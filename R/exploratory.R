@@ -63,7 +63,65 @@ ggCost = ggplot(data=data[data$ClaimCost >0,], aes(x = ClaimCost)) + geom_histog
 ggCost
 
 #TODO : Plot for male/female claims numbers and claimcost ... Same with AGE ... Maybe two lines, M+F by age 
+length(table(data$OwnersAge))#74
 
 
 
+Mnumb = matrix(ncol = 1, nrow = 74)
+Fnumb = matrix(ncol = 1, nrow = 74)
+for(i in 16:92){
+  Mnumb[i-15] = sum(data$NumberClaims[data$Gender == "M" & data$OwnersAge == i])
+  Fnumb[i-15] = sum(data$NumberClaims[data$Gender == "F" & data$OwnersAge == i])
+}
+
+table(data$Gender)
+FTot = 9843
+MTot = 54662
+
+ratioMF = MTot/FTot
+
+#Since there are much more men in the dataset, we are going to multiplay the number of claims of women by the ratio of men/women so it is more comparable. 
+#Results should only be taken into account to give an insight about data, but since they were extrapolized they may not be exact 
+
+Fnumb = Fnumb * ratioMF
+df = as.data.frame(cbind(Mnumb, Fnumb))
+
+test = ggplot(df, aes(x = 16:92)) + geom_line(aes(y = Mnumb, col = "M")) + 
+  geom_line(aes(y = Fnumb, col = "F")) + 
+  scale_color_manual(name = "", values = c("M" = "#00ba38", "F" = "#f8766d")) + 
+  theme(panel.grid.minor = element_blank()) + 
+  labs(title = "M vs F by Age for NumberClaims", y = 'NumberClaims', x = "Age")
+
+setwd("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/R/plots")
+#Printing plots 
+png("gender.png")
+print(ggGender)
+dev.off()
+png("ownerage.png")
+print(ggOwnersAge)
+dev.off()
+png("vehiculeage.png")
+print(ggVehiculeAge)
+dev.off()
+png("zone.png")
+print(ggZone)
+dev.off()
+png("class.png")
+print(ggClass)
+dev.off()
+png("bonus.png")
+print(ggBonus)
+dev.off()
+png("claims.png")
+print(ggClaims)
+dev.off()
+png("duration.png")
+print(ggDuration)
+dev.off()
+png("claimcost.png")
+print(ggCost)
+dev.off()
+png("MvFclaims.png")
+print(test)
+dev.off()
 
