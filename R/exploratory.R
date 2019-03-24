@@ -57,8 +57,8 @@ ggDuration = ggplot(data=data, aes(x=Duration)) + geom_histogram(breaks = seq(0,
 ggDuration
 
 #do not take lines where cost is 0 or graph will be impossible to read because of the difference in counts. NOTE : some outliers arn't taken into the graph for a bette visualisation
-ggCost = ggplot(data=data[data$ClaimCost >0,], aes(x = ClaimCost)) + geom_histogram(breaks = seq(0,200000, by = 500), aes(fill = ..count..)) +
-  labs(title = "ClaimCost repartition") + theme(plot.title = element_text(hjust = 0.5)) +
+ggCost = ggplot(data=data[data$ClaimCost >0,], aes(x = ClaimCost)) + geom_histogram(breaks = seq(0,200000, by = 5000), aes(fill = ..count..)) +
+  labs(title = "ClaimCost repartition", subtitle = "Intervals of 5000") + theme(plot.title = element_text(hjust = 0.5)) +
   scale_fill_gradient("Count", low = "green", high = "red") 
 ggCost
 
@@ -91,10 +91,10 @@ test = ggplot(df, aes(x = 16:92)) + geom_line(aes(y = Mnumb, col = "M")) +
   scale_color_manual(name = "", values = c("M" = "#00ba38", "F" = "#f8766d")) + 
   theme(panel.grid.minor = element_blank()) + 
   labs(title = "M vs F by Age for NumberClaims", y = 'NumberClaims', x = "Age")
-
+test
 setwd("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/R/plots")
 #Printing plots 
-png("gender.png")
+png("gender2.png")
 print(ggGender)
 dev.off()
 png("ownerage.png")
@@ -118,7 +118,7 @@ dev.off()
 png("duration.png")
 print(ggDuration)
 dev.off()
-png("claimcost.png")
+png("claimcost2.png")
 print(ggCost)
 dev.off()
 png("MvFclaims.png")
