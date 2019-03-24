@@ -23,12 +23,11 @@ ggGender
 
 ggOwnersAge = ggplot(data=data, aes(x=OwnersAge)) +
   geom_bar(stat="count", col = "black", aes(fill = ..count..)) + labs(title = "OwnersAge repartition") +
-  theme(plot.title = element_text(hjust = 0.5)) + guides(fill=FALSE) + scale_fill_gradient("Count", low = "green", high = "red") 
+  theme(plot.title = element_text(hjust = 0.5)) + scale_fill_gradient("Count", low = "green", high = "red") 
 ggOwnersAge
 
 ggVehiculeAge = ggplot(data=data, aes(x=VehiculeAge)) + geom_bar(stat="count", col = "black", aes(fill = ..count..)) +
-  labs(title = "VehiculeAge repartition") + theme(plot.title = element_text(hjust = 0.5)) +
-  guides(fill=FALSE) + scale_fill_gradient("Count", low = "green", high = "red") 
+  labs(title = "VehiculeAge repartition") + theme(plot.title = element_text(hjust = 0.5)) + scale_fill_gradient("Count", low = "green", high = "red") 
 ggVehiculeAge
 
 ggZone = ggplot(data=data, aes(x=Zone)) + geom_bar(stat="count", col = "black", aes(fill = ..count..)) +
@@ -92,8 +91,45 @@ test = ggplot(df, aes(x = 16:92)) + geom_line(aes(y = Mnumb, col = "M")) +
   theme(panel.grid.minor = element_blank()) + 
   labs(title = "M vs F by Age for NumberClaims", y = 'NumberClaims', x = "Age")
 test
+
+#number of claims by region 
+ggZoneClaim = ggplot(data=data, aes(x=Zone, weights = NumberClaims)) + geom_bar(col = "black", aes(fill = ..count..)) +
+  labs(title = "Zone claims repartition", y = "N.Claims") + theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_gradient("Count", low = "green", high = "red") 
+ggZoneClaim
+
+ggGenderClaim = ggplot(data=data, aes(x=Gender, weights = NumberClaims)) + geom_bar(col = "black", aes(fill = ..count..)) +
+  labs(title = "Gender claims repartition", y = "N.Claims") + theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_gradient("Count", low = "green", high = "red") 
+ggGenderClaim
+
+ggClassClaim = ggplot(data=data, aes(x=Class, weights = NumberClaims)) + geom_bar(col = "black", aes(fill = ..count..)) +
+  labs(title = "VehicleClass claims repartition", y = "N.Claims") + theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_gradient("Count", low = "green", high = "red") 
+ggClassClaim
+
+ggBonusClaim = ggplot(data=data, aes(x=Class, weights = BonusClass)) + geom_bar(col = "black", aes(fill = ..count..)) +
+  labs(title = "User bonus claims repartition", y = "N.Claims") + theme(plot.title = element_text(hjust = 0.5)) +
+  scale_fill_gradient("Count", low = "green", high = "red") 
+ggBonusClaim
+
+
+
+
 setwd("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/R/plots")
 #Printing plots 
+png("zoneClaim.png")
+print(ggZoneClaim)
+dev.off
+png("BonusClaim.png")
+print(ggBonusClaim)
+dev.off
+png("ClassClaim.png")
+print(ggClassClaim)
+dev.off
+png("genderClaim.png")
+print(ggGenderClaim)
+dev.off
 png("gender2.png")
 print(ggGender)
 dev.off()
