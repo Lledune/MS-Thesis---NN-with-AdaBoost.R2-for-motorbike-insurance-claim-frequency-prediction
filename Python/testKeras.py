@@ -26,14 +26,13 @@ yTest = y[~mdk]
 #building model
 model = keras.Sequential()
 model.add(Dense(5, input_dim = 6, activation = "relu"))
-model.add(Dense(10, activation = "relu"))
+#model.add(Dense(10, activation = "relu"))
 model.add(Dense(1, activation = "exponential"))
 
 #DEF CUSTOM LOSS
 def Deviance_loss():
     def loss(y_true, y_pred):
-        y_true = KB.max(y_true, 0)
-        return (KB.sqrt(KB.square( 2 * KB.log(y_true + KB.epsilon()) - KB.log(y_pred))))
+        return (KB.sqrt(KB.square( 2 * KB.log(y_true + KB.epsilon()) - KB.log(y_pred + KB.epsilon()))))
     return loss
 
 def lossO(y_true, y_pred):
@@ -42,11 +41,12 @@ def lossO(y_true, y_pred):
 
 #def deviance metric
 def Deviance(y_true, y_pred):
+    y_pred = KB.maximum(y_pred, 0.0 + KB.epsilon()) #make sure ypred is positive or ln(-x) = NAN
     return (KB.sqrt(KB.square( 2 * KB.log(y_true + KB.epsilon()) - KB.log(y_pred))))
 
 
 model.compile(loss = Deviance_loss(), optimizer = 'RMSprop', metrics = [Deviance, "mean_squared_error"])
-history = model.fit(factorsTrain, yTrain, epochs = 5)
+history = model.fit(factorsTrain, yTrain, epochs = 20)
 
 model.compile(loss = lossO, optimizer = 'RMSprop', metrics = [Deviance])
 model.fit(factorsTrain, yTrain, epochs = 5)
@@ -59,12 +59,12 @@ model.fit(factorsTrain, yTrain, epochs = 20)
 
 #Test results 
 model.evaluate(factorsTrain, yTrain)
-test = model.evaluate(factorsTest, yTest)
+model.evaluate(factorsTest, yTest)
 #plots 
 import matplotlib.pyplot as plt
 plt.plot(history.history['Deviance'])
 plt.title('Model Deviance')
-plt.ylabel('Accuracy')
+plt.ylabel('Deviance')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
