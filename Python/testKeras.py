@@ -30,7 +30,7 @@ model.add(Dense(10, activation = "relu"))
 model.add(Dense(1, activation = "exponential"))
 
 #DEF CUSTOM LOSS
-def custom_loss():
+def Deviance_loss():
     def loss(y_true, y_pred):
         y_true = KB.max(y_true, 0)
         return (KB.sqrt(KB.square( 2 * KB.log(y_true + KB.epsilon()) - KB.log(y_pred))))
@@ -41,23 +41,30 @@ def lossO(y_true, y_pred):
     return (KB.sqrt(KB.square( 2 * KB.log(y_true + KB.epsilon()) - KB.log(y_pred))))
 
 #def deviance metric
-def custom_metrics(y_true, y_pred):
+def Deviance(y_true, y_pred):
     return (KB.sqrt(KB.square( 2 * KB.log(y_true + KB.epsilon()) - KB.log(y_pred))))
 
 
-model.compile(loss = custom_loss(), optimizer = 'RMSprop', metrics = [custom_metrics, "mean_squared_error"])
+model.compile(loss = Deviance_loss(), optimizer = 'RMSprop', metrics = [Deviance, "mean_squared_error"])
+history = model.fit(factorsTrain, yTrain, epochs = 5)
+
+model.compile(loss = lossO, optimizer = 'RMSprop', metrics = [Deviance])
 model.fit(factorsTrain, yTrain, epochs = 5)
 
-model.compile(loss = lossO, optimizer = 'RMSprop', metrics = [custom_metrics])
-model.fit(factorsTrain, yTrain, epochs = 5)
-
-model.compile(loss = "poisson", optimizer = 'RMSprop', metrics = [custom_metrics])
+model.compile(loss = "poisson", optimizer = 'RMSprop', metrics = [Deviance])
 model.fit(factorsTrain, yTrain, epochs = 20)
 
-model.compile(loss = "mean_squared_error", optimizer = 'RMSprop', metrics = [custom_metrics, "mean_squared_error"])
+model.compile(loss = "mean_squared_error", optimizer = 'RMSprop', metrics = [Deviance, "mean_squared_error"])
 model.fit(factorsTrain, yTrain, epochs = 20)
 
 #Test results 
 model.evaluate(factorsTrain, yTrain)
-model.evaluate(factorsTest, yTest)
-
+test = model.evaluate(factorsTest, yTest)
+#plots 
+import matplotlib.pyplot as plt
+plt.plot(history.history['Deviance'])
+plt.title('Model Deviance')
+plt.ylabel('Accuracy')
+plt.xlabel('Epoch')
+plt.legend(['Train', 'Test'], loc='upper left')
+plt.show()
