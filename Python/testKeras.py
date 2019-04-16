@@ -6,9 +6,11 @@ from keras.layers import Dense
 import keras.backend as KB
 import math
 data = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/mcc.csv")
-
+data2 = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocData.csv")
+y2 = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaims.csv")
 data['Gender'] = data['Gender'].map({'M' : 1, 'K' : 0})
 
+data2
 
 mdk = np.random.rand(len(data)) < 0.8
 
@@ -29,6 +31,12 @@ model.add(Dense(5, input_dim = 6, activation = "relu"))
 #model.add(Dense(10, activation = "relu"))
 model.add(Dense(1, activation = "exponential"))
 
+#building model 2 
+model = keras.Sequential()
+model.add(Dense(25, input_dim = 25, activation = "relu"))
+#model.add(Dense(10, activation = "relu"))
+model.add(Dense(1, activation = "exponential"))
+
 #DEF CUSTOM LOSS
 def Deviance_loss():
     def loss(y_true, y_pred):
@@ -46,16 +54,20 @@ def Deviance(y_true, y_pred):
 
 
 model.compile(loss = Deviance_loss(), optimizer = 'RMSprop', metrics = [Deviance, "mean_squared_error"])
-history = model.fit(factorsTrain, yTrain, epochs = 20)
+model.fit(factorsTrain, yTrain, epochs = 5)
+model.fit(data2, y2, epochs = 5)
 
 model.compile(loss = lossO, optimizer = 'RMSprop', metrics = [Deviance])
 model.fit(factorsTrain, yTrain, epochs = 5)
+model.fit(data2, y2, epochs = 5)
 
 model.compile(loss = "poisson", optimizer = 'RMSprop', metrics = [Deviance])
-model.fit(factorsTrain, yTrain, epochs = 20)
+model.fit(factorsTrain, yTrain, epochs = 5)
+model.fit(data2, y2, epochs = 5)
 
 model.compile(loss = "mean_squared_error", optimizer = 'RMSprop', metrics = [Deviance, "mean_squared_error"])
-model.fit(factorsTrain, yTrain, epochs = 20)
+model.fit(factorsTrain, yTrain, epochs = 5)
+model.fit(data2, y2, epochs = 5)
 
 #Test results 
 model.evaluate(factorsTrain, yTrain)
