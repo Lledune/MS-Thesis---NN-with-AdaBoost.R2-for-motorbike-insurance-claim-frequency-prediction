@@ -22,18 +22,45 @@ library(caTools)
 dummies = dummyVars(NumberClaims ~ Gender + Zone + Class + BonusClass, data = data, drop2nd = T)  
 dumData = predict(dummies, data)
 
-newData = cbind(dumData, data$OwnersAge, data$VehiculeAge, data$NumberClaims)
-colnames(newData)[24:26] = c("OwnersAge", "VehiculeAge", "NumberClaims")
+newData = cbind(dumData, data$OwnersAge, data$VehiculeAge, data$NumberClaims, data$Duration)
+colnames(newData)[24:27] = c("OwnersAge", "VehiculeAge", "NumberClaims", "Duration")
 
-factors = newData[,1:25]
-y = newData[,26]
+#Test set building
 
-write.csv(factors, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocData.csv")
-write.csv(y, row.names = F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaims.csv")
-#removing duration and claimcost for now, we'll get them later 
+smp_size <- floor(0.9 * nrow(newData))
+
+## set the seed to make your partition reproducible
+set.seed(100)
+train_ind <- sample(seq_len(nrow(newData)), size = smp_size)
+
+train <- newData[train_ind, ]
+test <- newData[-train_ind, ]
+
+
+factorsTrain = train[,1:25]
+factorsTest = test[,1:25]
+
+yTrain = train[,26]
+yTest = test[,26]
+
+durTrain = train[,27]
+durTest = test[,27]
+
+#fullData
+write.csv(newData, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocFull.csv")
+
+
+#Factors
+write.csv(factorsTrain, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocDataTrain.csv")
+write.csv(factorsTest, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocDataTest.csv")
+
+#y
+write.csv(yTrain, row.names = F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaimsTrain.csv")
+write.csv(yTest, row.names = F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaimsTest.csv")
+#removing duration and claimcost for now, we'll get them later
 duration = as.data.frame(data$Duration)
-write.csv(duration, row.names = F, file = "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/Duration.csv")
-
+write.csv(durTrain, row.names = F, file = "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/DurationTrain.csv")
+write.csv(durTest, row.names = F, file = "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/DurationTest.csv")
 
 #TODO : delete rows with duration = 0
 sum(data$Duration[data$Duration == 0])

@@ -6,11 +6,12 @@ from keras.layers import Dense
 import keras.backend as KB
 import math
 data = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/mcc.csv")
-data2 = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocData.csv")
-y2 = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaims.csv")
+data2 = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocDataTrain.csv")
+y2 = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaimsTrain.csv")
+d = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/DurationTrain.csv")
 data['Gender'] = data['Gender'].map({'M' : 1, 'K' : 0})
 
-data2
+data2['Duration'] = d
 
 mdk = np.random.rand(len(data)) < 0.8
 
@@ -84,3 +85,34 @@ plt.ylabel('Deviance')
 plt.xlabel('Epoch')
 plt.legend(['Train', 'Test'], loc='upper left')
 plt.show()
+
+
+
+
+    def custom_loss(data, y_pred):
+
+        y_true = data[:, 0]
+        d = data[:, 1:]
+        # condition
+        mask = keras.backend.equal(y_true, 0) #i.e. y_true != 0
+        mask = KB.cast(mask, KB.floatx())
+        # returns 0 when y_true =0, 1 otherwise
+        #calculate loss using d...
+        loss_value = mask * (2 * d * y_pred) + (1-mask) * 2 * d * (y_true * KB.log(y_true) - y_true * KB.log(y_pred) - y_true + y_pred)
+        return loss_value
+
+
+    def baseline_model():
+        # create model
+        #building model
+        model = keras.Sequential()
+        model.add(Dense(5, input_dim = 26, activation = "relu"))
+        #model.add(Dense(10, activation = "relu"))
+        model.add(Dense(1, activation = "exponential"))
+        model.compile(loss=custom_loss, optimizer='RMSProp')
+        return model
+
+model = baseline_model()
+model.fit(data2, np.append(y2, d, axis = 1), epochs=1, shuffle=True, verbose=1)
+
+

@@ -6,6 +6,8 @@ durationTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insuran
 durationTrain = as.numeric(unlist(durationTrain))
 dataTrain = cbind(factorsTrain, durationTrain, yTrain)
 
+
+
 colnames(dataTrain)[length(dataTrain)-1] = "Duration"
 colnames(dataTrain)[length(dataTrain)] = "NumberClaims"
 
@@ -38,7 +40,7 @@ coefLambda
 
 dataTrain = as.matrix(dataTrain)
 preds = predict(cvfit, newx = dataTrain[,1:26], s = cvfit$lambda.1se)
-preds = exp(preds)
+predLambda = exp(preds)
 
 dataTrain = as.data.frame(dataTrain)
 
@@ -47,8 +49,7 @@ glmt = glm(NumberClaims ~ . - Duration, offset=log(Duration+0.000001), data = da
 
 glmtCut = step(glmt)
 preds = predict(glmtCut, dataTrain[,1:26])
-preds = exp(preds)
-
+predStep = exp(preds)
 
 #Deviance
 devianceSingle = function(yt, yp, duration){
@@ -73,3 +74,7 @@ devianceFull = function(yt, yp, duration){
 devFull = devianceFull(dataTrain$NumberClaims, preds, durationTrain)
 devFull = round(devFull, 5)
 devFull
+
+#test models 
+sum(devianceFull(dataTrain$NumberClaims, predStep, durationTrain)) #7321.062
+sum(devianceFull(dataTrain$NumberClaims, predLambda, durationTrain)) #7211.471
