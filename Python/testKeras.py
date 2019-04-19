@@ -52,6 +52,10 @@ def Deviance(y_true, y_pred):
     y_pred = KB.maximum(y_pred, 0.0 + KB.epsilon()) #make sure ypred is positive or ln(-x) = NAN
     return (KB.sqrt(KB.square( 2 * KB.log(y_true + KB.epsilon()) - KB.log(y_pred))))
 
+#def deviance metric
+def DevianceBis(y_true, y_pred):
+    y_pred = KB.maximum(y_pred, 0.0 + KB.epsilon()) #make sure ypred is positive or ln(-x) = NAN
+    return (KB.sqrt(KB.square( 2 * KB.log(y_true + KB.epsilon()) - KB.log(y_pred))))
 
 model.compile(loss = Deviance_loss(), optimizer = 'RMSprop', metrics = [Deviance, "mean_squared_error"])
 model.fit(factorsTrain, yTrain, epochs = 5)

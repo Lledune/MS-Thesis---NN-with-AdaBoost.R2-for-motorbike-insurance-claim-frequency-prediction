@@ -35,3 +35,12 @@ duration = as.data.frame(data$Duration)
 write.csv(duration, row.names = F, file = "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/Duration.csv")
 
 
+#TODO : delete rows with duration = 0
+sum(data$Duration[data$Duration == 0])
+rowsDel = which(data$Duration == 0)
+length(rowsDel)
+#There is 2069 values where duration = 0
+dataCheck = data[data$Duration == 0,]
+table(dataCheck$NumberClaims)
+
+#should we delete these ??

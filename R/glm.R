@@ -1,13 +1,13 @@
 #This is the GLM model of the project 
 
-factors = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocData.csv", sep = ",")
-y = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaims.csv", sep = ',')
-duration = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/Duration.csv", sep = ",")
+factorsTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocDataTrain.csv", sep = ",")
+yTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaimsTrain.csv", sep = ',')
+durationTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/DurationTrain.csv", sep = ",")
+durationTrain = as.numeric(unlist(durationTrain))
+dataTrain = cbind(factorsTrain, durationTrain, yTrain)
 
-data = cbind(factors, duration, y)
-
-colnames(data)[length(data)-1] = "Duration"
-colnames(data)[length(data)] = "NumberClaims"
+colnames(dataTrain)[length(dataTrain)-1] = "Duration"
+colnames(dataTrain)[length(dataTrain)] = "NumberClaims"
 
 library(caret)
 library(caTools)
@@ -16,14 +16,12 @@ library(mlbench)
 library(glmnet)
 #using cross validation with K=10
 
-#feature selection, using RFE https://machinelearningmastery.com/feature-selection-with-the-caret-r-package/
-
-control <- rfeControl(functions=rfFuncs, method="cv", number=10)
-
-fit = glmnet(as.matrix(data[,1:26]), as.matrix(data[,27]), family = "poisson")
+#Model simple
+fit = glmnet(as.matrix(dataTrain[,1:26]), as.matrix(dataTrain[,27]), family = "poisson")
 plot(fit, xvar = "dev", label = TRUE)
 
-cvfit = cv.glmnet(as.matrix(data[,1:26]), as.matrix(data[,27]), family = "poisson")
+#Model with CV
+cvfit = cv.glmnet(as.matrix(dataTrain[,1:26]), as.matrix(dataTrain[,27]), family = "poisson")
 plot(cvfit, xvar = "dev", label = TRUE)
 
 #One line is simply the ?? lambda corresponding to the minimum MSE of the cross validation (your left dotted line) . 
@@ -34,20 +32,44 @@ plot(cvfit, xvar = "dev", label = TRUE)
 cvfit$lambda.min; cvfit$lambda.1se #Ususally better to choose lambda1se because it reduces overfitting
 
 coefLambda = coef(cvfit,s=cvfit$lambda.1se) #coefficient for lambda 1se
-
+coefLambda
 #Only 10 coefficients are kept from feature selection 
+#TODO : Final model with selected features
 
-?barplot
-barplot(coefLambda@x)
+dataTrain = as.matrix(dataTrain)
+preds = predict(cvfit, newx = dataTrain[,1:26], s = cvfit$lambda.1se)
+preds = exp(preds)
+
+dataTrain = as.data.frame(dataTrain)
+
+#Building model #TODO : Change offset +0001
+glmt = glm(NumberClaims ~ . - Duration, offset=log(Duration+0.000001), data = dataTrain, family = poisson(link = "log"))
+
+glmtCut = step(glmt)
+preds = predict(glmtCut, dataTrain[,1:26])
+preds = exp(preds)
 
 
-fitControl <- trainControl(## 10-fold CV
-  method = "cv",
-  number = 10
-)
+#Deviance
+devianceSingle = function(yt, yp, duration){
+  
+  if(yt == 0){
+    return(2*duration*yp)
+  }
+  if(yt != 0){
+    return(2*duration * (yt*log(yt) - yt*log(yp) - yt + yp))
+  } 
+}
+devianceSingle(dataTrain$NumberClaims[1], preds[1], durationTrain[1])
 
-#Building model
-glmt = caret::train(NumberClaims ~ . - Duration + offset(log(Duration)), data = data,
-                    method = "glm", family = poisson(link = "log"), trControl = fitControl)
+devianceFull = function(yt, yp, duration){
+  x = matrix(nrow = length(yt), ncol = 1)
+  for(i in 1:length(x)){
+    x[i] = devianceSingle(yt[i], yp[i], duration[i])
+  }
+  return(x)
+}
 
-glmt
+devFull = devianceFull(dataTrain$NumberClaims, preds, durationTrain)
+devFull = round(devFull, 5)
+devFull
