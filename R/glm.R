@@ -1,15 +1,9 @@
 #This is the GLM model of the project 
 
-factorsTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocDataTrain.csv", sep = ",")
-yTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/NumberClaimsTrain.csv", sep = ',')
-durationTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/DurationTrain.csv", sep = ",")
-durationTrain = as.numeric(unlist(durationTrain))
-dataTrain = cbind(factorsTrain, durationTrain, yTrain)
+#dataTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocFull.csv", sep = ",")
+#oversampled
+dataTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/samp.csv", sep = ",")
 
-
-
-colnames(dataTrain)[length(dataTrain)-1] = "Duration"
-colnames(dataTrain)[length(dataTrain)] = "NumberClaims"
 
 library(caret)
 library(caTools)
@@ -44,13 +38,6 @@ predLambda = exp(preds)
 
 dataTrain = as.data.frame(dataTrain)
 
-#Building model #TODO : Change offset +0001
-glmt = glm(NumberClaims ~ . - Duration, offset=log(Duration+0.000001), data = dataTrain, family = poisson(link = "log"))
-
-glmtCut = step(glmt)
-preds = predict(glmtCut, dataTrain[,1:26])
-predStep = exp(preds)
-
 #Deviance
 devianceSingle = function(yt, yp, duration){
   
@@ -61,7 +48,7 @@ devianceSingle = function(yt, yp, duration){
     return(2*duration * (yt*log(yt) - yt*log(yp) - yt + yp))
   } 
 }
-devianceSingle(dataTrain$NumberClaims[1], preds[1], durationTrain[1])
+devianceSingle(dataTrain$NumberClaims[1], predLambda[1], durationTrain[1])
 
 devianceFull = function(yt, yp, duration){
   x = matrix(nrow = length(yt), ncol = 1)
@@ -76,5 +63,7 @@ devFull = round(devFull, 5)
 devFull
 
 #test models 
+durationTrain = dataTrain$Duration
 sum(devianceFull(dataTrain$NumberClaims, predStep, durationTrain)) #7321.062
 sum(devianceFull(dataTrain$NumberClaims, predLambda, durationTrain)) #7211.471
+mean(devianceFull(dataTrain$NumberClaims, predLambda, durationTrain)) #7211.471
