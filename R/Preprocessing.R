@@ -37,6 +37,8 @@ newData$VehiculeAge = normalize(newData$VehiculeAge)
 newData$Duration = normalize(newData$Duration)
 newData$NumberClaims = normalize(newData$NumberClaims)
 
+#delete durations = 0 rows 
+newData = newData[!(newData$Duration == 0), ]
 
 #Test set building
 smp_size <- floor(0.9 * nrow(newData))

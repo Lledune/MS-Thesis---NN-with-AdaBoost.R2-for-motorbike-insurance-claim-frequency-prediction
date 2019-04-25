@@ -13,4 +13,4 @@ samp = samp[,1:27]
 
 table(samp$NumberClaims)
 
-write.csv(samp, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/samp.csv")
+write.csv(samp, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/upsample.csv")
