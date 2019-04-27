@@ -23,7 +23,15 @@ dummies = dummyVars(NumberClaims ~ Gender + Zone + Class + BonusClass, data = da
 dumData = predict(dummies, data)
 
 newData = cbind(dumData, data$OwnersAge, data$VehiculeAge, data$Duration, data$NumberClaims)
+
+newData = as.data.frame(newData)
 colnames(newData)[24:27] = c("OwnersAge", "VehiculeAge", "Duration", "NumberClaims")
+#delete durations = 0 rows 
+newData = newData[!(newData$Duration == 0), ]
+#delete 4374 cause claifrequency too high outlier
+newData = newData[!newData[4374, ], ]TODO
+
+newData$ClaimFrequency = newData$NumberClaims/newData$Duration
 
 #Normalize data 
 normalize = function(vector){
@@ -36,9 +44,7 @@ newData$OwnersAge = normalize(newData$OwnersAge)
 newData$VehiculeAge = normalize(newData$VehiculeAge)
 newData$Duration = normalize(newData$Duration)
 newData$NumberClaims = normalize(newData$NumberClaims)
-
-#delete durations = 0 rows 
-newData = newData[!(newData$Duration == 0), ]
+newData$ClaimFrequency = normalize(newData$ClaimFrequency)
 
 #Test set building
 smp_size <- floor(0.9 * nrow(newData))

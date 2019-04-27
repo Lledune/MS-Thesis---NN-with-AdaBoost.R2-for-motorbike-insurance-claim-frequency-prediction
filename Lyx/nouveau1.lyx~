@@ -91,6 +91,461 @@ Lucien Ledune
 \end_inset
 
 
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Abstract
+This will be the abstract of the document
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
+Introduction
+\end_layout
+
+\begin_layout Standard
+this is introduction
+\end_layout
+
+\begin_layout Section
+Dataset
+\end_layout
+
+\begin_layout Subsection
+Présentation des données
+\end_layout
+
+\begin_layout Standard
+Afin de réaliser ce travail, nous avons besoin d'une base de donnée adéquate,
+ nous présentons celle-ci dans cette sous-section.
+ La base de données est constituée d'informations sur les clients d'une
+ compagnie d'assurance nommée Wasa, entre 1994 et 1998.
+ Les véhicules assurées sont composés uniquement de motos.
+ Il est difficile d'obtenir des données plus récentes à cause des clauses
+ de confidentialité des assurances.
+ La version originelle de ce jeu de donnée est utilisée dans une étude cas
+ du livre 
+\begin_inset Quotes eld
+\end_inset
+
+Non-life insurance pricing with GLM
+\begin_inset Quotes erd
+\end_inset
+
+, écrit par Ohlsson et Johansson, et celle-ci est disponible sur le site
+ web du livre
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://staff.math.su.se/esbj/GLMbook/case.html
+\end_layout
+
+\end_inset
+
+.
+ Le jeu de données est constitué de 64505 observations des 9 variables suivantes
+ :
+\end_layout
+
+\begin_layout Itemize
+OwnersAge : L'âge du conducteur.
+\end_layout
+
+\begin_layout Itemize
+Gender : Le sexe du conducteur.
+\end_layout
+
+\begin_layout Itemize
+Zone : Variable catégorielle représentant la zone dans laquelle le véhicule
+ est conduit..
+\end_layout
+
+\begin_layout Itemize
+Class : Variable catégorielle représentant la classe du véhicule.
+ Les classes sont assignées dans une des 7 catégories selon le ratio : 
+\begin_inset Formula $EV=\frac{kW\times100}{kg+75}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+VehiculeAge : L'âge du véhicule en années.
+\end_layout
+
+\begin_layout Itemize
+BonusClass : Le bonus du conducteur, un nouveau conducteur commence à 1
+ et sera incrémenté à chaque année complète passée dans la compagnie sans
+ sinistre déclaré, jusqu'à un maximum de 7.
+\end_layout
+
+\begin_layout Itemize
+Duration : Le nombre d'année passées dans la compagnie.
+\end_layout
+
+\begin_layout Itemize
+NumberClaims : Le nombre de sinistres.
+\end_layout
+
+\begin_layout Itemize
+ClaimCost : Le coût des sinistres.
+\end_layout
+
+\begin_layout Standard
+La variable Zone est décrite dans la table 1.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Descriptions des variables catégorielles
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top" width="5cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Classe
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zone géographique
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parties centrales et semi-centrales des trois plus grandes villes de Norvège.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Banlieues et villes moyennes.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Petites villes (à l'exception de celles des catégories 5 et 7).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Villages (à l'exception de ceux des catégories 5 et 7).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Villes du nord de la Suède.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Campagnes du nord de la Suède.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gotland (Grande île).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Analyse exploratoire
+\end_layout
+
+\begin_layout Standard
+Maintenant que les différentes variables ont été brièvement présentées et
+ leur fonction plus claire, nous allons maintenant passer à l'analyse exploratoi
+re de celle-ci.
+ Le but de cette analyse est de mieux comprendre les données qui serviront
+ à entraîner les différents algorithmes, ainsi que de repérer d'éventuelles
+ anomalies.
+ Durant l'analyse exploratoire d'une base de données, il est important de
+ regarder la distribution des variables, celle-ci nous donne beaucoup d'informat
+ions quant aux données.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "100col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space ~
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution des variables
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

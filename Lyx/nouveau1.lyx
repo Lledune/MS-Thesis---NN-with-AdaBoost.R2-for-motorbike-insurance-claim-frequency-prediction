@@ -120,8 +120,979 @@ this is introduction
 Dataset
 \end_layout
 
+\begin_layout Subsection
+Présentation des données
+\end_layout
+
 \begin_layout Standard
-this is chapter 2
+Afin de réaliser ce travail, nous avons besoin d'une base de donnée adéquate,
+ nous présentons celle-ci dans cette sous-section.
+ La base de données est constituée d'informations sur les clients d'une
+ compagnie d'assurance nommée Wasa, entre 1994 et 1998.
+ Les véhicules assurées sont composés uniquement de motos.
+ Il est difficile d'obtenir des données plus récentes à cause des clauses
+ de confidentialité des assurances.
+ La version originelle de ce jeu de données est utilisée dans une étude
+ cas du livre 
+\begin_inset Quotes eld
+\end_inset
+
+Non-life insurance pricing with GLM
+\begin_inset Quotes erd
+\end_inset
+
+, écrit par Ohlsson et Johansson, et celle-ci est disponible sur le site
+ web du livre
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+http://staff.math.su.se/esbj/GLMbook/case.html
+\end_layout
+
+\end_inset
+
+.
+ Le jeu de données est constitué de 64505 observations des 9 variables suivantes
+ :
+\end_layout
+
+\begin_layout Itemize
+OwnersAge : L'âge du conducteur.
+\end_layout
+
+\begin_layout Itemize
+Gender : Le sexe du conducteur.
+\end_layout
+
+\begin_layout Itemize
+Zone : Variable catégorielle représentant la zone dans laquelle le véhicule
+ est conduit..
+\end_layout
+
+\begin_layout Itemize
+Class : Variable catégorielle représentant la classe du véhicule.
+ Les classes sont assignées dans une des 7 catégories selon le ratio : 
+\begin_inset Formula $EV=\frac{kW\times100}{kg+75}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+VehiculeAge : L'âge du véhicule en années.
+\end_layout
+
+\begin_layout Itemize
+BonusClass : Le bonus du conducteur, un nouveau conducteur commence à 1
+ et sera incrémenté à chaque année complète passée dans la compagnie sans
+ sinistre déclaré, jusqu'à un maximum de 7.
+\end_layout
+
+\begin_layout Itemize
+Duration : Le nombre d'année passées dans la compagnie.
+\end_layout
+
+\begin_layout Itemize
+NumberClaims : Le nombre de sinistres.
+\end_layout
+
+\begin_layout Itemize
+ClaimCost : Le coût des sinistres.
+\end_layout
+
+\begin_layout Standard
+La variable Zone est décrite dans la table 1.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Descriptions des variables catégorielles
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="8" columns="3">
+<features booktabs="true" tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="left" valignment="top" width="5cm">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Variable
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Classe
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Description
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zone géographique
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Parties centrales et semi-centrales des trois plus grandes villes de Norvège.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Banlieues et villes moyennes.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Petites villes (à l'exception de celles des catégories 5 et 7).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Villages (à l'exception de ceux des catégories 5 et 7).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Villes du nord de la Suède.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Campagnes du nord de la Suède.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="left" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gotland (Grande île).
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Analyse exploratoire
+\end_layout
+
+\begin_layout Standard
+Maintenant que les différentes variables ont été brièvement présentées et
+ leur fonction plus claire, nous allons maintenant passer à l'analyse exploratoi
+re de celles-ci.
+ Le but de cette analyse est de mieux comprendre les données qui serviront
+ à entraîner les différents algorithmes, ainsi que de repérer d'éventuelles
+ anomalies.
+ Durant l'analyse exploratoire d'une base de données, il est important de
+ regarder la distribution des variables, celle-ci nous donne beaucoup d'informat
+ions quant aux données.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement tbh
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/gender2.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution Gender
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/ownerage.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution OwnersAge
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Sur ces deux premières figures nous observons respectivement les distributions
+ des variables Gender et OwnersAge.
+ La première chose que nous pouvons observer est la grande disparité entre
+ le nombre d'hommes de et femmes clients de l'assurance.
+ Notre jeu de données est composé d'hommes pour la grande majorité.
+ Pour ce qui est de la variable OwnersAge, nous constatons que les valeurs
+ sont réparties entre 16 et 92 ans, avec deux 
+\begin_inset Quotes eld
+\end_inset
+
+pics
+\begin_inset Quotes erd
+\end_inset
+
+ vers 25 et 45 ans.
+ Les valeurs maximales et minimales de nos variables continues seront importante
+ pour la suite, car elles sont nécessaires afin d'appliquer une normalisation
+ des données, qui sera discutée plus tard dans ce travail.
+ Ci dessous les distributions des variables VehiculeAge et Zone : 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement tbh
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/vehiculeage.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution VehiculeAge
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/zone.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution Zone
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La distribution de vehicule est indiquée en années, et nous pouvons donc
+ observer que si la plupart des véhicules assurés ont moins de 20 ans, un
+ grand nombre de ceux-ci sont bien plus vieux, avec comme maximum 99 ans.
+ Il est possible que ce véhicule soit considéré comme outlier et il sera
+ reconsidéré dans la partie preprocessing.
+\begin_inset Newline newline
+\end_inset
+
+La distribution de la variable Zone est intéressante, elle nous révèle que
+ la plupart des véhicules assurés sont conduits dans des villages, mais
+ aussi que très peu d'entre eux le sont dans le Gotland.
+ Ceci n'est pas surprenant puisque la population de la Suède est d'environ
+ 10 millions d'habitants, pour seulement 60.000 habitants la région du Gotland.
+ Les classes 5 et 6 sont elles aussi minoritaires, cela était aussi à prévoir
+ puisque ces catégories représentent le nord de la Suède alors que la plupart
+ de la population vis dans le sud du pays.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement tbh
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/bonus.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution BonusClass
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/class.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution Class
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Les classes de bonus les plus fréquentes sont les classes 1 et 7, respectivement
+ le minimum (entrée dans la compagnie d'assurance) et le maximum (client
+ fidèle depuis sept années au minimum).
+ 
+\begin_inset Newline newline
+\end_inset
+
+Pour la variable Class nous observons qu'assez peu de véhicules appartiennent
+ à la catégorie la plus puissante.
+ En fait, la plupart des véhicules se situent dans les classes 3, 4 et 5,
+ ce qui montre que les vehicules les moins puissants et les plus puissants
+ sont minoritaires.
+ Les graphiques suivants nous montrent la répartitions des sinistres par
+ bonus et par classe de véhicule.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement tbh
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/BonusClaim.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bonus Claims
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/ClassClaim.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Class Claims
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Il parait logique de supposer que plus un client a un bonus élevé, moins
+ celui-ci causera d'accident, puisque le bonus monte uniquement si le client
+ parvient à compléter une année sans causer d'accident.
+ Cependant en observant la figure 7, il apparait que la majorité des cas
+ d'accidents sont déclarés par des clients appartenant aux classes 3 à 6
+ de bonus.
+ Ce qui est d'autant plus étonnant lorsque l'on associe ce résultat avec
+ la distribution de la variable Class (figure 5) : les classes 3 à 6 sont
+ celles contenant le moins d'utilisateurs.
+ Les clients appartenant à la classe de bonus 7 semblent cependant causer
+ très peu d'accidents malgré le fait qu'ils soient la classe de bonus majoritair
+e.
+\begin_inset Newline newline
+\end_inset
+
+Les résultats de la figure 8 sont moins surprenant : plus un véhicule est
+ puissant, plus le risque d'accident sera important.
+ Les déviations de cette régle par les classes 3 et 7 sont expliquées par
+ la distribution de la population à travers les différentes classes (figure
+ 6), ainsi il y a peu d'accidents pour les véhicules de classe 7 simplement
+ car ceux-ci sont peu nombreux, une conclusion similaire peut être énoncée
+ pour la classe 3.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement tbh
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/genderClaim.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gender claims
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/zoneClaim.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Zone claims
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La répartition des sinistres par sexe indique que les hommes sont plus suceptibl
+es de causer des accidents que les femmes.
+ Il faut prendre en compte que les hommes sont bien plus nombreux que les
+ femmes dans nos données, mais la conclusion ne change pas puisque la proportion
+ de femmes est de 18%, alors que celles-ci ne causent que 8.7% des sinistres.
+ TODO ZONECLAIMS
 \end_layout
 
 \end_body
