@@ -67,7 +67,7 @@
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 1
-\paperpagestyle fancy
+\paperpagestyle default
 \tracking_changes false
 \output_changes false
 \html_math_output 0
@@ -113,7 +113,54 @@ Introduction
 \end_layout
 
 \begin_layout Standard
-this is introduction
+Partout dans le monde, la facilité montante de l'accès à une puissance de
+ calcul importante a motivé un grand nombre de changement dans la façon
+ d'approcher les problèmes, et ce dans la plupart des domaines de recherche.
+ Cette avancée technologique a permi d'utiliser des techniques de modélisations
+ et de prédictions qui étaient jusqu'à lors trop longues à mettre en place
+ pour avoir un réel intérêt pratique.
+ Le secteur des assurances n'a pas été épargné par le phénomène et évolue
+ avec son temps.
+ Le machine learning
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Apprentissage automatique : Méthodes statistique permettant à un ordinateur
+ d'apprendre à résoudre un problème donné à l'aide d'une base de données
+ pertinente.
+\end_layout
+
+\end_inset
+
+, outil de modélisation très puissant, est maintenant facilement accessible
+ et les compagnies d'assurances souhaient en tirer le meilleur parti en
+ matière de prédiction et d'aide à la décision.
+ 
+\begin_inset Newline newline
+\end_inset
+
+La modélisation de prédiction n'est pas nouvelle dans ce secteur, mais les
+ algorithmes utilisés changent avec l'essort actuel de la technologie.
+ Ainsi nous pouvons maintenant facilement utiliser des réseaux de neurones
+ afin de répondre aux problèmes pour lesquels des algorithmes moins efficaces
+ étaient utilisés.
+ Le but de ce travail est de montrer que ces nouveaux
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+La plupart de ces algorithmes sont en fait assez peu récents mais étaient
+ difficilement applicables en raison d'une puissance de calcul trop faible,
+ citons par exemple le perceptron, élement de base des réseaux de neurones
+ qui a été inventé dès 1957.
+\end_layout
+
+\end_inset
+
+ algorithmes sont efficaces et représentent un espoir d'amélioration pour
+ le futur.
+ TODO : expliquer le mémoire rapidement.
 \end_layout
 
 \begin_layout Section
@@ -132,8 +179,8 @@ Afin de réaliser ce travail, nous avons besoin d'une base de donnée adéquate,
  Les véhicules assurées sont composés uniquement de motos.
  Il est difficile d'obtenir des données plus récentes à cause des clauses
  de confidentialité des assurances.
- La version originelle de ce jeu de donnée est utilisée dans une étude cas
- du livre 
+ La version originelle de ce jeu de données est utilisée dans une étude
+ cas du livre 
 \begin_inset Quotes eld
 \end_inset
 
@@ -225,9 +272,10 @@ Descriptions des variables catégorielles
 \end_layout
 
 \begin_layout Plain Layout
+\align center
 \begin_inset Tabular
 <lyxtabular version="3" rows="8" columns="3">
-<features tabularvalignment="middle">
+<features booktabs="true" tabularvalignment="middle">
 <column alignment="center" valignment="top">
 <column alignment="center" valignment="top">
 <column alignment="left" valignment="top" width="5cm">
@@ -482,7 +530,7 @@ Analyse exploratoire
 \begin_layout Standard
 Maintenant que les différentes variables ont été brièvement présentées et
  leur fonction plus claire, nous allons maintenant passer à l'analyse exploratoi
-re de celle-ci.
+re de celles-ci.
  Le but de cette analyse est de mieux comprendre les données qui serviront
  à entraîner les différents algorithmes, ainsi que de repérer d'éventuelles
  anomalies.
@@ -494,6 +542,7 @@ ions quant aux données.
 
 
 \begin_inset Float figure
+placement !h
 wide false
 sideways false
 status open
@@ -506,7 +555,7 @@ has_inner_box 1
 inner_pos "t"
 use_parbox 0
 use_makebox 0
-width "100col%"
+width "45col%"
 special "none"
 height "1in"
 height_special "totalheight"
@@ -518,34 +567,931 @@ backgroundcolor "none"
 status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/gender2.png
+	scale 40
 
-\end_layout
-
-\end_inset
-
-
-\begin_inset space ~
 \end_inset
 
 
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distribution des variables
+Distribution Gender
 \end_layout
 
 \end_inset
 
 
 \end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
 
 \begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/ownerage.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution OwnersAge
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
 \end_inset
 
 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Sur ces deux premières figures nous observons respectivement les distributions
+ des variables Gender et OwnersAge.
+ La première chose que nous pouvons observer est la grande disparité entre
+ le nombre d'hommes de et femmes clients de l'assurance.
+ Notre jeu de données est composé d'hommes pour la grande majorité.
+ Pour ce qui est de la variable OwnersAge, nous constatons que les valeurs
+ sont réparties entre 16 et 92 ans, avec deux 
+\begin_inset Quotes eld
+\end_inset
+
+pics
+\begin_inset Quotes erd
+\end_inset
+
+ vers 25 et 45 ans.
+ Les valeurs maximales et minimales de nos variables continues seront importante
+ pour la suite, car elles sont nécessaires afin d'appliquer une normalisation
+ des données, qui sera discutée plus tard dans ce travail.
+ Ci dessous les distributions des variables VehiculeAge et Zone : 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/vehiculeage.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution VehiculeAge
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/zone.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution Zone
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La distribution de vehicule est indiquée en années, et nous pouvons donc
+ observer que si la plupart des véhicules assurés ont moins de 20 ans, un
+ grand nombre de ceux-ci sont bien plus vieux, avec comme maximum 99 ans.
+ Il est possible que ce véhicule soit considéré comme outlier et il sera
+ reconsidéré dans la partie preprocessing.
+\begin_inset Newline newline
+\end_inset
+
+La distribution de la variable Zone est intéressante, elle nous révèle que
+ la plupart des véhicules assurés sont conduits dans des villages, mais
+ aussi que très peu d'entre eux le sont dans le Gotland.
+ Ceci n'est pas surprenant puisque la population de la Suède est d'environ
+ 10 millions d'habitants, pour seulement 60.000 habitants la région du Gotland.
+ Les classes 5 et 6 sont elles aussi minoritaires, cela était aussi à prévoir
+ puisque ces catégories représentent le nord de la Suède alors que la plupart
+ de la population vis dans le sud du pays.
+ 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/bonus.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution BonusClass
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/class.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution Class
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Les classes de bonus les plus fréquentes sont les classes 1 et 7, respectivement
+ le minimum (entrée dans la compagnie d'assurance) et le maximum (client
+ fidèle depuis sept années au minimum).
+ 
+\begin_inset Newline newline
+\end_inset
+
+Pour la variable Class nous observons qu'assez peu de véhicules appartiennent
+ à la catégorie la plus puissante.
+ En fait, la plupart des véhicules se situent dans les classes 3, 4 et 5,
+ ce qui montre que les vehicules les moins puissants et les plus puissants
+ sont minoritaires.
+ Les graphiques suivants nous montrent la répartitions des sinistres par
+ bonus et par classe de véhicule.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/BonusClaim.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Bonus Claims
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/ClassClaim.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Class Claims
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Il parait logique de supposer que plus un client a un bonus élevé, moins
+ celui-ci causera d'accident, puisque le bonus monte uniquement si le client
+ parvient à compléter une année sans causer d'accident.
+ Cependant en observant la figure 7, il apparait que la majorité des cas
+ d'accidents sont déclarés par des clients appartenant aux classes 3 à 6
+ de bonus.
+ Ce qui est d'autant plus étonnant lorsque l'on associe ce résultat avec
+ la distribution de la variable Class (figure 5) : les classes 3 à 6 sont
+ celles contenant le moins d'utilisateurs.
+ Les clients appartenant à la classe de bonus 7 semblent cependant causer
+ très peu d'accidents malgré le fait qu'ils soient la classe de bonus majoritair
+e.
+\begin_inset Newline newline
+\end_inset
+
+Les résultats de la figure 8 sont moins surprenant : plus un véhicule est
+ puissant, plus le risque d'accident sera important.
+ Les déviations de cette régle par les classes 3 et 7 sont expliquées par
+ la distribution de la population à travers les différentes classes (figure
+ 6), ainsi il y a peu d'accidents pour les véhicules de classe 7 simplement
+ car ceux-ci sont peu nombreux, une conclusion similaire peut être énoncée
+ pour la classe 3.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/genderClaim.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gender claims
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/zoneClaim.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Zone claims
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La répartition des sinistres par sexe indique que les hommes sont plus suceptibl
+es de causer des accidents que les femmes.
+ Il faut prendre en compte que les hommes sont bien plus nombreux que les
+ femmes dans nos données, mais la conclusion ne change pas puisque la proportion
+ de femmes est de 18%, alors que celles-ci ne causent que 8.7% des sinistres.
+ Sur la figure 10, nous observons que les classes 1 et 3 sont celles qui
+ déclarent le plus de sinistres.
+ La première classe étant plutôt minoritaire (figure 4) nous observons que
+ les personnes habitant dans les parties centrales et semi-centrales de
+ Norvège semblent causer bien plus d'accidents que les autres catégories,
+ la même conclusion peut être faite pour la deuxième classe (Banlieues et
+ villes moyennes).
+ Pour ce qui est de nord de la Suède, nous constatons l'inverse puisque
+ ceux-ci semblent causer assez peu d'accidents.
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement !h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/MvFclaims.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Gender claims by Age
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Box Frameless
+position "t"
+hor_pos "c"
+has_inner_box 1
+inner_pos "t"
+use_parbox 0
+use_makebox 0
+width "45col%"
+special "none"
+height "1in"
+height_special "totalheight"
+thickness "0.4pt"
+separation "3pt"
+shadowsize "4pt"
+framecolor "black"
+backgroundcolor "none"
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/claimcost2.png
+	scale 40
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Distribution ClaimCost
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La figure 11 a pour but de mieux comprendre cette disparité entre les hommes
+ et les femmes dans la déclaration des sinistres.
+ Une comparaison par âge permet de mettre en évidence une information importante.
+ En effet, si les hommes semblent bien causer plus d'accidents que les femmes
+ jusqu'à la treintaine, cette tendance s'égalise passé ce cap.
+ Enfin, la figure 12 nous informe de la distribution de la variable ClaimCost,
+ représentant le coût total des sinistres d'un client.
+ Il est important de noter qu'il s'agit bien de la somme de tous les sinistres
+ déclarés du client, ainsi si une personne a reçu une compensation de l'assuranc
+e pour plusieurs sinistres, la variable contient la somme du coût de tous
+ ces sinistres déclarés.
+ Il semble que la grande majorité des clients ne dépassent pas 5000€ de
+ compensation venant de l'assurance (Le graphique ne montre que les valeurs
+ non-nulles, ainsi les clients n'ayant jamais déclaté de sinistres ne sont
+ pas comptés dans l'intervalle 
+\begin_inset Formula $\left[0,5000\right]$
+\end_inset
+
+.
+ La distribution de cette variable montre bien qu'assez peu de clients dépassent
+ les 20.000€ de compensation, mais certains peuvent monter à près de 200.000€.
+\end_layout
+
+\begin_layout Subsection
+Preprocessing
+\end_layout
+
+\begin_layout Standard
+Le preprocessing des données est une étape très importante lorsque nous
+ travaillons avec ce type de données et celui-ci n'est pas à négliger.
+ Il consiste a préparer les données pour les algorithmes, afin que ceux-ci
+ puissent fonctionner de manière optimale.
+ Dans ce travail, plusieurs méthodes de preprocessing ont été utilisées.
+\end_layout
+
+\begin_layout Subsubsection
+Variables binaires (Dummy variables)
+\end_layout
+
+\begin_layout Standard
+Certaines de nos variables sont catégorielles, et plus particulièrement
+ sont des variables non-ordinales.
+ Cela signifie que les différentes catégories ne peuvent pas être ordonnées,
+ il s'agit purement de l'assignation d'un client à un groupe donné.
+ Ce type de variable ne peut pas être encodé tel quel et doit être transformé
+ en une série de variables binaires.
+ La conversion d'une variable catégorielle en variable binaire consiste
+ à créer 
+\begin_inset Formula $n-1$
+\end_inset
+
+ nouvelles variables dites 
+\begin_inset Quotes eld
+\end_inset
+
+binaires
+\begin_inset Quotes erd
+\end_inset
+
+ et qui prendront pour valeur 
+\begin_inset Formula $1$
+\end_inset
+
+ si le client appartient à cette catégorie, 
+\begin_inset Formula $0$
+\end_inset
+
+ sinon.
+ Par exemple si 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+ représente la variable associée au client 
+\begin_inset Formula $i$
+\end_inset
+
+ et à la variable 
+\begin_inset Formula $j$
+\end_inset
+
+, nous pouvons écrire :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\begin{align*}
+x_{j}=\begin{cases}
+0\text{ if }x_{i}\notin j & 1\text{ if }x_{i}\in j\end{cases}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Les variables Gender, Zone, Class, et BonusClass peuvent être transformées
+ de la sorte.
+ Ce travail sera effectué avec le package caret
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Classification And REgression Tools : Package de machine learning pour R.
+\end_layout
+
+\end_inset
+
+ de R.
+ La fonction incluse dans ce package crée 
+\begin_inset Formula $n$
+\end_inset
+
+ variables binaires, la dernière sera donc supprimée car celle-ci ne représente
+ aucune information.
+ Prenons pour exemple la variable Gender.
+ Si 
+\begin_inset Formula $x_{iGender}=1$
+\end_inset
+
+ alors le client est une femme.
+ Cependant nous ne devons pas créer une deuxième variable binaire puisque
+ si 
+\begin_inset Formula $x_{iGender}=0$
+\end_inset
+
+ nous pouvons en déduire que le client est un homme.
+ Ceci explique pourquoi nous n'avons besoin que de 
+\begin_inset Formula $n-1$
+\end_inset
+
+ variables binaires pour représenter toute l'information de 
+\begin_inset Formula $n$
+\end_inset
+
+ catégories appartenant à une variable catégorielle.
+\end_layout
+
+\begin_layout Subsubsection
+Normalisation
+\end_layout
+
+\begin_layout Standard
+Les données quantitatives ne doivent pas être transformées en variables
+ binaires (bien que celles-ci peuvent être converties en intervalles puis
+ en variables binaires, ce ne sera pas le cas dans le cadre de ce travail).
+ Cependant cela ne signifie pas qu'aucune méthode de preprocessing ne doit
+ être appliquée à ces données.
+ La normalisation des données quantitatives aide certains algoithmes à converger
+ plus rapidement et peut même parfois améliorer leur précision.
+ Cette normalisation des données est particulièrement importante pour les
+ réseaux de neurones, car l'optimisation de ceux-ci est basée sur les résultats
+ des fonctions d'activation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Voir chapitre 3
+\end_layout
+
+\end_inset
+
+ utilisées.
+ Celles-ci varient rapidement entre 0 et 1 (ou -1 et 1) et sans la normalisation
+ des données leurs réponses aux valeurs extrêmes seraient localisées dans
+ les extrémités, ce qui peut empêcher l'algorithme de converger dans les
+ cas les plus graves.
+\begin_inset Newline newline
+\end_inset
+
+Plusieurs méthodes peuvent être utilisées afin de procéder à la normalisation
+ des données.
+ Cependant nous ne décrirons que celle qui sera utilisée dans le cadre de
+ ce travail : la normalisation Min Max.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Elle consiste (pour une variable 
+\begin_inset Formula $j$
+\end_inset
+
+) à convertir l'ensemble des données sur l'intervalle 
+\begin_inset Formula $[\text{0,1]}$
+\end_inset
+
+en se servant de 
+\begin_inset Formula $Max(x_{j})$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Valeur maximale prise par la variable j.
+\end_layout
+
+\end_inset
+
+ et 
+\begin_inset Formula $Min(x_{j})$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Valeur minimale prise par la variable j.
+\end_layout
+
+\end_inset
+
+ par la formule : 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Formula 
+\begin{align*}
+z_{ij} & =\frac{x_{ij}-min(x_{j})}{max(x_{j})-min(x_{j})}
+\end{align*}
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Cette transformation sera appliquée aux variables OwnersAge et VehiculeAge.
+\end_layout
+
+\begin_layout Subsubsection
+Outliers
+\end_layout
+
+\begin_layout Section
+Algorithmes
 \end_layout
 
 \end_body

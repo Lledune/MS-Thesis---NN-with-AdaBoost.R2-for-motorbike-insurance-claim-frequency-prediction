@@ -27,10 +27,8 @@ newData = cbind(dumData, data$OwnersAge, data$VehiculeAge, data$Duration, data$N
 newData = as.data.frame(newData)
 colnames(newData)[24:27] = c("OwnersAge", "VehiculeAge", "Duration", "NumberClaims")
 #delete durations = 0 rows 
-newData = newData[!(newData$Duration == 0), ]
+newData = newData[!(newData$Duration < 0.00001), ]
 #delete 4374 cause claifrequency too high outlier
-newData = newData[!newData[4374, ], ]TODO
-
 newData$ClaimFrequency = newData$NumberClaims/newData$Duration
 
 #Normalize data 
@@ -42,9 +40,6 @@ normalize = function(vector){
 newData = as.data.frame(newData)
 newData$OwnersAge = normalize(newData$OwnersAge)
 newData$VehiculeAge = normalize(newData$VehiculeAge)
-newData$Duration = normalize(newData$Duration)
-newData$NumberClaims = normalize(newData$NumberClaims)
-newData$ClaimFrequency = normalize(newData$ClaimFrequency)
 
 #Test set building
 smp_size <- floor(0.9 * nrow(newData))
@@ -61,10 +56,5 @@ write.csv(newData, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-netwo
 write.csv(train, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocTrain.csv")
 write.csv(test, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocTest.csv")
 
-#should we delete these ??
-newData = as.data.frame(newData)
-indexes = !(durTrain == 0)
-dataNoD = newData[indexes, ]
-write.csv(dataNoD, row.names =  F, "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocNoD.csv")
 
 

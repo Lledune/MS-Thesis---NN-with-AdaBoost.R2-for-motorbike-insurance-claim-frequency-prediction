@@ -16,7 +16,10 @@ nbClaims = data['NumberClaims']
 nbClaims = nbClaims.to_frame()
 y = data['ClaimFrequency']
 d = data['Duration']
-y = y.to_frame()
+y = pd.DataFrame(y)
+d = pd.DataFrame(d)
+feed = np.append(y, d, axis = 1) #Used to pass d with y in loss function 
+y = y.values
 d = d.values
 
 def rmse(yt, yp):
@@ -50,36 +53,31 @@ def custom_loss2(data, y_pred):
     
     return loss_value
 
-def custom_loss3(data, y_pred):
-
-    y_true = data[:, 0]
-    d = data[:, 1]
-    switch = KB.greater(y_true, 0.)
-    # condition
-    loss_value = KB.switch(switch, 2 * d * (y_true * KB.log(y_true) - y_true * KB.log(y_pred + KB.epsilon()) - y_true + y_pred), 2 * d * y_pred)
-    return loss_value
-
-def lf1(data, y_pred):
-    y_true = data[:, 0]
-    d = data[:, 1]
-    return(2 * d * y_pred)
-
-def lf2(data, y_pred):
-    y_true = data[:, 0]
-    d = data[:, 1]
-    return(2 * d * (y_true * KB.log(y_true) - y_true * KB.log(y_pred) - y_true + y_pred))
-
-
-
-def cl4(d):
-    def custom_loss4(y_true, y_pred):
-        if(d == 0):
-            return lf1(y_true, y_pred)
-        else:
-            return lf2(y_true, y_pred)
-    return custom_loss4
+    def custom_loss3(data, y_pred):
+        y_true = data[:, 0]
+        d = data[:, 1]
         
-
+        lnYTrue = KB.switch(KB.equal(y_true, 0), KB.zeros_like(y_true), KB.log(y_true))
+        lnYPred = KB.switch(KB.equal(y_pred, 0), KB.zeros_like(y_pred), KB.log(y_pred))
+        loss_value = 2 * d * (y_true * lnYTrue - y_true * lnYPred[:, 0] - y_true + y_pred[:, 0])
+        return loss_value
+    
+    def deviance(data, y_pred):
+        y_true = data[:, 0]
+        d = data[:, 1]
+        
+        lnY = KB.log(y_true)
+        bool1 = KB.equal(y_true, 0)
+        zeros = KB.zeros_like(y_true)
+        lnY = KB.switch(bool1, zeros, lnY)
+        
+        lnYp = KB.log(y_pred)
+        bool2 = KB.equal(y_pred, 0)
+        zeross = KB.zeros_like(y_pred)
+        lnYp = KB.switch(bool2, zeross, lnYp)
+        
+        loss = 2 * d * (y_true * lnY - y_true * lnYp[:, 0] - y_true + y_pred[:, 0])
+        return KB.sum(loss)
 
 
 def baseline_model(loss):
@@ -94,11 +92,11 @@ def baseline_model(loss):
     model.compile(loss=loss, optimizer='Adam')
     return model
 
-model1 = baseline_model("poisson")
-model2 = baseline_model(cl4(d))
+model1 = baseline_model("mean_squared_error")
+model2 = baseline_model(deviance)
 
-model2.fit(factors, np.append(y, d, axis = 1), epochs=2, shuffle=True, verbose=1)
-model1.fit(factors, y, epochs=2, shuffle=True, verbose=1)
+model2.fit(factors, feed, epochs=4, shuffle=True, verbose=1)
+model1.fit(factors, y, epochs=4, shuffle=True, verbose=1)
 
 #model 1 = poisson, model 2 = custom
 #In spyder IDE can check comp to see if two models are similar

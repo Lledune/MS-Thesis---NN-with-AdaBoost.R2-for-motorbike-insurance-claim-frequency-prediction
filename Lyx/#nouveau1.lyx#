@@ -1339,7 +1339,7 @@ binaires
 \begin_layout Standard
 \begin_inset Formula 
 \begin{align*}
-x_{ij}=\begin{cases}
+\begin{cases}
 0\text{ if }x_{i}\notin j & 1\text{ if }x_{i}\in j\end{cases}
 \end{align*}
 
@@ -1356,7 +1356,7 @@ Les variables Gender, Zone, Class, et BonusClass peuvent être transformées
 status open
 
 \begin_layout Plain Layout
-Classification And REgression Tools : Package de machine learning pour R.
+Classification And REgression Tools.
 \end_layout
 
 \end_inset
