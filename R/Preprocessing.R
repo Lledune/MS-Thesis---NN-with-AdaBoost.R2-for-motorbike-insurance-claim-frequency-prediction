@@ -22,11 +22,18 @@ library(caTools)
 dummies = dummyVars(NumberClaims ~ Gender + Zone + Class + BonusClass, data = data, drop2nd = T)  
 dumData = predict(dummies, data)
 
+#delete columns of unnecessary dummies 
+
+
 newData = cbind(dumData, data$OwnersAge, data$VehiculeAge, data$Duration, data$NumberClaims)
 
 newData = as.data.frame(newData)
 colnames(newData)[24:27] = c("OwnersAge", "VehiculeAge", "Duration", "NumberClaims")
 newData$Duration[newData$Duration == 0] = 0.00274
+
+#Delete nbcliams > 0 and duration ==0
+newData = newData[-c(3388,4199,15908,16076), ]
+
 #delete durations = 0 rows 
 #newData = newData[!(newData$Duration == 0), ]
 #delete 4374 cause claifrequency too high outlier
@@ -43,7 +50,7 @@ normalize = function(vector){
 newData = as.data.frame(newData)
 newData$OwnersAge = normalize(newData$OwnersAge)
 newData$VehiculeAge = normalize(newData$VehiculeAge)
-newData$Duration = normalize(newData$Duration)
+
 
 #Test set building
 smp_size <- floor(0.9 * nrow(newData))

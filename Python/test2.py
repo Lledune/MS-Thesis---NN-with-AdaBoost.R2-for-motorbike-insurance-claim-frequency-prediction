@@ -10,6 +10,8 @@ data = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pri
 
 factors = data.drop('NumberClaims', axis = 1)
 factors = factors.drop('ClaimFrequency', axis = 1)
+#DO NOT USE DURATION AS FACTOR OR IT WILL MAKE EVERTHING BUG AND CREATE BLACKHOLE THAT ABSORBS EVERY DIMENSIONS.
+factors = factors.drop('Duration', axis = 1)
 nbClaims = data['NumberClaims']
 nbClaims = nbClaims.to_frame()
 y = data['ClaimFrequency']
@@ -51,18 +53,20 @@ def baseline_model(loss):
     # create model
     #building model
     model = keras.Sequential()
-    model.add(Dense(25, input_dim = 26, activation = "exponential"))
+    model.add(Dense(25, input_dim = 25, activation = "exponential"))
+    #model.add(Dense(2, activation = "exponential"))
+
 
     #model.add(Dense(10, activation = "relu"))
-    model.add(Dense(1, activation = "sigmoid"))
+    model.add(Dense(1, activation = "exponential"))
     model.compile(loss=loss, optimizer='Adam')
     return model
 
 model1 = baseline_model("mean_squared_error")
 model2 = baseline_model(deviance)
 
-model2.fit(factors, feed, epochs=4, shuffle=True, verbose=1)
-model1.fit(factors, y, epochs=4, shuffle=True, verbose=1)
+model2.fit(factors, feed, epochs=10, shuffle=True, verbose=1)
+model1.fit(factors, y, epochs=10, shuffle=True, verbose=1)
 
 #model 1 = poisson, model 2 = custom
 #In spyder IDE can check comp to see if two models are similar
