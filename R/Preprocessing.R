@@ -26,10 +26,13 @@ newData = cbind(dumData, data$OwnersAge, data$VehiculeAge, data$Duration, data$N
 
 newData = as.data.frame(newData)
 colnames(newData)[24:27] = c("OwnersAge", "VehiculeAge", "Duration", "NumberClaims")
+newData$Duration[newData$Duration == 0] = 0.00274
 #delete durations = 0 rows 
-newData = newData[!(newData$Duration < 0.00001), ]
+#newData = newData[!(newData$Duration == 0), ]
 #delete 4374 cause claifrequency too high outlier
+
 newData$ClaimFrequency = newData$NumberClaims/newData$Duration
+
 
 #Normalize data 
 normalize = function(vector){
@@ -40,6 +43,7 @@ normalize = function(vector){
 newData = as.data.frame(newData)
 newData$OwnersAge = normalize(newData$OwnersAge)
 newData$VehiculeAge = normalize(newData$VehiculeAge)
+newData$Duration = normalize(newData$Duration)
 
 #Test set building
 smp_size <- floor(0.9 * nrow(newData))

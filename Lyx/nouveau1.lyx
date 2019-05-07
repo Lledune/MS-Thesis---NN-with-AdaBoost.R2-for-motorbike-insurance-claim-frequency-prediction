@@ -1490,6 +1490,80 @@ Cette transformation sera appliquée aux variables OwnersAge et VehiculeAge.
 Outliers
 \end_layout
 
+\begin_layout Standard
+Lors de l'encodage des données, il arrive que certaines valeurs des variables
+ quantitatives soient assez extrêmes et semblent fort distantes des autres
+ observations.
+ Dans ce cas nous pouvons soit garder la valeur si celle-ci semble ajouter
+ de l'information au modèle ou la supprimer dans le but d'une meilleure
+ généralisation par celui-ci.
+ Dans la section 2.2 une donnée a particulièrement attiré notre attention
+ comme outlier potentiel : une moto de 99 ans.
+ Pour celle-ci nous pouvons entrevoir deux possibilités :
+\end_layout
+
+\begin_layout Itemize
+Il peut simplement s'agir d'une erreur d'encodage, auquel cas l'observation
+ doit être supprimée pour éviter de biaiser le modèle.
+\end_layout
+
+\begin_layout Itemize
+Il peut également s'agir d'une vraie moto de type 
+\begin_inset Quotes eld
+\end_inset
+
+ancêtre
+\begin_inset Quotes erd
+\end_inset
+
+, cependant ce genre de véhicule ne se conduit pas de la même manière qu'un
+ véhicule utilisé au quotidien, et on peut supporser que les risques d'accidents
+ sont bien moindres.
+ Dans ce cas-ci la suppression de la donnée n'est pas obligatoire mais peut
+ aider à une meilleure généralisation du modèle.
+\end_layout
+
+\begin_layout Standard
+Puisqu'aucun moyen simple de vérifier cette hypothèse n'est disponible,
+ celle-ci sera supprimée de la base de donnée car la perte d'information
+ est moindre.
+\begin_inset Newline newline
+\end_inset
+
+La suppression de trop d'information peut cependant nuire au modèle, les
+ données extrêmes mais non-aberantes seront donc conservées.
+\end_layout
+
+\begin_layout Subsubsection
+Durée de contrat
+\end_layout
+
+\begin_layout Standard
+Pour le bon fonctionement du modèle, certaines autres données ont du être
+ modifiées car celles-ci entrainaient des erreurs dans la fonction de déviance
+ utilisée pour la calibration des poids des réseaux de neurones.
+ Les observations incriminées sont celles ayant une durée de contrat nulle.
+ Ces valeurs nulles de durée de contrat sont peu cohérentes (impossible
+ d'avoir un sinistre déclaré au cours du contrat si celui-ci n'est pas encore
+ en vigueur) et elles seront donc changées par la valeur correspondant à
+ un jour (
+\begin_inset Formula $1/365\simeq0.00274$
+\end_inset
+
+).
+ Certaines de ces observations n'ont cependant pas une valeur nulle pour
+ la variable NbClaims, ce qui signifie que des sinistres auraient été déclarés
+ dans des contrats dont la durée est nulle.
+ Ce cas de figure n'étant pas possible, elles seront supprimées car il s'agit
+ probablement d'erreur d'encodage.
+ De plus changer la valeur de la durée du contrat par 0.00274 dans ce cas
+ reviendrait à considérer une fréquence de sinistre de 
+\begin_inset Formula $\simeq365$
+\end_inset
+
+ soit un sinistre par jour ce qui pourrait grandement biaiser le modèle.
+\end_layout
+
 \begin_layout Section
 Algorithmes
 \end_layout
