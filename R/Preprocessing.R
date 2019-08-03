@@ -23,12 +23,12 @@ dummies = dummyVars(NumberClaims ~ Gender + Zone + Class + BonusClass, data = da
 dumData = predict(dummies, data)
 
 #delete columns of unnecessary dummies 
-
+dumData = dumData[, -c(2,9,16,23)]
 
 newData = cbind(dumData, data$OwnersAge, data$VehiculeAge, data$Duration, data$NumberClaims)
 
 newData = as.data.frame(newData)
-colnames(newData)[24:27] = c("OwnersAge", "VehiculeAge", "Duration", "NumberClaims")
+colnames(newData)[20:23] = c("OwnersAge", "VehiculeAge", "Duration", "NumberClaims")
 newData$Duration[newData$Duration == 0] = 0.00274
 
 #Delete nbcliams > 0 and duration ==0

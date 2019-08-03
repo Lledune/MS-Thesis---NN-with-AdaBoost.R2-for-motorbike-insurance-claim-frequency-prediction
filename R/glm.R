@@ -2,8 +2,11 @@
 
 #dataTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocFull.csv", sep = ",")
 #oversampled
-dataTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/samp.csv", sep = ",")
-
+dataTrain = read.csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocFull.csv", sep = ",")
+duration = dataTrain[,22]
+dataTrain = dataTrain[, -22]
+nbc = dataTrain[,22]
+dataTrain = dataTrain[, -22]
 
 library(caret)
 library(caTools)
@@ -13,11 +16,11 @@ library(glmnet)
 #using cross validation with K=10
 
 #Model simple
-fit = glmnet(as.matrix(dataTrain[,1:26]), as.matrix(dataTrain[,27]), family = "poisson")
+fit = glmnet(as.matrix(dataTrain[,1:21]), as.matrix(dataTrain[,22]), family = "poisson")
 plot(fit, xvar = "dev", label = TRUE)
 
 #Model with CV
-cvfit = cv.glmnet(as.matrix(dataTrain[,1:26]), as.matrix(dataTrain[,27]), family = "poisson")
+cvfit = cv.glmnet(as.matrix(dataTrain[,1:21]), as.matrix(dataTrain[,22]), family = "poisson")
 plot(cvfit, xvar = "dev", label = TRUE)
 
 #One line is simply the ?? lambda corresponding to the minimum MSE of the cross validation (your left dotted line) . 
@@ -27,16 +30,17 @@ plot(cvfit, xvar = "dev", label = TRUE)
 #accessing the values : 
 cvfit$lambda.min; cvfit$lambda.1se #Ususally better to choose lambda1se because it reduces overfitting
 
-coefLambda = coef(cvfit,s=cvfit$lambda.1se) #coefficient for lambda 1se
+coefLambda = coef(cvfit,s=cvfit$lambda.min) #coefficient for lambda 1se
 coefLambda
 #Only 10 coefficients are kept from feature selection 
 #TODO : Final model with selected features
 
 dataTrain = as.matrix(dataTrain)
-preds = predict(cvfit, newx = dataTrain[,1:26], s = cvfit$lambda.1se)
+preds = predict(cvfit, newx = dataTrain[,1:21], s = cvfit$lambda.min)
 predLambda = exp(preds)
 
 dataTrain = as.data.frame(dataTrain)
+
 
 #Deviance
 devianceSingle = function(yt, yp, duration){
@@ -48,22 +52,14 @@ devianceSingle = function(yt, yp, duration){
     return(2*duration * (yt*log(yt) - yt*log(yp) - yt + yp))
   } 
 }
-devianceSingle(dataTrain$NumberClaims[1], predLambda[1], durationTrain[1])
 
 devianceFull = function(yt, yp, duration){
   x = matrix(nrow = length(yt), ncol = 1)
   for(i in 1:length(x)){
     x[i] = devianceSingle(yt[i], yp[i], duration[i])
   }
-  return(x)
+  return(sum(x))
 }
 
-devFull = devianceFull(dataTrain$NumberClaims, preds, durationTrain)
-devFull = round(devFull, 5)
-devFull
+devianceFull(dataTrain$ClaimFrequency, predLambda, duration)
 
-#test models 
-durationTrain = dataTrain$Duration
-sum(devianceFull(dataTrain$NumberClaims, predStep, durationTrain)) #7321.062
-sum(devianceFull(dataTrain$NumberClaims, predLambda, durationTrain)) #7211.471
-mean(devianceFull(dataTrain$NumberClaims, predLambda, durationTrain)) #7211.471

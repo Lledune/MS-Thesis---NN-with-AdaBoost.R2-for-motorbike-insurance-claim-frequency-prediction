@@ -53,7 +53,7 @@ def baseline_model(loss):
     # create model
     #building model
     model = keras.Sequential()
-    model.add(Dense(25, input_dim = 25, activation = "exponential"))
+    model.add(Dense(15, input_dim = 21, activation = "exponential"))
     #model.add(Dense(2, activation = "exponential"))
 
 
@@ -63,7 +63,7 @@ def baseline_model(loss):
     return model
 
 model1 = baseline_model("mean_squared_error")
-model2 = baseline_model(deviance)
+model2 = baseline_model(custom_loss3)
 
 model2.fit(factors, feed, epochs=10, shuffle=True, verbose=1)
 model1.fit(factors, y, epochs=10, shuffle=True, verbose=1)

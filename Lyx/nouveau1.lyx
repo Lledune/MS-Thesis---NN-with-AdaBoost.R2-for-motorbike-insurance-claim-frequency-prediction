@@ -5,6 +5,10 @@
 \save_transient_properties true
 \origin unavailable
 \textclass article
+\begin_preamble
+\usepackage{algorithm}
+\usepackage{algorithmic}
+\end_preamble
 \use_default_options true
 \maintain_unincluded_children false
 \language english
@@ -1277,6 +1281,230 @@ e pour plusieurs sinistres, la variable contient la somme du coût de tous
 \end_layout
 
 \begin_layout Subsection
+Assurances
+\end_layout
+
+\begin_layout Standard
+Dans cette sous-section seront expliquées les particularités de l'analyse
+ de données dans le cadre de l'assurance, et plus précisement dans le cas
+ qui nous intéresse ici.
+\end_layout
+
+\begin_layout Subsubsection
+Principe
+\end_layout
+
+\begin_layout Standard
+Un contrat entre l'assureur et l'assuré implique le payement d'une prime
+ d'assurance par le second, en échange de compensations lorsqu'un sinistre
+ est déclaré.
+ Le fait de regrouper un grand nombre de clients va avoir un effet stabilisateur
+ de variance pour l'assureur.
+ En effet il est difficile de prédire précisemment le nombre d'accidents
+ qu'un assuré aura, cependant plus le nombre d'assurés sera élevé et plus
+ le nombre (total) de sinistres sera prévisible.
+ Ceci est du à la loi des grands nombres qui implique :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\bar{X}\rightarrow\mu\:when\,n\rightarrow\infty
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La moyenne de l'échantillon 
+\begin_inset Formula $\bar{X}$
+\end_inset
+
+converge vers le moyenne de la population 
+\begin_inset Formula $\mu$
+\end_inset
+
+ lorsque la taille de l'échantillon augmente.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Dans le cadre de l'assurance, les variables explicatives sont aussi appelées
+ facteur d'évaluations, les deux termes seront utilisés indifférement au
+ cours de ce travail.
+\end_layout
+
+\begin_layout Subsubsection
+Ratio
+\end_layout
+
+\begin_layout Standard
+Il est important de comprendre ce que l'on cherche à expliquer avec un modèle,
+ aussi il faut savoir que cette analyse se base sur un ratio.
+ Un ratio 
+\begin_inset Formula $Y$
+\end_inset
+
+ est un rapport entre une réponse 
+\begin_inset Formula $X$
+\end_inset
+
+ et une exposition
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+L'exposition peut être le nombre de sinistres ou la durée du contrat.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $v$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Y=X/v
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Il existe différents ratios mais ici ne sera présenté que celui utilisé
+ dans l'analyse à venir : La fréquence des réclamations.
+ Il s'agit du rapport entre le nombre de réclamations et la durée du contrat,
+ nous obtenons ainsi une fréquence qui sera la variable prédite par nos
+ modèles.
+\end_layout
+
+\begin_layout Subsubsection
+Distribution du ratio
+\end_layout
+
+\begin_layout Standard
+Pour la création d'un modèle cherchant à prédire la fréquence des réclamations
+ c'est souvent la distribution Poisson qui est utilisée.
+ Une loi poisson de paramètre 
+\begin_inset Formula $\lambda$
+\end_inset
+
+ implique :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Y\sim Poisson(\lambda)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E[Y]=\lambda
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Var[Y]=\lambda
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Afin de vérifier que la distribution de la fréquence des sinistres suit
+ bien une loi de poisson celle-ci est affichée.
+ En effet la plupart des valeurs se situent près de 0, les valeurs supérieures
+ à 1 sont présentes mais extrêmement rares et ne sont donc pas affichées
+ afin d'observer plus précisemment les valeurs types.
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\align center
+\begin_inset Graphics
+	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/Rplot02.png
+	width 6cm
+	height 4.5cm
+	keepAspectRatio
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La loi de poisson fait partie de la famille des modèles à dispersion exponentiel
+le (ED), une catégorie regroupant un grand nombre de lois statistiques connues
+ comme la loi normale, gamma ou encore binomiale.
+ Une variable aléatoire Y suit une dispersion exponentielle si sa fonction
+ de distribution suit la forme suivante :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_{i}}\right\} c(y,\phi,v_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\theta_{i}$
+\end_inset
+
+: paramètre dépendant de i.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\phi$
+\end_inset
+
+: paramètre identique pour tous les i.
+ C'est le paramètre de dispersion
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $c(.)$
+\end_inset
+
+ est indépendante du paramètre 
+\begin_inset Formula $\theta_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsection
 Preprocessing
 \end_layout
 
@@ -1566,6 +1794,877 @@ Pour le bon fonctionement du modèle, certaines autres données ont du être
 
 \begin_layout Section
 Algorithmes
+\end_layout
+
+\begin_layout Standard
+Dans cette section, les différents algorithmes utilisés lors des analyses
+ seront présentés à des fins de compréhension du travail.
+ ..............................
+\begin_inset Newline newline
+\end_inset
+
+Afin d'effectuer un travail de prédiction en matière de régression ou de
+ classification, il est nécessaire d'avoir un outil puissant à disposition
+ : l'apprentissage automatique ou 
+\begin_inset Quotes eld
+\end_inset
+
+machine learning
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Il s'agit d'un ensemble de méthodes basées sur des outils statistiques
+ permettant la création de modèles pouvant être utilisés pour la prédiction.
+ (réf wiki)
+\end_layout
+
+\begin_layout Subsection
+Explication d'un modèle
+\end_layout
+
+\begin_layout Subsubsection
+Définitions et apprentissage
+\end_layout
+
+\begin_layout Standard
+Avant de pouvoir rentrer dans les détails, il est important de définir les
+ notations qui seront utilisées, de définir ce qu'est un modèle et comment
+ celui-ci se construit.
+ La construction d'un modèle est spécifique pour la résolution d'une tâche
+ 
+\begin_inset Formula $T$
+\end_inset
+
+, que l'on cherche à améliorer par rapport à une métrique 
+\begin_inset Formula $P$
+\end_inset
+
+ grâce à des expériences
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Données.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $Q$
+\end_inset
+
+.
+ La base de données est composée de 
+\begin_inset Formula $X$
+\end_inset
+
+ les variables explicatives et de 
+\begin_inset Formula $Y$
+\end_inset
+
+ la variable expliquée.
+ Dans notre cas :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $T$
+\end_inset
+
+ : Déterminer la fréquence des sinistres.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $P$
+\end_inset
+
+ : Déviance (Explications dans la section 3.1.2).
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Q=\{(x_{1},y_{1}),...,(x_{n},y_{n})\}$
+\end_inset
+
+ : Base de données 
+\begin_inset Formula $X\rightarrow Y$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Un modèle cherche à approximer une fonction cible (choisie), dans le cas
+ étudié 
+\begin_inset Formula $f:X\rightarrow\mathbb{R^{+}}$
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Dans notre étude seuls les modèles supervisés
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Algorithmes nécessitant une base de données 
+\begin_inset Formula $X\rightarrow Y$
+\end_inset
+
+ pour l'apprentissage.
+\end_layout
+
+\end_inset
+
+ seront abordés.
+ Deux éléments sont nécessaires pour la création d'un modèle, une base de
+ données et un algorithme supervisé (choix du modèle).
+ La base de données est composée de 
+\begin_inset Formula $N$
+\end_inset
+
+ entrées des variables explicatives et de la variable expliquée 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ où 
+\begin_inset Formula $i$
+\end_inset
+
+ représente l'individu et où 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+ représente la valeur prise pour la variable 
+\begin_inset Formula $j$
+\end_inset
+
+ pour l'individu 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Le modèle va se servir des valeurs prises par les 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+ pour tenter d'expliquer 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+.
+ Pour ce faire l'algorithme doit subir une phase d'apprentissage, aucours
+ de laquelle celui-ci va recevoir des entrées provenant de la base de données
+ et se servir de celles-ci pour 
+\begin_inset Quotes eld
+\end_inset
+
+apprendre
+\begin_inset Quotes erd
+\end_inset
+
+ et se calibrer sur le problème que l'on cherche à résoudre.
+ Cette phase d'apprentissage est différente d'un algorithme à un autre.
+ Une fois cette phase d'apprentissage terminée le modèle ainsi créé peut
+ être utilisé pour la prédiction (après que celui-ci ait été validé, voir
+ sous-sections suivantes).
+ Les valeurs prédites par l'algorithmes seront notées 
+\begin_inset Formula $\hat{y_{i}}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Évaluation
+\end_layout
+
+\begin_layout Standard
+Pour l'apprentissage, les algorithmes supervisés se basent sur un critère
+ mesurant l'erreur d'un modèle : la fonction de perte.
+ Ce critère permet la comparaison entre différents modèles et un choix optimal
+ parmis ceux-ci, en sélectionnant celui qui minimise l'erreur commise dans
+ les prédictions.
+ Il existe un grand nombre de critères pouvant servir pour l'évaluation
+ des modèles mais le choix de celui-ci doit se faire en fonction du problème
+ adressé et de la base de données.
+ Le choix de ce critère est important car il peut impacter l'efficacité
+ des modèles créés.
+\begin_inset Newline newline
+\end_inset
+
+Le critère peut être défini comme 
+\begin_inset Formula $f(y,\hat{y})$
+\end_inset
+
+ une fonction dépendant des valeurs prises par 
+\begin_inset Formula $y$
+\end_inset
+
+ et 
+\begin_inset Formula $\hat{y}$
+\end_inset
+
+ mesurant la différence entre les prédictions et la réalité d'une certaine
+ manière.
+ (https://en.wikipedia.org/wiki/Loss_function) Une fonction de perte intuitive
+ est donnée en guise d'example par la racine de l'erreur quadratique moyenne
+ (RMSE).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+RMSE(\theta,\hat{\theta})=\sqrt{MSE(\theta,\hat{\theta})}=\sqrt{E((\hat{\theta}-\theta)^{2})}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Le RMSE est sûrement un des critères les plus utilisés aujourd'hui (y compris
+ pour les réseaux de neurones), cependant utiliser celui-ci reviendrait
+ à considérer le ratio de la fréquence des réclamations comme étant distribué
+ selon une loi gaussienne.
+ Les résultats s'en trouvent alors biaisés car les propriétés statistiques
+ de la variable expliquée ne sont pas prises en compte.
+ Afin de palier à ce problème, un autre critère statistique sera utilisé
+ : la déviance de Poisson.
+ La déviance est utilisée la plupart du temps pour des tests d'hypothèses
+ et elle joue un role important dans l'analyse des distributions de la famille
+ exponentielle.
+ Elle peut être vue comme une forme de distance (d'où son utilisation en
+ temps que critère).
+ Notons D* la déviance mise à l'échelle, un test entre les maximum de vraisembla
+nce du modèle entrainé et du modèle saturé
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Modèle où les 
+\begin_inset Formula $\hat{y_{i}}$
+\end_inset
+
+sont définis comme les véritables valeurs 
+\begin_inset Formula $y_{i},$
+\end_inset
+
+le maximum de vraisemblance de ce modèle est le meilleur que nous pouvons
+ obtenir du fait que les 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+sont parfaitement prédits.
+\end_layout
+
+\end_inset
+
+.
+ Notons aussi 
+\begin_inset Formula $l(\hat{y_{i})}$
+\end_inset
+
+ le log-vraisemblance de 
+\begin_inset Formula $\hat{y_{i}}$
+\end_inset
+
+et 
+\begin_inset Formula $l(y_{i})$
+\end_inset
+
+ le log-vraisemblance de 
+\begin_inset Formula $y_{i}.$
+\end_inset
+
+ (wiki deviance)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+D^{*}(y_{i},\hat{y_{i})}=2\left(l(y_{i})-l(\hat{y_{i})}\right)
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+En utilisant la fonction de distribution des ED vue précédemment, le résultat
+ suivant est obtenu :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $a'(\theta)=e^{\theta}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $h(y)=ln(y)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+D^{*}(y_{i},\hat{y_{i})}=\frac{2}{\phi}v_{i}(y_{i}h(y_{i}))-a(h(y_{i}))-y_{i}h(\hat{y_{i}})+a(h(\hat{y_{i}})))
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La déviance non mise à l'échelle peut ensuite être obtenue en multipliant
+ cette formule par le paramètre de dispersion 
+\begin_inset Formula $\phi$
+\end_inset
+
+ (voir section 2.3.3).
+ La dérivation de cette déviance non mise à l'échelle appliquée à la loi
+ de poisson résulte en la déviance de Poisson non-mise à l'échelle, c'est
+ ce critère qui sera utilisé pour l'apprentissage de nos modèles.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+D(y_{i},\hat{y_{i}})=2v_{i}(y_{i}ln(y_{i})-y_{i}ln(\hat{y_{i}})-y_{i}+\hat{y_{i}}),\:\;\forall y_{i}>0
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+La base de donnée utilisée portant sur des événements rares, beaucoup de
+ cas 
+\begin_inset Formula $y_{i}=0$
+\end_inset
+
+ seront étudiés, en modifiant la formule ci dessus la formule adéquate pour
+ ce cas particulier est donnée par :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+D(y_{i},\hat{y}_{i})=2v_{i}\hat{y_{i},}\;\:\forall y_{i}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Overfit, AIC et BIC
+\end_layout
+
+\begin_layout Standard
+Il est important de comprendre le but derrière la création d'un tel modèle.
+ Nous cherchons à approximer une fonction de réponse 
+\begin_inset Formula $Y$
+\end_inset
+
+ à l'aide de ce modèle.
+ Afin que cette fonction sois au mieux approchée, il est important que le
+ modèle reste général.
+ En effet le but final du modèle est de prédire des valeurs de Y pour des
+ nouvelles entrées 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+, ce qui amène à des méthodes permettant de vérifier que cette fonction
+ est correctement approximée.
+ Plus particulièrement nous chercons à éviter un maximum l'overfit.
+ L'overfit survient lorsqu'un modèle approxime bien les valeurs du jeu de
+ données utilisé pour l'entraînement mais que celui-ci est incapable de
+ déterminer des valeurs cohérentes pour des nouvelles entrées, il peut être
+ notamment causé par un trop grand nombre de variables explicatives ou une
+ phase d'apprentissage mal configurée.
+ Le modèle est alors inutilisable dans un scénario réél.
+\begin_inset Newline newline
+\end_inset
+
+Afin de choisir des modèles limitant l'overfit, deux nouveaux critères seront
+ introduits : AIC et BIC.
+ Comme les autres critères vus, ce sont des mesures de la qualité d'un modèle
+ statistique.
+ Il est (presque) toujours possible d'améliorer les résultats d'un modèle
+ sur les critères basiques en augmentant le nombre de variables explicatives.
+ Cependant cette pratique augmente les risque d'overfit, c'est la raison
+ pour laquelle dans la création d'un modèle la parcimonie
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Principe consistant à utiliser le moins de variables explicatives possible
+ pour expliquer un phénomène afin de réduire le phénomène d'overfit.
+\end_layout
+
+\end_inset
+
+ du modèle est importante.
+ Ces deux critères permettent de prendre en compte le nombre de variables
+ explicatives dans le calcul de la qualité de modèle.
+\end_layout
+
+\begin_layout Itemize
+AIC (Akaike Information Criterion) : (wiki aic) 
+\begin_inset Formula $AIC=2k-2ln(L)$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+(Où 
+\begin_inset Formula $k$
+\end_inset
+
+ est le nombre de paramètres à estimer du modèle et L est le maximum de
+ la fonction de vraisemblance du modèle (edit copyright))
+\end_layout
+
+\begin_layout Itemize
+BIC (Bayesion Information Criterion) : (wiki) 
+\begin_inset Formula $BIC=k\times ln(N)-2ln(L)$
+\end_inset
+
+ 
+\begin_inset Newline newline
+\end_inset
+
+(Où N est le nombre d'observations dans l'échantillon)
+\end_layout
+
+\begin_layout Subsubsection
+Validation croisée (K-fold)
+\end_layout
+
+\begin_layout Standard
+La valeur de certains paramètres d'un modèle pouvant être générée dans un
+ premier temps de manière aléatoire lors de l'initialisation avant d'être
+ optimisés, et la forme du jeu de données pouvant aussi influencer les résultats
+, deux modèles 
+\begin_inset Quotes eld
+\end_inset
+
+identiques
+\begin_inset Quotes erd
+\end_inset
+
+ n'auront pas toujours le même résultats pour les critères statistiques
+ utilisés.
+ Il est aussi parfois difficile de détecter l'overfit, c'est la raison pour
+ laquelle la validation croisée est utilisée.
+ Généralement la base de données utilisée est divisée en un jeu d'entraînement
+ et un jeu de test qui ne sera pas utilisé pour l'entraînement mais pour
+ calculer les résultats du modèle aux différents critères statistiques.
+ Dans le cas étudié ici, les événements sont rares, c'est pourquoi il est
+ souvent préférable de travailler avec la base de donnée complète en évitant
+ cette division.
+ C'est pour palier à ce problème que la validation croisée sera utilisée.
+\begin_inset Newline newline
+\end_inset
+
+Le principe de base est de diviser le jeu de données en 
+\begin_inset Formula $K$
+\end_inset
+
+ ensembles de taille égale.
+ Un modèle sera ensuite entrainé pour chaque ensemble en utilisant cet ensemble
+ comme jeu de test et l'ensemble des autres ensembles comme jeu d'entraînement.
+ Le résultat de la métrique est alors la moyenne des résultats des différents
+ ensembles.
+ Plus formellement :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Q=\{(x_{1},y_{1}),...,(x_{n},y_{n})\}$
+\end_inset
+
+, la base de données.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $K$
+\end_inset
+
+, le nombre d'ensembles créés.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $M$
+\end_inset
+
+, l'algorithme d'apprentissage.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $E(M,Q)$
+\end_inset
+
+, la fonction de perte dépendant de 
+\begin_inset Formula $y$
+\end_inset
+
+ et 
+\begin_inset Formula $\hat{y}$
+\end_inset
+
+, calculée sur 
+\begin_inset Formula $Q$
+\end_inset
+
+ avec le modèle 
+\begin_inset Formula $M$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+
+\lang french
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\series bold
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+Diviser 
+\begin_inset Formula $Q$
+\end_inset
+
+ en 
+\begin_inset Formula $K$
+\end_inset
+
+ sous-ensembles 
+\begin_inset Formula $Q_{1},...,Q_{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+for 
+\begin_inset Formula $k=1,...,K$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ test = 
+\begin_inset Formula $Q_{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ train = 
+\begin_inset Formula $Q\,\setminus\,Q_{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $M_{k}=M(train)$
+\end_inset
+
+//Entraînement du modèle.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $E_{k}=E(M_{k},test)$
+\end_inset
+
+ //Erreur du modèle 
+\begin_inset Formula $M_{k}$
+\end_inset
+
+ sur 
+\begin_inset Formula $Q_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+endfor
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $E(Q)=K^{-1}\sum_{i=1}^{i=k}E_{k}$
+\end_inset
+
+//Moyenne des erreurs
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+return 
+\begin_inset Formula $E(Q)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ 
+\series bold
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang french
+Validation croisée (K-folds)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\lang french
+\SpecialChar allowbreak
+Cette méthode permet de limiter l'overfit et de le détecter dans la plupart
+ des cas.
+ La valeur de la métrique donnée par la validation croisée dispose d'une
+ variance inférieure aux résultats donnés sans celle-ci.
+ Comme dit précédemment la base de donnée est constituée d'événements rares
+ et cette méthode sera donc préférée à la traditionnelle décomposition entrainem
+ent/test.
+\end_layout
+
+\begin_layout Subsection
+Réseaux de neurones
 \end_layout
 
 \end_body
