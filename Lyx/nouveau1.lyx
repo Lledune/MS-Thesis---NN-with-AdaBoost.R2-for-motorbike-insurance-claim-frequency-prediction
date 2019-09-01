@@ -2220,11 +2220,20 @@ Principe consistant à utiliser le moins de variables explicatives possible
 \end_layout
 
 \begin_layout Itemize
-AIC (Akaike Information Criterion) : (wiki aic) 
 \begin_inset Formula $AIC=2k-2ln(L)$
 \end_inset
 
  
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Akaike Information Criterion
+\end_layout
+
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -2237,11 +2246,20 @@ AIC (Akaike Information Criterion) : (wiki aic)
 \end_layout
 
 \begin_layout Itemize
-BIC (Bayesion Information Criterion) : (wiki) 
-\begin_inset Formula $BIC=k\times ln(N)-2ln(L)$
+\begin_inset Formula $BIC=k\,ln(N)-2ln(L)$
 \end_inset
 
  
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Bayesian Information Criterion
+\end_layout
+
+\end_inset
+
+
 \begin_inset Newline newline
 \end_inset
 
@@ -2665,6 +2683,212 @@ ent/test.
 
 \begin_layout Subsection
 Réseaux de neurones
+\end_layout
+
+\begin_layout Standard
+Avant de comprendre comment cet algorithme fonctionne d'un point de vue
+ mathématique, il est intéressant de comprendre de quoi est inspiré son
+ fonctionnement.
+ Comme son nom peut l'indiquer, le réseau de neurones artificiels est un
+ algorithme d'apprentissage automatique inspiré du fonctionnement du cerveau
+ humain.
+ Un neurone biologique reçoit des informations, et si l'importance de celle-ci
+ est suffisante alors celui-ci déclenche un signal aux neurones voisins.
+ Le fonctionnement d'un neurone seul peut être représenté par un modèle
+ simple : le perceptron.
+\end_layout
+
+\begin_layout Subsubsection
+Perceptron
+\end_layout
+
+\begin_layout Standard
+Le perceptron est le modèle à la base des réseaux de neurones artificiels
+ modernes, celui-ci a été inventé dès 1957 par Frank Rosenblatt.
+ Il s'agissait alors d'un algorithme permettant l'apprentissage automatique
+ par l'erreur (apprentissage supervisé).
+ Son fonctionnement est très similaire à celui d'un neurone humain, puisqu'il
+ en est inspiré.
+ Mathématiquement, un perceptron est la somme d'un biais et de multiplications
+ entre les valeurs des variables et les poids du perceptron passant par
+ une fonction dite 
+\begin_inset Quotes eld
+\end_inset
+
+d'activation
+\begin_inset Quotes erd
+\end_inset
+
+ qui détermine la réponse du neurone.
+ La fonction d'activation représente le potentiel d'activation du neurone.
+ L'exemple le plus simple serait une fonction renvoyant 1 si l'entrée est
+ positive et 0 (ou -1) si l'entrée est négative (bien que cette fonction
+ ne sera pas utilisée dans nos algorithmes car non différentiable, ce qui
+ est un problème pour la calibration, voir sections suivantes).
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/1280px-Activation_tanh.svg.png
+	width 10cm
+	height 4cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Exemple de fonction d'activation : tangente hyperbolique
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+Pour en revenir au perceptron, notons que les données d'un individu sont
+ considérées comme un vecteur 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ et que l'ensemble des données constituent la matrice de données 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ L'attribut 
+\begin_inset Formula $j$
+\end_inset
+
+ de la personne 
+\begin_inset Formula $i$
+\end_inset
+
+ est noté 
+\begin_inset Formula $x_{ij}$
+\end_inset
+
+.
+ Le vecteur des poids du perceptron est noté 
+\begin_inset Formula $W$
+\end_inset
+
+ et 
+\begin_inset Formula $w_{n}$
+\end_inset
+
+ représente le poids 
+\begin_inset Formula $n$
+\end_inset
+
+.
+ Il existe aussi un biais noté 
+\begin_inset Formula $w_{0}$
+\end_inset
+
+ qui n'est pas multiplié par une valeur 
+\begin_inset Formula $x_{i}$
+\end_inset
+
+mais par 
+\begin_inset Formula $1$
+\end_inset
+
+, il n'intéragit donc pas avec les valeurs prises par les variables.
+ La fonction d'activation est quant à elle notée 
+\begin_inset Formula $\varphi(.)$
+\end_inset
+
+.
+ Il est important de noter que le nombre de poids correspond à 
+\begin_inset Formula $J$
+\end_inset
+
+, soit le nombre de variable explicatives utilisées.
+ Un perceptron peut être représenté comme ceci : 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/2000px-Perceptron-bias.svg.png
+	width 7cm
+	height 5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Représentation d'un perceptron
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+La manière dont un perceptron calcule la réponse 
+\begin_inset Formula $Y$
+\end_inset
+
+ peut être décomposée en deux étapes :
+\end_layout
+
+\begin_layout Itemize
+Les poids sont multipliés par les valeurs des entrées à laquelle on ajoute
+ le biais : 
+\begin_inset Formula $\omega=\sum_{j=1}^{J}x_{j}w_{j}+w_{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+La valeur ainsi obtenue est prise comme argument dans la fonction d'activation
+ : 
+\begin_inset Formula $Y=\varphi(\omega)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+C'est donc cette réponse 
+\begin_inset Formula $Y$
+\end_inset
+
+ qui sera considérée comme le résultat du perceptron.
+ Le perceptron reste cependant un modèle simple et il ne peut être utilisé
+ que pour des problèmes relevant de classification séparable linéairement.
 \end_layout
 
 \end_body
