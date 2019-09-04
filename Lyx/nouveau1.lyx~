@@ -2692,10 +2692,22 @@ Avant de comprendre comment cet algorithme fonctionne d'un point de vue
  Comme son nom peut l'indiquer, le réseau de neurones artificiels est un
  algorithme d'apprentissage automatique inspiré du fonctionnement du cerveau
  humain.
- Un neurone biologique reçoit des informations, et si l'importance de celle-ci
- est suffisante alors celui-ci déclenche un signal aux neurones voisins.
- Le fonctionnement d'un neurone seul peut être représenté par un modèle
- simple : le perceptron.
+ Un neurone biologique est composé du corps de la cellule qui contient les
+ composants les plus importants, de plusieurs extrémités nommées les dendrites,
+ ainsi que de l'axone (une extension du neurone pouvant être des milliers
+ de fois plus longue que le corps du neurone).
+ L'axone se subdivise en plusieurs branches appelées synapses.
+ Les neurones fonctionnent en recevant des impulsions électriques appelées
+ 
+\begin_inset Quotes eld
+\end_inset
+
+signaux
+\begin_inset Quotes erd
+\end_inset
+
+, et lorsqu'un neurone reçoit un certain nombre de signaux en même temps,
+ celui-ci va déclencher son propre signal.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2723,7 +2735,9 @@ d'activation
  La fonction d'activation représente le potentiel d'activation du neurone.
  L'exemple le plus simple serait une fonction renvoyant 1 si l'entrée est
  positive et 0 (ou -1) si l'entrée est négative (bien que cette fonction
- ne sera pas utilisée dans nos algorithmes car non différentiable).
+ ne sera pas utilisée dans nos algorithmes car non différentiable, ce qui
+ est un problème pour la calibration, voir sections suivantes), c'est d'ailleurs
+ cette fonction qui a été utilisée en premier pour les perceptrons.
 \end_layout
 
 \begin_layout Standard
@@ -2736,7 +2750,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename Images/1280px-Activation_tanh.svg.png
+	filename Images/400px-HardLimitFunction.png
 	width 10cm
 	height 4cm
 
@@ -2749,7 +2763,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Exemple de fonction d'activation : tangente hyperbolique
+Exemple de fonction d'activation : Step function
 \end_layout
 
 \end_inset
@@ -2887,7 +2901,112 @@ C'est donc cette réponse
 
  qui sera considérée comme le résultat du perceptron.
  Le perceptron reste cependant un modèle simple et il ne peut être utilisé
- que pour des problèmes relevant de classification séparable linéairement.
+ que pour des problèmes relevant de classification séparable linéairement,
+ et son fonctionement pourrait être schématisé par la recherche d'un seuil
+ représentant la valeur des variables à partir de laquelle un exemple serait
+ considéré comme appartenant à une classe ou à l'autre.
+\begin_inset Newline newline
+\end_inset
+
+Lorsqu'il est question d'apprentissage automatique, cela signifie en fait
+ que les paramètres du modèle sont optimisés en fonction de notre base de
+ données.
+ Pour le perceptron cela signifie trouver les valeurs optimales 
+\begin_inset Formula $w$
+\end_inset
+
+ pour un problème spécifique.
+ Pour être plus précis, l'algorithme va prendre en entrée une ligne de notre
+ base de données et faire une prédiction.
+ Si cette prédiction est correcte alors les poids ne sont pas modifiés,
+ cependant dans le cas ou la prédiction est incorrecte nous utilisons une
+ règle de mise à jour des poids, afin de donner plus d'importance aux entrées
+ qui auraient rendu la prédiction correcte.
+ Ce procédé sera expliqué plus en détail dans la section suivante, mais
+ nous pouvons déjà observer l'équation de mise à jour des poids d'un perceptron
+ simple :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $w_{i}$
+\end_inset
+
+ le poids du neurone 
+\begin_inset Formula $i$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\eta$
+\end_inset
+
+ le taux d'apprentissage, il s'agit d'un paramètre déterminant à quel point
+ nous devons modifier les poids lors d'une erreur
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\hat{y_{j}}$
+\end_inset
+
+la prédiction du perceptron
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y_{j}$
+\end_inset
+
+la valeur cible
+\end_layout
+
+\begin_layout Standard
+Comme mentionné précédemment, le perceptron reste cependant un modèle simple,
+ et celui-ci est incapable de résoudre certains problèmes pourtant basiques.
+ L'exemple le plus connu est le problème XOR
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+OU
+\begin_inset Quotes erd
+\end_inset
+
+ exclusif, opérateur logique de l'algèbre de Boole.
+ Pour deux opérandes, celui-ci permet à chacun d'avoir la valeur VRAI, mais
+ pas les deux en même temps.
+\end_layout
+
+\end_inset
+
+, insolvable par le perceptron et mentionné par Minsky et Papert dans leur
+ papier intitulé 
+\begin_inset Quotes eld
+\end_inset
+
+Perceptrons
+\begin_inset Quotes erd
+\end_inset
+
+ qui met en avant un certaines faiblesses du perceptron.
+ Suite à ces découvertes la recherche dans le domaine va être mise de côté.
+ Cependant il est plus tard apparu que ces faiblesses pouvaient pour la
+ plupart (y compris le problème XOR) pouvaient être éliminées en empilant
+ plusieurs perceptrons en couches de neurones artificiels.
  
 \end_layout
 
