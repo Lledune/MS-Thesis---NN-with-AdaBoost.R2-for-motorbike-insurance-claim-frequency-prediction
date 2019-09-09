@@ -3130,9 +3130,8 @@ status open
 
 \begin_layout Plain Layout
 Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
- peuvent être optimisés facilement de manière automatique et nécessitent
- la création de plusieurs modèles avec différents hyperparamètres dont les
- résultats seront comparés sur la fonction de perte.
+ peuvent être optimisés facilement de manière automatique et nécessite la
+ création de plusieurs modèles a.
 \end_layout
 
 \end_inset

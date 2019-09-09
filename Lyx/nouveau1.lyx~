@@ -3005,9 +3005,64 @@ Perceptrons
  qui met en avant un certaines faiblesses du perceptron.
  Suite à ces découvertes la recherche dans le domaine va être mise de côté.
  Cependant il est plus tard apparu que ces faiblesses pouvaient pour la
- plupart (y compris le problème XOR) pouvaient être éliminées en empilant
- plusieurs perceptrons en couches de neurones artificiels.
- 
+ plupart (y compris le problème XOR) être éliminées en empilant plusieurs
+ perceptrons en couches de neurones artificiels.
+\end_layout
+
+\begin_layout Subsubsection
+Perceptron multicouche
+\end_layout
+
+\begin_layout Standard
+Le perceptron multicouche, plus communément appelé MLP
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Multilayer perceptron
+\end_layout
+
+\end_inset
+
+ est une structure composée de couches, elles-mêmes formées par plusieurs
+ perceptrons.
+ Le schéma ci-dessous montre la structure d'un tél réseau :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/neural-network.png
+	width 12cm
+	height 7cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Représentation d'un perceptron
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
