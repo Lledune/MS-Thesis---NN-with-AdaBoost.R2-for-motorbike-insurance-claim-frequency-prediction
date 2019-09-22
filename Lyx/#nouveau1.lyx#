@@ -8,6 +8,14 @@
 \begin_preamble
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -1973,6 +1981,21 @@ apprendre
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+Il est important de distinguer deux types de paramètres : les paramètres
+ et les hyperparamètres.
+\end_layout
+
+\begin_layout Itemize
+Paramètre : Variable optimisée de manière supervisée, à l'aide des données
+ disponibles.
+\end_layout
+
+\begin_layout Itemize
+Hyperparamètre : Variable définie à la création du modèle et dont l'optimisation
+ est généralement manuelle.
 \end_layout
 
 \begin_layout Subsubsection
@@ -2954,7 +2977,12 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_inset
 
  le taux d'apprentissage, il s'agit d'un paramètre déterminant à quel point
- nous devons modifier les poids lors d'une erreur
+ nous devons modifier les poids lors d'une erreur, celui-ci est inclus dans
+ l'intervalle 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -3014,6 +3042,10 @@ Perceptrons
 Perceptron multicouche
 \end_layout
 
+\begin_layout Paragraph
+Fonctionnement
+\end_layout
+
 \begin_layout Standard
 Le perceptron multicouche, plus communément appelé MLP
 \begin_inset Foot
@@ -3059,7 +3091,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Représentation d'un perceptron
+Représentation d'un MLP
 \end_layout
 
 \end_inset
@@ -3130,8 +3162,9 @@ status open
 
 \begin_layout Plain Layout
 Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
- peuvent être optimisés facilement de manière automatique et nécessite la
- création de plusieurs modèles a.
+ peuvent être optimisés facilement de manière automatique et nécessitent
+ la création de plusieurs modèles avec différents hyperparamètres dont les
+ résultats seront comparés sur la fonction de perte.
 \end_layout
 
 \end_inset
@@ -3141,8 +3174,483 @@ Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
 \end_inset
 
 Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
- il est plus complexe et nécessite certains changements dans les notations
- utilisées.
+ son architecture est plus complexe et nécessite certains changements dans
+ les notations utilisées, aussi https://stats.stackexchange.com/questions/154879/a
+-list-of-cost-functions-used-in-neural-networks-alongside-applications :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $w_{jk}^{i}$
+\end_inset
+
+ : poids du neurone 
+\begin_inset Formula $k$
+\end_inset
+
+ dans le couche 
+\begin_inset Formula $(i-1)$
+\end_inset
+
+ vers le neurone 
+\begin_inset Formula $j$
+\end_inset
+
+ de la couche 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $b_{j}^{i}$
+\end_inset
+
+ : le biais du neurone 
+\begin_inset Formula $j$
+\end_inset
+
+ dans la couche 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $a_{j}^{i}$
+\end_inset
+
+ : la valeur de la fonction d'activation du neurone 
+\begin_inset Formula $j$
+\end_inset
+
+ dans la couche 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $z_{j}^{i}=\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i}$
+\end_inset
+
+ : La valeur d'activation avant de passer par la fonction d'activation.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\varphi(.)$
+\end_inset
+
+ : la fonction d'activation.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $n^{net}$
+\end_inset
+
+ : le nombre de couches du réseau (entrée et sortie comprises).
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $n_{j}^{net}$
+\end_inset
+
+ : le nombre de neurones dans la couche 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Chaque neurone de ce réseau fonctionne en fait comme un perceptron, relié
+ à d'autres perceptrons organisés en forme de couches, et qui transfère
+ le résultat de sa sortie à la couche suivante.
+ En partant de ce principe et en adaptant les notations, le conclusion suivante
+ est trouvée :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a_{j}^{i}=\varphi(\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+représentant la sortie du neurone 
+\begin_inset Formula $j$
+\end_inset
+
+ dans la couche 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Si 
+\begin_inset Formula $i=n^{net}$
+\end_inset
+
+ alors il représente la sortie du réseau, ou sa réponse.
+ La couche de sortie peut être composée d'un seul neurone mais cela n'est
+ pas obligatoire.
+ Si nous cherchons par exemple à estimer à quelle classe une instance appartient
+ nous pouvons représenter chaque classe par un neurone dans cette couche.
+\end_layout
+
+\begin_layout Paragraph
+Entrainement
+\end_layout
+
+\begin_layout Standard
+Dans cette partie sera expliquée la manière dont un réseau de ce type est
+ calibré.
+ Il y a deux types de paramètres à optimiser : les paramètres et les hyperparamè
+tres.
+ Les paramètres sont des variables inhérente au modèle qui seront optimisée
+ sur base de nos données.
+ Le réseau de neurones passe donc par une phase d'apprentissage, où il est
+ optimisé avec un algorithme d'optimisation choisi.
+ Un exemple pourrait être donné avec la descente du gradient, un algorithme
+ consistant à calculer l'inverse de la matrice hessienne.
+ Cependant calculer l'inverse de cette matrice peut se révéler laborieux
+ si celle ci est mal conditionnée, cela ne sera donc pas notre premier choix.
+ Il existe plusieurs algorithme permettant d'optimiser les réseaux de neurones
+ artificiels cependant l'algorithme ayant permi le développement initial
+ historique de ceux-ci se trouve être la 
+\begin_inset Quotes eld
+\end_inset
+
+rétropropagation
+\begin_inset Quotes erd
+\end_inset
+
+ découverte par D.
+ E.
+ Rumelhart, se basant sur le gradiant.
+\begin_inset Newline newline
+\end_inset
+
+
+\lang french
+
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+begin{algorithmic}[1]
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\series bold
+begin
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+Diviser 
+\begin_inset Formula $Q$
+\end_inset
+
+ en 
+\begin_inset Formula $K$
+\end_inset
+
+ sous-ensembles 
+\begin_inset Formula $Q_{1},...,Q_{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+for 
+\begin_inset Formula $k=1,...,K$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ test = 
+\begin_inset Formula $Q_{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ train = 
+\begin_inset Formula $Q\,\setminus\,Q_{k}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $M_{k}=M(train)$
+\end_inset
+
+//Entraînement du modèle.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $E_{k}=E(M_{k},test)$
+\end_inset
+
+ //Erreur du modèle 
+\begin_inset Formula $M_{k}$
+\end_inset
+
+ sur 
+\begin_inset Formula $Q_{k}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+endfor
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
+\begin_inset Formula $E(Q)=K^{-1}\sum_{i=1}^{i=k}E_{k}$
+\end_inset
+
+//Moyenne des erreurs
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+return 
+\begin_inset Formula $E(Q)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+ 
+\series bold
+end
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+end{algorithmic}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang french
+Validation croisée (K-folds)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body

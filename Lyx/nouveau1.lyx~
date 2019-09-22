@@ -2954,7 +2954,12 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_inset
 
  le taux d'apprentissage, il s'agit d'un paramètre déterminant à quel point
- nous devons modifier les poids lors d'une erreur
+ nous devons modifier les poids lors d'une erreur, celui-ci est inclus dans
+ l'intervalle 
+\begin_inset Formula $[0,1]$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -3007,6 +3012,7 @@ Perceptrons
  Cependant il est plus tard apparu que ces faiblesses pouvaient pour la
  plupart (y compris le problème XOR) être éliminées en empilant plusieurs
  perceptrons en couches de neurones artificiels.
+ (livre scikit)
 \end_layout
 
 \begin_layout Subsubsection
@@ -3026,6 +3032,12 @@ Multilayer perceptron
 
  est une structure composée de couches, elles-mêmes formées par plusieurs
  perceptrons.
+ Pendant longtemps, les chercheurs ont tenté de trouver une manière efficace
+ d'effectuer l'entraînement de ce type de réseau sans succès, jusqu'au jour
+ où D.
+ E.
+ Rumelhart a découvert une méthode appelée la rétropropagation (1986) qui
+ sera expliquée plus loin dans ce chapitre.
  Le schéma ci-dessous montre la structure d'un tél réseau :
 \end_layout
 
@@ -3052,7 +3064,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Représentation d'un perceptron
+Représentation d'un MLP
 \end_layout
 
 \end_inset
@@ -3063,6 +3075,202 @@ Représentation d'un perceptron
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+Un réseau de ce type résout la plupart des problèmes du perceptron lorsqu'il
+ est utilisé seul et compose un modèle beaucoup plus puissant, capable de
+ détecter les relations non-linéaires et de résoudre un grand nombre de
+ problèmes de classification et de régression.
+ Ce type de réseau est utilisé dans un grand nombre d'applications récentes
+ telles que les voitures autonomes, la reconnaissance vocale ou encore la
+ vision artificielle
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Computer vision.
+\end_layout
+
+\end_inset
+
+.
+ Comme observable sur le graphique, l'information circule dans un seul sens
+ sur notre schéma.
+ Il faut savoir qu'il existe différent types de MLP, dont certains avec
+ des relations circulaires entre les neurones.
+ Cependant ce type de réseau ne sera pas utilisé dans ce travail et ne seront
+ donc pas vus en détails, les réseaux de neurones artificiels utilisés seront
+ uniquement des réseaux feed-forward ; l'information arrive à l'entrée du
+ réseau, transite à travers celui-ci dans une direction unique, et le modèle
+ nous renvoie une réponse 
+\begin_inset Formula $\hat{y_{i}}$
+\end_inset
+
+ en sortie.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Un réseau tel que celui-ci est composé de plusieurs couches à travers l'informat
+ion passe successivement.
+ La première couche est la couche d'entrée, celle-qui va recevoir les données.
+ Ensuite, il y a une ou plusieurs couches cachées
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Si il y a une seule couche cachée on parle de réseau peu profond (shallow
+ network) et s'il y a plusieurs couches cachées on parle alors de réseau
+ profond (deep network).
+\end_layout
+
+\end_inset
+
+ et enfin le couche de sortie renvoyant la réponse du réseau.
+ Le nombre de neurones par couche et le nombre de couches cachées sont tout
+ deux des hyperparamètres
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
+ peuvent être optimisés facilement de manière automatique et nécessitent
+ la création de plusieurs modèles avec différents hyperparamètres dont les
+ résultats seront comparés sur la fonction de perte.
+\end_layout
+
+\end_inset
+
+ à définir.
+\begin_inset Newline newline
+\end_inset
+
+Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
+ son architecture est plus complexe et nécessite certains changements dans
+ les notations utilisées, aussi https://stats.stackexchange.com/questions/154879/a
+-list-of-cost-functions-used-in-neural-networks-alongside-applications :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $w_{jk}^{i}$
+\end_inset
+
+ : poids du neurone 
+\begin_inset Formula $k$
+\end_inset
+
+ dans le couche 
+\begin_inset Formula $(i-1)$
+\end_inset
+
+ vers le neurone 
+\begin_inset Formula $j$
+\end_inset
+
+ de la couche 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $b_{j}^{i}$
+\end_inset
+
+ : le biais du neurone 
+\begin_inset Formula $j$
+\end_inset
+
+ dans la couche 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $a_{j}^{i}$
+\end_inset
+
+ : la valeur de la fonction d'activation du neurone 
+\begin_inset Formula $j$
+\end_inset
+
+ dans la couche 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $z_{j}^{i}=\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i}$
+\end_inset
+
+ : La valeur d'activation avant de passer par la fonction d'activation.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\varphi(.)$
+\end_inset
+
+ : la fonction d'activation.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $n^{net}$
+\end_inset
+
+ : le nombre de couches du réseau (entrée et sortie comprises).
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $n_{j}^{net}$
+\end_inset
+
+ : le nombre de neurones dans la couche 
+\begin_inset Formula $j$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Chaque neurone de ce réseau fonctionne en fait comme un perceptron, relié
+ à d'autres perceptrons organisés en forme de couches, et qui transfère
+ le résultat de sa sortie à la couche suivante.
+ En partant de ce principe et en adaptant les notations, le conclusion suivante
+ est trouvée :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+a_{j}^{i}=\varphi(\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+représentant la sortie du neurone 
+\begin_inset Formula $j$
+\end_inset
+
+ dans la couche 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Si 
+\begin_inset Formula $i=n^{net}$
+\end_inset
+
+ alors il représente la sortie du réseau.
 \end_layout
 
 \end_body
