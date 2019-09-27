@@ -8,6 +8,14 @@
 \begin_preamble
 \usepackage{algorithm}
 \usepackage{algorithmic}
+\usepackage{titlesec}
+
+\setcounter{secnumdepth}{4}
+
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
 \end_preamble
 \use_default_options true
 \maintain_unincluded_children false
@@ -3019,6 +3027,10 @@ Perceptrons
 Perceptron multicouche
 \end_layout
 
+\begin_layout Paragraph
+Fonctionnement
+\end_layout
+
 \begin_layout Standard
 Le perceptron multicouche, plus communément appelé MLP
 \begin_inset Foot
@@ -3270,7 +3282,19 @@ représentant la sortie du neurone
 \begin_inset Formula $i=n^{net}$
 \end_inset
 
- alors il représente la sortie du réseau.
+ alors il représente la sortie du réseau, ou sa réponse.
+ La couche de sortie peut être composée d'un seul neurone mais cela n'est
+ pas obligatoire.
+ Si nous cherchons par exemple à estimer à quelle classe une instance appartient
+ nous pouvons représenter chaque classe par un neurone dans cette couche.
+\end_layout
+
+\begin_layout Paragraph
+Entrainement
+\end_layout
+
+\begin_layout Standard
+dd
 \end_layout
 
 \end_body

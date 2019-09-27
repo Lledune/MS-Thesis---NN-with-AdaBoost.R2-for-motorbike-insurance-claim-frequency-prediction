@@ -126,7 +126,7 @@ Introduction
 
 \begin_layout Standard
 Partout dans le monde, la facilité montante de l'accès à une puissance de
- calcul importante a motivé un grand nombre de changement dans la façon
+ calcul importante a motivé un grand nombre de changements dans la façon
  d'approcher les problèmes, et ce dans la plupart des domaines de recherche.
  Cette avancée technologique a permi d'utiliser des techniques de modélisations
  et de prédictions qui étaient jusqu'à lors trop longues à mettre en place
@@ -155,7 +155,7 @@ Apprentissage automatique : Méthodes statistique permettant à un ordinateur
 La modélisation de prédiction n'est pas nouvelle dans ce secteur, mais les
  algorithmes utilisés changent avec l'essort actuel de la technologie.
  Ainsi nous pouvons maintenant facilement utiliser des réseaux de neurones
- afin de répondre aux problèmes pour lesquels des algorithmes moins efficaces
+ afin de répondre aux problèmes pour lesquels des algorithmes moins complexes
  étaient utilisés.
  Le but de ce travail est de montrer que ces nouveaux
 \begin_inset Foot
@@ -1981,25 +1981,10 @@ apprendre
 \end_inset
 
 .
-\begin_inset Newline newline
-\end_inset
-
-Il est important de distinguer deux types de paramètres : les paramètres
- et les hyperparamètres.
-\end_layout
-
-\begin_layout Itemize
-Paramètre : Variable optimisée de manière supervisée, à l'aide des données
- disponibles.
-\end_layout
-
-\begin_layout Itemize
-Hyperparamètre : Variable définie à la création du modèle et dont l'optimisation
- est généralement manuelle.
 \end_layout
 
 \begin_layout Subsubsection
-Évaluation
+Évaluation et fonctions de perte
 \end_layout
 
 \begin_layout Standard
@@ -2855,11 +2840,10 @@ mais par
 \end_inset
 
 , soit le nombre de variable explicatives utilisées.
- Un perceptron peut être représenté comme ceci : 
-\begin_inset Newline newline
-\end_inset
+ Un perceptron peut être représenté comme ceci :
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -3078,7 +3062,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename Images/neural-network.png
+	filename Images/neralnet.PNG
 	width 12cm
 	height 7cm
 
@@ -3304,41 +3288,98 @@ représentant la sortie du neurone
  nous pouvons représenter chaque classe par un neurone dans cette couche.
 \end_layout
 
-\begin_layout Paragraph
-Entrainement
-\end_layout
-
 \begin_layout Standard
-Dans cette partie sera expliquée la manière dont un réseau de ce type est
- calibré.
- Il y a deux types de paramètres à optimiser : les paramètres et les hyperparamè
-tres.
- Les paramètres sont des variables inhérente au modèle qui seront optimisée
- sur base de nos données.
- Le réseau de neurones passe donc par une phase d'apprentissage, où il est
- optimisé avec un algorithme d'optimisation choisi.
- Un exemple pourrait être donné avec la descente du gradient, un algorithme
- consistant à calculer l'inverse de la matrice hessienne.
- Cependant calculer l'inverse de cette matrice peut se révéler laborieux
- si celle ci est mal conditionnée, cela ne sera donc pas notre premier choix.
- Il existe plusieurs algorithme permettant d'optimiser les réseaux de neurones
- artificiels cependant l'algorithme ayant permi le développement initial
- historique de ceux-ci se trouve être la 
+Le fonctionement d'un réseau de neurones étant expliqué, il est maintenant
+ nécessaire de comprendre comment un tel réseau est calibré, car sans cette
+ phase de calibration le réseau de neurone serait inefficace.
+ Il existe diverses méthodes permettant d'optimiser un réseau de neurone
+ mais nous ne détaillerons que la 
 \begin_inset Quotes eld
 \end_inset
 
-rétropropagation
+backpropagation
 \begin_inset Quotes erd
 \end_inset
 
- découverte par D.
- E.
- Rumelhart, se basant sur le gradiant.
+ ou rétropropagation, algorithme ayant permi la reprise de la recherche
+ dans le milieu lors de son apparition.
+\end_layout
+
+\begin_layout Paragraph
+Rétropropagation
+\end_layout
+
+\begin_layout Standard
+Avant l'apparition de la rétropropagation, les réseaux de neurones étaient
+ calibrés grâce à la descente du gradient, algorithme consistant à calculer
+ le gradient, la matrice Hessienne et son inverse afin de mettre à jour
+ les paramètres du modèle (poids 
+\begin_inset Formula $w_{jk}^{i}$
+\end_inset
+
+).
+ Cette méthode présente cependant un inconvenient de taille : l'inversion
+ numérique de la matrice Hessienne est très long voir impossible lorsque
+ celle-ci est mal conditionnée.
+ Ces problèmes peuvent être contournés en utilisant un autre algorithme
+ paru en 1986 : la rétropropagation.
+ Pour une plus grande clarté dans la description de cet algorithme, le vecteur
+ contenant les poids 
+\begin_inset Formula $w_{jk}^{i}$
+\end_inset
+
+ sera nommé 
+\begin_inset Formula $\Omega$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+La rétropropagation consiste en une série d'instructions répétées 
+\begin_inset Formula $T$
+\end_inset
+
+ fois, et 
+\begin_inset Formula $t$
+\end_inset
+
+ sera utilisé en indexe des paramètres pour montrer la valeur d'un paramètre
+ à l'époque
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Époque : une période ou moment particulier dans l'exécution de l'algorithme.
+\end_layout
+
+\end_inset
+
+ 
+\begin_inset Formula $t$
+\end_inset
+
+.
+ Le vecteur 
+\begin_inset Formula $\Omega_{t}$
+\end_inset
+
+ est modifié d'un petit pas dans la direction opposée à celle du gradient
+ à chaque époque pour devenir 
+\begin_inset Formula $\Omega_{t+1}$
+\end_inset
+
+, et la taille de ce pas est généralement déterminée par une fonction dégressive
+ diminuant au fur et à mesure que 
+\begin_inset Formula $t$
+\end_inset
+
+ augmente.
+\lang french
+
 \begin_inset Newline newline
 \end_inset
 
-
-\lang french
 
 \begin_inset Float algorithm
 placement H
@@ -3379,154 +3420,8 @@ STATE
 
 \end_inset
 
-
-\series bold
-begin
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang french
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE 
-\end_layout
-
-\end_inset
-
-Diviser 
-\begin_inset Formula $Q$
-\end_inset
-
- en 
-\begin_inset Formula $K$
-\end_inset
-
- sous-ensembles 
-\begin_inset Formula $Q_{1},...,Q_{k}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang french
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE 
-\end_layout
-
-\end_inset
-
-for 
-\begin_inset Formula $k=1,...,K$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang french
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE 
-\end_layout
-
-\end_inset
-
- test = 
-\begin_inset Formula $Q_{k}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang french
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE 
-\end_layout
-
-\end_inset
-
- train = 
-\begin_inset Formula $Q\,\setminus\,Q_{k}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang french
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE 
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula $M_{k}=M(train)$
-\end_inset
-
-//Entraînement du modèle.
-\end_layout
-
-\begin_layout Plain Layout
-
-\lang french
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE 
-\end_layout
-
-\end_inset
-
- 
-\begin_inset Formula $E_{k}=E(M_{k},test)$
-\end_inset
-
- //Erreur du modèle 
-\begin_inset Formula $M_{k}$
-\end_inset
-
- sur 
-\begin_inset Formula $Q_{k}$
+Attribution de valeurs aléatoires à 
+\begin_inset Formula $\Omega_{0}$
 \end_inset
 
 .
@@ -3547,7 +3442,33 @@ STATE
 
 \end_inset
 
-endfor
+Choix du pas initial, 
+\begin_inset Formula $\rho_{0}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+Choix de la fonction du pas 
+\begin_inset Formula $g(\rho_{0},t)$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Plain Layout
@@ -3566,10 +3487,8 @@ STATE
 \end_inset
 
 
-\begin_inset Formula $E(Q)=K^{-1}\sum_{i=1}^{i=k}E_{k}$
-\end_inset
-
-//Moyenne des erreurs
+\series bold
+begin
 \end_layout
 
 \begin_layout Plain Layout
@@ -3587,8 +3506,26 @@ STATE
 
 \end_inset
 
-return 
-\begin_inset Formula $E(Q)$
+For t = 0, ..., T
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+Calcul du gradient : 
+\begin_inset Formula $\nabla R(\Omega_{t})$
 \end_inset
 
 
@@ -3609,7 +3546,51 @@ STATE
 
 \end_inset
 
- 
+Mise à jour de la taille du pas : 
+\begin_inset Formula $\rho_{t+1}=g(\rho_{0},t)$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+Mise à jour des poids : 
+\begin_inset Formula $\Omega_{t+1}=\Omega_{t}-\rho_{t+1}\nabla R(\Omega_{t})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset ERT
+status collapsed
+
+\begin_layout Plain Layout
+
+
+\backslash
+STATE 
+\end_layout
+
+\end_inset
+
+
 \series bold
 end
 \end_layout
@@ -3638,9 +3619,7 @@ end{algorithmic}
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang french
-Validation croisée (K-folds)
+Rétropropagation
 \end_layout
 
 \end_inset
@@ -3651,6 +3630,10 @@ Validation croisée (K-folds)
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+TODO : lequel sera utilisé.
 \end_layout
 
 \end_body
