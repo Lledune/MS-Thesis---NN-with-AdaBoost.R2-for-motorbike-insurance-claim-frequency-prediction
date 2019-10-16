@@ -156,7 +156,7 @@ La modélisation de prédiction n'est pas nouvelle dans ce secteur, mais les
  algorithmes utilisés changent avec l'essort actuel de la technologie.
  Ainsi nous pouvons maintenant facilement utiliser des réseaux de neurones
  afin de répondre aux problèmes pour lesquels des algorithmes moins complexes
- étaient utilisés.
+ étaient utilisés auparavant.
  Le but de ce travail est de montrer que ces nouveaux
 \begin_inset Foot
 status open
@@ -549,12 +549,11 @@ re de celles-ci.
  Durant l'analyse exploratoire d'une base de données, il est important de
  regarder la distribution des variables, celle-ci nous donne beaucoup d'informat
 ions quant aux données.
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
-placement !h
+placement H
 wide false
 sideways false
 status open
@@ -651,13 +650,13 @@ Distribution OwnersAge
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
 Sur ces deux premières figures nous observons respectivement les distributions
  des variables Gender et OwnersAge.
- La première chose que nous pouvons observer est la grande disparité entre
- le nombre d'hommes de et femmes clients de l'assurance.
+ La première chose que nous pouvons voir est la grande disparité entre le
+ nombre d'hommes de et femmes clients de l'assurance.
  Notre jeu de données est composé d'hommes pour la grande majorité.
  Pour ce qui est de la variable OwnersAge, nous constatons que les valeurs
  sont réparties entre 16 et 92 ans, avec deux 
@@ -672,13 +671,12 @@ pics
  Les valeurs maximales et minimales de nos variables continues seront importante
  pour la suite, car elles sont nécessaires afin d'appliquer une normalisation
  des données, qui sera discutée plus tard dans ce travail.
- Ci dessous les distributions des variables VehiculeAge et Zone : 
-\begin_inset Newline newline
-\end_inset
+ Ci dessous les distributions des variables VehiculeAge et Zone :
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
-placement !h
+placement H
 wide false
 sideways false
 status open
@@ -775,32 +773,27 @@ Distribution Zone
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
 La distribution de vehicule est indiquée en années, et nous pouvons donc
  observer que si la plupart des véhicules assurés ont moins de 20 ans, un
  grand nombre de ceux-ci sont bien plus vieux, avec comme maximum 99 ans.
  Il est possible que ce véhicule soit considéré comme outlier et il sera
  reconsidéré dans la partie preprocessing.
-\begin_inset Newline newline
-\end_inset
-
-La distribution de la variable Zone est intéressante, elle nous révèle que
- la plupart des véhicules assurés sont conduits dans des villages, mais
+ La distribution de la variable Zone est intéressante, elle nous révèle
+ que la plupart des véhicules assurés sont conduits dans des villages, mais
  aussi que très peu d'entre eux le sont dans le Gotland.
  Ceci n'est pas surprenant puisque la population de la Suède est d'environ
  10 millions d'habitants, pour seulement 60.000 habitants la région du Gotland.
  Les classes 5 et 6 sont elles aussi minoritaires, cela était aussi à prévoir
  puisque ces catégories représentent le nord de la Suède alors que la plupart
  de la population vis dans le sud du pays.
- 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
-placement !h
+placement H
 wide false
 sideways false
 status open
@@ -897,9 +890,9 @@ Distribution Class
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
 Les classes de bonus les plus fréquentes sont les classes 1 et 7, respectivement
  le minimum (entrée dans la compagnie d'assurance) et le maximum (client
  fidèle depuis sept années au minimum).
@@ -914,12 +907,11 @@ Pour la variable Class nous observons qu'assez peu de véhicules appartiennent
  sont minoritaires.
  Les graphiques suivants nous montrent la répartitions des sinistres par
  bonus et par classe de véhicule.
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
-placement !h
+placement H
 wide false
 sideways false
 status open
@@ -1016,9 +1008,9 @@ Class Claims
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
 Il parait logique de supposer que plus un client a un bonus élevé, moins
  celui-ci causera d'accident, puisque le bonus monte uniquement si le client
  parvient à compléter une année sans causer d'accident.
@@ -1041,12 +1033,11 @@ Les résultats de la figure 8 sont moins surprenant : plus un véhicule est
  6), ainsi il y a peu d'accidents pour les véhicules de classe 7 simplement
  car ceux-ci sont peu nombreux, une conclusion similaire peut être énoncée
  pour la classe 3.
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
-placement !h
+placement H
 wide false
 sideways false
 status open
@@ -1143,9 +1134,9 @@ Zone claims
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
 La répartition des sinistres par sexe indique que les hommes sont plus suceptibl
 es de causer des accidents que les femmes.
  Il faut prendre en compte que les hommes sont bien plus nombreux que les
@@ -1160,12 +1151,11 @@ es de causer des accidents que les femmes.
  villes moyennes).
  Pour ce qui est de nord de la Suède, nous constatons l'inverse puisque
  ceux-ci semblent causer assez peu d'accidents.
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
-
+\begin_layout Standard
 \begin_inset Float figure
-placement !h
+placement H
 wide false
 sideways false
 status open
@@ -1262,9 +1252,9 @@ Distribution ClaimCost
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
 La figure 11 a pour but de mieux comprendre cette disparité entre les hommes
  et les femmes dans la déclaration des sinistres.
  Une comparaison par âge permet de mettre en évidence une information importante.
@@ -1465,9 +1455,10 @@ Afin de vérifier que la distribution de la fréquence des sinistres suit
 \end_inset
 
 
-\begin_inset Newline newline
-\end_inset
+\end_layout
 
+\begin_layout Standard
+\align block
 La loi de poisson fait partie de la famille des modèles à dispersion exponentiel
 le (ED), une catégorie regroupant un grand nombre de lois statistiques connues
  comme la loi normale, gamma ou encore binomiale.
@@ -1490,15 +1481,23 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \begin_inset Formula $\theta_{i}$
 \end_inset
 
-: paramètre dépendant de i.
+: paramètre dépendant de 
+\begin_inset Formula $i$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
 \begin_inset Formula $\phi$
 \end_inset
 
-: paramètre identique pour tous les i.
- C'est le paramètre de dispersion
+: paramètre identique pour tous les 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ C'est le paramètre de dispersion.
 \end_layout
 
 \begin_layout Itemize
@@ -1675,7 +1674,7 @@ Elle consiste (pour une variable
 \begin_inset Formula $[\text{0,1]}$
 \end_inset
 
-en se servant de 
+ en se servant de 
 \begin_inset Formula $Max(x_{j})$
 \end_inset
 
@@ -2045,8 +2044,15 @@ Le RMSE est sûrement un des critères les plus utilisés aujourd'hui (y compris
  exponentielle.
  Elle peut être vue comme une forme de distance (d'où son utilisation en
  temps que critère).
- Notons D* la déviance mise à l'échelle, un test entre les maximum de vraisembla
-nce du modèle entrainé et du modèle saturé
+ Aussi : (wiki deviance)
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $D^{*}$
+\end_inset
+
+, la déviance mise à l'échelle, un test entre les maximums de vraisemblance
+ du modèle entraîné et du modèle saturé
 \begin_inset Foot
 status open
 
@@ -2070,23 +2076,28 @@ sont parfaitement prédits.
 \end_inset
 
 .
- Notons aussi 
-\begin_inset Formula $l(\hat{y_{i})}$
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $l(\hat{y_{i}})$
 \end_inset
 
- le log-vraisemblance de 
-\begin_inset Formula $\hat{y_{i}}$
+, le log-vraisemblance de 
+\begin_inset Formula $\hat{y_{i}}.$
 \end_inset
 
-et 
+
+\end_layout
+
+\begin_layout Itemize
 \begin_inset Formula $l(y_{i})$
 \end_inset
 
- le log-vraisemblance de 
+, le log-vraisemblance de 
 \begin_inset Formula $y_{i}.$
 \end_inset
 
- (wiki deviance)
+
 \end_layout
 
 \begin_layout Standard
@@ -2250,7 +2261,7 @@ Akaike Information Criterion
 \end_inset
 
  est le nombre de paramètres à estimer du modèle et L est le maximum de
- la fonction de vraisemblance du modèle (edit copyright))
+ la fonction de vraisemblance du modèle (edit copy))
 \end_layout
 
 \begin_layout Itemize
@@ -2724,6 +2735,42 @@ signaux
  celui-ci va déclencher son propre signal.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/Neuron-figure-fr.svg
+	width 4.5cm
+	height 7.5cm
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Schéma d'un neurone biologique.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsubsection
 Perceptron
 \end_layout
@@ -2979,14 +3026,14 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \begin_inset Formula $\hat{y_{j}}$
 \end_inset
 
-la prédiction du perceptron
+ la prédiction du perceptron
 \end_layout
 
 \begin_layout Itemize
 \begin_inset Formula $y_{j}$
 \end_inset
 
-la valeur cible
+ la valeur cible
 \end_layout
 
 \begin_layout Standard
@@ -3069,8 +3116,8 @@ status open
 \align center
 \begin_inset Graphics
 	filename Images/neralnet.PNG
-	width 12cm
-	height 7cm
+	width 15cm
+	height 8.5cm
 
 \end_inset
 
@@ -3081,7 +3128,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Représentation d'un MLP
+Représentation d'un MLP 
+\begin_inset Quotes eld
+\end_inset
+
+feed-forward
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -3640,6 +3695,266 @@ Rétropropagation
 
 \begin_layout Standard
 TODO : lequel sera utilisé.
+\end_layout
+
+\begin_layout Subsection
+Boosting
+\end_layout
+
+\begin_layout Standard
+Afin d'améliorer les performances de certains algorithmes, de nombreux chercheur
+s se sont penchés sur les méthodes dites de 
+\begin_inset Quotes eld
+\end_inset
+
+boosting
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Il s'agit ici plus de 
+\begin_inset Quotes eld
+\end_inset
+
+méta-algorithme
+\begin_inset Quotes erd
+\end_inset
+
+ que d'algorithme à proprement parler, c'est à dire qu'il s'agit d'une famille
+ d'algorithmes utilisant d'autres algorithmes (apprenants faibles) dans
+ certaines de ses étapes afin d'améliorer les performances que l'apprenant
+ faible choisi aurait eu sans l'utilisation du méta-algortithme.
+ Ces méthodes se basent sur l'entrainement d'apprenants faibles
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Algorithme générant des prédicteurs de relativement mauvaise qualité (mais
+ avec de meilleures performances que le hasard pur), la plupart du temps
+ utilisé en combinaison avec d'autres apprenants faibles afin de créer un
+ ensemble de prédicteurs 
+\begin_inset Quotes eld
+\end_inset
+
+fort
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+ combinés afin de créer un ensemble de prédicteurs considéré comme 
+\begin_inset Quotes eld
+\end_inset
+
+fort
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Elles se basent souvent sur une règle de décision basée sur les réponses
+ des différents prédicteurs, dans le cas d'une classification binaire cela
+ peut par exemple être représenté par un vote majoritaire de ceux-ci.
+ Avec le boosting, les prédicteurs sont entrainés l'un après l'autre sur
+ un sous-ensemble des données du jeu d'entraînement.
+ Une fois le prédicteur entraîné, toutes les données du jeu d'entraînement
+ sont passées dans celui-ci et l'erreur du prédicteur sur les prédictions
+ est enregistrée.
+ Concrètement c'est la distance entre l'observation et sa prédiction qui
+ est observée, puisque nous tentons avec le boosting de donner l'accent
+ aux données mal prédites pour l'entraînement des prochains prédicteurs.
+ Les probabilités des données les plus incorrectes sont ensuite modifiées
+ afin d'augmenter leur chances d'apparaître dans le sous-ensemble utilisé
+ pour l'entraînement du prochain prédicteur.
+ L'algorithme de boosting le plus connu est probablement AdaBoost, qui tient
+ son nom de 
+\begin_inset Quotes eld
+\end_inset
+
+Adaptative boosting
+\begin_inset Quotes erd
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Boosting adaptatif.
+\end_layout
+
+\end_inset
+
+, il en existe plusieurs versions à la fois pour la classification et la
+ régression et c'est ce méta-algorithme qui sera utilisé.
+\end_layout
+
+\begin_layout Subsubsection
+Erreur
+\end_layout
+
+\begin_layout Standard
+En suivant cette méthode nous pouvons réduire l'erreur à chaque nouveau
+ prédicteur ajouté.
+ Cependant il serait naïf de penser que l'on peut utiliser cette méthode
+ infiniment afin d'approcher une erreur nulle, d'abord à cause d'un possible
+ overfit empêchant la généralisation sur le jeu de test, mais surtout car
+ il est possible de démontrer qu'il existe une erreur minimum due aux bruits
+ des données, qui est donc inévitable.
+ Adaboost est donc très sensible au bruit des données comme il est possible
+ de la démontrer :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N_{1}$
+\end_inset
+
+: le nombre d'observations du jeu d'entraînement.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N_{2}$
+\end_inset
+
+ : le nombre d'observations du jeu de test.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ : la valeur prise dans les données pour l'observation 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y_{i}^{(t)}$
+\end_inset
+
+ : la valeur réelle exacte pour l'observation 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y_{i}^{(p)}(x_{i})$
+\end_inset
+
+ : la prédiction pour l'observation 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Définissons l'erreur de prédiction (PE) et l'erreur d'échantillonnage du
+ modèle (ME) :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+PE=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}-y_{i}^{(p)}(x_{i})]^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+ME=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}^{(t)}-y_{i}^{(p)}(x_{i})]^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Si le bruit peut être considéré comme additif alors :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y_{i}=y_{i}^{(t)}+n_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ où 
+\begin_inset Formula $n_{i}$
+\end_inset
+
+ est le bruit de l'observation 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ De plus, si nous ajoutons que :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E[n]=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E[n_{i}n_{j}]=\delta_{ij}\sigma^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Il est possible d'obtenir l'espérance par rapport à 
+\begin_inset Formula $(y,x)$
+\end_inset
+
+ pour terminer avec :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E[PE]=\sigma^{2}+E[ME]
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ce qui prouve l'existence d'une erreur de prédiction minimum due au bruit
+ et représentée par 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+ (Drucker)
 \end_layout
 
 \end_body
