@@ -580,7 +580,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/gender2.png
+	filename Images/gender2.png
 	scale 40
 
 \end_inset
@@ -625,7 +625,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/ownerage.png
+	filename Images/ownerage.png
 	scale 40
 
 \end_inset
@@ -703,7 +703,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/vehiculeage.png
+	filename Images/vehiculeage.png
 	scale 40
 
 \end_inset
@@ -748,7 +748,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/zone.png
+	filename Images/zone.png
 	scale 40
 
 \end_inset
@@ -820,7 +820,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/bonus.png
+	filename Images/bonus.png
 	scale 40
 
 \end_inset
@@ -865,7 +865,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/class.png
+	filename Images/class.png
 	scale 40
 
 \end_inset
@@ -938,7 +938,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/BonusClaim.png
+	filename Images/BonusClaim.png
 	scale 40
 
 \end_inset
@@ -983,7 +983,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/ClassClaim.png
+	filename Images/ClassClaim.png
 	scale 40
 
 \end_inset
@@ -1064,7 +1064,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/genderClaim.png
+	filename Images/genderClaim.png
 	scale 40
 
 \end_inset
@@ -1109,7 +1109,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/zoneClaim.png
+	filename Images/zoneClaim.png
 	scale 40
 
 \end_inset
@@ -1182,7 +1182,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/MvFclaims.png
+	filename Images/MvFclaims.png
 	scale 40
 
 \end_inset
@@ -1227,7 +1227,7 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/claimcost2.png
+	filename Images/claimcost2.png
 	scale 40
 
 \end_inset
@@ -1286,6 +1286,7 @@ Assurances
 Dans cette sous-section seront expliquées les particularités de l'analyse
  de données dans le cadre de l'assurance, et plus précisement dans le cas
  qui nous intéresse ici.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -1447,10 +1448,9 @@ Afin de vérifier que la distribution de la fréquence des sinistres suit
 \begin_layout Standard
 \align center
 \begin_inset Graphics
-	filename C:/Users/Lucien/Desktop/Poisson-neural-network-insurance-pricing/R/plots/Rplot02.png
+	filename Images/Rplot02.png
 	width 6cm
 	height 4.5cm
-	keepAspectRatio
 
 \end_inset
 
@@ -2706,6 +2706,1442 @@ ent/test.
 GLM : modèle linéaire généralisé
 \end_layout
 
+\begin_layout Subsubsection
+Les bases du GLM
+\end_layout
+
+\begin_layout Standard
+Les GLMs représentent une généralisation de l'OLS
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Ordinary Least Squares (régression linéaire)
+\end_layout
+
+\end_inset
+
+ dans deux directions : 
+\end_layout
+
+\begin_layout Itemize
+La distribution de probabilité : Dans l'OLS, nous supposons que les données
+ suivent une loi gaussienne.
+ Avec les GLM, nous travaillons avec une classe de distrution (les distributions
+ EDM) dont la fonction de distribution générale a été présentée plus tôt
+ dans ce travail.
+ Plus particulièrement dans notre cas, cela va nous permettre de construire
+ nos modèles avec la loi de Poisson.
+ 
+\end_layout
+
+\begin_layout Itemize
+Modèle pour la moyenne : Dans les modèles linéaires classiques, la moyenne
+ n'est qu'une fonction linéaire des variables exploratoires.
+ Dans les GLMs, c'est une transformation monotone de la moyenne qui est
+ une fonction linéaire des variables exploratoires.
+ 
+\end_layout
+
+\begin_layout Standard
+Les GLMs se sont vite présentés comme un modèle très efficace pour la modélisati
+on des ratios dans les assurances.
+ Ceux-ci présentent en effet nombres d'avantages : 
+\end_layout
+
+\begin_layout Itemize
+L'existence de différentes recherches menées sur le sujet ainsi que de méthodes
+ déjà définies pour l'estimation des différents paramètres du modèle, d'interval
+les de confiances, ...
+\end_layout
+
+\begin_layout Itemize
+Ils sont utilisés à la fois dans le cadre des assurances, mais pas uniquement.
+\end_layout
+
+\begin_layout Itemize
+Il existe un bon nombre de programmes/outils permettant de construire de
+ tels modèles de manière relativement simple et efficace.
+\end_layout
+
+\begin_layout Standard
+Enfin, un GLM est composé de : 
+\end_layout
+
+\begin_layout Itemize
+Un prédicteur linéaire : 
+\begin_inset Formula $\eta_{i}=\beta_{0}+...+\beta_{1}x_{1i}+\beta_{p}x_{pi}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+La fonction de lien : 
+\begin_inset Formula $g(\mu_{i})=\eta_{i}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+La fonction de variance : 
+\begin_inset Formula $v(Y_{i})=\phi v(\mu)$
+\end_inset
+
+ où 
+\begin_inset Formula $\phi$
+\end_inset
+
+ est le paramètre de dispersion (constant).
+ (https://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf)
+\end_layout
+
+\begin_layout Standard
+Ces composants seront décrit plus précisemment plus loin dans ce chapitre.
+\end_layout
+
+\begin_layout Subsubsection
+Hypothèses
+\end_layout
+
+\begin_layout Standard
+Afin que les raisonements à suivre restent corrects, il est nécessaire de
+ faire 3 hypothèses pour que nos modèles statistiques restent valides.
+\end_layout
+
+\begin_layout Paragraph*
+Hypothèse 1 : Indépendance des polices d'assurances
+\end_layout
+
+\begin_layout Standard
+Considérons que nous avons 
+\begin_inset Formula $n$
+\end_inset
+
+ polices d'assurances, avec 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ correspondant à la réponse de la police i.
+ Nous supposons que 
+\begin_inset Formula $X_{1},...,X_{n}$
+\end_inset
+
+ sont indépendants.
+ 
+\end_layout
+
+\begin_layout Standard
+Même si cette hypothèse est primordiale, il n'est pas difficile de trouver
+ des cas ou celle-ci n'est pas respectée.
+ Par exemple dans le cas des grandes catastrophes naturelles qui impliquent
+ qu'un grand nombre de personnes déclarent des sinistres pour la même raison.
+ Pour ce genre de cas il est nécessaire d'utiliser des modèles différents
+ cependant nous ne nous y intéresseront pas dans le cadre de ce travail.
+\end_layout
+
+\begin_layout Paragraph*
+Hypothèse 2 : Indépendance temporelle
+\end_layout
+
+\begin_layout Standard
+Considérons 
+\begin_inset Formula $n$
+\end_inset
+
+ intervalles de temps différents, avec 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ correspondant à la réponse dans l'intervalle de temps 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ Alors 
+\begin_inset Formula $X_{1},...,X_{n}$
+\end_inset
+
+ sont indépendants.
+\end_layout
+
+\begin_layout Paragraph*
+Hypothèse 3 : Homogénéité
+\end_layout
+
+\begin_layout Standard
+Considérons deux polices dans la même plage de tarifs et ayant la même durée
+ de contrat, avec 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ correspondant à la réponse pour la police i.
+ Alors 
+\begin_inset Formula $X_{1}$
+\end_inset
+
+ et 
+\begin_inset Formula $X_{2}$
+\end_inset
+
+ ont la même distribution de probabilité.
+ 
+\end_layout
+
+\begin_layout Standard
+Cette hypothèse n'est dans les fait pas complètement respectée.
+ Les différents conducteurs sont répartis dans des classes relativement
+ homogènes mais il reste de la non-homogénéité résiduelle.
+ Celle-ci est généralement compensée par un système de bonus/malus ou d'autres
+ moyens similaires.
+ 
+\begin_inset Newline newline
+\end_inset
+
+Les hypothèses 1 et 2 ont pour conséquence que les coûts des sinistres sont
+ indépendants : Il concernent soit une police différente soit un intervalle
+ de temps différent.
+\end_layout
+
+\begin_layout Subsubsection
+Modèles à dispersion exponentielle (EDM)
+\end_layout
+
+\begin_layout Standard
+Les modèles à dispersion exponentielles font parties des GLMs, et généralisent
+ la distribution normale utilisée dans les modèles linéaires.
+ En utilisant les hypothèses ci-dessus, nous pouvons déterminer la distribution
+ de probabilité d'un EDM.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_{i}}\right\} c(y,\phi,v_{i})
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\theta_{i}$
+\end_inset
+
+: paramètre pouvant dépendre de 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\phi>0$
+\end_inset
+
+ : paramètre de dispersion, ne peut pas dépendre de 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $b(\theta_{i})$
+\end_inset
+
+ : fonction cumulante, le choix de cette fonction revient à choisir une
+ famille de distributions de probabilité (Normale, Poisson, ...).
+ 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $c(.)$
+\end_inset
+
+ : fonction ne dépendant pas de 
+\begin_inset Formula $\theta_{i}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Dans notre cas, nous nous occupons de la fréquence des sinistres.
+ Considérons 
+\begin_inset Formula $N(t)$
+\end_inset
+
+ comme le nombre de sinistres d'un indivitu au cours de la période 
+\begin_inset Formula $[0,t]$
+\end_inset
+
+.
+ Beard, Pentikäinen et Pesonen (TODO: biblio des 3 mecs la) montrent que
+ ce processus statistique suit une loi de poisson.
+ Si 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ représente le nombre de plaintes dans une classe de durée 
+\begin_inset Formula $\omega_{i}$
+\end_inset
+
+ et prenons 
+\begin_inset Formula $\mu_{i}$
+\end_inset
+
+ comme l'espérence lorsque 
+\begin_inset Formula $\omega_{i}=1$
+\end_inset
+
+.
+ Alors 
+\begin_inset Formula $X_{i}$
+\end_inset
+
+ suit une distribution de Poisson et sa densité est : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{X_{i}}(x_{i};\mu_{i})=e^{-\omega_{i}\mu_{i}}\frac{(\omega_{i}\mu_{i})^{x_{i}}}{x_{i}!},\;x_{i}=0,1,2,...
+\]
+
+\end_inset
+
+Si nous nous intéressons maintenant à la distribution du ratio 
+\begin_inset Formula $Y_{i}=X_{i}/w_{i}$
+\end_inset
+
+ nous tombons également sur une distribution de Poisson
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Pour être précis, il s'agit en réalité d'une transformation de la distribution
+ de Poisson, la distribution 
+\begin_inset Quotes eld
+\end_inset
+
+relative
+\begin_inset Quotes erd
+\end_inset
+
+ de Poisson.
+\end_layout
+
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\omega_{i}y_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+=exp\{w_{i}(y_{i}\theta_{i}-e^{\theta_{i}})+c(y_{i},\omega_{i})\}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Qui est la une forme de la distribution de probabilité des EDM vue plus
+ haut, avec :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\phi=1$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $b(\theta_{i})=e^{\theta_{i}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+La fonction de lien 
+\end_layout
+
+\begin_layout Paragraph*
+Forme de tableau
+\end_layout
+
+\begin_layout Standard
+Dans ce travail, nous avons jusqu'ici considéré que les données étaient
+ exprimées sous forme de liste, soit un vecteur 
+\begin_inset Formula $y'=(y_{1},...,y_{n})$
+\end_inset
+
+, chaque ligne 
+\begin_inset Formula $i$
+\end_inset
+
+ contient également la durée 
+\begin_inset Formula $\omega_{i}$
+\end_inset
+
+ ainsi que les facteurs d'évaluations correspondants.
+ Cette forme représente la forme de liste, et est celle qui sera préférée
+ lorsque nous travaillons dans des logiciels tels que SAS, R, ou encore
+ Python afin de gérer et représenter les données.
+ Il existe cependant une autre manière de représenter les données qui s'avère
+ très utile pour certaines démonstrations : la forme de tableau.
+ 
+\end_layout
+
+\begin_layout Standard
+Dans cette forme, les observations 
+\begin_inset Formula $y_{i_{1,...,}i_{k}}$
+\end_inset
+
+ sont représentées de manière à avoir un indice par variable, un exemple
+ est donné ci-dessous.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="5" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+i
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Married
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gender
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Observation
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+M
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{1}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+F
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{2}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+No
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+M
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{3}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+No
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+F
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{4}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Forme de liste
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="3">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Married
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Male
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Female
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Yes
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{11}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{12}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+No
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{21}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{22}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Forme de tableau
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Paragraph*
+Fonction de lien
+\end_layout
+
+\begin_layout Standard
+Maintenant que les notations utilisées dans cette parties sont expliquées,
+ nous pouvons nous pencher sur la deuxième partie de la généralisation des
+ GLMs, la fonction de lien.
+ Considérons que 
+\begin_inset Formula $\mu_{ij}$
+\end_inset
+
+ représente l'espérence de ratio de la cellule 
+\begin_inset Formula $(i,j)$
+\end_inset
+
+ (forme de tableau), où 
+\begin_inset Formula $i$
+\end_inset
+
+ et 
+\begin_inset Formula $j$
+\end_inset
+
+ représentent respectivement la permière et la deuxième variable catégorielle.
+ Pour cet exemple nous allons considérer que la première variable conporte
+ deux classes et la deuxième en comporte trois, ci dessous une représentation
+ en forme de tableau.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="3" columns="4">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Var1/Var2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Catégorie 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Catégorie 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Catégorie 3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Catégorie 1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{11}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{12}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{13}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Catégorie 2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{21}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{22}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $y_{23}$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Exemple pour la fonction de lien
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La fonction de lien sert à généraliser le modèle linéaire basique (OLS),
+ celui-ci suppose que la moyenne suit une structure additive de la forme
+ :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mu_{ij}=\gamma_{0}+\gamma_{1i}+\gamma_{2j}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Il faut maintenant choisir une cellule comme la cellule de base, ce qui
+ nous servira à ajouter des contraintes, en particulier que sa moyenne 
+\begin_inset Formula $\mu_{ij}$
+\end_inset
+
+ soit égale à 
+\begin_inset Formula $\gamma_{0}$
+\end_inset
+
+.
+ Si nous suivons notre exemple et choisissons la cellule 
+\begin_inset Formula $(1,1)$
+\end_inset
+
+ comme cellule de base, cela signifie que 
+\begin_inset Formula $\mu_{11}=\gamma_{0}+\gamma_{11}+\gamma_{21}$
+\end_inset
+
+ doit donner 
+\begin_inset Formula $\mu_{11}=\gamma_{0}$
+\end_inset
+
+.
+ Pour ce faire, il suffit de déclarer :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\gamma_{11}=\gamma_{21}=0
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Et donc :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mu_{11}=\gamma_{0}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Nous réécrivons maintenant le modèle sous forme de liste et définissons
+ :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\beta_{1}:=\gamma_{0}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\beta_{2}:=\gamma_{12}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\beta_{3}:=\gamma_{22}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\beta_{3}:=\gamma_{23}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En forme de liste, 
+\begin_inset Formula $\mu_{i}$
+\end_inset
+
+ représente la moyenne d'une plage de tarif.
+ Les deux variables catégorielles sont également transformées en variables
+ binaires, de la même manière que dans la partie 2.4.1.
+ Définissons maintenant : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mu_{i}=\sum_{j=1}^{4}x_{ij}\beta_{j}\qquad i=1,2,...,6.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cette équation représente la structure linéaire (wiki) et peut être écrit
+ sous la forme matricielle :
+\begin_inset Formula 
+\[
+\mu=X\beta
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Généralisons maintenant l'exemple ci dessus, avec l'équation : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\mu_{i}=\sum_{j=1}^{r}x_{ij}\beta_{j}\qquad i=1,...,n.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $r$
+\end_inset
+
+ : nombre de variables exploratoires.
+\end_layout
+
+\begin_layout Standard
+Nous introduisons maintenant la fonction de lien 
+\begin_inset Formula $g(.)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g(\mu_{i})=\eta_{i}=\sum_{j=1}^{r}x_{ij}\beta_{j}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Ici 
+\begin_inset Formula $g(.)$
+\end_inset
+
+ représente la fonction de lien est doit être monotone et dérivable.
+ Cette fonction est le lien entre la moyenne et la structure linéaire.
+ Par exemple dans le cas d'un modèle multiplicatif (et pour reprendre le
+ cas étudié ci-dessus) nous cherchons à avoir 
+\begin_inset Formula $\mu_{ij}=\gamma_{o}\gamma_{1i}\gamma_{2j}$
+\end_inset
+
+, ce qui peut être obtenu grâce au logarithmes : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+log(\mu_{ij})=log(\gamma_{o})+log(\gamma_{1i})+log(\gamma_{2j})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+log(\mu_{i})=\sum_{j=1}^{4}x_{ij}\beta_{j}\qquad i=1,2,...,6.
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g(\mu_{i})=\eta_{i}=log(\mu_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La fonction de lien est donc le logarithme dans le cas des modèles multiplicatif
+s, bien souvent utilisés dans les problèmes d'assurances.
+\end_layout
+
+\begin_layout Subsubsection
+Estimation des paramètres 
+\begin_inset Formula $\beta$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dans le cadre des GLMs, les paramètres 
+\begin_inset Formula $\beta$
+\end_inset
+
+ sont estimés à l'aide de la technique du maximum de vraisemblance.
+ Cela signifie que les estimations sont basées sur l'échantillon de données
+ et implique la nécessité de disposer d'un bon nombre d'entrées.
+ La fonction du maximum de vraisemblance de 
+\begin_inset Formula $\theta$
+\end_inset
+
+ est définie comme suit : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+l(\theta;\phi;y)=\frac{1}{\phi}\sum_{i}\omega_{i}(y_{i}\theta_{i}-b(\theta_{i}))+\sum_{i}c(y_{i},\phi,\omega_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+En réécrivant l'équation en fonction de 
+\begin_inset Formula $\beta$
+\end_inset
+
+ au lieu de 
+\begin_inset Formula $\theta$
+\end_inset
+
+ et en prenant la dérivée de 
+\begin_inset Formula $l(.)$
+\end_inset
+
+ par rapport à 
+\begin_inset Formula $\beta$
+\end_inset
+
+ nous donne la fonction de score : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\frac{\partial l}{\partial\beta_{k}}=\frac{1}{\phi}\omega_{i}\frac{y_{i}-\mu_{i}}{v(\mu_{i})g'(\mu_{i})}x_{ij}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $v(.)$
+\end_inset
+
+ : fonction de variance
+\end_layout
+
+\begin_layout Standard
+Il suffit maintenant de prendre ces 
+\begin_inset Formula $r$
+\end_inset
+
+ dérivées partielles et de les égaliser à 
+\begin_inset Formula $0$
+\end_inset
+
+ et de les multiplier par 
+\begin_inset Formula $\phi$
+\end_inset
+
+ afin d'obtenir les équations du maximum de vraisemblance : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sum_{i}\omega_{i}\frac{y_{i}-\mu_{i}}{v(\mu_{i})g'(\mu_{i})}x_{ij}=0,\qquad i=1,...,r
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La résolution de ce système d'équation doit se faire de manière numérique
+ et nous donne l'estimation des paramètres 
+\begin_inset Formula $\beta$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Subsubsection
+Modélisation de Poisson
+\end_layout
+
+\begin_layout Standard
+Nous allons maintenant discuter du cas où 
+\begin_inset Formula $Y$
+\end_inset
+
+ suit une loi de poisson, ce qui est le cas pour notre base de données.
+ Supposons : (https://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+Y_{i}\sim Poisson(\lambda_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Alors les propritétés de la loi de poisson donnent : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E(Y_{i})=\lambda_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+var(Y_{i})=\lambda_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Donc la fonction de variance sera : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+v(\mu_{i})=\mu_{i}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Et la fonction de lien utilisée dans ce cas-ci sera le logarithme, qui nous
+ permet de passer du domaine 
+\begin_inset Formula $[0,\infty]$
+\end_inset
+
+ au domaine 
+\begin_inset Formula $[-\infty,\infty]$
+\end_inset
+
+:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+g(\mu_{i})=log(\mu_{i})
+\]
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Réseaux de neurones
 \end_layout
@@ -3955,6 +5391,27 @@ Ce qui prouve l'existence d'une erreur de prédiction minimum due au bruit
 
 .
  (Drucker)
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-1"
+
+\end_inset
+
+Esbjörn Ohlsson, Björn Johansson, Non-life insurance pricing with Generalized
+ Linear Models
+\end_layout
+
+\begin_layout Bibliography
+\begin_inset CommandInset bibitem
+LatexCommand bibitem
+key "key-2"
+
+\end_inset
+
+gsg
 \end_layout
 
 \end_body
