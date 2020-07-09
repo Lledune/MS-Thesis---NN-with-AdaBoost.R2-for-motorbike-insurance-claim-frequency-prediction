@@ -40,11 +40,11 @@
 \output_sync 0
 \bibtex_command default
 \index_command default
-\paperfontsize default
+\paperfontsize 12
 \spacing single
 \use_hyperref false
 \papersize a4paper
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -55,9 +55,11 @@
 \use_package stackrel 1
 \use_package stmaryrd 1
 \use_package undertilde 1
-\cite_engine basic
-\cite_engine_type default
+\cite_engine biblatex
+\cite_engine_type authoryear
 \biblio_style plain
+\biblatex_bibstyle authoryear
+\biblatex_citestyle authoryear
 \use_bibtopic false
 \use_indices false
 \paperorientation portrait
@@ -69,6 +71,10 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2.5cm
+\topmargin 4cm
+\rightmargin 2.5cm
+\bottommargin 4cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -120,8 +126,33 @@ This will be the abstract of the document
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset CommandInset toc
+LatexCommand tableofcontents
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Introduction
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+nocite{*}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2372,8 +2403,6 @@ Le principe de base est de diviser le jeu de données en
 \end_layout
 
 \begin_layout Standard
-
-\lang french
 \begin_inset Float algorithm
 placement H
 wide false
@@ -2381,8 +2410,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status open
 
@@ -2399,8 +2426,6 @@ begin{algorithmic}[1]
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2419,8 +2444,6 @@ begin
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2449,8 +2472,6 @@ Diviser
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2471,8 +2492,6 @@ for
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2493,8 +2512,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2515,8 +2532,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2537,8 +2552,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2567,8 +2580,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2585,8 +2596,6 @@ endfor
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2607,8 +2616,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2629,8 +2636,6 @@ return
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -2649,8 +2654,6 @@ end
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status open
 
@@ -2667,13 +2670,9 @@ end{algorithmic}
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang french
 Validation croisée (K-folds)
 \end_layout
 
@@ -2688,8 +2687,6 @@ Validation croisée (K-folds)
 \end_layout
 
 \begin_layout Standard
-
-\lang french
 \SpecialChar allowbreak
 Cette méthode permet de limiter l'overfit et de le détecter dans la plupart
  des cas.
@@ -2701,8 +2698,6 @@ ent/test.
 \end_layout
 
 \begin_layout Subsection
-
-\lang french
 GLM : modèle linéaire généralisé
 \end_layout
 
@@ -3813,7 +3808,7 @@ Nous réécrivons maintenant le modèle sous forme de liste et définissons
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $\beta_{3}:=\gamma_{23}$
+\begin_inset Formula $\beta_{4}:=\gamma_{23}$
 \end_inset
 
 
@@ -4872,8 +4867,6 @@ status open
 \end_inset
 
  augmente.
-\lang french
-
 \begin_inset Newline newline
 \end_inset
 
@@ -4885,8 +4878,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status open
 
@@ -4903,8 +4894,6 @@ begin{algorithmic}[1]
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -4925,8 +4914,6 @@ Attribution de valeurs aléatoires à
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -4947,8 +4934,6 @@ Choix du pas initial,
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -4969,8 +4954,6 @@ Choix de la fonction du pas
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -4989,8 +4972,6 @@ begin
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -5007,8 +4988,6 @@ For t = 0, ..., T
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -5029,8 +5008,6 @@ Calcul du gradient :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -5051,8 +5028,6 @@ Mise à jour de la taille du pas :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -5073,8 +5048,6 @@ Mise à jour des poids :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status collapsed
 
@@ -5093,8 +5066,6 @@ end
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset ERT
 status open
 
@@ -5111,8 +5082,6 @@ end{algorithmic}
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang french
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
@@ -5134,6 +5103,23 @@ TODO : lequel sera utilisé.
 \end_layout
 
 \begin_layout Subsection
+Boosting
+\end_layout
+
+\begin_layout Subsubsection
+Bagging
+\end_layout
+
+\begin_layout Standard
+Si le bagging n'est pas au centre de ce travail, il est tout de même intéressant
+ de présenter cet algorithme car il est souvent comparé au boosting qui
+ sera introduit dans la section suivante.
+ En effet, le bagging (Bootstrap Aggregating) est une méthode assez populaire
+ dans le domaine de l'apprentissage automatique, connue pour fonctionner
+ particulièrement bien lorsque la variance 
+\end_layout
+
+\begin_layout Subsubsection
 Boosting
 \end_layout
 
@@ -5228,6 +5214,120 @@ Boosting adaptatif.
 \end_layout
 
 \begin_layout Subsubsection
+Rasoir d'Ockham
+\end_layout
+
+\begin_layout Standard
+Lorsqu'un modèle est entrainé, il est important que celui-ci soit assez
+ général pour avoir de bonnes performances sur le jeu d'entraînement, mais
+ aussi et surtout sur le jeu de test qui sert à évaluer les performances
+ réelles de l'algorithme.
+ Le principe de rasoir d'Ockham est un principe qui vient de la philosophie,
+ mais dont le raisonement a été largement adopté dans la communauté de recherche
+ sur l'apprentissage automatique.
+ Il soutient que 
+\begin_inset Quotes eld
+\end_inset
+
+les hypothèses suffisantes les plus simples doivent être choisies
+\begin_inset Quotes erd
+\end_inset
+
+ (réf wiki).
+ En d'autres termes, il s'agit de construire un modèle avec assez de paramètres
+ pour être efficace mais assez simple pour pouvoir être généralisable.
+ Ce principe a été largement vérifié dans la plupart des cas, mais il est
+ intéressant de noter que le boosting peut constituer une exception à cette
+ règle, comme nous allons le voir dans cette section.
+ (boosting margin ref).
+\end_layout
+
+\begin_layout Standard
+Dans une étude menée par Schapire, Freund, Bartlett et Lee, les performances
+ d'AdaBoost ont été comparées aux performances du boosting, et plus particulière
+ment c'est un fait intéressant concernant AdaBoost qui a été à l'origine
+ de cette recherche.
+ En observant les graphiques de performances d'AdaBoost et du bagging entrainés
+ avec le même type d'apprenant faible et sur le même jeu de données, il
+ est possible de voir que dans certains cas, l'erreur sur le jeu de test
+ d'Adaboost continuait de descendre en tendant vers une asymptote après
+ que l'erreur sur le jeu d'entrainement était déjà nulle, ce qui n'a pas
+ été observé pour le bagging et constitue un comportement à la fois particulier
+ et avantageux.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingMarginSchapire"
+literal "false"
+
+\end_inset
+
+ Il était jusque là supposé que les méthodes de vote d'ensemble
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Décision basée sur l'aggrégation du vote de plusieurs modèles, comme dans
+ AdaBoost ou dans le bagging.
+\end_layout
+
+\end_inset
+
+ fonctionnaient en réduisant la variance des algorithmes, et que ces méthodes
+ étaient donc plus efficaces lorsque la variance de la prédiction était
+ élevée 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "breiman1996bias"
+literal "false"
+
+\end_inset
+
+.
+ Cette explication, qui peut être utilisée comme argument en parlant du
+ bagging (qui est connu pour fonctionner particulièrement bien lorsque la
+ variance est grande), n'est cependant pas applicable dans le cas du boosting.
+ En effet celui-ci ne recquiert pas que la variance soit élevée afin de
+ délivrer de bonnes performances.
+ 
+\end_layout
+
+\begin_layout Standard
+TODO : Faire graphique learning curves pour montrer + conclusions.
+\end_layout
+
+\begin_layout Standard
+Dans son rapport de recherche, et pour prouver son hypothèse, Breiman applique
+ le boosting à un algorithme connu pour sa variance faible (Analyse discriminant
+e linéaire) et les résultats obtenus semblent pencher en sa faveur puisque
+ les performances de l'algorithme combiné au boosting sont plutôt mauvaises.
+ Cependant, l'autre étude évoquée dans cette section met en évidence le
+ fait que la variance faible de l'algorithme ne serait pas en cause.
+ En plus du fait que AdaBoost a été testé avec succès sur des problèmes
+ à faible variance, les chercheurs évoquent deux hypothèses qui expliqueraient
+ pourquoi le boosting peut ne pas être performant dans certains cas 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingMarginSchapire"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Trop peu de données sont mises à disposition de l'algorithme pour l'apprentissag
+e.
+\end_layout
+
+\begin_layout Enumerate
+Les erreurs d'entrainement des apprenants faibles deviennent trop élevées
+ rapidement (Suite aux rééchantillonages).
+\end_layout
+
+\begin_layout Subsubsection
 Erreur
 \end_layout
 
@@ -5240,7 +5340,15 @@ En suivant cette méthode nous pouvons réduire l'erreur à chaque nouveau
  il est possible de démontrer qu'il existe une erreur minimum due aux bruits
  des données, qui est donc inévitable.
  Adaboost est donc très sensible au bruit des données comme il est possible
- de la démontrer :
+ de la démontrer 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingRegressionDrucker"
+literal "false"
+
+\end_inset
+
+ :
 \end_layout
 
 \begin_layout Itemize
@@ -5393,25 +5501,113 @@ Ce qui prouve l'existence d'une erreur de prédiction minimum due au bruit
  (Drucker)
 \end_layout
 
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-1"
-
-\end_inset
-
-Esbjörn Ohlsson, Björn Johansson, Non-life insurance pricing with Generalized
- Linear Models
+\begin_layout Subsubsection
+AdaBoost
 \end_layout
 
-\begin_layout Bibliography
-\begin_inset CommandInset bibitem
-LatexCommand bibitem
-key "key-2"
+\begin_layout Standard
+À l'origine, AdaBoost est un algorithme qui a été pensé pour la classification.
+ Son fonctionnement ne prévoyait pas l'estimation d'une valeur 
+\begin_inset Formula $\hat{y}$
+\end_inset
+
+ en régression.
+ L'algorithme est présenté par Freund et Schapire (citation) en 1997, et
+ la différence principale avec les autres techniques de boosting, c'est
+ qu'il tient compte de l'erreur de chaque apprenant faible afin de tenter
+ de les corriger lors de la création des prochains apprenants faibles.
+ Cet algorithme a gagné énormément de popularité au cours des années en
+ remportant un grand nombre de compétitions dans le domaine de la classification.
+ Celui-ci a notamment montré sa supériorité par rapport au 
+\begin_inset Quotes eld
+\end_inset
+
+bagging
+\begin_inset Quotes erd
+\end_inset
+
+, un autre méta-algorithme populaire.
+ Il faut cependant noter que puisque AdaBoost, les résultats de chaque modèle
+ influent la création du suivant, il est impossible d'entraîner les modèles
+ de manière parallèle sur les différents coeurs d'un processeur ou d'un
+ GPU
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Graphics Processing Unit, ou processeur graphique, souvent utilisé pour
+ faire des calculs parallèles de manière extrêmement rapide.
+\end_layout
 
 \end_inset
 
-gsg
+ (improving regressors with boosting techniques REF)
+\end_layout
+
+\begin_layout Standard
+Il se repose sur trois idées principales : 
+\end_layout
+
+\begin_layout Itemize
+AdaBoost combine un grand nombre d'apprenants faibles afin d'obtenir une
+ classification la plus précise possible.
+ Les apprenants faibles sont des modèles avec une prise de décision simple.
+ Dans le cas de la classification, il s'agit souvent d'une série d'arbres
+ de décision prenant leur décision en se basant sur une seule variable,
+ les apprenants faibles sont généralement rapides et simples à entraîner
+ puisque c'est potentiellement un très grand nombre d'entre eux qui seront
+ utilisés.
+ Ceci dit, le boosting est aussi possible avec des algorithmes plus puissants,
+ le seul réél problème étant le temps de calcul.
+ 
+\end_layout
+
+\begin_layout Itemize
+Tous les algorithmes entrainés n'ont pas le même poids lors de la prise
+ de décision, en effet ceux qui sont le plus confiants quant à leur décisions
+ seront plus impactant lors de la décision finale.
+ 
+\end_layout
+
+\begin_layout Itemize
+Chaque apprenant faible est entraîné en prenant en compte les erreurs commises
+ par les apprenants faibles précédents.
+ 
+\end_layout
+
+\begin_layout Standard
+L'algorithme a été dévié dans plusieurs formes portant toutes des noms différent
+s, et parmis ces formes, certaines permettent de travailler avec des problèmes
+ de régression.
+ C'est notamment le cas de Adaboost.R2, présenté par Drucker (réf), qui sera
+ l'algorithme utilisé dans ce travail.
+ Celui-ci est présenté ci-dessous dans la section 3.4.3.
+\end_layout
+
+\begin_layout Subsubsection
+AdaBoost.R2
+\end_layout
+
+\begin_layout Standard
+AdaBoost.R2 est un algorithme présenté par Drucker (réf) et permettant d'applique
+r l'algorithme d'AdaBoost à un problème de régression.
+ 
+\end_layout
+
+\begin_layout Section
+Bibliographie
+\end_layout
+
+\begin_layout Standard
+\begin_inset CommandInset bibtex
+LatexCommand bibtex
+btprint "btPrintAll"
+bibfiles "papers/Jabref/bibliography"
+options "bibtotoc,plain"
+
+\end_inset
+
+
 \end_layout
 
 \end_body
