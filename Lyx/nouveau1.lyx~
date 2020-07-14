@@ -135,6 +135,13 @@ LatexCommand tableofcontents
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Section
 Introduction
 \end_layout
@@ -204,6 +211,13 @@ La plupart de ces algorithmes sont en fait assez peu récents mais étaient
  algorithmes sont efficaces et représentent un espoir d'amélioration pour
  le futur.
  TODO : expliquer le mémoire rapidement.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -561,6 +575,13 @@ Gotland (Grande île).
 
 \end_layout
 
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -1309,6 +1330,13 @@ e pour plusieurs sinistres, la variable contient la somme du coût de tous
  les 20.000€ de compensation, mais certains peuvent monter à près de 200.000€.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Assurances
 \end_layout
@@ -1540,6 +1568,13 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -1828,6 +1863,13 @@ Pour le bon fonctionement du modèle, certaines autres données ont du être
 \end_inset
 
  soit un sinistre par jour ce qui pourrait grandement biaiser le modèle.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
@@ -2695,6 +2737,13 @@ Cette méthode permet de limiter l'overfit et de le détecter dans la plupart
  Comme dit précédemment la base de donnée est constituée d'événements rares
  et cette méthode sera donc préférée à la traditionnelle décomposition entrainem
 ent/test.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Subsection
@@ -4137,6 +4186,13 @@ g(\mu_{i})=log(\mu_{i})
 
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Réseaux de neurones
 \end_layout
@@ -5102,6 +5158,13 @@ Rétropropagation
 TODO : lequel sera utilisé.
 \end_layout
 
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
 \begin_layout Subsection
 Boosting
 \end_layout
@@ -5116,7 +5179,115 @@ Si le bagging n'est pas au centre de ce travail, il est tout de même intéressa
  sera introduit dans la section suivante.
  En effet, le bagging (Bootstrap Aggregating) est une méthode assez populaire
  dans le domaine de l'apprentissage automatique, connue pour fonctionner
- particulièrement bien lorsque la variance 
+ particulièrement bien lorsque la variance est élevée.
+ Pour mieux comprendre pourquoi l'algorithme fonctionne de cette manière,
+ le bagging va être introduit ci-dessous.
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BaggingBreiman"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+: Set d'apprentissage, il est composé de données sous la forme 
+\begin_inset Formula $\{(y_{n},x_{n}),n=1,...,N)\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $x$
+\end_inset
+
+ : Les facteurs d'évaluation.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y$
+\end_inset
+
+ : La valeur à prédire.
+ 
+\end_layout
+
+\begin_layout Standard
+Sur base de ceci 
+\begin_inset Formula $\varphi(x,\mathcal{L})$
+\end_inset
+
+ est défini, il s'agit du prédicteur qui sert à déterminer une réponse 
+\begin_inset Formula $y$
+\end_inset
+
+ sur base de 
+\begin_inset Formula $x$
+\end_inset
+
+ et 
+\begin_inset Formula $\mathcal{L}$
+\end_inset
+
+.
+ En supposant que de plusieurs sets d'apprentissages dénotés 
+\begin_inset Formula $\{\mathcal{L}_{k}\}$
+\end_inset
+
+ sont disponibles, alors il est possible de créer 
+\begin_inset Formula $k$
+\end_inset
+
+ prédicteurs 
+\begin_inset Formula $\varphi(x_{k},\mathcal{L}_{k})$
+\end_inset
+
+ et de les combiner afin de d'obtenir un résulat pour la prédiction.
+ Dans le cas de la régression, ce résultat peut être obtenu en prenant simplemen
+t la moyenne des résultats des différents prédicteurs : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{y}=K^{-1}\sum_{1}^{K}\varphi(x_{k},\mathcal{L}_{k})=E_{\mathcal{L}}\varphi(x,\mathcal{L})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Un raisonement similaire peut être tenu pour le cas de la classification
+ mais celui-ci ne sera pas expliqué ici car il ne rentre pas dans le cadre
+ de ce travail.
+ Le problème principal du bagging est qu'il nécessite 
+\begin_inset Formula $k$
+\end_inset
+
+ sets d'apprentissage, ce qui est rarement possible en pratique.
+ Heureusement, il est possible de palier à ce problème grâce à une technique
+ de génération de sets d'apprentissage : le bootstrap.
+ 
+\end_layout
+
+\begin_layout Standard
+Celui-ci consiste en un échantillonage aléatoire (équiprobable) avec remise.
+ Les sets d'entraînements générés sont donc composés de 
+\begin_inset Formula $n$
+\end_inset
+
+ entrées sélectionnées de manière aléatoire parmi le set d'entraînement
+ de base.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -5244,8 +5415,8 @@ les hypothèses suffisantes les plus simples doivent être choisies
 
 \begin_layout Standard
 Dans une étude menée par Schapire, Freund, Bartlett et Lee, les performances
- d'AdaBoost ont été comparées aux performances du boosting, et plus particulière
-ment c'est un fait intéressant concernant AdaBoost qui a été à l'origine
+ d'AdaBoost ont été comparées aux performances du bagging, et plus particulièrem
+ent c'est un fait intéressant concernant AdaBoost qui a été à l'origine
  de cette recherche.
  En observant les graphiques de performances d'AdaBoost et du bagging entrainés
  avec le même type d'apprenant faible et sur le même jeu de données, il
@@ -5253,8 +5424,7 @@ ment c'est un fait intéressant concernant AdaBoost qui a été à l'origine
  d'Adaboost continuait de descendre en tendant vers une asymptote après
  que l'erreur sur le jeu d'entrainement était déjà nulle, ce qui n'a pas
  été observé pour le bagging et constitue un comportement à la fois particulier
- et avantageux.
- 
+ et avantageux 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BoostingMarginSchapire"
@@ -5262,13 +5432,14 @@ literal "false"
 
 \end_inset
 
+.
  Il était jusque là supposé que les méthodes de vote d'ensemble
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
 Décision basée sur l'aggrégation du vote de plusieurs modèles, comme dans
- AdaBoost ou dans le bagging.
+ le boosting.
 \end_layout
 
 \end_inset
@@ -5303,6 +5474,9 @@ e linéaire) et les résultats obtenus semblent pencher en sa faveur puisque
  les performances de l'algorithme combiné au boosting sont plutôt mauvaises.
  Cependant, l'autre étude évoquée dans cette section met en évidence le
  fait que la variance faible de l'algorithme ne serait pas en cause.
+ Le boosting permettrait dans certains cas de faire diminuer l'erreur de
+ test après que l'erreur d'entraînement soit déjà nulle, comme mentionné
+ plus haut.
  En plus du fait que AdaBoost a été testé avec succès sur des problèmes
  à faible variance, les chercheurs évoquent deux hypothèses qui expliqueraient
  pourquoi le boosting peut ne pas être performant dans certains cas 
@@ -5328,7 +5502,7 @@ Les erreurs d'entrainement des apprenants faibles deviennent trop élevées
 \end_layout
 
 \begin_layout Subsubsection
-Erreur
+Erreur naturelle
 \end_layout
 
 \begin_layout Standard
@@ -5340,7 +5514,15 @@ En suivant cette méthode nous pouvons réduire l'erreur à chaque nouveau
  il est possible de démontrer qu'il existe une erreur minimum due aux bruits
  des données, qui est donc inévitable.
  Adaboost est donc très sensible au bruit des données comme il est possible
- de la démontrer :
+ de le démontrer 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingRegressionDrucker"
+literal "false"
+
+\end_inset
+
+ :
 \end_layout
 
 \begin_layout Itemize
@@ -5484,13 +5666,13 @@ E[PE]=\sigma^{2}+E[ME]
 \begin_inset Newline newline
 \end_inset
 
-Ce qui prouve l'existence d'une erreur de prédiction minimum due au bruit
- et représentée par 
+Ce qui laisse supposer l'existence d'une erreur de prédiction minimum due
+ au bruit et représentée par 
 \begin_inset Formula $\sigma^{2}$
 \end_inset
 
 .
- (Drucker)
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -5498,14 +5680,22 @@ AdaBoost
 \end_layout
 
 \begin_layout Standard
-À l'origine, AdaBoost est un algorithme qui a été pensé pour la classification.
+À l'origine, AdaBoost est un algorithme qui a été pensé pour la classification
+ binaire.
  Son fonctionnement ne prévoyait pas l'estimation d'une valeur 
 \begin_inset Formula $\hat{y}$
 \end_inset
 
  en régression.
- L'algorithme est présenté par Freund et Schapire (citation) en 1997, et
- la différence principale avec les autres techniques de boosting, c'est
+ L'algorithme est présenté par Freund et Schapire 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "OnlineLearningBoostingFreund"
+literal "false"
+
+\end_inset
+
+, et la différence principale avec les autres techniques de boosting, c'est
  qu'il tient compte de l'erreur de chaque apprenant faible afin de tenter
  de les corriger lors de la création des prochains apprenants faibles.
  Cet algorithme a gagné énormément de popularité au cours des années en
@@ -5522,7 +5712,7 @@ bagging
  Il faut cependant noter que puisque AdaBoost, les résultats de chaque modèle
  influent la création du suivant, il est impossible d'entraîner les modèles
  de manière parallèle sur les différents coeurs d'un processeur ou d'un
- GPU
+ GPU (contrairement au bagging)
 \begin_inset Foot
 status open
 
@@ -5533,11 +5723,487 @@ Graphics Processing Unit, ou processeur graphique, souvent utilisé pour
 
 \end_inset
 
- (improving regressors with boosting techniques REF)
+
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingRegressionDrucker"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
-Il se repose sur trois idées principales : 
+AdaBoost suppose qu'un apprenant de base (apprenant faible) peut être utilisé
+ pour crée une hypothèse de base (hypothèse faible).
+ Cette hypothèse faible ne doit pas être particulièrement complexe ou efficace
+ sur le jeu de données, la seule supposition faite est qu'elle doit être
+ légèrement plus efficace qu'une sélection aléatoire de la classe finale.
+ Cette sélection aléatoire, puisque nous somme dans le cadre d'une classificatio
+n binaire, aura une précision 
+\begin_inset Formula $\epsilon_{t}=1/2$
+\end_inset
+
+.
+ Si 
+\begin_inset Formula $\gamma$
+\end_inset
+
+ est un nombre positif proche de 0, alors cette supposition appelée 
+\begin_inset Quotes eld
+\end_inset
+
+supposition de l'apprentissage faible
+\begin_inset Quotes erd
+\end_inset
+
+ peut être écrite comme : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\epsilon_{t}\leq\frac{1}{2}-\gamma
+\]
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Afin d'améliorer le précision d'AdaBoost, des apprenants faibles sont construits
+, et ceux-ci nécessitent un jeu de données afin d'être entraînés.
+ C'est ici qu'un autre problème se pose car si les apprenants faibles sont
+ tous entraînés sur le même jeu de données alors on peut supposer que ceux-ci
+ seront toujours très similaires et ne permettront pas d'obtenir de bons
+ résultats.
+ Il est donc nécessaire de modifier le jeu de données utilisé après chaque
+ itération de l'algorithme.
+ AdaBoost contourne cette barrière en construisant un nouveau jeu d'entraînement
+ à chaque itération en respectant une distribution 
+\begin_inset Formula $D_{t}$
+\end_inset
+
+ modifiée a chaque itération de l'algorithme, cela permet aux apprenants
+ de bases de produires des hypothèses de bases différentes et variées, ce
+ qui au final permet d'obtenir de biens meilleur résultats.
+ C'est d'ailleurs l'idée principale du boosting, choisir les jeux d'entraînement
+ de telle manière que l'on force l'apprenant faible à déduire une nouvelle
+ hypothèse faible.
+\end_layout
+
+\begin_layout Standard
+AdaBoost fonctionne de la manière suivante : 
+\end_layout
+
+\begin_layout Standard
+
+\lang french
+\begin_inset Float algorithm
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+Avec : 
+\begin_inset Formula $(x_{1},y_{1}),...,(x_{m},y_{m})$
+\end_inset
+
+ où 
+\begin_inset Formula $x_{i}\in\chi,y_{i}\in\{-1,+1\}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Init : 
+\begin_inset Formula $D_{1}(i)=1/m,i=1,...,m$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+For 
+\begin_inset Formula $t=1,...,T$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Entraînement d'un apprenant faible en utilisant 
+\begin_inset Formula $D_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Récupération de l'hypothèse faible de l'apprenant faible 
+\begin_inset Formula $h_{t}:\chi\rightarrow\{-1,+1\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Calcul de l'erreur pondérée : 
+\begin_inset Formula $\epsilon_{t}\doteq Pr_{i\sim D_{t}}[h_{t}(x_{i})\neq y_{i}]$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Calcul de l'importance : 
+\begin_inset Formula $\alpha_{t}=\frac{1}{2}ln\left(\frac{1-\epsilon_{t}}{\epsilon_{t}}\right)$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Mise à jour de la distribution 
+\begin_inset Formula $D_{t}$
+\end_inset
+
+ :
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Si 
+\begin_inset Formula $h_{t}(x_{i})=y_{i}$
+\end_inset
+
+ : 
+\begin_inset Formula $D_{t+1}(i)=\frac{D_{t}(i)}{Z_{t}}e^{-\alpha_{t}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Si 
+\begin_inset Formula $h_{t}(x_{i})\neq y_{i}$
+\end_inset
+
+ : 
+\begin_inset Formula $D_{t+1}(i)=\frac{D_{t}(i)}{Z_{t}}e^{\alpha_{t}}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+Où 
+\begin_inset Formula $Z_{t}$
+\end_inset
+
+ représente le facteur de normalisation qui permet de garder l'égalité 
+\begin_inset Formula $\sum_{i=1}^{m}D_{t+1}(i)=1$
+\end_inset
+
+ afin que 
+\begin_inset Formula $D_{t+1}$
+\end_inset
+
+ reste une distribution.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Hypothèse finale : 
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Formula 
+\[
+H(x)=sign\left(\sum_{t=1}^{T}\alpha_{t}h_{t}(x)\right)
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\lang french
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+
+\lang french
+AdaBoost 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "OnlineLearningBoostingFreund"
+literal "false"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cette version de l'algorithme est différente de celle qui sera utilisée
+ dans le cadre de ce travail puisqu'elle n'est pas prévue pour la régression
+ mais il est tout de même intéressant de comprendre les différentes étapes
+ de celui-ci car la logique reste très similaire entre les différentes versions
+ d'AdaBoost.
+ Premièrement, un jeu de données est sélectionné en suivant la distribution
+ 
+\begin_inset Formula $D_{t}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+Il est important de noter que le but de l'apprenant faible est simplement
+ de déterminer une hypothèse faible 
+\begin_inset Formula $h_{t}:\chi\rightarrow\{-1,+1\}$
+\end_inset
+
+ dépendante de la distribution 
+\begin_inset Formula $D_{t}$
+\end_inset
+
+.
+ À chaque itération cette hypothèse sera différente puisque 
+\begin_inset Formula $D_{t}\neq D_{t+1}$
+\end_inset
+
+.
+ La qualité de l'hypothèse est déterminée par le calcul de l'erreur pondérée
+ :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\epsilon_{t}\doteq Pr_{i\sim D_{t}}[h_{t}(x_{i})\neq y_{i}]=\sum_{i:h_{t}(x_{i})\neq y_{i}}D_{t}(i)
+\]
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cette équation indique deux choses intéressantes : 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\epsilon_{t}$
+\end_inset
+
+ représente la chance de se tromper dans la classification d'un élément
+ choisi de manière aléatoire selon la distribution 
+\begin_inset Formula $D_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+Puisque 
+\begin_inset Formula $D_{t}$
+\end_inset
+
+ est une fonction de distribution et que sa somme est égale à 1, cette chance
+ est représentée par la somme des poids 
+\begin_inset Formula $D_{t}(i)$
+\end_inset
+
+ des éléments mal classés.
+ 
+\end_layout
+
+\begin_layout Standard
+Ensuite, AdaBoost détermine l'importance 
+\begin_inset Formula $\alpha_{t}$
+\end_inset
+
+ associée à l'hypothèse 
+\begin_inset Formula $h_{t}$
+\end_inset
+
+, ce qui permet de donner plus ou moins d'importance à chaque hypothèse
+ dans la décision finale.
+ Plus une hypothèse est efficace (plus son erreur est faible) et plus 
+\begin_inset Formula $\alpha_{t}$
+\end_inset
+
+ est élevé ce qui lui donne plus d'importance.
+ Le cas inverse est aussi vrai, moins une hypothèse est efficace (plus elle
+ se rapproche des performances d'une sélection aléatoire de la réponse)
+ et plus l'importance de l'hypothèse sera faible.
+ La fonction d'importance dépend uniquement de l'erreur pondérée.
+ 
+\end_layout
+
+\begin_layout Standard
+Pour la prochaine étape, il est nécessaire de mettre à jour la distribution
+ 
+\begin_inset Formula $D_{t}$
+\end_inset
+
+ en fonction des performances de l'hypothèse 
+\begin_inset Formula $h_{t}$
+\end_inset
+
+ pour obtenir une distribution 
+\begin_inset Formula $D_{t+1}$
+\end_inset
+
+ qui permets une hypothèse 
+\begin_inset Formula $h_{t+1}$
+\end_inset
+
+ efficace sur les examples mal classés par l'hypothèse précédente.
+ L'idée principale ici est de donner plus d'importance aux éléments mal
+ classés par 
+\begin_inset Formula $h_{t}$
+\end_inset
+
+ et moins d'importance aux éléments classés correctement par 
+\begin_inset Formula $h_{t}$
+\end_inset
+
+.
+ Pour ce faire, l'équation suivante est utilisée : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+D_{t+1}(i)=\frac{D_{t}(i)exp(-\alpha_{t}y_{i}h_{t}(x_{i}))}{Z_{t}}
+\]
+
+\end_inset
+
+
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Qui peut être scindée en deux cas (si l'exemple 
+\begin_inset Formula $i$
+\end_inset
+
+ est correctement classé ou non) comme indiqué dans l'algorithme 3.
+ 
+\begin_inset Formula $Z_{t}$
+\end_inset
+
+ est le facteur de normalisation, c'est à dire que c'est un facteur qui
+ sert à maintenir l'équation 
+\begin_inset Formula $D_{t+1}=1$
+\end_inset
+
+.
+ De ce fait, il est facile de déduire celui-ci : 
+\begin_inset Formula $Z_{t}=\sum_{i=1}^{m}\sigma_{t+1}(i)$
+\end_inset
+
+ où 
+\begin_inset Formula $\sigma_{t+1}$
+\end_inset
+
+ représente : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\sigma_{t+1}(i)=D_{t}(i)exp(-\alpha_{t}y_{i}h_{t}(x_{i}))
+\]
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+ soit 
+\begin_inset Formula $D_{t+1}$
+\end_inset
+
+ avant d'être divisé par 
+\begin_inset Formula $Z_{t}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Une fois tous les apprenants faibles entraînés, AdaBoost les combinent en
+ un modèle final 
+\begin_inset Formula $H$
+\end_inset
+
+.
+ Ceci est simplement représenté par un vote de chaque apprenant de base,
+ pondéré par 
+\begin_inset Formula $\alpha_{t}$
+\end_inset
+
+.
+ Ce vote pondéré simple est possible car cet algorithme est utilisé dans
+ le cadre de la classification, et que les hypothèses sont représentées
+ par 
+\begin_inset Formula $h_{t}:\chi\rightarrow\{-1,+1\}$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+H(x)=sign\left(\sum_{t=1}^{T}\alpha_{t}h_{t}(x)\right)
+\]
+
+\end_inset
+
+
+\begin_inset Newline linebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Pour résumer, AdaBoost se repose sur trois idées principales : 
 \end_layout
 
 \begin_layout Itemize
@@ -5550,30 +6216,36 @@ AdaBoost combine un grand nombre d'apprenants faibles afin d'obtenir une
  puisque c'est potentiellement un très grand nombre d'entre eux qui seront
  utilisés.
  Ceci dit, le boosting est aussi possible avec des algorithmes plus puissants,
- le seul réél problème étant le temps de calcul.
+ le seul réél problème dans ce cas étant le temps de calcul et que les apprenant
+s de base soient plus efficaces qu'une sélection aléatoire (équiprobable)
+ de la réponse.
  
 \end_layout
 
 \begin_layout Itemize
 Tous les algorithmes entrainés n'ont pas le même poids lors de la prise
  de décision, en effet ceux qui sont le plus confiants quant à leur décisions
- seront plus impactant lors de la décision finale.
+ seront plus impactants lors de la décision finale.
  
 \end_layout
 
 \begin_layout Itemize
 Chaque apprenant faible est entraîné en prenant en compte les erreurs commises
  par les apprenants faibles précédents.
- 
+ Ceci est représenté par le calcul de la distribution 
+\begin_inset Formula $D_{t+1}$
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
 L'algorithme a été dévié dans plusieurs formes portant toutes des noms différent
 s, et parmis ces formes, certaines permettent de travailler avec des problèmes
  de régression.
- C'est notamment le cas de Adaboost.R2, présenté par Drucker (réf), qui sera
- l'algorithme utilisé dans ce travail.
- Celui-ci est présenté ci-dessous dans la section 3.4.3.
+ C'est notamment le cas de Adaboost.R2, présenté par Drucker, qui sera l'algorith
+me utilisé dans ce travail.
+ Celui-ci est présenté ci-dessous dans la section 3.4.6.
 \end_layout
 
 \begin_layout Subsubsection
@@ -5595,7 +6267,7 @@ Bibliographie
 LatexCommand bibtex
 btprint "btPrintAll"
 bibfiles "papers/Jabref/bibliography"
-options "bibtotoc,plain"
+options "bibtotoc"
 
 \end_inset
 
