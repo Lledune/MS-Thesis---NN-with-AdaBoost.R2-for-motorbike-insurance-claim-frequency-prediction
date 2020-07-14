@@ -9,7 +9,7 @@
 \usepackage{algorithm}
 \usepackage{algorithmic}
 \usepackage{titlesec}
-
+\usepackage{url}
 \setcounter{secnumdepth}{4}
 
 \titleformat{\paragraph}
@@ -105,7 +105,23 @@ Lucien Ledune
 
 \begin_layout Date
 16 april 2019
+\end_layout
+
+\begin_layout Date
 \begin_inset Newpage newpage
+\end_inset
+
+
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+pagenumbering{roman}
+\end_layout
+
 \end_inset
 
 
@@ -137,6 +153,24 @@ LatexCommand tableofcontents
 
 \begin_layout Standard
 \begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+ 
+\backslash
+clearpage
+\backslash
+pagenumbering{arabic}
+\end_layout
+
 \end_inset
 
 
@@ -1380,7 +1414,7 @@ La moyenne de l'échantillon
 \begin_inset Formula $\bar{X}$
 \end_inset
 
-converge vers le moyenne de la population 
+ converge vers le moyenne de la population 
 \begin_inset Formula $\mu$
 \end_inset
 
@@ -1522,7 +1556,15 @@ La loi de poisson fait partie de la famille des modèles à dispersion exponenti
 le (ED), une catégorie regroupant un grand nombre de lois statistiques connues
  comme la loi normale, gamma ou encore binomiale.
  Une variable aléatoire Y suit une dispersion exponentielle si sa fonction
- de distribution suit la forme suivante :
+ de distribution suit la forme suivante 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+ :
 \end_layout
 
 \begin_layout Standard
@@ -1727,7 +1769,15 @@ Voir chapitre 3
 Plusieurs méthodes peuvent être utilisées afin de procéder à la normalisation
  des données.
  Cependant nous ne décrirons que celle qui sera utilisée dans le cadre de
- ce travail : la normalisation Min Max.
+ ce travail : la normalisation Min Max 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+.
  
 \begin_inset Newline newline
 \end_inset
@@ -1785,6 +1835,7 @@ z_{ij} & =\frac{x_{ij}-min(x_{j})}{max(x_{j})-min(x_{j})}
 \end_inset
 
 Cette transformation sera appliquée aux variables OwnersAge et VehiculeAge.
+ 
 \end_layout
 
 \begin_layout Subsubsection
@@ -1877,12 +1928,6 @@ Algorithmes
 \end_layout
 
 \begin_layout Standard
-Dans cette section, les différents algorithmes utilisés lors des analyses
- seront présentés à des fins de compréhension du travail.
- ..............................
-\begin_inset Newline newline
-\end_inset
-
 Afin d'effectuer un travail de prédiction en matière de régression ou de
  classification, il est nécessaire d'avoir un outil puissant à disposition
  : l'apprentissage automatique ou 
@@ -1896,7 +1941,35 @@ machine learning
 .
  Il s'agit d'un ensemble de méthodes basées sur des outils statistiques
  permettant la création de modèles pouvant être utilisés pour la prédiction.
- (réf wiki)
+ 
+\end_layout
+
+\begin_layout Standard
+Dans cette section, les différents algorithmes utilisés lors des analyses
+ seront présentés à des fins de compréhension du travail.
+ Pour commencer, des explications seront données sur le fonctionement général
+ d'un modèle prédictif, et plus particulièrement dans le cas de la régression.
+ Les bases nécessaires pour comprendre comment évaluer un modèle afin de
+ déterminer la supériorité de l'un d'entre eux par rapport à d'autres seront
+ explorées afin de disposer du bagage théorique nécessaire pour analyser
+ les résultats obtenus dans le cadre de ce travail.
+ 
+\end_layout
+
+\begin_layout Standard
+Les deux algorithmes de bases que sont les modèles linéaires généralisés
+ et les réseaux de neurones artificiels seront introduit et leur fonctionement
+ expliqué.
+ Enfin, le boosting sera également étudié et plus particulièrement le 
+\begin_inset Quotes eld
+\end_inset
+
+meta-algorithme
+\begin_inset Quotes erd
+\end_inset
+
+ qui nous intéresse ici : AdaBoost.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -2086,10 +2159,17 @@ Le critère peut être défini comme
 \end_inset
 
  mesurant la différence entre les prédictions et la réalité d'une certaine
- manière.
- (https://en.wikipedia.org/wiki/Loss_function) Une fonction de perte intuitive
- est donnée en guise d'example par la racine de l'erreur quadratique moyenne
- (RMSE).
+ manière 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Wikipedia2020,StatActu2"
+literal "false"
+
+\end_inset
+
+.
+ Une fonction de perte intuitive est donnée en guise d'example par la racine
+ de l'erreur quadratique moyenne (RMSE).
 \end_layout
 
 \begin_layout Standard
@@ -2117,7 +2197,7 @@ Le RMSE est sûrement un des critères les plus utilisés aujourd'hui (y compris
  exponentielle.
  Elle peut être vue comme une forme de distance (d'où son utilisation en
  temps que critère).
- Aussi : (wiki deviance)
+ Aussi : 
 \end_layout
 
 \begin_layout Itemize
@@ -2223,7 +2303,15 @@ La déviance non mise à l'échelle peut ensuite être obtenue en multipliant
  (voir section 2.3.3).
  La dérivation de cette déviance non mise à l'échelle appliquée à la loi
  de poisson résulte en la déviance de Poisson non-mise à l'échelle, c'est
- ce critère qui sera utilisé pour l'apprentissage de nos modèles.
+ ce critère qui sera utilisé pour l'apprentissage de nos modèles 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -2308,7 +2396,15 @@ Principe consistant à utiliser le moins de variables explicatives possible
 
  du modèle est importante.
  Ces deux critères permettent de prendre en compte le nombre de variables
- explicatives dans le calcul de la qualité de modèle.
+ explicatives dans le calcul de la qualité de modèle 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2,aicbic"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
@@ -2396,7 +2492,15 @@ Le principe de base est de diviser le jeu de données en
  Un modèle sera ensuite entrainé pour chaque ensemble en utilisant cet ensemble
  comme jeu de test et l'ensemble des autres ensembles comme jeu d'entraînement.
  Le résultat de la métrique est alors la moyenne des résultats des différents
- ensembles.
+ ensembles 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2,crossval"
+literal "false"
+
+\end_inset
+
+.
  Plus formellement :
 \end_layout
 
@@ -4219,7 +4323,15 @@ signaux
 \end_inset
 
 , et lorsqu'un neurone reçoit un certain nombre de signaux en même temps,
- celui-ci va déclencher son propre signal.
+ celui-ci va déclencher son propre signal 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4285,7 +4397,15 @@ d'activation
  positive et 0 (ou -1) si l'entrée est négative (bien que cette fonction
  ne sera pas utilisée dans nos algorithmes car non différentiable, ce qui
  est un problème pour la calibration, voir sections suivantes), c'est d'ailleurs
- cette fonction qui a été utilisée en premier pour les perceptrons.
+ cette fonction qui a été utilisée en premier pour les perceptrons 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Geron2017"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Standard
@@ -4471,7 +4591,15 @@ Lorsqu'il est question d'apprentissage automatique, cela signifie en fait
  qui auraient rendu la prédiction correcte.
  Ce procédé sera expliqué plus en détail dans la section suivante, mais
  nous pouvons déjà observer l'équation de mise à jour des poids d'un perceptron
- simple :
+ simple 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Geron2017"
+literal "false"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
@@ -4558,8 +4686,15 @@ Perceptrons
  Suite à ces découvertes la recherche dans le domaine va être mise de côté.
  Cependant il est plus tard apparu que ces faiblesses pouvaient pour la
  plupart (y compris le problème XOR) être éliminées en empilant plusieurs
- perceptrons en couches de neurones artificiels.
- (livre scikit)
+ perceptrons en couches de neurones artificiels 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Geron2017"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsubsection
@@ -4707,8 +4842,7 @@ Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
 
 Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
  son architecture est plus complexe et nécessite certains changements dans
- les notations utilisées, aussi https://stats.stackexchange.com/questions/154879/a
--list-of-cost-functions-used-in-neural-networks-alongside-applications :
+ les notations utilisées, aussi :
 \end_layout
 
 \begin_layout Itemize
@@ -4850,7 +4984,15 @@ backpropagation
 \end_inset
 
  ou rétropropagation, algorithme ayant permi la reprise de la recherche
- dans le milieu lors de son apparition.
+ dans le milieu lors de son apparition 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2,Geron2017"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph
@@ -5141,7 +5283,15 @@ end{algorithmic}
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Rétropropagation
+Rétropropagation 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -5382,297 +5532,6 @@ Boosting adaptatif.
 
 , il en existe plusieurs versions à la fois pour la classification et la
  régression et c'est ce méta-algorithme qui sera utilisé.
-\end_layout
-
-\begin_layout Subsubsection
-Rasoir d'Ockham
-\end_layout
-
-\begin_layout Standard
-Lorsqu'un modèle est entrainé, il est important que celui-ci soit assez
- général pour avoir de bonnes performances sur le jeu d'entraînement, mais
- aussi et surtout sur le jeu de test qui sert à évaluer les performances
- réelles de l'algorithme.
- Le principe de rasoir d'Ockham est un principe qui vient de la philosophie,
- mais dont le raisonement a été largement adopté dans la communauté de recherche
- sur l'apprentissage automatique.
- Il soutient que 
-\begin_inset Quotes eld
-\end_inset
-
-les hypothèses suffisantes les plus simples doivent être choisies
-\begin_inset Quotes erd
-\end_inset
-
- (réf wiki).
- En d'autres termes, il s'agit de construire un modèle avec assez de paramètres
- pour être efficace mais assez simple pour pouvoir être généralisable.
- Ce principe a été largement vérifié dans la plupart des cas, mais il est
- intéressant de noter que le boosting peut constituer une exception à cette
- règle, comme nous allons le voir dans cette section.
- (boosting margin ref).
-\end_layout
-
-\begin_layout Standard
-Dans une étude menée par Schapire, Freund, Bartlett et Lee, les performances
- d'AdaBoost ont été comparées aux performances du bagging, et plus particulièrem
-ent c'est un fait intéressant concernant AdaBoost qui a été à l'origine
- de cette recherche.
- En observant les graphiques de performances d'AdaBoost et du bagging entrainés
- avec le même type d'apprenant faible et sur le même jeu de données, il
- est possible de voir que dans certains cas, l'erreur sur le jeu de test
- d'Adaboost continuait de descendre en tendant vers une asymptote après
- que l'erreur sur le jeu d'entrainement était déjà nulle, ce qui n'a pas
- été observé pour le bagging et constitue un comportement à la fois particulier
- et avantageux 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "BoostingMarginSchapire"
-literal "false"
-
-\end_inset
-
-.
- Il était jusque là supposé que les méthodes de vote d'ensemble
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Décision basée sur l'aggrégation du vote de plusieurs modèles, comme dans
- le boosting.
-\end_layout
-
-\end_inset
-
- fonctionnaient en réduisant la variance des algorithmes, et que ces méthodes
- étaient donc plus efficaces lorsque la variance de la prédiction était
- élevée 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "breiman1996bias"
-literal "false"
-
-\end_inset
-
-.
- Cette explication, qui peut être utilisée comme argument en parlant du
- bagging (qui est connu pour fonctionner particulièrement bien lorsque la
- variance est grande), n'est cependant pas applicable dans le cas du boosting.
- En effet celui-ci ne recquiert pas que la variance soit élevée afin de
- délivrer de bonnes performances.
- 
-\end_layout
-
-\begin_layout Standard
-TODO : Faire graphique learning curves pour montrer + conclusions.
-\end_layout
-
-\begin_layout Standard
-Dans son rapport de recherche, et pour prouver son hypothèse, Breiman applique
- le boosting à un algorithme connu pour sa variance faible (Analyse discriminant
-e linéaire) et les résultats obtenus semblent pencher en sa faveur puisque
- les performances de l'algorithme combiné au boosting sont plutôt mauvaises.
- Cependant, l'autre étude évoquée dans cette section met en évidence le
- fait que la variance faible de l'algorithme ne serait pas en cause.
- Le boosting permettrait dans certains cas de faire diminuer l'erreur de
- test après que l'erreur d'entraînement soit déjà nulle, comme mentionné
- plus haut.
- En plus du fait que AdaBoost a été testé avec succès sur des problèmes
- à faible variance, les chercheurs évoquent deux hypothèses qui expliqueraient
- pourquoi le boosting peut ne pas être performant dans certains cas 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "BoostingMarginSchapire"
-literal "false"
-
-\end_inset
-
-.
- 
-\end_layout
-
-\begin_layout Enumerate
-Trop peu de données sont mises à disposition de l'algorithme pour l'apprentissag
-e.
-\end_layout
-
-\begin_layout Enumerate
-Les erreurs d'entrainement des apprenants faibles deviennent trop élevées
- rapidement (Suite aux rééchantillonages).
-\end_layout
-
-\begin_layout Subsubsection
-Erreur naturelle
-\end_layout
-
-\begin_layout Standard
-En suivant cette méthode nous pouvons réduire l'erreur à chaque nouveau
- prédicteur ajouté.
- Cependant il serait naïf de penser que l'on peut utiliser cette méthode
- infiniment afin d'approcher une erreur nulle, d'abord à cause d'un possible
- overfit empêchant la généralisation sur le jeu de test, mais surtout car
- il est possible de démontrer qu'il existe une erreur minimum due aux bruits
- des données, qui est donc inévitable.
- Adaboost est donc très sensible au bruit des données comme il est possible
- de le démontrer 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "BoostingRegressionDrucker"
-literal "false"
-
-\end_inset
-
- :
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $N_{1}$
-\end_inset
-
-: le nombre d'observations du jeu d'entraînement.
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $N_{2}$
-\end_inset
-
- : le nombre d'observations du jeu de test.
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $y_{i}$
-\end_inset
-
- : la valeur prise dans les données pour l'observation 
-\begin_inset Formula $i$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $y_{i}^{(t)}$
-\end_inset
-
- : la valeur réelle exacte pour l'observation 
-\begin_inset Formula $i$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $y_{i}^{(p)}(x_{i})$
-\end_inset
-
- : la prédiction pour l'observation 
-\begin_inset Formula $i$
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Standard
-Définissons l'erreur de prédiction (PE) et l'erreur d'échantillonnage du
- modèle (ME) :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-PE=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}-y_{i}^{(p)}(x_{i})]^{2}
-\]
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-ME=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}^{(t)}-y_{i}^{(p)}(x_{i})]^{2}
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Si le bruit peut être considéré comme additif alors :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-y_{i}=y_{i}^{(t)}+n_{i}
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
- où 
-\begin_inset Formula $n_{i}$
-\end_inset
-
- est le bruit de l'observation 
-\begin_inset Formula $i$
-\end_inset
-
-.
- De plus, si nous ajoutons que :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-E[n]=0
-\]
-
-\end_inset
-
-
-\begin_inset Formula 
-\[
-E[n_{i}n_{j}]=\delta_{ij}\sigma^{2}
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Il est possible d'obtenir l'espérance par rapport à 
-\begin_inset Formula $(y,x)$
-\end_inset
-
- pour terminer avec :
-\end_layout
-
-\begin_layout Standard
-\begin_inset Formula 
-\[
-E[PE]=\sigma^{2}+E[ME]
-\]
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-Ce qui laisse supposer l'existence d'une erreur de prédiction minimum due
- au bruit et représentée par 
-\begin_inset Formula $\sigma^{2}$
-\end_inset
-
-.
- 
 \end_layout
 
 \begin_layout Subsubsection
@@ -5997,7 +5856,15 @@ Il est important de noter que le but de l'apprenant faible est simplement
 
 .
  La qualité de l'hypothèse est déterminée par le calcul de l'erreur pondérée
- :
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "schapire2013boosting"
+literal "false"
+
+\end_inset
+
+:
 \end_layout
 
 \begin_layout Standard
@@ -6120,7 +5987,15 @@ Qui peut être scindée en deux cas (si l'exemple
 \begin_inset Formula $i$
 \end_inset
 
- est correctement classé ou non) comme indiqué dans l'algorithme 3.
+ est correctement classé ou non) comme indiqué dans l'algorithme 3 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "schapire2013boosting"
+literal "false"
+
+\end_inset
+
+.
  
 \begin_inset Formula $Z_{t}$
 \end_inset
@@ -6166,7 +6041,7 @@ Qui peut être scindée en deux cas (si l'exemple
 \end_layout
 
 \begin_layout Standard
-Une fois tous les apprenants faibles entraînés, AdaBoost les combinent en
+Une fois tous les apprenants faibles entraînés, AdaBoost les combine en
  un modèle final 
 \begin_inset Formula $H$
 \end_inset
@@ -6256,6 +6131,304 @@ AdaBoost.R2
 AdaBoost.R2 est un algorithme présenté par Drucker (réf) et permettant d'applique
 r l'algorithme d'AdaBoost à un problème de régression.
  
+\end_layout
+
+\begin_layout Subsubsection
+Rasoir d'Ockham
+\end_layout
+
+\begin_layout Standard
+Lorsqu'un modèle est entrainé, il est important que celui-ci soit assez
+ général pour avoir de bonnes performances sur le jeu d'entraînement, mais
+ aussi et surtout sur le jeu de test qui sert à évaluer les performances
+ réelles de l'algorithme.
+ Le principe de rasoir d'Ockham est un principe qui vient de la philosophie,
+ mais dont le raisonement a été largement adopté dans la communauté de recherche
+ sur l'apprentissage automatique.
+ Il soutient que 
+\begin_inset Quotes eld
+\end_inset
+
+les hypothèses suffisantes les plus simples doivent être choisies
+\begin_inset Quotes erd
+\end_inset
+
+ (réf wiki).
+ En d'autres termes, il s'agit de construire un modèle avec assez de paramètres
+ pour être efficace mais assez simple pour pouvoir être généralisable.
+ Ce principe a été largement vérifié dans la plupart des cas, mais il est
+ intéressant de noter que le boosting peut constituer une exception à cette
+ règle, comme nous allons le voir dans cette section.
+ (boosting margin ref).
+\end_layout
+
+\begin_layout Standard
+Dans une étude menée par Schapire, Freund, Bartlett et Lee, les performances
+ d'AdaBoost ont été comparées aux performances du bagging, et plus particulièrem
+ent c'est un fait intéressant concernant AdaBoost qui a été à l'origine
+ de cette recherche.
+ En observant les graphiques de performances d'AdaBoost et du bagging entrainés
+ avec le même type d'apprenant faible et sur le même jeu de données, il
+ est possible de voir que dans certains cas, l'erreur sur le jeu de test
+ d'Adaboost continuait de descendre en tendant vers une asymptote après
+ que l'erreur sur le jeu d'entrainement était déjà nulle, ce qui n'a pas
+ été observé pour le bagging et constitue un comportement à la fois particulier
+ et avantageux 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingMarginSchapire"
+literal "false"
+
+\end_inset
+
+.
+ Il était jusque là supposé que les méthodes de vote d'ensemble
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Décision basée sur l'aggrégation du vote de plusieurs modèles, comme dans
+ le boosting.
+\end_layout
+
+\end_inset
+
+ fonctionnaient en réduisant la variance des algorithmes, et que ces méthodes
+ étaient donc plus efficaces lorsque la variance de la prédiction était
+ élevée 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "breiman1996bias"
+literal "false"
+
+\end_inset
+
+.
+ Cette explication, qui peut être utilisée comme argument en parlant du
+ bagging (qui est connu pour fonctionner particulièrement bien lorsque la
+ variance est grande), n'est cependant pas applicable dans le cas du boosting.
+ En effet celui-ci ne recquiert pas que la variance soit élevée afin de
+ délivrer de bonnes performances.
+ 
+\end_layout
+
+\begin_layout Standard
+TODO : Faire graphique learning curves pour montrer + conclusions.
+\end_layout
+
+\begin_layout Standard
+Dans son rapport de recherche, et pour prouver son hypothèse, Breiman applique
+ le boosting à un algorithme connu pour sa variance faible (Analyse discriminant
+e linéaire) et les résultats obtenus semblent pencher en sa faveur puisque
+ les performances de l'algorithme combiné au boosting sont plutôt mauvaises.
+ Cependant, l'autre étude évoquée dans cette section met en évidence le
+ fait que la variance faible de l'algorithme ne serait pas en cause.
+ Le boosting permettrait dans certains cas de faire diminuer l'erreur de
+ test après que l'erreur d'entraînement soit déjà nulle, comme mentionné
+ plus haut.
+ En plus du fait que AdaBoost a été testé avec succès sur des problèmes
+ à faible variance, les chercheurs évoquent deux hypothèses qui expliqueraient
+ pourquoi le boosting peut ne pas être performant dans certains cas 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingMarginSchapire"
+literal "false"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Enumerate
+Trop peu de données sont mises à disposition de l'algorithme pour l'apprentissag
+e.
+\end_layout
+
+\begin_layout Enumerate
+Les erreurs d'entrainement des apprenants faibles deviennent trop élevées
+ rapidement (Suite aux rééchantillonages).
+\end_layout
+
+\begin_layout Subsubsection
+Erreur naturelle
+\end_layout
+
+\begin_layout Standard
+En suivant cette méthode nous pouvons réduire l'erreur à chaque nouveau
+ prédicteur ajouté.
+ Cependant il serait naïf de penser que l'on peut utiliser cette méthode
+ infiniment afin d'approcher une erreur nulle, d'abord à cause d'un possible
+ overfit empêchant la généralisation sur le jeu de test, mais surtout car
+ il est possible de démontrer qu'il existe une erreur minimum due aux bruits
+ des données, qui est donc inévitable.
+ Adaboost est donc très sensible au bruit des données comme il est possible
+ de le démontrer 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingRegressionDrucker"
+literal "false"
+
+\end_inset
+
+ :
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N_{1}$
+\end_inset
+
+: le nombre d'observations du jeu d'entraînement.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $N_{2}$
+\end_inset
+
+ : le nombre d'observations du jeu de test.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ : la valeur prise dans les données pour l'observation 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y_{i}^{(t)}$
+\end_inset
+
+ : la valeur réelle exacte pour l'observation 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $y_{i}^{(p)}(x_{i})$
+\end_inset
+
+ : la prédiction pour l'observation 
+\begin_inset Formula $i$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Définissons l'erreur de prédiction (PE) et l'erreur d'échantillonnage du
+ modèle (ME) :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+PE=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}-y_{i}^{(p)}(x_{i})]^{2}
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+ME=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}^{(t)}-y_{i}^{(p)}(x_{i})]^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Si le bruit peut être considéré comme additif alors :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+y_{i}=y_{i}^{(t)}+n_{i}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+ où 
+\begin_inset Formula $n_{i}$
+\end_inset
+
+ est le bruit de l'observation 
+\begin_inset Formula $i$
+\end_inset
+
+.
+ De plus, si nous ajoutons que :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E[n]=0
+\]
+
+\end_inset
+
+
+\begin_inset Formula 
+\[
+E[n_{i}n_{j}]=\delta_{ij}\sigma^{2}
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Il est possible d'obtenir l'espérance par rapport à 
+\begin_inset Formula $(y,x)$
+\end_inset
+
+ pour terminer avec :
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+E[PE]=\sigma^{2}+E[ME]
+\]
+
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Ce qui laisse supposer l'existence d'une erreur de prédiction minimum due
+ au bruit et représentée par 
+\begin_inset Formula $\sigma^{2}$
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section
