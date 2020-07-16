@@ -175,4 +175,18 @@
   year         = {2020},
 }
 
+@Article{shrestha2006experiments,
+  author    = {Shrestha, Durga L and Solomatine, Dimitri P},
+  journal   = {Neural computation},
+  title     = {Experiments with AdaBoost. RT, an improved boosting scheme for regression},
+  year      = {2006},
+  number    = {7},
+  pages     = {1678--1710},
+  volume    = {18},
+  publisher = {MIT Press},
+}
+
+@Article{,
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

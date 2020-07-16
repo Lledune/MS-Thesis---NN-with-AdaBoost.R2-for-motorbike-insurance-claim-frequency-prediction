@@ -211,7 +211,7 @@ begin{center}
 \backslash
 large {
 \backslash
-bf Application d'AdaBoost aux réseaux de neurones }}
+bf Application d'AdaBoost aux réseaux de neurones dans un cas de régression}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -314,7 +314,7 @@ Membres du jury:                             & & Mémoire présenté en vue
 Prof.
  Donatien Hainaut {
 \backslash
-it Promoteur}                & & en sciences des données  
+it (Promoteur)}                & & en sciences des données  
 \backslash
 
 \backslash
@@ -330,7 +330,7 @@ it Promoteur}                & & en sciences des données
 Prof.
  Johan Segers {
 \backslash
-it Lecteur}                                
+it (Lecteur)}                                
 \end_layout
 
 \begin_layout Plain Layout
@@ -489,22 +489,6 @@ frontmatter
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-setcounter{chapter}{1}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section*
 Preface.
 \end_layout
@@ -546,7 +530,7 @@ mainmatter
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Chapter
 Introduction
 \end_layout
 
@@ -624,11 +608,11 @@ La plupart de ces algorithmes sont en fait assez peu récents mais étaient
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Chapter
 Dataset
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Présentation des données
 \end_layout
 
@@ -991,7 +975,7 @@ Gotland (Grande île).
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Analyse exploratoire
 \end_layout
 
@@ -1741,7 +1725,7 @@ e pour plusieurs sinistres, la variable contient la somme du coût de tous
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Assurances
 \end_layout
 
@@ -1752,7 +1736,7 @@ Dans cette sous-section seront expliquées les particularités de l'analyse
  
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Principe
 \end_layout
 
@@ -1798,7 +1782,7 @@ Dans le cadre de l'assurance, les variables explicatives sont aussi appelées
  cours de ce travail.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Ratio
 \end_layout
 
@@ -1849,7 +1833,7 @@ Il existe différents ratios mais ici ne sera présenté que celui utilisé
  modèles.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Distribution du ratio
 \end_layout
 
@@ -1989,7 +1973,7 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Preprocessing
 \end_layout
 
@@ -2001,7 +1985,7 @@ Le preprocessing des données est une étape très importante lorsque nous
  Dans ce travail, plusieurs méthodes de preprocessing ont été utilisées.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Variables binaires (Dummy variables)
 \end_layout
 
@@ -2104,7 +2088,7 @@ Classification And REgression Tools : Package de machine learning pour R.
  catégories appartenant à une variable catégorielle.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Normalisation
 \end_layout
 
@@ -2208,7 +2192,7 @@ Cette transformation sera appliquée aux variables OwnersAge et VehiculeAge.
  
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Outliers
 \end_layout
 
@@ -2256,7 +2240,7 @@ La suppression de trop d'information peut cependant nuire au modèle, les
  données extrêmes mais non-aberantes seront donc conservées.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Durée de contrat
 \end_layout
 
@@ -2293,7 +2277,7 @@ Pour le bon fonctionement du modèle, certaines autres données ont du être
 
 \end_layout
 
-\begin_layout Section
+\begin_layout Chapter
 Algorithmes
 \end_layout
 
@@ -2342,11 +2326,11 @@ meta-algorithme
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Explication d'un modèle
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Définitions et apprentissage
 \end_layout
 
@@ -2498,7 +2482,7 @@ apprendre
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Évaluation et fonctions de perte
 \end_layout
 
@@ -2529,15 +2513,7 @@ Le critère peut être défini comme
 \end_inset
 
  mesurant la différence entre les prédictions et la réalité d'une certaine
- manière 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Wikipedia2020,StatActu2"
-literal "false"
-
-\end_inset
-
-.
+ manière.
  Une fonction de perte intuitive est donnée en guise d'example par la racine
  de l'erreur quadratique moyenne (RMSE).
 \end_layout
@@ -2557,7 +2533,15 @@ RMSE(\theta,\hat{\theta})=\sqrt{MSE(\theta,\hat{\theta})}=\sqrt{E((\hat{\theta}-
 Le RMSE est sûrement un des critères les plus utilisés aujourd'hui (y compris
  pour les réseaux de neurones), cependant utiliser celui-ci reviendrait
  à considérer le ratio de la fréquence des réclamations comme étant distribué
- selon une loi gaussienne.
+ selon une loi gaussienne 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+.
  Les résultats s'en trouvent alors biaisés car les propriétés statistiques
  de la variable expliquée ne sont pas prises en compte.
  Afin de palier à ce problème, un autre critère statistique sera utilisé
@@ -2716,7 +2700,7 @@ D(y_{i},\hat{y}_{i})=2v_{i}\hat{y_{i},}\;\:\forall y_{i}=0
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Overfit, AIC et BIC
 \end_layout
 
@@ -2824,7 +2808,7 @@ Bayesian Information Criterion
 (Où N est le nombre d'observations dans l'échantillon)
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Validation croisée (K-fold)
 \end_layout
 
@@ -3220,11 +3204,11 @@ ent/test.
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 GLM : modèle linéaire généralisé
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Les bases du GLM
 \end_layout
 
@@ -3319,13 +3303,21 @@ La fonction de variance :
 Ces composants seront décrit plus précisemment plus loin dans ce chapitre.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Hypothèses
 \end_layout
 
 \begin_layout Standard
 Afin que les raisonements à suivre restent corrects, il est nécessaire de
- faire 3 hypothèses pour que nos modèles statistiques restent valides.
+ faire 3 hypothèses pour que nos modèles statistiques restent valides 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph*
@@ -3422,7 +3414,7 @@ Les hypothèses 1 et 2 ont pour conséquence que les coûts des sinistres sont
  de temps différent.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Modèles à dispersion exponentielle (EDM)
 \end_layout
 
@@ -3430,7 +3422,15 @@ Modèles à dispersion exponentielle (EDM)
 Les modèles à dispersion exponentielles font parties des GLMs, et généralisent
  la distribution normale utilisée dans les modèles linéaires.
  En utilisant les hypothèses ci-dessus, nous pouvons déterminer la distribution
- de probabilité d'un EDM.
+ de probabilité d'un EDM 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -3502,8 +3502,16 @@ Dans notre cas, nous nous occupons de la fréquence des sinistres.
 \end_inset
 
 .
- Beard, Pentikäinen et Pesonen (TODO: biblio des 3 mecs la) montrent que
- ce processus statistique suit une loi de poisson.
+ Beard, Pentikäinen et Pesonen montrent que ce processus statistique suit
+ une loi de poisson 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "beard1977risk"
+literal "false"
+
+\end_inset
+
+.
  Si 
 \begin_inset Formula $X_{i}$
 \end_inset
@@ -3540,7 +3548,15 @@ Si nous nous intéressons maintenant à la distribution du ratio
 \begin_inset Formula $Y_{i}=X_{i}/w_{i}$
 \end_inset
 
- nous tombons également sur une distribution de Poisson
+ nous tombons également sur une distribution de Poisson 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+
 \begin_inset Foot
 status open
 
@@ -3603,7 +3619,7 @@ Qui est la une forme de la distribution de probabilité des EDM vue plus
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 La fonction de lien 
 \end_layout
 
@@ -3630,7 +3646,15 @@ Dans ce travail, nous avons jusqu'ici considéré que les données étaient
  lorsque nous travaillons dans des logiciels tels que SAS, R, ou encore
  Python afin de gérer et représenter les données.
  Il existe cependant une autre manière de représenter les données qui s'avère
- très utile pour certaines démonstrations : la forme de tableau.
+ très utile pour certaines démonstrations : la forme de tableau 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -4455,10 +4479,18 @@ g(\mu_{i})=\eta_{i}=log(\mu_{i})
 
 \begin_layout Standard
 La fonction de lien est donc le logarithme dans le cas des modèles multiplicatif
-s, bien souvent utilisés dans les problèmes d'assurances.
+s, bien souvent utilisés dans les problèmes d'assurances 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Estimation des paramètres 
 \begin_inset Formula $\beta$
 \end_inset
@@ -4563,10 +4595,18 @@ La résolution de ce système d'équation doit se faire de manière numérique
 \begin_inset Formula $\beta$
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010,StatActu1,StatActu2"
+literal "false"
+
+\end_inset
+
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Modélisation de Poisson
 \end_layout
 
@@ -4576,7 +4616,7 @@ Nous allons maintenant discuter du cas où
 \end_inset
 
  suit une loi de poisson, ce qui est le cas pour notre base de données.
- Supposons : (https://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf)
+ Supposons : 
 \end_layout
 
 \begin_layout Standard
@@ -4659,7 +4699,7 @@ g(\mu_{i})=log(\mu_{i})
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Réseaux de neurones
 \end_layout
 
@@ -4732,7 +4772,7 @@ Schéma d'un neurone biologique.
 
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Perceptron
 \end_layout
 
@@ -5059,7 +5099,7 @@ literal "false"
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Perceptron multicouche
 \end_layout
 
@@ -5677,11 +5717,11 @@ TODO : lequel sera utilisé.
 
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 Boosting
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Bagging
 \end_layout
 
@@ -5802,7 +5842,7 @@ Celui-ci consiste en un échantillonage aléatoire (équiprobable) avec remise.
  
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Boosting
 \end_layout
 
@@ -5896,7 +5936,7 @@ Boosting adaptatif.
  régression et c'est ce méta-algorithme qui sera utilisé.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 AdaBoost
 \end_layout
 
@@ -6479,7 +6519,7 @@ me utilisé dans ce travail.
  Celui-ci est présenté ci-dessous dans la section 3.4.6.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 AdaBoost.R2
 \end_layout
 
@@ -6669,7 +6709,7 @@ Hypothèse finale
 \begin_layout Plain Layout
 \begin_inset Formula 
 \[
-h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}log\left(\frac{1}{\beta_{t}}\right)\right\} 
+h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}\sum_{t}log\left(\frac{1}{\beta_{t}}\right)\right\} 
 \]
 
 \end_inset
@@ -6746,7 +6786,7 @@ Aggrégation des hypothèses faibles en une hypothèse forte pour la décision
 \begin_layout Standard
 \begin_inset Formula 
 \[
-h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}log\left(\frac{1}{\beta_{t}}\right)\right\} 
+h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}\sum_{t}log\left(\frac{1}{\beta_{t}}\right)\right\} 
 \]
 
 \end_inset
@@ -6804,7 +6844,7 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
 \end_inset
 
  associée au premier 
-\begin_inset Formula $log(\frac{1}{\beta_{t}})$
+\begin_inset Formula $t$
 \end_inset
 
  qui satisfait l'inégalité sera considéré comme la réponse finale renvoyée
@@ -6816,8 +6856,8 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
 
  étaient égaux (chaque hypothèse disposant de la même importance) alors
  la réponse finale correspondrait à la médiane simple des prédictions.
- Une grande différence entre AdaBoost et AdaBoost peut cependant être mentionnée
- : Dans AdaBoost, 
+ Une grande différence entre AdaBoost et AdaBoost.R2 peut cependant être
+ mentionnée : Dans AdaBoost, 
 \begin_inset Formula $T$
 \end_inset
 
@@ -6834,7 +6874,7 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
 .
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Rasoir d'Ockham
 \end_layout
 
@@ -6951,7 +6991,7 @@ Les erreurs d'entrainement des apprenants faibles deviennent trop élevées
  rapidement (Suite aux rééchantillonages).
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Erreur naturelle
 \end_layout
 
@@ -7122,18 +7162,6 @@ Ce qui laisse supposer l'existence d'une erreur de prédiction minimum due
 \end_inset
 
 .
- 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-Bibliographie
 \end_layout
 
 \begin_layout Standard

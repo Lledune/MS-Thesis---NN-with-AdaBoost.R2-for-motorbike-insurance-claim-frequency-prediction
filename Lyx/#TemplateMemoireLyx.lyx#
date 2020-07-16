@@ -40,7 +40,7 @@
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
-\language french
+\language english
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -65,7 +65,7 @@
 \spacing single
 \use_hyperref false
 \papersize a4paper
-\use_geometry false
+\use_geometry true
 \use_package amsmath 1
 \use_package amssymb 1
 \use_package cancel 1
@@ -92,13 +92,17 @@
 \shortcut idx
 \color #008000
 \end_index
+\leftmargin 2.5cm
+\topmargin 4cm
+\rightmargin 2.5cm
+\bottommargin 4cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
 \is_math_indent 0
 \math_numbering_side default
-\quotes_style swiss
+\quotes_style english
 \dynamic_quotes 0
 \papercolumns 1
 \papersides 2
@@ -207,7 +211,7 @@ begin{center}
 \backslash
 large {
 \backslash
-bf Institutional Asset Liability Management.}}
+bf Application d'AdaBoost aux réseaux de neurones dans un cas de régression}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -293,43 +297,40 @@ Membres du jury:                             & & Mémoire présenté en vue
 
 \begin_layout Plain Layout
 
-                                             & & l'obtention du mastère
-  
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Prof.
- XXXXXXX {
-\backslash
-it Promoteur}                & & en sciences actuarielles  
-\backslash
-
-\backslash
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\begin_layout Plain Layout
-
-Prof.
- XXXXXXX                                & & (orientation sciences actuarielles)
+                                             & & l'obtention du master 
  
 \backslash
 
 \backslash
 
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Prof.
+ Donatien Hainaut {
+\backslash
+it (Promoteur)}                & & en sciences des données  
+\backslash
+
+\backslash
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+Prof.
+ Johan Segers {
+\backslash
+it (Lecteur)}                                
 \end_layout
 
 \begin_layout Plain Layout
@@ -365,7 +366,7 @@ Prof.
 
 \begin_layout Plain Layout
 
-                                             & & XXXXXXXXXXXXXXX
+                                             & & Lucien Ledune
 \end_layout
 
 \begin_layout Plain Layout
@@ -411,7 +412,7 @@ footnotesize Louvain-La-Neuve
 
 \begin_layout Plain Layout
 
- Juin 2017}
+ Juillet 2020}
 \end_layout
 
 \begin_layout Plain Layout
@@ -488,22 +489,6 @@ frontmatter
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
-
-\backslash
-setcounter{chapter}{1}
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section*
 Preface.
 \end_layout
@@ -545,15 +530,11 @@ mainmatter
 
 \end_layout
 
-\begin_layout Section
-
-\lang english
+\begin_layout Chapter
 Introduction
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset ERT
 status open
 
@@ -570,8 +551,6 @@ nocite{*}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Partout dans le monde, la facilité montante de l'accès à une puissance de
  calcul importante a motivé un grand nombre de changements dans la façon
  d'approcher les problèmes, et ce dans la plupart des domaines de recherche.
@@ -585,8 +564,6 @@ Partout dans le monde, la facilité montante de l'accès à une puissance de
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Apprentissage automatique : Méthodes statistique permettant à un ordinateur
  d'apprendre à résoudre un problème donné à l'aide d'une base de données
  pertinente.
@@ -611,8 +588,6 @@ La modélisation de prédiction n'est pas nouvelle dans ce secteur, mais les
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 La plupart de ces algorithmes sont en fait assez peu récents mais étaient
  difficilement applicables en raison d'une puissance de calcul trop faible,
  citons par exemple le perceptron, élement de base des réseaux de neurones
@@ -627,29 +602,21 @@ La plupart de ces algorithmes sont en fait assez peu récents mais étaient
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Section
-
-\lang english
+\begin_layout Chapter
 Dataset
 \end_layout
 
-\begin_layout Subsection
-
-\lang english
+\begin_layout Section
 Présentation des données
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Afin de réaliser ce travail, nous avons besoin d'une base de donnée adéquate,
  nous présentons celle-ci dans cette sous-section.
  La base de données est constituée d'informations sur les clients d'une
@@ -672,8 +639,6 @@ Non-life insurance pricing with GLM
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 http://staff.math.su.se/esbj/GLMbook/case.html
 \end_layout
 
@@ -685,27 +650,19 @@ http://staff.math.su.se/esbj/GLMbook/case.html
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 OwnersAge : L'âge du conducteur.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Gender : Le sexe du conducteur.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Zone : Variable catégorielle représentant la zone dans laquelle le véhicule
  est conduit..
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Class : Variable catégorielle représentant la classe du véhicule.
  Les classes sont assignées dans une des 7 catégories selon le ratio : 
 \begin_inset Formula $EV=\frac{kW\times100}{kg+75}$
@@ -715,46 +672,32 @@ Class : Variable catégorielle représentant la classe du véhicule.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 VehiculeAge : L'âge du véhicule en années.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 BonusClass : Le bonus du conducteur, un nouveau conducteur commence à 1
  et sera incrémenté à chaque année complète passée dans la compagnie sans
  sinistre déclaré, jusqu'à un maximum de 7.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Duration : Le nombre d'année passées dans la compagnie.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 NumberClaims : Le nombre de sinistres.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 ClaimCost : Le coût des sinistres.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La variable Zone est décrite dans la table 1.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float table
 placement H
 wide false
@@ -762,13 +705,9 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Descriptions des variables catégorielles
 \end_layout
 
@@ -779,8 +718,6 @@ Descriptions des variables catégorielles
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Tabular
 <lyxtabular version="3" rows="8" columns="3">
 <features booktabs="true" tabularvalignment="middle">
@@ -792,8 +729,6 @@ Descriptions des variables catégorielles
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Variable
 \end_layout
 
@@ -803,8 +738,6 @@ Variable
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Classe
 \end_layout
 
@@ -814,8 +747,6 @@ Classe
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Description
 \end_layout
 
@@ -827,8 +758,6 @@ Description
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Zone géographique
 \end_layout
 
@@ -838,8 +767,6 @@ Zone géographique
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 1
 \end_layout
 
@@ -849,8 +776,6 @@ Zone géographique
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Parties centrales et semi-centrales des trois plus grandes villes de Norvège.
 \end_layout
 
@@ -871,8 +796,6 @@ Parties centrales et semi-centrales des trois plus grandes villes de Norvège.
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 2
 \end_layout
 
@@ -882,8 +805,6 @@ Parties centrales et semi-centrales des trois plus grandes villes de Norvège.
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Banlieues et villes moyennes.
 \end_layout
 
@@ -904,8 +825,6 @@ Banlieues et villes moyennes.
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 3
 \end_layout
 
@@ -915,8 +834,6 @@ Banlieues et villes moyennes.
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Petites villes (à l'exception de celles des catégories 5 et 7).
 \end_layout
 
@@ -937,8 +854,6 @@ Petites villes (à l'exception de celles des catégories 5 et 7).
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 4
 \end_layout
 
@@ -948,8 +863,6 @@ Petites villes (à l'exception de celles des catégories 5 et 7).
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Villages (à l'exception de ceux des catégories 5 et 7).
 \end_layout
 
@@ -970,8 +883,6 @@ Villages (à l'exception de ceux des catégories 5 et 7).
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 5
 \end_layout
 
@@ -981,8 +892,6 @@ Villages (à l'exception de ceux des catégories 5 et 7).
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Villes du nord de la Suède.
 \end_layout
 
@@ -1003,8 +912,6 @@ Villes du nord de la Suède.
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 6
 \end_layout
 
@@ -1014,8 +921,6 @@ Villes du nord de la Suède.
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Campagnes du nord de la Suède.
 \end_layout
 
@@ -1036,8 +941,6 @@ Campagnes du nord de la Suède.
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 7
 \end_layout
 
@@ -1047,8 +950,6 @@ Campagnes du nord de la Suède.
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Gotland (Grande île).
 \end_layout
 
@@ -1068,23 +969,17 @@ Gotland (Grande île).
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-
-\lang english
+\begin_layout Section
 Analyse exploratoire
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Maintenant que les différentes variables ont été brièvement présentées et
  leur fonction plus claire, nous allons maintenant passer à l'analyse exploratoi
 re de celles-ci.
@@ -1097,8 +992,6 @@ ions quant aux données.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -1106,8 +999,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Box Frameless
 position "t"
 hor_pos "c"
@@ -1128,8 +1019,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/gender2.png
 	scale 40
@@ -1140,8 +1029,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Distribution Gender
 \end_layout
 
@@ -1177,8 +1064,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/ownerage.png
 	scale 40
@@ -1189,8 +1074,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Distribution OwnersAge
 \end_layout
 
@@ -1210,8 +1093,6 @@ Distribution OwnersAge
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Sur ces deux premières figures nous observons respectivement les distributions
  des variables Gender et OwnersAge.
  La première chose que nous pouvons voir est la grande disparité entre le
@@ -1234,8 +1115,6 @@ pics
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -1243,8 +1122,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Box Frameless
 position "t"
 hor_pos "c"
@@ -1265,8 +1142,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/vehiculeage.png
 	scale 40
@@ -1277,8 +1152,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Distribution VehiculeAge
 \end_layout
 
@@ -1314,8 +1187,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/zone.png
 	scale 40
@@ -1326,8 +1197,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Distribution Zone
 \end_layout
 
@@ -1347,8 +1216,6 @@ Distribution Zone
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La distribution de vehicule est indiquée en années, et nous pouvons donc
  observer que si la plupart des véhicules assurés ont moins de 20 ans, un
  grand nombre de ceux-ci sont bien plus vieux, avec comme maximum 99 ans.
@@ -1365,8 +1232,6 @@ La distribution de vehicule est indiquée en années, et nous pouvons donc
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -1374,8 +1239,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Box Frameless
 position "t"
 hor_pos "c"
@@ -1396,8 +1259,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/bonus.png
 	scale 40
@@ -1408,8 +1269,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Distribution BonusClass
 \end_layout
 
@@ -1445,8 +1304,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/class.png
 	scale 40
@@ -1457,8 +1314,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Distribution Class
 \end_layout
 
@@ -1478,8 +1333,6 @@ Distribution Class
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Les classes de bonus les plus fréquentes sont les classes 1 et 7, respectivement
  le minimum (entrée dans la compagnie d'assurance) et le maximum (client
  fidèle depuis sept années au minimum).
@@ -1497,8 +1350,6 @@ Pour la variable Class nous observons qu'assez peu de véhicules appartiennent
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -1506,8 +1357,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Box Frameless
 position "t"
 hor_pos "c"
@@ -1528,8 +1377,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/BonusClaim.png
 	scale 40
@@ -1540,8 +1387,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Bonus Claims
 \end_layout
 
@@ -1577,8 +1422,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/ClassClaim.png
 	scale 40
@@ -1589,8 +1432,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Class Claims
 \end_layout
 
@@ -1610,8 +1451,6 @@ Class Claims
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Il parait logique de supposer que plus un client a un bonus élevé, moins
  celui-ci causera d'accident, puisque le bonus monte uniquement si le client
  parvient à compléter une année sans causer d'accident.
@@ -1637,8 +1476,6 @@ Les résultats de la figure 8 sont moins surprenant : plus un véhicule est
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -1646,8 +1483,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Box Frameless
 position "t"
 hor_pos "c"
@@ -1668,8 +1503,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/genderClaim.png
 	scale 40
@@ -1680,8 +1513,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Gender claims
 \end_layout
 
@@ -1717,8 +1548,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/zoneClaim.png
 	scale 40
@@ -1729,8 +1558,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Zone claims
 \end_layout
 
@@ -1750,8 +1577,6 @@ Zone claims
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La répartition des sinistres par sexe indique que les hommes sont plus suceptibl
 es de causer des accidents que les femmes.
  Il faut prendre en compte que les hommes sont bien plus nombreux que les
@@ -1769,8 +1594,6 @@ es de causer des accidents que les femmes.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -1778,8 +1601,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Box Frameless
 position "t"
 hor_pos "c"
@@ -1800,8 +1621,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/MvFclaims.png
 	scale 40
@@ -1812,8 +1631,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Gender claims by Age
 \end_layout
 
@@ -1849,8 +1666,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/claimcost2.png
 	scale 40
@@ -1861,8 +1676,6 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Distribution ClaimCost
 \end_layout
 
@@ -1882,8 +1695,6 @@ Distribution ClaimCost
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La figure 11 a pour but de mieux comprendre cette disparité entre les hommes
  et les femmes dans la déclaration des sinistres.
  Une comparaison par âge permet de mettre en évidence une information importante.
@@ -1908,38 +1719,28 @@ e pour plusieurs sinistres, la variable contient la somme du coût de tous
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-
-\lang english
+\begin_layout Section
 Assurances
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Dans cette sous-section seront expliquées les particularités de l'analyse
  de données dans le cadre de l'assurance, et plus précisement dans le cas
  qui nous intéresse ici.
  
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Principe
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Un contrat entre l'assureur et l'assuré implique le payement d'une prime
  d'assurance par le second, en échange de compensations lorsqu'un sinistre
  est déclaré.
@@ -1952,8 +1753,6 @@ Un contrat entre l'assureur et l'assuré implique le payement d'une prime
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \bar{X}\rightarrow\mu\:when\,n\rightarrow\infty
@@ -1983,15 +1782,11 @@ Dans le cadre de l'assurance, les variables explicatives sont aussi appelées
  cours de ce travail.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Ratio
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Il est important de comprendre ce que l'on cherche à expliquer avec un modèle,
  aussi il faut savoir que cette analyse se base sur un ratio.
  Un ratio 
@@ -2007,8 +1802,6 @@ Il est important de comprendre ce que l'on cherche à expliquer avec un modèle,
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 L'exposition peut être le nombre de sinistres ou la durée du contrat.
 \end_layout
 
@@ -2022,8 +1815,6 @@ L'exposition peut être le nombre de sinistres ou la durée du contrat.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 Y=X/v
@@ -2042,15 +1833,11 @@ Il existe différents ratios mais ici ne sera présenté que celui utilisé
  modèles.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Distribution du ratio
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Pour la création d'un modèle cherchant à prédire la fréquence des réclamations
  c'est souvent la distribution Poisson qui est utilisée.
  Une loi poisson de paramètre 
@@ -2061,8 +1848,6 @@ Pour la création d'un modèle cherchant à prédire la fréquence des réclamat
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 Y\sim Poisson(\lambda)
@@ -2074,8 +1859,6 @@ Y\sim Poisson(\lambda)
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 E[Y]=\lambda
@@ -2087,8 +1870,6 @@ E[Y]=\lambda
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 Var[Y]=\lambda
@@ -2113,8 +1894,6 @@ Afin de vérifier que la distribution de la fréquence des sinistres suit
 
 \begin_layout Standard
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/Rplot02.png
 	width 6cm
@@ -2127,8 +1906,6 @@ Afin de vérifier que la distribution de la fréquence des sinistres suit
 
 \begin_layout Standard
 \align block
-
-\lang english
 La loi de poisson fait partie de la famille des modèles à dispersion exponentiel
 le (ED), une catégorie regroupant un grand nombre de lois statistiques connues
  comme la loi normale, gamma ou encore binomiale.
@@ -2145,8 +1922,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_{i}}\right\} c(y,\phi,v_{i})
@@ -2158,8 +1933,6 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\theta_{i}$
 \end_inset
 
@@ -2171,8 +1944,6 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\phi$
 \end_inset
 
@@ -2185,8 +1956,6 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $c(.)$
 \end_inset
 
@@ -2198,23 +1967,17 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-
-\lang english
+\begin_layout Section
 Preprocessing
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Le preprocessing des données est une étape très importante lorsque nous
  travaillons avec ce type de données et celui-ci n'est pas à négliger.
  Il consiste a préparer les données pour les algorithmes, afin que ceux-ci
@@ -2222,15 +1985,11 @@ Le preprocessing des données est une étape très importante lorsque nous
  Dans ce travail, plusieurs méthodes de preprocessing ont été utilisées.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Variables binaires (Dummy variables)
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Certaines de nos variables sont catégorielles, et plus particulièrement
  sont des variables non-ordinales.
  Cela signifie que les différentes catégories ne peuvent pas être ordonnées,
@@ -2275,8 +2034,6 @@ binaires
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \begin{align*}
 x_{ij}=\begin{cases}
@@ -2296,8 +2053,6 @@ Les variables Gender, Zone, Class, et BonusClass peuvent être transformées
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Classification And REgression Tools : Package de machine learning pour R.
 \end_layout
 
@@ -2333,15 +2088,11 @@ Classification And REgression Tools : Package de machine learning pour R.
  catégories appartenant à une variable catégorielle.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Normalisation
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Les données quantitatives ne doivent pas être transformées en variables
  binaires (bien que celles-ci peuvent être converties en intervalles puis
  en variables binaires, ce ne sera pas le cas dans le cadre de ce travail).
@@ -2356,8 +2107,6 @@ Les données quantitatives ne doivent pas être transformées en variables
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Voir chapitre 3
 \end_layout
 
@@ -2404,8 +2153,6 @@ Elle consiste (pour une variable
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Valeur maximale prise par la variable j.
 \end_layout
 
@@ -2420,8 +2167,6 @@ Valeur maximale prise par la variable j.
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Valeur minimale prise par la variable j.
 \end_layout
 
@@ -2447,15 +2192,11 @@ Cette transformation sera appliquée aux variables OwnersAge et VehiculeAge.
  
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Outliers
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Lors de l'encodage des données, il arrive que certaines valeurs des variables
  quantitatives soient assez extrêmes et semblent fort distantes des autres
  observations.
@@ -2468,15 +2209,11 @@ Lors de l'encodage des données, il arrive que certaines valeurs des variables
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Il peut simplement s'agir d'une erreur d'encodage, auquel cas l'observation
  doit être supprimée pour éviter de biaiser le modèle.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Il peut également s'agir d'une vraie moto de type 
 \begin_inset Quotes eld
 \end_inset
@@ -2493,8 +2230,6 @@ ancêtre
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Puisqu'aucun moyen simple de vérifier cette hypothèse n'est disponible,
  celle-ci sera supprimée de la base de donnée car la perte d'information
  est moindre.
@@ -2505,15 +2240,11 @@ La suppression de trop d'information peut cependant nuire au modèle, les
  données extrêmes mais non-aberantes seront donc conservées.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Durée de contrat
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Pour le bon fonctionement du modèle, certaines autres données ont du être
  modifiées car celles-ci entrainaient des erreurs dans la fonction de déviance
  utilisée pour la calibration des poids des réseaux de neurones.
@@ -2540,23 +2271,17 @@ Pour le bon fonctionement du modèle, certaines autres données ont du être
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Section
-
-\lang english
+\begin_layout Chapter
 Algorithmes
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Afin d'effectuer un travail de prédiction en matière de régression ou de
  classification, il est nécessaire d'avoir un outil puissant à disposition
  : l'apprentissage automatique ou 
@@ -2574,8 +2299,6 @@ machine learning
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Dans cette section, les différents algorithmes utilisés lors des analyses
  seront présentés à des fins de compréhension du travail.
  Pour commencer, des explications seront données sur le fonctionement général
@@ -2588,8 +2311,6 @@ Dans cette section, les différents algorithmes utilisés lors des analyses
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Les deux algorithmes de bases que sont les modèles linéaires généralisés
  et les réseaux de neurones artificiels seront introduit et leur fonctionement
  expliqué.
@@ -2605,21 +2326,15 @@ meta-algorithme
  
 \end_layout
 
-\begin_layout Subsection
-
-\lang english
+\begin_layout Section
 Explication d'un modèle
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Définitions et apprentissage
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Avant de pouvoir rentrer dans les détails, il est important de définir les
  notations qui seront utilisées, de définir ce qu'est un modèle et comment
  celui-ci se construit.
@@ -2637,8 +2352,6 @@ Avant de pouvoir rentrer dans les détails, il est important de définir les
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Données.
 \end_layout
 
@@ -2662,8 +2375,6 @@ Données.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $T$
 \end_inset
 
@@ -2671,8 +2382,6 @@ Données.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $P$
 \end_inset
 
@@ -2680,8 +2389,6 @@ Données.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $Q=\{(x_{1},y_{1}),...,(x_{n},y_{n})\}$
 \end_inset
 
@@ -2693,8 +2400,6 @@ Données.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Un modèle cherche à approximer une fonction cible (choisie), dans le cas
  étudié 
 \begin_inset Formula $f:X\rightarrow\mathbb{R^{+}}$
@@ -2709,8 +2414,6 @@ Dans notre étude seuls les modèles supervisés
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Algorithmes nécessitant une base de données 
 \begin_inset Formula $X\rightarrow Y$
 \end_inset
@@ -2779,15 +2482,11 @@ apprendre
 .
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Évaluation et fonctions de perte
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Pour l'apprentissage, les algorithmes supervisés se basent sur un critère
  mesurant l'erreur d'un modèle : la fonction de perte.
  Ce critère permet la comparaison entre différents modèles et un choix optimal
@@ -2814,22 +2513,12 @@ Le critère peut être défini comme
 \end_inset
 
  mesurant la différence entre les prédictions et la réalité d'une certaine
- manière 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "Wikipedia2020,StatActu2"
-literal "false"
-
-\end_inset
-
-.
+ manière.
  Une fonction de perte intuitive est donnée en guise d'example par la racine
  de l'erreur quadratique moyenne (RMSE).
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 RMSE(\theta,\hat{\theta})=\sqrt{MSE(\theta,\hat{\theta})}=\sqrt{E((\hat{\theta}-\theta)^{2})}
@@ -2844,7 +2533,15 @@ RMSE(\theta,\hat{\theta})=\sqrt{MSE(\theta,\hat{\theta})}=\sqrt{E((\hat{\theta}-
 Le RMSE est sûrement un des critères les plus utilisés aujourd'hui (y compris
  pour les réseaux de neurones), cependant utiliser celui-ci reviendrait
  à considérer le ratio de la fréquence des réclamations comme étant distribué
- selon une loi gaussienne.
+ selon une loi gaussienne 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+.
  Les résultats s'en trouvent alors biaisés car les propriétés statistiques
  de la variable expliquée ne sont pas prises en compte.
  Afin de palier à ce problème, un autre critère statistique sera utilisé
@@ -2858,8 +2555,6 @@ Le RMSE est sûrement un des critères les plus utilisés aujourd'hui (y compris
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $D^{*}$
 \end_inset
 
@@ -2869,8 +2564,6 @@ Le RMSE est sûrement un des critères les plus utilisés aujourd'hui (y compris
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Modèle où les 
 \begin_inset Formula $\hat{y_{i}}$
 \end_inset
@@ -2893,8 +2586,6 @@ sont parfaitement prédits.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $l(\hat{y_{i}})$
 \end_inset
 
@@ -2906,8 +2597,6 @@ sont parfaitement prédits.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $l(y_{i})$
 \end_inset
 
@@ -2919,8 +2608,6 @@ sont parfaitement prédits.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 D^{*}(y_{i},\hat{y_{i})}=2\left(l(y_{i})-l(\hat{y_{i})}\right)
@@ -2937,8 +2624,6 @@ En utilisant la fonction de distribution des ED vue précédemment, le résultat
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $a'(\theta)=e^{\theta}$
 \end_inset
 
@@ -2946,8 +2631,6 @@ En utilisant la fonction de distribution des ED vue précédemment, le résultat
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $h(y)=ln(y)$
 \end_inset
 
@@ -2955,8 +2638,6 @@ En utilisant la fonction de distribution des ED vue précédemment, le résultat
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 D^{*}(y_{i},\hat{y_{i})}=\frac{2}{\phi}v_{i}(y_{i}h(y_{i}))-a(h(y_{i}))-y_{i}h(\hat{y_{i}})+a(h(\hat{y_{i}})))
@@ -2988,8 +2669,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 D(y_{i},\hat{y_{i}})=2v_{i}(y_{i}ln(y_{i})-y_{i}ln(\hat{y_{i}})-y_{i}+\hat{y_{i}}),\:\;\forall y_{i}>0
@@ -3011,8 +2690,6 @@ La base de donnée utilisée portant sur des événements rares, beaucoup de
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 D(y_{i},\hat{y}_{i})=2v_{i}\hat{y_{i},}\;\:\forall y_{i}=0
@@ -3023,15 +2700,11 @@ D(y_{i},\hat{y}_{i})=2v_{i}\hat{y_{i},}\;\:\forall y_{i}=0
 
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Overfit, AIC et BIC
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Il est important de comprendre le but derrière la création d'un tel modèle.
  Nous cherchons à approximer une fonction de réponse 
 \begin_inset Formula $Y$
@@ -3069,8 +2742,6 @@ Afin de choisir des modèles limitant l'overfit, deux nouveaux critères seront
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Principe consistant à utiliser le moins de variables explicatives possible
  pour expliquer un phénomène afin de réduire le phénomène d'overfit.
 \end_layout
@@ -3091,8 +2762,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $AIC=2k-2ln(L)$
 \end_inset
 
@@ -3101,8 +2770,6 @@ literal "false"
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Akaike Information Criterion
 \end_layout
 
@@ -3121,8 +2788,6 @@ Akaike Information Criterion
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $BIC=k\,ln(N)-2ln(L)$
 \end_inset
 
@@ -3131,8 +2796,6 @@ Akaike Information Criterion
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Bayesian Information Criterion
 \end_layout
 
@@ -3145,15 +2808,11 @@ Bayesian Information Criterion
 (Où N est le nombre d'observations dans l'échantillon)
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Validation croisée (K-fold)
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La valeur de certains paramètres d'un modèle pouvant être générée dans un
  premier temps de manière aléatoire lors de l'initialisation avant d'être
  optimisés, et la forme du jeu de données pouvant aussi influencer les résultats
@@ -3200,8 +2859,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $Q=\{(x_{1},y_{1}),...,(x_{n},y_{n})\}$
 \end_inset
 
@@ -3209,8 +2866,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $K$
 \end_inset
 
@@ -3218,8 +2873,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $M$
 \end_inset
 
@@ -3227,8 +2880,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $E(M,Q)$
 \end_inset
 
@@ -3252,8 +2903,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float algorithm
 placement H
 wide false
@@ -3261,8 +2910,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status open
 
@@ -3279,8 +2926,6 @@ begin{algorithmic}[1]
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3299,8 +2944,6 @@ begin
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3329,8 +2972,6 @@ Diviser
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3351,8 +2992,6 @@ for
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3373,8 +3012,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3395,8 +3032,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3417,8 +3052,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3447,8 +3080,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3465,8 +3096,6 @@ endfor
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3487,8 +3116,6 @@ STATE
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3509,8 +3136,6 @@ return
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -3529,8 +3154,6 @@ end
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status open
 
@@ -3547,13 +3170,9 @@ end{algorithmic}
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Validation croisée (K-folds)
 \end_layout
 
@@ -3568,8 +3187,6 @@ Validation croisée (K-folds)
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \SpecialChar allowbreak
 Cette méthode permet de limiter l'overfit et de le détecter dans la plupart
  des cas.
@@ -3581,36 +3198,26 @@ ent/test.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-
-\lang english
+\begin_layout Section
 GLM : modèle linéaire généralisé
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Les bases du GLM
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Les GLMs représentent une généralisation de l'OLS
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Ordinary Least Squares (régression linéaire)
 \end_layout
 
@@ -3620,8 +3227,6 @@ Ordinary Least Squares (régression linéaire)
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 La distribution de probabilité : Dans l'OLS, nous supposons que les données
  suivent une loi gaussienne.
  Avec les GLM, nous travaillons avec une classe de distrution (les distributions
@@ -3633,8 +3238,6 @@ La distribution de probabilité : Dans l'OLS, nous supposons que les données
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Modèle pour la moyenne : Dans les modèles linéaires classiques, la moyenne
  n'est qu'une fonction linéaire des variables exploratoires.
  Dans les GLMs, c'est une transformation monotone de la moyenne qui est
@@ -3643,43 +3246,31 @@ Modèle pour la moyenne : Dans les modèles linéaires classiques, la moyenne
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Les GLMs se sont vite présentés comme un modèle très efficace pour la modélisati
 on des ratios dans les assurances.
  Ceux-ci présentent en effet nombres d'avantages : 
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 L'existence de différentes recherches menées sur le sujet ainsi que de méthodes
  déjà définies pour l'estimation des différents paramètres du modèle, d'interval
 les de confiances, ...
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Ils sont utilisés à la fois dans le cadre des assurances, mais pas uniquement.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Il existe un bon nombre de programmes/outils permettant de construire de
  tels modèles de manière relativement simple et efficace.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Enfin, un GLM est composé de : 
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Un prédicteur linéaire : 
 \begin_inset Formula $\eta_{i}=\beta_{0}+...+\beta_{1}x_{1i}+\beta_{p}x_{pi}$
 \end_inset
@@ -3688,8 +3279,6 @@ Un prédicteur linéaire :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 La fonction de lien : 
 \begin_inset Formula $g(\mu_{i})=\eta_{i}$
 \end_inset
@@ -3698,8 +3287,6 @@ La fonction de lien :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 La fonction de variance : 
 \begin_inset Formula $v(Y_{i})=\phi v(\mu)$
 \end_inset
@@ -3713,33 +3300,31 @@ La fonction de variance :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Ces composants seront décrit plus précisemment plus loin dans ce chapitre.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Hypothèses
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Afin que les raisonements à suivre restent corrects, il est nécessaire de
- faire 3 hypothèses pour que nos modèles statistiques restent valides.
+ faire 3 hypothèses pour que nos modèles statistiques restent valides 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Paragraph*
-
-\lang english
 Hypothèse 1 : Indépendance des polices d'assurances
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Considérons que nous avons 
 \begin_inset Formula $n$
 \end_inset
@@ -3758,8 +3343,6 @@ Considérons que nous avons
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Même si cette hypothèse est primordiale, il n'est pas difficile de trouver
  des cas ou celle-ci n'est pas respectée.
  Par exemple dans le cas des grandes catastrophes naturelles qui impliquent
@@ -3769,14 +3352,10 @@ Même si cette hypothèse est primordiale, il n'est pas difficile de trouver
 \end_layout
 
 \begin_layout Paragraph*
-
-\lang english
 Hypothèse 2 : Indépendance temporelle
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Considérons 
 \begin_inset Formula $n$
 \end_inset
@@ -3798,14 +3377,10 @@ Considérons
 \end_layout
 
 \begin_layout Paragraph*
-
-\lang english
 Hypothèse 3 : Homogénéité
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Considérons deux polices dans la même plage de tarifs et ayant la même durée
  de contrat, avec 
 \begin_inset Formula $X_{i}$
@@ -3825,8 +3400,6 @@ Considérons deux polices dans la même plage de tarifs et ayant la même durée
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Cette hypothèse n'est dans les fait pas complètement respectée.
  Les différents conducteurs sont répartis dans des classes relativement
  homogènes mais il reste de la non-homogénéité résiduelle.
@@ -3841,25 +3414,27 @@ Les hypothèses 1 et 2 ont pour conséquence que les coûts des sinistres sont
  de temps différent.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Modèles à dispersion exponentielle (EDM)
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Les modèles à dispersion exponentielles font parties des GLMs, et généralisent
  la distribution normale utilisée dans les modèles linéaires.
  En utilisant les hypothèses ci-dessus, nous pouvons déterminer la distribution
- de probabilité d'un EDM.
+ de probabilité d'un EDM 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_{i}}\right\} c(y,\phi,v_{i})
@@ -3875,8 +3450,6 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\theta_{i}$
 \end_inset
 
@@ -3888,8 +3461,6 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\phi>0$
 \end_inset
 
@@ -3901,8 +3472,6 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $b(\theta_{i})$
 \end_inset
 
@@ -3912,8 +3481,6 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $c(.)$
 \end_inset
 
@@ -3925,8 +3492,6 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Dans notre cas, nous nous occupons de la fréquence des sinistres.
  Considérons 
 \begin_inset Formula $N(t)$
@@ -3937,8 +3502,16 @@ Dans notre cas, nous nous occupons de la fréquence des sinistres.
 \end_inset
 
 .
- Beard, Pentikäinen et Pesonen (TODO: biblio des 3 mecs la) montrent que
- ce processus statistique suit une loi de poisson.
+ Beard, Pentikäinen et Pesonen montrent que ce processus statistique suit
+ une loi de poisson 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "beard1977risk"
+literal "false"
+
+\end_inset
+
+.
  Si 
 \begin_inset Formula $X_{i}$
 \end_inset
@@ -3964,8 +3537,6 @@ Dans notre cas, nous nous occupons de la fréquence des sinistres.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 f_{X_{i}}(x_{i};\mu_{i})=e^{-\omega_{i}\mu_{i}}\frac{(\omega_{i}\mu_{i})^{x_{i}}}{x_{i}!},\;x_{i}=0,1,2,...
@@ -3977,13 +3548,19 @@ Si nous nous intéressons maintenant à la distribution du ratio
 \begin_inset Formula $Y_{i}=X_{i}/w_{i}$
 \end_inset
 
- nous tombons également sur une distribution de Poisson
+ nous tombons également sur une distribution de Poisson 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Pour être précis, il s'agit en réalité d'une transformation de la distribution
  de Poisson, la distribution 
 \begin_inset Quotes eld
@@ -4002,8 +3579,6 @@ relative
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\omega_{i}y_{i})
@@ -4015,8 +3590,6 @@ f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\omega_{i}y_{i})
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 =exp\{w_{i}(y_{i}\theta_{i}-e^{\theta_{i}})+c(y_{i},\omega_{i})\}
@@ -4028,15 +3601,11 @@ f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\omega_{i}y_{i})
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Qui est la une forme de la distribution de probabilité des EDM vue plus
  haut, avec :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\phi=1$
 \end_inset
 
@@ -4044,29 +3613,21 @@ Qui est la une forme de la distribution de probabilité des EDM vue plus
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $b(\theta_{i})=e^{\theta_{i}}$
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 La fonction de lien 
 \end_layout
 
 \begin_layout Paragraph*
-
-\lang english
 Forme de tableau
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Dans ce travail, nous avons jusqu'ici considéré que les données étaient
  exprimées sous forme de liste, soit un vecteur 
 \begin_inset Formula $y'=(y_{1},...,y_{n})$
@@ -4085,13 +3646,19 @@ Dans ce travail, nous avons jusqu'ici considéré que les données étaient
  lorsque nous travaillons dans des logiciels tels que SAS, R, ou encore
  Python afin de gérer et représenter les données.
  Il existe cependant une autre manière de représenter les données qui s'avère
- très utile pour certaines démonstrations : la forme de tableau.
+ très utile pour certaines démonstrations : la forme de tableau 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Dans cette forme, les observations 
 \begin_inset Formula $y_{i_{1,...,}i_{k}}$
 \end_inset
@@ -4101,8 +3668,6 @@ Dans cette forme, les observations
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float table
 placement H
 wide false
@@ -4111,8 +3676,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Tabular
 <lyxtabular version="3" rows="5" columns="4">
 <features tabularvalignment="middle">
@@ -4125,8 +3688,6 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 i
 \end_layout
 
@@ -4136,8 +3697,6 @@ i
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Married
 \end_layout
 
@@ -4147,8 +3706,6 @@ Married
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Gender
 \end_layout
 
@@ -4158,8 +3715,6 @@ Gender
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Observation
 \end_layout
 
@@ -4171,8 +3726,6 @@ Observation
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 1
 \end_layout
 
@@ -4182,8 +3735,6 @@ Observation
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Yes
 \end_layout
 
@@ -4193,8 +3744,6 @@ Yes
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 M
 \end_layout
 
@@ -4204,8 +3753,6 @@ M
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{1}$
 \end_inset
 
@@ -4220,8 +3767,6 @@ M
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 2
 \end_layout
 
@@ -4231,8 +3776,6 @@ M
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Yes
 \end_layout
 
@@ -4242,8 +3785,6 @@ Yes
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 F
 \end_layout
 
@@ -4253,8 +3794,6 @@ F
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{2}$
 \end_inset
 
@@ -4269,8 +3808,6 @@ F
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 3
 \end_layout
 
@@ -4280,8 +3817,6 @@ F
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 No
 \end_layout
 
@@ -4291,8 +3826,6 @@ No
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 M
 \end_layout
 
@@ -4302,8 +3835,6 @@ M
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{3}$
 \end_inset
 
@@ -4318,8 +3849,6 @@ M
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 4
 \end_layout
 
@@ -4329,8 +3858,6 @@ M
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 No
 \end_layout
 
@@ -4340,8 +3867,6 @@ No
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 F
 \end_layout
 
@@ -4351,8 +3876,6 @@ F
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{4}$
 \end_inset
 
@@ -4370,13 +3893,9 @@ F
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Forme de liste
 \end_layout
 
@@ -4391,8 +3910,6 @@ Forme de liste
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float table
 placement H
 wide false
@@ -4401,8 +3918,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="3">
 <features tabularvalignment="middle">
@@ -4414,8 +3929,6 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Married
 \end_layout
 
@@ -4425,8 +3938,6 @@ Married
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Male
 \end_layout
 
@@ -4436,8 +3947,6 @@ Male
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Female
 \end_layout
 
@@ -4449,8 +3958,6 @@ Female
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Yes
 \end_layout
 
@@ -4460,8 +3967,6 @@ Yes
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{11}$
 \end_inset
 
@@ -4474,8 +3979,6 @@ Yes
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{12}$
 \end_inset
 
@@ -4490,8 +3993,6 @@ Yes
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 No
 \end_layout
 
@@ -4501,8 +4002,6 @@ No
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{21}$
 \end_inset
 
@@ -4515,8 +4014,6 @@ No
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{22}$
 \end_inset
 
@@ -4534,13 +4031,9 @@ No
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Forme de tableau
 \end_layout
 
@@ -4555,14 +4048,10 @@ Forme de tableau
 \end_layout
 
 \begin_layout Paragraph*
-
-\lang english
 Fonction de lien
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Maintenant que les notations utilisées dans cette parties sont expliquées,
  nous pouvons nous pencher sur la deuxième partie de la généralisation des
  GLMs, la fonction de lien.
@@ -4590,8 +4079,6 @@ Maintenant que les notations utilisées dans cette parties sont expliquées,
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float table
 placement H
 wide false
@@ -4600,8 +4087,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Tabular
 <lyxtabular version="3" rows="3" columns="4">
 <features tabularvalignment="middle">
@@ -4614,8 +4099,6 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Var1/Var2
 \end_layout
 
@@ -4625,8 +4108,6 @@ Var1/Var2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Catégorie 1
 \end_layout
 
@@ -4636,8 +4117,6 @@ Catégorie 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Catégorie 2
 \end_layout
 
@@ -4647,8 +4126,6 @@ Catégorie 2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Catégorie 3
 \end_layout
 
@@ -4660,8 +4137,6 @@ Catégorie 3
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Catégorie 1
 \end_layout
 
@@ -4671,8 +4146,6 @@ Catégorie 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{11}$
 \end_inset
 
@@ -4685,8 +4158,6 @@ Catégorie 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{12}$
 \end_inset
 
@@ -4699,8 +4170,6 @@ Catégorie 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{13}$
 \end_inset
 
@@ -4715,8 +4184,6 @@ Catégorie 1
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 Catégorie 2
 \end_layout
 
@@ -4726,8 +4193,6 @@ Catégorie 2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{21}$
 \end_inset
 
@@ -4740,8 +4205,6 @@ Catégorie 2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{22}$
 \end_inset
 
@@ -4754,8 +4217,6 @@ Catégorie 2
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula $y_{23}$
 \end_inset
 
@@ -4773,13 +4234,9 @@ Catégorie 2
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Exemple pour la fonction de lien
 \end_layout
 
@@ -4794,16 +4251,12 @@ Exemple pour la fonction de lien
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La fonction de lien sert à généraliser le modèle linéaire basique (OLS),
  celui-ci suppose que la moyenne suit une structure additive de la forme
  :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \mu_{ij}=\gamma_{0}+\gamma_{1i}+\gamma_{2j}
@@ -4815,8 +4268,6 @@ La fonction de lien sert à généraliser le modèle linéaire basique (OLS),
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Il faut maintenant choisir une cellule comme la cellule de base, ce qui
  nous servira à ajouter des contraintes, en particulier que sa moyenne 
 \begin_inset Formula $\mu_{ij}$
@@ -4844,8 +4295,6 @@ Il faut maintenant choisir une cellule comme la cellule de base, ce qui
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \gamma_{11}=\gamma_{21}=0
@@ -4857,14 +4306,10 @@ Il faut maintenant choisir une cellule comme la cellule de base, ce qui
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Et donc :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \mu_{11}=\gamma_{0}
@@ -4876,15 +4321,11 @@ Et donc :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Nous réécrivons maintenant le modèle sous forme de liste et définissons
  :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\beta_{1}:=\gamma_{0}$
 \end_inset
 
@@ -4892,8 +4333,6 @@ Nous réécrivons maintenant le modèle sous forme de liste et définissons
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\beta_{2}:=\gamma_{12}$
 \end_inset
 
@@ -4901,8 +4340,6 @@ Nous réécrivons maintenant le modèle sous forme de liste et définissons
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\beta_{3}:=\gamma_{22}$
 \end_inset
 
@@ -4910,8 +4347,6 @@ Nous réécrivons maintenant le modèle sous forme de liste et définissons
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\beta_{4}:=\gamma_{23}$
 \end_inset
 
@@ -4919,8 +4354,6 @@ Nous réécrivons maintenant le modèle sous forme de liste et définissons
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 En forme de liste, 
 \begin_inset Formula $\mu_{i}$
 \end_inset
@@ -4932,8 +4365,6 @@ En forme de liste,
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \mu_{i}=\sum_{j=1}^{4}x_{ij}\beta_{j}\qquad i=1,2,...,6.
@@ -4945,8 +4376,6 @@ En forme de liste,
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Cette équation représente la structure linéaire (wiki) et peut être écrit
  sous la forme matricielle :
 \begin_inset Formula 
@@ -4960,14 +4389,10 @@ Cette équation représente la structure linéaire (wiki) et peut être écrit
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Généralisons maintenant l'exemple ci dessus, avec l'équation : 
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \mu_{i}=\sum_{j=1}^{r}x_{ij}\beta_{j}\qquad i=1,...,n.
@@ -4979,8 +4404,6 @@ Généralisons maintenant l'exemple ci dessus, avec l'équation :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $r$
 \end_inset
 
@@ -4988,8 +4411,6 @@ Généralisons maintenant l'exemple ci dessus, avec l'équation :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Nous introduisons maintenant la fonction de lien 
 \begin_inset Formula $g(.)$
 \end_inset
@@ -4998,8 +4419,6 @@ Nous introduisons maintenant la fonction de lien
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 g(\mu_{i})=\eta_{i}=\sum_{j=1}^{r}x_{ij}\beta_{j}
@@ -5011,8 +4430,6 @@ g(\mu_{i})=\eta_{i}=\sum_{j=1}^{r}x_{ij}\beta_{j}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Ici 
 \begin_inset Formula $g(.)$
 \end_inset
@@ -5028,8 +4445,6 @@ Ici
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 log(\mu_{ij})=log(\gamma_{o})+log(\gamma_{1i})+log(\gamma_{2j})
@@ -5041,8 +4456,6 @@ log(\mu_{ij})=log(\gamma_{o})+log(\gamma_{1i})+log(\gamma_{2j})
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 log(\mu_{i})=\sum_{j=1}^{4}x_{ij}\beta_{j}\qquad i=1,2,...,6.
@@ -5054,8 +4467,6 @@ log(\mu_{i})=\sum_{j=1}^{4}x_{ij}\beta_{j}\qquad i=1,2,...,6.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 g(\mu_{i})=\eta_{i}=log(\mu_{i})
@@ -5067,15 +4478,19 @@ g(\mu_{i})=\eta_{i}=log(\mu_{i})
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La fonction de lien est donc le logarithme dans le cas des modèles multiplicatif
-s, bien souvent utilisés dans les problèmes d'assurances.
+s, bien souvent utilisés dans les problèmes d'assurances 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010"
+literal "false"
+
+\end_inset
+
+.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Estimation des paramètres 
 \begin_inset Formula $\beta$
 \end_inset
@@ -5084,8 +4499,6 @@ Estimation des paramètres
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Dans le cadre des GLMs, les paramètres 
 \begin_inset Formula $\beta$
 \end_inset
@@ -5101,8 +4514,6 @@ Dans le cadre des GLMs, les paramètres
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 l(\theta;\phi;y)=\frac{1}{\phi}\sum_{i}\omega_{i}(y_{i}\theta_{i}-b(\theta_{i}))+\sum_{i}c(y_{i},\phi,\omega_{i})
@@ -5114,8 +4525,6 @@ l(\theta;\phi;y)=\frac{1}{\phi}\sum_{i}\omega_{i}(y_{i}\theta_{i}-b(\theta_{i}))
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 En réécrivant l'équation en fonction de 
 \begin_inset Formula $\beta$
 \end_inset
@@ -5136,8 +4545,6 @@ En réécrivant l'équation en fonction de
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \frac{\partial l}{\partial\beta_{k}}=\frac{1}{\phi}\omega_{i}\frac{y_{i}-\mu_{i}}{v(\mu_{i})g'(\mu_{i})}x_{ij}
@@ -5149,8 +4556,6 @@ En réécrivant l'équation en fonction de
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $v(.)$
 \end_inset
 
@@ -5158,8 +4563,6 @@ En réécrivant l'équation en fonction de
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Il suffit maintenant de prendre ces 
 \begin_inset Formula $r$
 \end_inset
@@ -5176,8 +4579,6 @@ Il suffit maintenant de prendre ces
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \sum_{i}\omega_{i}\frac{y_{i}-\mu_{i}}{v(\mu_{i})g'(\mu_{i})}x_{ij}=0,\qquad i=1,...,r
@@ -5189,36 +4590,36 @@ Il suffit maintenant de prendre ces
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La résolution de ce système d'équation doit se faire de manière numérique
  et nous donne l'estimation des paramètres 
 \begin_inset Formula $\beta$
 \end_inset
 
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "Ohlsson2010,StatActu1,StatActu2"
+literal "false"
+
+\end_inset
+
 .
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Modélisation de Poisson
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Nous allons maintenant discuter du cas où 
 \begin_inset Formula $Y$
 \end_inset
 
  suit une loi de poisson, ce qui est le cas pour notre base de données.
- Supposons : (https://statmath.wu.ac.at/courses/heather_turner/glmCourse_001.pdf)
+ Supposons : 
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 Y_{i}\sim Poisson(\lambda_{i})
@@ -5230,14 +4631,10 @@ Y_{i}\sim Poisson(\lambda_{i})
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Alors les propritétés de la loi de poisson donnent : 
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 E(Y_{i})=\lambda_{i}
@@ -5257,14 +4654,10 @@ var(Y_{i})=\lambda_{i}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Donc la fonction de variance sera : 
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 v(\mu_{i})=\mu_{i}
@@ -5276,8 +4669,6 @@ v(\mu_{i})=\mu_{i}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Et la fonction de lien utilisée dans ce cas-ci sera le logarithme, qui nous
  permet de passer du domaine 
 \begin_inset Formula $[0,\infty]$
@@ -5291,8 +4682,6 @@ Et la fonction de lien utilisée dans ce cas-ci sera le logarithme, qui nous
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 g(\mu_{i})=log(\mu_{i})
@@ -5304,23 +4693,17 @@ g(\mu_{i})=log(\mu_{i})
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-
-\lang english
+\begin_layout Section
 Réseaux de neurones
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Avant de comprendre comment cet algorithme fonctionne d'un point de vue
  mathématique, il est intéressant de comprendre de quoi est inspiré son
  fonctionnement.
@@ -5354,8 +4737,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -5364,8 +4745,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/Neuron-figure-fr.svg
 	width 4.5cm
@@ -5377,13 +4756,9 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Schéma d'un neurone biologique.
 \end_layout
 
@@ -5397,15 +4772,11 @@ Schéma d'un neurone biologique.
 
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Perceptron
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Le perceptron est le modèle à la base des réseaux de neurones artificiels
  modernes, celui-ci a été inventé dès 1957 par Frank Rosenblatt.
  Il s'agissait alors d'un algorithme permettant l'apprentissage automatique
@@ -5440,8 +4811,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -5450,8 +4819,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/400px-HardLimitFunction.png
 	width 10cm
@@ -5463,13 +4830,9 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Exemple de fonction d'activation : Step function
 \end_layout
 
@@ -5543,8 +4906,6 @@ mais par
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -5553,8 +4914,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/2000px-Perceptron-bias.svg.png
 	width 7cm
@@ -5566,13 +4925,9 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Représentation d'un perceptron
 \end_layout
 
@@ -5591,8 +4946,6 @@ La manière dont un perceptron calcule la réponse
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Les poids sont multipliés par les valeurs des entrées à laquelle on ajoute
  le biais : 
 \begin_inset Formula $\omega=\sum_{j=1}^{J}x_{j}w_{j}+w_{0}$
@@ -5602,8 +4955,6 @@ Les poids sont multipliés par les valeurs des entrées à laquelle on ajoute
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 La valeur ainsi obtenue est prise comme argument dans la fonction d'activation
  : 
 \begin_inset Formula $Y=\varphi(\omega)$
@@ -5613,8 +4964,6 @@ La valeur ainsi obtenue est prise comme argument dans la fonction d'activation
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 C'est donc cette réponse 
 \begin_inset Formula $Y$
 \end_inset
@@ -5656,8 +5005,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
@@ -5669,8 +5016,6 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $w_{i}$
 \end_inset
 
@@ -5682,8 +5027,6 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\eta$
 \end_inset
 
@@ -5697,8 +5040,6 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\hat{y_{j}}$
 \end_inset
 
@@ -5706,8 +5047,6 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $y_{j}$
 \end_inset
 
@@ -5715,8 +5054,6 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Comme mentionné précédemment, le perceptron reste cependant un modèle simple,
  et celui-ci est incapable de résoudre certains problèmes pourtant basiques.
  L'exemple le plus connu est le problème XOR
@@ -5724,8 +5061,6 @@ Comme mentionné précédemment, le perceptron reste cependant un modèle simple
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Quotes eld
 \end_inset
 
@@ -5764,28 +5099,20 @@ literal "false"
 .
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Perceptron multicouche
 \end_layout
 
 \begin_layout Paragraph
-
-\lang english
 Fonctionnement
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Le perceptron multicouche, plus communément appelé MLP
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Multilayer perceptron
 \end_layout
 
@@ -5803,8 +5130,6 @@ Multilayer perceptron
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Float figure
 placement H
 wide false
@@ -5813,8 +5138,6 @@ status open
 
 \begin_layout Plain Layout
 \align center
-
-\lang english
 \begin_inset Graphics
 	filename Images/neralnet.PNG
 	width 15cm
@@ -5826,13 +5149,9 @@ status open
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Représentation d'un MLP 
 \begin_inset Quotes eld
 \end_inset
@@ -5855,8 +5174,6 @@ feed-forward
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Un réseau de ce type résout la plupart des problèmes du perceptron lorsqu'il
  est utilisé seul et compose un modèle beaucoup plus puissant, capable de
  détecter les relations non-linéaires et de résoudre un grand nombre de
@@ -5868,8 +5185,6 @@ Un réseau de ce type résout la plupart des problèmes du perceptron lorsqu'il
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Computer vision.
 \end_layout
 
@@ -5901,8 +5216,6 @@ ion passe successivement.
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Si il y a une seule couche cachée on parle de réseau peu profond (shallow
  network) et s'il y a plusieurs couches cachées on parle alors de réseau
  profond (deep network).
@@ -5917,8 +5230,6 @@ Si il y a une seule couche cachée on parle de réseau peu profond (shallow
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
  peuvent être optimisés facilement de manière automatique et nécessitent
  la création de plusieurs modèles avec différents hyperparamètres dont les
@@ -5937,8 +5248,6 @@ Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $w_{jk}^{i}$
 \end_inset
 
@@ -5962,8 +5271,6 @@ Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $b_{j}^{i}$
 \end_inset
 
@@ -5979,8 +5286,6 @@ Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $a_{j}^{i}$
 \end_inset
 
@@ -5996,8 +5301,6 @@ Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $z_{j}^{i}=\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i}$
 \end_inset
 
@@ -6005,8 +5308,6 @@ Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\varphi(.)$
 \end_inset
 
@@ -6014,8 +5315,6 @@ Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $n^{net}$
 \end_inset
 
@@ -6023,8 +5322,6 @@ Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $n_{j}^{net}$
 \end_inset
 
@@ -6036,8 +5333,6 @@ Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Chaque neurone de ce réseau fonctionne en fait comme un perceptron, relié
  à d'autres perceptrons organisés en forme de couches, et qui transfère
  le résultat de sa sortie à la couche suivante.
@@ -6046,8 +5341,6 @@ Chaque neurone de ce réseau fonctionne en fait comme un perceptron, relié
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 a_{j}^{i}=\varphi(\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i})
@@ -6059,8 +5352,6 @@ a_{j}^{i}=\varphi(\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i})
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 représentant la sortie du neurone 
 \begin_inset Formula $j$
 \end_inset
@@ -6082,8 +5373,6 @@ représentant la sortie du neurone
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Le fonctionement d'un réseau de neurones étant expliqué, il est maintenant
  nécessaire de comprendre comment un tel réseau est calibré, car sans cette
  phase de calibration le réseau de neurone serait inefficace.
@@ -6109,14 +5398,10 @@ literal "false"
 \end_layout
 
 \begin_layout Paragraph
-
-\lang english
 Rétropropagation
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Avant l'apparition de la rétropropagation, les réseaux de neurones étaient
  calibrés grâce à la descente du gradient, algorithme consistant à calculer
  le gradient, la matrice Hessienne et son inverse afin de mettre à jour
@@ -6143,8 +5428,6 @@ Avant l'apparition de la rétropropagation, les réseaux de neurones étaient
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 La rétropropagation consiste en une série d'instructions répétées 
 \begin_inset Formula $T$
 \end_inset
@@ -6159,8 +5442,6 @@ La rétropropagation consiste en une série d'instructions répétées
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Époque : une période ou moment particulier dans l'exécution de l'algorithme.
 \end_layout
 
@@ -6197,8 +5478,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status open
 
@@ -6215,8 +5494,6 @@ begin{algorithmic}[1]
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6237,8 +5514,6 @@ Attribution de valeurs aléatoires à
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6259,8 +5534,6 @@ Choix du pas initial,
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6281,8 +5554,6 @@ Choix de la fonction du pas
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6301,8 +5572,6 @@ begin
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6319,8 +5588,6 @@ For t = 0, ..., T
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6341,8 +5608,6 @@ Calcul du gradient :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6363,8 +5628,6 @@ Mise à jour de la taille du pas :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6385,8 +5648,6 @@ Mise à jour des poids :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status collapsed
 
@@ -6405,8 +5666,6 @@ end
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset ERT
 status open
 
@@ -6423,13 +5682,9 @@ end{algorithmic}
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
-\lang english
 Rétropropagation 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -6452,35 +5707,25 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 TODO : lequel sera utilisé.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Newpage pagebreak
 \end_inset
 
 
 \end_layout
 
-\begin_layout Subsection
-
-\lang english
+\begin_layout Section
 Boosting
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Bagging
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Si le bagging n'est pas au centre de ce travail, il est tout de même intéressant
  de présenter cet algorithme car il est souvent comparé au boosting qui
  sera introduit dans la section suivante.
@@ -6501,8 +5746,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\mathcal{L}$
 \end_inset
 
@@ -6514,8 +5757,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $x$
 \end_inset
 
@@ -6523,8 +5764,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $y$
 \end_inset
 
@@ -6533,8 +5772,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Sur base de ceci 
 \begin_inset Formula $\varphi(x,\mathcal{L})$
 \end_inset
@@ -6570,8 +5807,6 @@ t la moyenne des résultats des différents prédicteurs :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \hat{y}=K^{-1}\sum_{1}^{K}\varphi(x_{k},\mathcal{L}_{k})=E_{\mathcal{L}}\varphi(x,\mathcal{L})
@@ -6583,8 +5818,6 @@ t la moyenne des résultats des différents prédicteurs :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Un raisonement similaire peut être tenu pour le cas de la classification
  mais celui-ci ne sera pas expliqué ici car il ne rentre pas dans le cadre
  de ce travail.
@@ -6599,8 +5832,6 @@ Un raisonement similaire peut être tenu pour le cas de la classification
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Celui-ci consiste en un échantillonage aléatoire (équiprobable) avec remise.
  Les sets d'entraînements générés sont donc composés de 
 \begin_inset Formula $n$
@@ -6611,15 +5842,11 @@ Celui-ci consiste en un échantillonage aléatoire (équiprobable) avec remise.
  
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Boosting
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Afin d'améliorer les performances de certains algorithmes, de nombreux chercheur
 s se sont penchés sur les méthodes dites de 
 \begin_inset Quotes eld
@@ -6647,8 +5874,6 @@ méta-algorithme
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Algorithme générant des prédicteurs de relativement mauvaise qualité (mais
  avec de meilleures performances que le hasard pur), la plupart du temps
  utilisé en combinaison avec d'autres apprenants faibles afin de créer un
@@ -6702,8 +5927,6 @@ Adaptative boosting
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Boosting adaptatif.
 \end_layout
 
@@ -6713,15 +5936,11 @@ Boosting adaptatif.
  régression et c'est ce méta-algorithme qui sera utilisé.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 AdaBoost
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 À l'origine, AdaBoost est un algorithme qui a été pensé pour la classification
  binaire.
  Son fonctionnement ne prévoyait pas l'estimation d'une valeur 
@@ -6759,8 +5978,6 @@ bagging
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Graphics Processing Unit, ou processeur graphique, souvent utilisé pour
  faire des calculs parallèles de manière extrêmement rapide.
 \end_layout
@@ -6779,8 +5996,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 AdaBoost suppose qu'un apprenant de base (apprenant faible) peut être utilisé
  pour crée une hypothèse de base (hypothèse faible).
  Cette hypothèse faible ne doit pas être particulièrement complexe ou efficace
@@ -6808,8 +6023,6 @@ supposition de l'apprentissage faible
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \epsilon_{t}\leq\frac{1}{2}-\gamma
@@ -6825,8 +6038,6 @@ supposition de l'apprentissage faible
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Afin d'améliorer le précision d'AdaBoost, des apprenants faibles sont construits
 , et ceux-ci nécessitent un jeu de données afin d'être entraînés.
  C'est ici qu'un autre problème se pose car si les apprenants faibles sont
@@ -6849,8 +6060,6 @@ Afin d'améliorer le précision d'AdaBoost, des apprenants faibles sont construi
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 AdaBoost fonctionne de la manière suivante : 
 \end_layout
 
@@ -6862,8 +6071,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Avec : 
 \begin_inset Formula $(x_{1},y_{1}),...,(x_{m},y_{m})$
 \end_inset
@@ -6876,8 +6083,6 @@ Avec :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 Init : 
 \begin_inset Formula $D_{1}(i)=1/m,i=1,...,m$
 \end_inset
@@ -6886,8 +6091,6 @@ Init :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 For 
 \begin_inset Formula $t=1,...,T$
 \end_inset
@@ -6896,8 +6099,6 @@ For
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Entraînement d'un apprenant faible en utilisant 
 \begin_inset Formula $D_{t}$
 \end_inset
@@ -6906,8 +6107,6 @@ Entraînement d'un apprenant faible en utilisant
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Récupération de l'hypothèse faible de l'apprenant faible 
 \begin_inset Formula $h_{t}:\chi\rightarrow\{-1,+1\}$
 \end_inset
@@ -6916,8 +6115,6 @@ Récupération de l'hypothèse faible de l'apprenant faible
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Calcul de l'erreur pondérée : 
 \begin_inset Formula $\epsilon_{t}\doteq Pr_{i\sim D_{t}}[h_{t}(x_{i})\neq y_{i}]$
 \end_inset
@@ -6926,8 +6123,6 @@ Calcul de l'erreur pondérée :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Calcul de l'importance : 
 \begin_inset Formula $\alpha_{t}=\frac{1}{2}ln\left(\frac{1-\epsilon_{t}}{\epsilon_{t}}\right)$
 \end_inset
@@ -6936,8 +6131,6 @@ Calcul de l'importance :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Mise à jour de la distribution 
 \begin_inset Formula $D_{t}$
 \end_inset
@@ -6947,8 +6140,6 @@ Mise à jour de la distribution
 
 \begin_deeper
 \begin_layout Itemize
-
-\lang english
 Si 
 \begin_inset Formula $h_{t}(x_{i})=y_{i}$
 \end_inset
@@ -6961,8 +6152,6 @@ Si
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Si 
 \begin_inset Formula $h_{t}(x_{i})\neq y_{i}$
 \end_inset
@@ -6975,8 +6164,6 @@ Si
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 Où 
 \begin_inset Formula $Z_{t}$
 \end_inset
@@ -6994,14 +6181,10 @@ Où
 
 \end_deeper
 \begin_layout Itemize
-
-\lang english
 Hypothèse finale :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula 
 \[
 H(x)=sign\left(\sum_{t=1}^{T}\alpha_{t}h_{t}(x)\right)
@@ -7038,8 +6221,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Cette version de l'algorithme est différente de celle qui sera utilisée
  dans le cadre de ce travail puisqu'elle n'est pas prévue pour la régression
  mais il est tout de même intéressant de comprendre les différentes étapes
@@ -7055,8 +6236,6 @@ Cette version de l'algorithme est différente de celle qui sera utilisée
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Il est important de noter que le but de l'apprenant faible est simplement
  de déterminer une hypothèse faible 
 \begin_inset Formula $h_{t}:\chi\rightarrow\{-1,+1\}$
@@ -7085,8 +6264,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \epsilon_{t}\doteq Pr_{i\sim D_{t}}[h_{t}(x_{i})\neq y_{i}]=\sum_{i:h_{t}(x_{i})\neq y_{i}}D_{t}(i)
@@ -7102,14 +6279,10 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Cette équation indique deux choses intéressantes : 
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $\epsilon_{t}$
 \end_inset
 
@@ -7122,8 +6295,6 @@ Cette équation indique deux choses intéressantes :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Puisque 
 \begin_inset Formula $D_{t}$
 \end_inset
@@ -7138,8 +6309,6 @@ Puisque
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Ensuite, AdaBoost détermine l'importance 
 \begin_inset Formula $\alpha_{t}$
 \end_inset
@@ -7163,8 +6332,6 @@ Ensuite, AdaBoost détermine l'importance
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Pour la prochaine étape, il est nécessaire de mettre à jour la distribution
  
 \begin_inset Formula $D_{t}$
@@ -7197,8 +6364,6 @@ Pour la prochaine étape, il est nécessaire de mettre à jour la distribution
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 D_{t+1}(i)=\frac{D_{t}(i)exp(-\alpha_{t}y_{i}h_{t}(x_{i}))}{Z_{t}}
@@ -7214,8 +6379,6 @@ D_{t+1}(i)=\frac{D_{t}(i)exp(-\alpha_{t}y_{i}h_{t}(x_{i}))}{Z_{t}}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Qui peut être scindée en deux cas (si l'exemple 
 \begin_inset Formula $i$
 \end_inset
@@ -7251,8 +6414,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 \sigma_{t+1}(i)=D_{t}(i)exp(-\alpha_{t}y_{i}h_{t}(x_{i}))
@@ -7276,8 +6437,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Une fois tous les apprenants faibles entraînés, AdaBoost les combine en
  un modèle final 
 \begin_inset Formula $H$
@@ -7300,8 +6459,6 @@ Une fois tous les apprenants faibles entraînés, AdaBoost les combine en
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 H(x)=sign\left(\sum_{t=1}^{T}\alpha_{t}h_{t}(x)\right)
@@ -7317,14 +6474,10 @@ H(x)=sign\left(\sum_{t=1}^{T}\alpha_{t}h_{t}(x)\right)
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Pour résumer, AdaBoost se repose sur trois idées principales : 
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 AdaBoost combine un grand nombre d'apprenants faibles afin d'obtenir une
  classification la plus précise possible.
  Les apprenants faibles sont des modèles avec une prise de décision simple.
@@ -7341,8 +6494,6 @@ s de base soient plus efficaces qu'une sélection aléatoire (équiprobable)
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Tous les algorithmes entrainés n'ont pas le même poids lors de la prise
  de décision, en effet ceux qui sont le plus confiants quant à leur décisions
  seront plus impactants lors de la décision finale.
@@ -7350,8 +6501,6 @@ Tous les algorithmes entrainés n'ont pas le même poids lors de la prise
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Chaque apprenant faible est entraîné en prenant en compte les erreurs commises
  par les apprenants faibles précédents.
  Ceci est représenté par le calcul de la distribution 
@@ -7362,8 +6511,6 @@ Chaque apprenant faible est entraîné en prenant en compte les erreurs commises
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 L'algorithme a été dévié dans plusieurs formes portant toutes des noms différent
 s, et parmis ces formes, certaines permettent de travailler avec des problèmes
  de régression.
@@ -7372,15 +6519,11 @@ me utilisé dans ce travail.
  Celui-ci est présenté ci-dessous dans la section 3.4.6.
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 AdaBoost.R2
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 AdaBoost.R2 est un algorithme présenté par Drucker et permettant d'appliquer
  l'algorithme d'AdaBoost à un problème de régression.
  Il est très similaire dans son fonctionement à celui de l'algorithme originel
@@ -7396,8 +6539,6 @@ sideways false
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Avec : 
 \begin_inset Formula $(x_{1},y_{1}),...,(x_{N_{1}},y_{N_{1}})$
 \end_inset
@@ -7410,8 +6551,6 @@ Avec :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 Init : 
 \begin_inset Formula $w_{i}=1$
 \end_inset
@@ -7424,8 +6563,6 @@ Init :
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 While 
 \begin_inset Formula $\bar{L}<0.5$
 \end_inset
@@ -7434,8 +6571,6 @@ While
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Normalisation des poids 
 \begin_inset Formula $p_{i}=w_{i}/\sum w_{i}$
 \end_inset
@@ -7444,8 +6579,6 @@ Normalisation des poids
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Création d'un jeu d'entraînement de taille 
 \begin_inset Formula $N_{1}$
 \end_inset
@@ -7458,8 +6591,6 @@ Création d'un jeu d'entraînement de taille
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Création d'un apprenant faible 
 \begin_inset Formula $t$
 \end_inset
@@ -7472,8 +6603,6 @@ Création d'un apprenant faible
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Récupération des prédictions 
 \begin_inset Formula $y_{i}^{(p)}(x_{i})$
 \end_inset
@@ -7486,8 +6615,6 @@ Récupération des prédictions
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Calcul de la perte 
 \begin_inset Formula $L_{i}=L\left[|y_{i}^{(p)}(x_{i})-y_{i}|\right]$
 \end_inset
@@ -7501,8 +6628,6 @@ Calcul de la perte
 
 \begin_deeper
 \begin_layout Itemize
-
-\lang english
 Si 
 \begin_inset Formula $D=sup|y_{i}^{(p)}(x_{i})-y_{i}|$
 \end_inset
@@ -7516,8 +6641,6 @@ Si
 
 \begin_deeper
 \begin_layout Enumerate
-
-\lang english
 Linéaire : 
 \begin_inset Formula $L_{i}=\frac{|y_{i}^{(p)}(x_{i})-y_{i}|}{D}$
 \end_inset
@@ -7526,8 +6649,6 @@ Linéaire :
 \end_layout
 
 \begin_layout Enumerate
-
-\lang english
 Carrée : 
 \begin_inset Formula $L_{i}=\frac{|y_{i}^{(p)}(x_{i})-y_{i}|^{2}}{D^{2}}$
 \end_inset
@@ -7536,8 +6657,6 @@ Carrée :
 \end_layout
 
 \begin_layout Enumerate
-
-\lang english
 Exponentielle : 
 \begin_inset Formula $L_{i}=exp\left[\frac{-|y_{i}^{(p)}(x_{i})-y_{i}|}{D}\right]$
 \end_inset
@@ -7548,8 +6667,6 @@ Exponentielle :
 \end_deeper
 \end_deeper
 \begin_layout Itemize
-
-\lang english
 Calcul de la perte moyenne : 
 \begin_inset Formula $\bar{L}=\sum_{i=1}^{N_{1}}L_{i}p_{i}$
 \end_inset
@@ -7558,8 +6675,6 @@ Calcul de la perte moyenne :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Calcul de l'importance : 
 \begin_inset Formula $\beta=\frac{\hat{L}}{1-\hat{L}}$
 \end_inset
@@ -7568,8 +6683,6 @@ Calcul de l'importance :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Mise à jour des poids : 
 \begin_inset Formula $w_{i+1}=w_{i}\beta^{[1-L_{i}]}$
 \end_inset
@@ -7578,8 +6691,6 @@ Mise à jour des poids :
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Hypothèse finale 
 \begin_inset Formula $h_{f}$
 \end_inset
@@ -7596,11 +6707,9 @@ Hypothèse finale
 \end_layout
 
 \begin_layout Plain Layout
-
-\lang english
 \begin_inset Formula 
 \[
-h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}log\left(\frac{1}{\beta_{t}}\right)\right\} 
+h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}\sum_{t}log\left(\frac{1}{\beta_{t}}\right)\right\} 
 \]
 
 \end_inset
@@ -7634,15 +6743,11 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Comme mentionné précédemment, il est clair que les deux algorithmes sont
  très similaires, et fonctionnent tout deux comme ceci : 
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Échantillonnage d'un jeu d'entraînement selon les probabilités associées
  à chaque élément, 
 \begin_inset Formula $D_{t}$
@@ -7656,20 +6761,14 @@ Comme mentionné précédemment, il est clair que les deux algorithmes sont
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Création d'un apprenant faible et calcul de la perte.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Calcul de l'importance de l'apprenant faible.
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Mise à jour des poids : C'est cette étape qui différencie réellement le
  boosting du bagging, en effet le fait de modifier les probabilités de sélection
  des éléments de manière individuelle permet aux apprenants faibles suivant
@@ -7678,8 +6777,6 @@ Mise à jour des poids : C'est cette étape qui différencie réellement le
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 Aggrégation des hypothèses faibles en une hypothèse forte pour la décision
  finale : Dans AdaBoost, cela correspond à un vote majoritaire (pondéré
  par l'importance de l'hypothèse) et dans AdaBoost.R2 la formule suivante
@@ -7687,11 +6784,9 @@ Aggrégation des hypothèses faibles en une hypothèse forte pour la décision
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
-h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}log\left(\frac{1}{\beta_{t}}\right)\right\} 
+h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}\sum_{t}log\left(\frac{1}{\beta_{t}}\right)\right\} 
 \]
 
 \end_inset
@@ -7700,8 +6795,6 @@ h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Soit la médiane pondérée.
  Pour se faire une idée de la manière donc cette étape fonctionne dans AdaBoost.R
 2, une interprétation est donnée.
@@ -7709,8 +6802,6 @@ Soit la médiane pondérée.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Afin de déterminer la réponse finale, toutes les hypothèses faibles sont
  utilisées afin d'obtenir une prédiction 
 \begin_inset Formula $y_{i}^{(t)}$
@@ -7727,8 +6818,6 @@ Afin de déterminer la réponse finale, toutes les hypothèses faibles sont
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 y_{1}^{(t)}\leq y_{2}^{(t)}\leq...\leq y_{i}^{(t)}
@@ -7740,8 +6829,6 @@ y_{1}^{(t)}\leq y_{2}^{(t)}\leq...\leq y_{i}^{(t)}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
  d'additioner (en suivant l'odre ci-dessus) les 
 \begin_inset Formula $log(\frac{1}{\beta_{t}})$
@@ -7757,7 +6844,7 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
 \end_inset
 
  associée au premier 
-\begin_inset Formula $log(\frac{1}{\beta_{t}})$
+\begin_inset Formula $t$
 \end_inset
 
  qui satisfait l'inégalité sera considéré comme la réponse finale renvoyée
@@ -7769,8 +6856,8 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
 
  étaient égaux (chaque hypothèse disposant de la même importance) alors
  la réponse finale correspondrait à la médiane simple des prédictions.
- Une grande différence entre AdaBoost et AdaBoost peut cependant être mentionnée
- : Dans AdaBoost, 
+ Une grande différence entre AdaBoost et AdaBoost.R2 peut cependant être
+ mentionnée : Dans AdaBoost, 
 \begin_inset Formula $T$
 \end_inset
 
@@ -7787,15 +6874,11 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
 .
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Rasoir d'Ockham
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Lorsqu'un modèle est entrainé, il est important que celui-ci soit assez
  général pour avoir de bonnes performances sur le jeu d'entraînement, mais
  aussi et surtout sur le jeu de test qui sert à évaluer les performances
@@ -7821,8 +6904,6 @@ les hypothèses suffisantes les plus simples doivent être choisies
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Dans une étude menée par Schapire, Freund, Bartlett et Lee, les performances
  d'AdaBoost ont été comparées aux performances du bagging, et plus particulièrem
 ent c'est un fait intéressant concernant AdaBoost qui a été à l'origine
@@ -7847,8 +6928,6 @@ literal "false"
 status open
 
 \begin_layout Plain Layout
-
-\lang english
 Décision basée sur l'aggrégation du vote de plusieurs modèles, comme dans
  le boosting.
 \end_layout
@@ -7875,14 +6954,10 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 TODO : Faire graphique learning curves pour montrer + conclusions.
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Dans son rapport de recherche, et pour prouver son hypothèse, Breiman applique
  le boosting à un algorithme connu pour sa variance faible (Analyse discriminant
 e linéaire) et les résultats obtenus semblent pencher en sa faveur puisque
@@ -7907,28 +6982,20 @@ literal "false"
 \end_layout
 
 \begin_layout Enumerate
-
-\lang english
 Trop peu de données sont mises à disposition de l'algorithme pour l'apprentissag
 e.
 \end_layout
 
 \begin_layout Enumerate
-
-\lang english
 Les erreurs d'entrainement des apprenants faibles deviennent trop élevées
  rapidement (Suite aux rééchantillonages).
 \end_layout
 
-\begin_layout Subsubsection
-
-\lang english
+\begin_layout Subsection
 Erreur naturelle
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 En suivant cette méthode nous pouvons réduire l'erreur à chaque nouveau
  prédicteur ajouté.
  Cependant il serait naïf de penser que l'on peut utiliser cette méthode
@@ -7949,8 +7016,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $N_{1}$
 \end_inset
 
@@ -7958,8 +7023,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $N_{2}$
 \end_inset
 
@@ -7967,8 +7030,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $y_{i}$
 \end_inset
 
@@ -7980,8 +7041,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $y_{i}^{(t)}$
 \end_inset
 
@@ -7993,8 +7052,6 @@ literal "false"
 \end_layout
 
 \begin_layout Itemize
-
-\lang english
 \begin_inset Formula $y_{i}^{(p)}(x_{i})$
 \end_inset
 
@@ -8006,15 +7063,11 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 Définissons l'erreur de prédiction (PE) et l'erreur d'échantillonnage du
  modèle (ME) :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 PE=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}-y_{i}^{(p)}(x_{i})]^{2}
@@ -8026,8 +7079,6 @@ PE=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}-y_{i}^{(p)}(x_{i})]^{2}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 ME=\frac{1}{N_{2}}\sum_{i=1}^{N_{2}}[y_{i}^{(t)}-y_{i}^{(p)}(x_{i})]^{2}
@@ -8043,8 +7094,6 @@ Si le bruit peut être considéré comme additif alors :
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 y_{i}=y_{i}^{(t)}+n_{i}
@@ -8069,8 +7118,6 @@ y_{i}=y_{i}^{(t)}+n_{i}
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 E[n]=0
@@ -8098,8 +7145,6 @@ Il est possible d'obtenir l'espérance par rapport à
 \end_layout
 
 \begin_layout Standard
-
-\lang english
 \begin_inset Formula 
 \[
 E[PE]=\sigma^{2}+E[ME]
@@ -8117,27 +7162,9 @@ Ce qui laisse supposer l'existence d'une erreur de prédiction minimum due
 \end_inset
 
 .
- 
 \end_layout
 
 \begin_layout Standard
-
-\lang english
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
-\begin_layout Section
-
-\lang english
-Bibliographie
-\end_layout
-
-\begin_layout Standard
-
-\lang english
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
 btprint "btPrintAll"
