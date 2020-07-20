@@ -609,7 +609,7 @@ La plupart de ces algorithmes sont en fait assez peu récents mais étaient
 \end_layout
 
 \begin_layout Chapter
-Dataset
+Jeu de données
 \end_layout
 
 \begin_layout Section
@@ -1225,7 +1225,8 @@ La distribution de vehicule est indiquée en années, et nous pouvons donc
  que la plupart des véhicules assurés sont conduits dans des villages, mais
  aussi que très peu d'entre eux le sont dans le Gotland.
  Ceci n'est pas surprenant puisque la population de la Suède est d'environ
- 10 millions d'habitants, pour seulement 60.000 habitants la région du Gotland.
+ 10 millions d'habitants, pour seulement 60.000 habitants dans la région
+ du Gotland.
  Les classes 5 et 6 sont elles aussi minoritaires, cela était aussi à prévoir
  puisque ces catégories représentent le nord de la Suède alors que la plupart
  de la population vis dans le sud du pays.
@@ -1718,11 +1719,261 @@ e pour plusieurs sinistres, la variable contient la somme du coût de tous
  les 20.000€ de compensation, mais certains peuvent monter à près de 200.000€.
 \end_layout
 
+\begin_layout Section
+Matrice des corrélations
+\end_layout
+
 \begin_layout Standard
-\begin_inset Newpage pagebreak
+La matrice des corrélations va maintenant être analysée.
+ Cette matrice, représentée sous forme de graphique, donne des informations
+ quant aux relations linéaires liant les différentes variables.
+ La corrélation entre deux variables est définis comme suit : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+r=\frac{Cov(X,Y)}{\sigma_{X}\sigma_{Y}}
+\]
+
 \end_inset
 
 
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $Cov(X,Y)$
+\end_inset
+
+ : Covariance des variables X et Y.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\sigma_{X}$
+\end_inset
+
+ : Écart-type de 
+\begin_inset Formula $X$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $\sigma_{Y}$
+\end_inset
+
+ : Écart-type de 
+\begin_inset Formula $Y$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Il est important de noter que cette mesure ne prends en compte que les relations
+ linéaires entre les variables, mais elle permet de se faire une première
+ idée des relations dans la base de donnée lors de l'analyse exploratoire.
+ Une corrélation positive implique que si 
+\begin_inset Formula $Y$
+\end_inset
+
+ augmente, alors 
+\begin_inset Formula $X$
+\end_inset
+
+ a tendance à augmenter aussi.
+ Au contraire, si la correlation est négative, 
+\begin_inset Formula $X$
+\end_inset
+
+ aurait tendance à diminuer.
+ Enfin, si la corrélation est proche de 
+\begin_inset Formula $0$
+\end_inset
+
+, cela signifie que les variable n'ont pas de relation (linéaire).
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/corrmat.png
+	width 8cm
+	height 8cm
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Matrice des corrélations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Cette métrique n'a que peu d'intérêt à être appliquée aux variables catégorielle
+s alors seules les variables continues sont représentées ici.
+ 
+\end_layout
+
+\begin_layout Itemize
+Les variables ClaimFrequency et ClaimCost sont positivement corrélées, ce
+ qui est facilement expliquable par le fait que ClaimCost est la somme des
+ coûts des différents sinistres venus.
+ Ceci implique que si aucun sinistre n'a été déclaré (ClaimFrequency 
+\begin_inset Formula $=$
+\end_inset
+
+0 ) alors ClaimCost sera nul.
+ 
+\end_layout
+
+\begin_layout Itemize
+Le même raisonement peut être tenu pour la corrélation positive entre NumberClai
+ms et ClaimCost.
+ 
+\end_layout
+
+\begin_layout Itemize
+La corrélation positive entre ClaimFrequency et NumberClaims est quant à
+ elle expliquée par le fait que ClaimFrequency est un ratio divisant NumberClaim
+s par Duration (voir 2.4.2).
+\end_layout
+
+\begin_layout Itemize
+Les variables Duration, NumberClaims, ClaimFrequency, ClaimCost ne sont
+ pas utilisées dans la prédiction.
+ Si les autres variables (OwnersAge et VehiculeAge) sont mises en évidence,
+ la corrélation presque nulle est une bonne chose puisqu'il est bon d'éviter
+ de mettre trop de variables corrélées dans un même modèle (ce qui ne veut
+ cependant pas dire qu'elles n'ont pas une relation non-linéaire possible).
+ 
+\end_layout
+
+\begin_layout Section
+Observation des sinistres
+\end_layout
+
+\begin_layout Standard
+En plus de la matrice des corrélations, il est possible de mettre regarder
+ les variables numériques deux à deux afin de mettre en évidence d'éventuelles
+ relations.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/pairdataClaim.png
+	width 15cm
+	height 15cm
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+\begin_inset Quotes eld
+\end_inset
+
+Pair-plot
+\begin_inset Quotes erd
+\end_inset
+
+ des variables numériques en fonction de la variable 
+\begin_inset Quotes eld
+\end_inset
+
+Claim
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+La figure 2.14 montre plusieurs choses : 
+\end_layout
+
+\begin_layout Itemize
+Les individus sont colorés en fonction d'une nouvelle variable catégorielle
+ créée pour l'occasion : Claim.
+ Elle indique si un individu a déclaré un sinistre ou non.
+ Sur la diagonale se situent les fonctions de densité, scindées selon la
+ variable Claim.
+ Les autres graphiques montrent les relations entre les différentes variables
+ numériques, deux à deux.
+ 
+\end_layout
+
+\begin_layout Itemize
+En ce qui concerne la variable OwnersAge et sa densité, il est intéressant
+ de noter que les deux pics observés sont inversés en fonction de la variable
+ Claim.
+ Il y a plus de clients qui déclarent un sinistre vers le pic de 25 ans
+ que de clients qui n'en déclarent pas, et il y a moins de clients qui déclarent
+ un sinitre vers 45 ans que de clients qui en déclarent un.
+ 
+\end_layout
+
+\begin_layout Itemize
+Pour la variable VehicleAge, la forme de la densité du groupe ayant déclaré
+ un sinistre ou plus indique que beaucoup d'accidents surviennent lorsqu'un
+ véhicule est encore relativement neuf.
+ Ce qui semble aussi être indiqué par les graphiques VehiculeAge/NumberClaims
+ et VehiculeAge/ClaimFrequency.
+\end_layout
+
+\begin_layout Itemize
+La durée du contrat (Duration) semble quant à elle avoir moins d'influence
+ sur l'appartenance à un des groupes de la variable Claim.
 \end_layout
 
 \begin_layout Section
@@ -1730,9 +1981,9 @@ Assurances
 \end_layout
 
 \begin_layout Standard
-Dans cette sous-section seront expliquées les particularités de l'analyse
- de données dans le cadre de l'assurance, et plus précisement dans le cas
- qui nous intéresse ici.
+Dans cette section seront expliquées les particularités de l'analyse de
+ données dans le cadre de l'assurance, et plus précisement dans le cas qui
+ nous intéresse ici.
  
 \end_layout
 
@@ -2474,7 +2725,7 @@ apprendre
  Cette phase d'apprentissage est différente d'un algorithme à un autre.
  Une fois cette phase d'apprentissage terminée le modèle ainsi créé peut
  être utilisé pour la prédiction (après que celui-ci ait été validé, voir
- sous-sections suivantes).
+ section 3.1.4).
  Les valeurs prédites par l'algorithmes seront notées 
 \begin_inset Formula $\hat{y_{i}}$
 \end_inset
@@ -2623,20 +2874,6 @@ En utilisant la fonction de distribution des ED vue précédemment, le résultat
  suivant est obtenu :
 \end_layout
 
-\begin_layout Itemize
-\begin_inset Formula $a'(\theta)=e^{\theta}$
-\end_inset
-
-
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $h(y)=ln(y)$
-\end_inset
-
-
-\end_layout
-
 \begin_layout Standard
 \begin_inset Formula 
 \[
@@ -2666,6 +2903,20 @@ literal "false"
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $a'(\theta)=e^{\theta}$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+\begin_inset Formula $h(y)=ln(y)$
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2700,6 +2951,48 @@ D(y_{i},\hat{y}_{i})=2v_{i}\hat{y_{i},}\;\:\forall y_{i}=0
 
 \end_layout
 
+\begin_layout Standard
+Cette formule est obtenue en remplaçant 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ par 
+\begin_inset Formula $0$
+\end_inset
+
+.
+ Bien que trivial, ce développement est important car sans cette formule
+ simplifiée, le cas 
+\begin_inset Formula $y_{i}=0$
+\end_inset
+
+ pose problème pour l'optimisation.
+ En effet, le terme 
+\begin_inset Formula $y_{i}ln(y_{i})$
+\end_inset
+
+ vaut évidemment 
+\begin_inset Formula $0$
+\end_inset
+
+ dans ce cas précis, cependant 
+\begin_inset Formula $ln(0)=-\infty$
+\end_inset
+
+ et ceci était source d'erreurs de convergence pour l'optimisation
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Optimisation faite avec le package Keras, ceci était plus un problème informatiq
+ue que mathématique.
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
 \begin_layout Subsection
 Overfit, AIC et BIC
 \end_layout
@@ -2710,7 +3003,7 @@ Il est important de comprendre le but derrière la création d'un tel modèle.
 \begin_inset Formula $Y$
 \end_inset
 
- à l'aide de ce modèle.
+ à l'aide de celui-ci.
  Afin que cette fonction sois au mieux approchée, il est important que le
  modèle reste général.
  En effet le but final du modèle est de prédire des valeurs de Y pour des
@@ -2720,7 +3013,7 @@ Il est important de comprendre le but derrière la création d'un tel modèle.
 
 , ce qui amène à des méthodes permettant de vérifier que cette fonction
  est correctement approximée.
- Plus particulièrement nous chercons à éviter un maximum l'overfit.
+ Plus particulièrement le but est d'éviter un maximum l'overfit.
  L'overfit survient lorsqu'un modèle approxime bien les valeurs du jeu de
  données utilisé pour l'entraînement mais que celui-ci est incapable de
  déterminer des valeurs cohérentes pour des nouvelles entrées, il peut être
@@ -2784,7 +3077,7 @@ Akaike Information Criterion
 \end_inset
 
  est le nombre de paramètres à estimer du modèle et L est le maximum de
- la fonction de vraisemblance du modèle (edit copy))
+ la fonction de vraisemblance du modèle)
 \end_layout
 
 \begin_layout Itemize
@@ -2805,7 +3098,11 @@ Bayesian Information Criterion
 \begin_inset Newline newline
 \end_inset
 
-(Où N est le nombre d'observations dans l'échantillon)
+(Où 
+\begin_inset Formula $N$
+\end_inset
+
+ est le nombre d'observations dans l'échantillon)
 \end_layout
 
 \begin_layout Subsection
@@ -2833,7 +3130,15 @@ identiques
  calculer les résultats du modèle aux différents critères statistiques.
  Dans le cas étudié ici, les événements sont rares, c'est pourquoi il est
  souvent préférable de travailler avec la base de donnée complète en évitant
- cette division.
+ cette division 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+.
  C'est pour palier à ce problème que la validation croisée sera utilisée.
 \begin_inset Newline newline
 \end_inset
@@ -2844,7 +3149,7 @@ Le principe de base est de diviser le jeu de données en
 
  ensembles de taille égale.
  Un modèle sera ensuite entrainé pour chaque ensemble en utilisant cet ensemble
- comme jeu de test et l'ensemble des autres ensembles comme jeu d'entraînement.
+ comme jeu de test et la totalité des autres ensembles comme jeu d'entraînement.
  Le résultat de la métrique est alors la moyenne des résultats des différents
  ensembles 
 \begin_inset CommandInset citation
@@ -3420,8 +3725,8 @@ Modèles à dispersion exponentielle (EDM)
 \begin_layout Standard
 Les modèles à dispersion exponentielles font parties des GLMs, et généralisent
  la distribution normale utilisée dans les modèles linéaires.
- En utilisant les hypothèses ci-dessus, nous pouvons déterminer la distribution
- de probabilité d'un EDM 
+ En utilisant les hypothèses ci-dessus, la distribution de probabilité d'un
+ EDM peut être déterminée 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Ohlsson2010"
@@ -3491,7 +3796,7 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 \end_layout
 
 \begin_layout Standard
-Dans notre cas, nous nous occupons de la fréquence des sinistres.
+Dans le cas étudié, c'est la fréquence des sinistres qui est importante.
  Considérons 
 \begin_inset Formula $N(t)$
 \end_inset
@@ -3543,11 +3848,11 @@ f_{X_{i}}(x_{i};\mu_{i})=e^{-\omega_{i}\mu_{i}}\frac{(\omega_{i}\mu_{i})^{x_{i}}
 
 \end_inset
 
-Si nous nous intéressons maintenant à la distribution du ratio 
+ La distribution du ratio 
 \begin_inset Formula $Y_{i}=X_{i}/w_{i}$
 \end_inset
 
- nous tombons également sur une distribution de Poisson 
+ est aussi étudiée et tombe également sur une distribution de Poisson 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Ohlsson2010"
@@ -3622,7 +3927,7 @@ Qui est la une forme de la distribution de probabilité des EDM vue plus
 La fonction de lien 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Subsubsection*
 Forme de tableau
 \end_layout
 
@@ -4046,7 +4351,7 @@ Forme de tableau
 
 \end_layout
 
-\begin_layout Paragraph*
+\begin_layout Subsubsection*
 Fonction de lien
 \end_layout
 
@@ -4071,7 +4376,7 @@ Maintenant que les notations utilisées dans cette parties sont expliquées,
 \end_inset
 
  représentent respectivement la permière et la deuxième variable catégorielle.
- Pour cet exemple nous allons considérer que la première variable conporte
+ Pour cet exemple nous allons considérer que la première variable comporte
  deux classes et la deuxième en comporte trois, ci dessous une représentation
  en forme de tableau.
  
@@ -4375,8 +4680,8 @@ En forme de liste,
 \end_layout
 
 \begin_layout Standard
-Cette équation représente la structure linéaire (wiki) et peut être écrit
- sous la forme matricielle :
+Cette équation représente la structure linéaire et peut être écrit sous
+ la forme matricielle :
 \begin_inset Formula 
 \[
 \mu=X\beta
@@ -4540,7 +4845,7 @@ En réécrivant l'équation en fonction de
 \begin_inset Formula $\beta$
 \end_inset
 
- nous donne la fonction de score : 
+ la fonction de score est obtenue : 
 \end_layout
 
 \begin_layout Standard
@@ -4594,7 +4899,7 @@ La résolution de ce système d'équation doit se faire de manière numérique
 \begin_inset Formula $\beta$
 \end_inset
 
- 
+, qui dépendent du jeu de données utilisé 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Ohlsson2010,StatActu1,StatActu2"
@@ -4668,7 +4973,7 @@ v(\mu_{i})=\mu_{i}
 \end_layout
 
 \begin_layout Standard
-Et la fonction de lien utilisée dans ce cas-ci sera le logarithme, qui nous
+Et la fonction de lien utilisée dans ce cas-ci sera le logarithme (qui nous
  permet de passer du domaine 
 \begin_inset Formula $[0,\infty]$
 \end_inset
@@ -4677,7 +4982,7 @@ Et la fonction de lien utilisée dans ce cas-ci sera le logarithme, qui nous
 \begin_inset Formula $[-\infty,\infty]$
 \end_inset
 
-:
+):
 \end_layout
 
 \begin_layout Standard
@@ -5703,10 +6008,6 @@ literal "false"
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-TODO : lequel sera utilisé.
 \end_layout
 
 \begin_layout Standard
@@ -7163,6 +7464,23 @@ Ce qui laisse supposer l'existence d'une erreur de prédiction minimum due
 .
 \end_layout
 
+\begin_layout Chapter
+Étude de cas
+\end_layout
+
+\begin_layout Standard
+Maintenant que les notions qui seront utilisée au cours de cette analyse
+ ont toutes été présentées, l'étude de cas peut être réalisée.
+ Pour rappel, les données utilisées sont issues d'une assurance moto et
+ la variable prédite est la fréquence des sinistres, qui correspond au nombre
+ de sinistres déclarés divisé par le durée du contrat.
+ Dans ce chapitre ...
+\end_layout
+
+\begin_layout Section
+GLM
+\end_layout
+
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
@@ -7173,6 +7491,14 @@ options "bibtotoc"
 \end_inset
 
 
+\end_layout
+
+\begin_layout Chapter*
+Annexes
+\end_layout
+
+\begin_layout Standard
+sss
 \end_layout
 
 \end_body
