@@ -6,7 +6,7 @@ from keras.layers import Dense
 import keras.backend as KB
 from math import log
 
-data = pd.read_csv("c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/preprocFull.csv")
+data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
 
 factors = data.drop('NumberClaims', axis = 1)
 factors = factors.drop('ClaimFrequency', axis = 1)

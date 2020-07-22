@@ -1913,7 +1913,15 @@ Pair-plot
 \begin_inset Quotes erd
 \end_inset
 
- des variables numériques en fonction de la variable 'Claim'.
+ des variables numériques en fonction de la variable 
+\begin_inset Quotes eld
+\end_inset
+
+Claim
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \end_inset
