@@ -14,10 +14,6 @@ from keras.layers import Dense, Dropout
 data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
 datacats = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/catOnly.csv")
 
-#shuffling because the dataset is ordered by age and the young clients have more accidents which leads to unbalanced k-fold.
-data = data.sample(frac = 1, random_state = 24202).reset_index(drop=True)
-datacats = datacats.sample(frac = 1, random_state = 24202).reset_index(drop=True)
-
 #separing columns
 d1 = data['Duration']
 d2 = datacats['Duration']
@@ -95,7 +91,7 @@ from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import KFold
 
-def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, lr = 0.001, act1 = "relu"):
+def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, lr = 0.001, act1 = "relu"):
     with tf.device('/gpu:0'):
         # create model
         #building model
@@ -103,7 +99,7 @@ def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 
         model.add(Dense(nn1, input_dim = 21, activation = act1, kernel_initializer=kernel_initializer))
         model.add(Dropout(dropout))
         #model.add(Dense(2, activation = "exponential"))
-        #model.add(Dense(10, activation = "relu"))
+        model.add(Dense(nn2, activation = act1))
         model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
         optimizer = keras.optimizers.adagrad(lr=lr)
         model.compile(loss=deviance, optimizer=optimizer, metrics = [deviance, "mean_squared_error"])
@@ -112,33 +108,10 @@ def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 
 
 clf = KerasRegressor(build_fn=baseline_model2)
 
-param_grid = {
-    'clf__epochs':[300,600,100],
-    'clf__dropout':[0.1,0.5],
-    'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[50000, 10000, 1000],
-    'clf__nn1':[10,15,20,25],
-    'clf__lr':[0.1,0.2,0.3],
-    'clf__act1':['exponential', 'softmax']
-}
-
-pipeline = Pipeline([
-    ('clf',clf)
-])
-
-cv = KFold(n_splits=5, shuffle=False)
-
-grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=2, n_iter = 40) #plus de folds pourraient augmenter la variance
-grid.fit(data, feed)
-
-results = pd.DataFrame(grid.cv_results_)
-results.to_csv('NNshallowCV.csv')
-best = grid.best_estimator_
-
-ypred = best.predict(data)
-devTest = devFull(y1, ypred, d1)
-
-#TODO : TESTER AVEC DONATIEN DE METTRE EXP LINK FUNCTION et voir si les résultats sont meilleurs. 
+from sklearn.ensemble import AdaBoostRegressor
+boostedNN = AdaBoostRegressor(base_estimator=clf)
+nextfeed = feed[:, 1]
+boostedNN.fit(data, y1)
 
 
 

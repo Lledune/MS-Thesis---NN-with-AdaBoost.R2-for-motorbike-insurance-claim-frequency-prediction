@@ -1,22 +1,14 @@
-#NN file 
-import tensorflow as tf
-import keras 
-import numpy as np 
+import numpy as np
 import pandas as pd
+import tensorflow as tf
 import keras.backend as KB
-from math import log, exp
-import os
-from sklearn.model_selection import KFold, StratifiedKFold
+import os 
 from keras.layers import Dense, Dropout
-
+import keras
 
 #importing datasets
 data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
 datacats = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/catOnly.csv")
-
-#shuffling because the dataset is ordered by age and the young clients have more accidents which leads to unbalanced k-fold.
-data = data.sample(frac = 1, random_state = 24202).reset_index(drop=True)
-datacats = datacats.sample(frac = 1, random_state = 24202).reset_index(drop=True)
 
 #separing columns
 d1 = data['Duration']
@@ -40,6 +32,9 @@ d1 = pd.DataFrame(d1)
 d2 = pd.DataFrame(d2)
 feed = np.append(y1, d1, axis = 1)
 feed2 = np.append(y2, d2, axis = 1)
+
+feed = pd.DataFrame(feed)
+feed2 = pd.DataFrame(feed2)
 
 #Loss function     
 def deviance(data, y_pred):
@@ -80,22 +75,8 @@ def devFull(y, yhat, d):
         sumtot = sumtot + dev
     return sumtot
 
-#used to check that keras is well using GPU
-from tensorflow.python.client import device_lib
-print(device_lib.list_local_devices())
-
-
-####################
-#Trying to insert keras into sklearn, and search hyperparameters
-#This is the first iteration of it, we check the big domains of hyperparameter and will refine them afterwards depending on the results.
-####################
-
-from keras.wrappers.scikit_learn import KerasRegressor
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
-from sklearn.pipeline import Pipeline
-from sklearn.model_selection import KFold
-
-def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, lr = 0.001, act1 = "relu"):
+#MODEL USED FOR BOOSTING
+def baseline_model2(dropout = 0.2, kernel_initializer = 'uniform', nn1 = 15, lr = 0.01, act1 = "softmax"):
     with tf.device('/gpu:0'):
         # create model
         #building model
@@ -103,42 +84,85 @@ def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 
         model.add(Dense(nn1, input_dim = 21, activation = act1, kernel_initializer=kernel_initializer))
         model.add(Dropout(dropout))
         #model.add(Dense(2, activation = "exponential"))
-        #model.add(Dense(10, activation = "relu"))
         model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
         optimizer = keras.optimizers.adagrad(lr=lr)
         model.compile(loss=deviance, optimizer=optimizer, metrics = [deviance, "mean_squared_error"])
         return model
 
 
-clf = KerasRegressor(build_fn=baseline_model2)
+##############################################
+#ADABOOST.R2
+##############################################
 
-param_grid = {
-    'clf__epochs':[300,600,100],
-    'clf__dropout':[0.1,0.5],
-    'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[50000, 10000, 1000],
-    'clf__nn1':[10,15,20,25],
-    'clf__lr':[0.1,0.2,0.3],
-    'clf__act1':['exponential', 'softmax']
-}
 
-pipeline = Pipeline([
-    ('clf',clf)
-])
+#inits weights to 1/N
+def initWeights(data):
+    n = len(data)
+    weights = np.ones(n)
+    weights = weights/sum(weights)
+    return weights 
+    
 
-cv = KFold(n_splits=5, shuffle=False)
+#Normalizing the weights to sum = 1
+def normalizeWeights(weights):
+    sumW = sum(weights)
+    newW = weights/sumW
+    return newW
 
-grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=2, n_iter = 40) #plus de folds pourraient augmenter la variance
-grid.fit(data, feed)
+#Resample data given weights, returns indices of said new data.
+def resampleIndices(data, weights):
+    nRows = len(data)
+    indices = np.arange(nRows)
+    res = np.random.choice(indices, size = nRows, replace = True, p = weights)
+    return res
 
-results = pd.DataFrame(grid.cv_results_)
-results.to_csv('NNshallowCV.csv')
-best = grid.best_estimator_
+#Selecting rows with array of indices
+def dataFromIndices(data, indices):
+    newD = data.iloc[indices, :]
+    return newD
 
-ypred = best.predict(data)
-devTest = devFull(y1, ypred, d1)
+#The reason feed is passed instead of Y is because keras needs a tuple (y, d) to calculate the custom loss function deviance.
+#data is X
+def boost(iboost, data, feed, weights):
+    y = feed.iloc[:,0]
+    d = feed.iloc[:,1]
+    
+    #setting up the estimator
+    estimator = baseline_model2()
+    
+    #weighted sampling
+    weightedSampleIndices = resampleIndices(data, weights)
+    feedSampled = dataFromIndices(feed, weightedSampleIndices)
+    dataSampled = dataFromIndices(data, weightedSampleIndices)
+    
+    #fit on boostrapped sample
+    estimator.fit(dataSampled, feedSampled, batch_size=5000, epochs = 200, verbose=2)
+    #get estimates on initial dataset
+    preds = pd.DataFrame(estimator.predict(data))
+    
+    #error vector
+    error_vect = np.abs(y.to_numpy() - preds.to_numpy())
+    
+    
+    
+    
+    
 
-#TODO : TESTER AVEC DONATIEN DE METTRE EXP LINK FUNCTION et voir si les résultats sont meilleurs. 
+#Boost 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
