@@ -16,6 +16,7 @@ class AdaBoost():
         self.estimatorsWeights = []
         self.estimatorsSampleWeights = []
         self.learning_rate = learning_rate
+        self.averageLoss = []
         
         
     #Loss function  for Keras    
@@ -116,7 +117,9 @@ class AdaBoost():
         dataSampled = self.dataFromIndices(data, weightedSampleIndices)
         
         #fit on boostrapped sample
-        estimator.fit(dataSampled, feedSampled, batch_size=5000, epochs = 20, verbose=2)
+        estimator.fit(dataSampled, feedSampled, batch_size=1000, epochs = 200, verbose=2)
+        self.estimators.append(estimator)
+
         #get estimates on initial dataset
         preds = pd.DataFrame(estimator.predict(data)).iloc[:,0]
         
@@ -148,9 +151,9 @@ class AdaBoost():
             if(len(self.estimators) > 1):
                 self.estimators.pop(-1)
                 self.printeq()
-                print("Average Loss <= 0.5, stopping AdaBoost.R2 after ", iboost, " runs.")
+                print("Average Loss >= 0.5, stopping AdaBoost.R2 after ", iboost, " runs.")
                 self.printeq()
-            return None, None, None
+            return None, None, None, None
         
         #beta
         beta = estimator_error / (1. - estimator_error)
@@ -203,8 +206,10 @@ class AdaBoost():
             #append        
             self.estimatorsWeights.append(estimator_weight)
             self.estimatorsErrors.append(estimator_error)
-            self.estimatorsSampleWeights.append(weights)
-            self.estimators.append(estimator)
+            self.estimatorsSampleWeights.append(weights)            
+            self.printeq()
+            print("Done.")
+            self.printeq()
             
             if(estimator_error == 0):
                 break
@@ -236,10 +241,12 @@ d1 = pd.DataFrame(d1)
 feed = np.append(y1, d1, axis = 1)
 feed = pd.DataFrame(feed)
 
-est = AdaBoost(3, 'linear', learning_rate = 1)
+est = AdaBoost(5, 'linear', learning_rate = 1)
 
 initWeights = est.initWeights(data)
+
 est.fit(data, feed, initWeights)
+
 vectorWeights = est.estimatorsWeights
 vectorSampleWeights = est.estimatorsSampleWeights
 vectorEstimators = est.estimators
