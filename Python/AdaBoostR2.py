@@ -3,6 +3,7 @@ import pandas as pd
 import tensorflow as tf
 import keras.backend as KB
 import os 
+from math import log
 from keras.layers import Dense, Dropout
 import keras
 
@@ -121,9 +122,17 @@ def dataFromIndices(data, indices):
     newD = data.iloc[indices, :]
     return newD
 
+aaa = np.zeros(len(data))
+aaa[0] = 1
+aaa[1] = 2
+weights = normalizeWeights(aaa)
+
+def discardEstimator(estArray, currentEstError):
+    if(currentEstError >= 0.5)
+
 #The reason feed is passed instead of Y is because keras needs a tuple (y, d) to calculate the custom loss function deviance.
 #data is X
-def boost(iboost, data, feed, weights):
+def boost(iboost, data, feed, weights, loss = 'linear'):
     y = feed.iloc[:,0]
     d = feed.iloc[:,1]
     
@@ -136,14 +145,36 @@ def boost(iboost, data, feed, weights):
     dataSampled = dataFromIndices(data, weightedSampleIndices)
     
     #fit on boostrapped sample
-    estimator.fit(dataSampled, feedSampled, batch_size=5000, epochs = 200, verbose=2)
+    estimator.fit(dataSampled, feedSampled, batch_size=5000, epochs = 20, verbose=2)
     #get estimates on initial dataset
-    preds = pd.DataFrame(estimator.predict(data))
+    preds = pd.DataFrame(estimator.predict(data)).iloc[:,0]
     
     #error vector
-    error_vect = np.abs(y.to_numpy() - preds.to_numpy())
+    error_vect = y-preds
+    error_vect = np.abs(error_vect)    
+    sample_mask = weights > 0
+    masked_sample_weight = weights[sample_mask]
+    masked_error_vector = error_vect[sample_mask]
     
+    #max error
+    error_max = masked_error_vector.max()
+    if error_max != 0:
+        #normalizing
+        masked_error_vector /= error_max
+    #if loss isn't linear then modify it accordingly
+    if loss == 'square':
+        masked_error_vector **= 2
+    elif loss == 'exponential':
+        masked_error_vector = 1. - np.exp(-masked_error_vector)
+        
+    #average loss
+    estimator_error = (masked_sample_weight * masked_error_vector).sum()
+
+    #TODO STOP IF ESTIMATOR ERROR <= 0
+
+    elif        
     
+        
     
     
     
