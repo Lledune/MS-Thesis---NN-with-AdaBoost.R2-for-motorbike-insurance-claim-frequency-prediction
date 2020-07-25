@@ -7,6 +7,11 @@ from math import log
 from keras.layers import Dense, Dropout
 import keras
 
+
+from sklearn.utils.extmath import stable_cumsum
+from sklearn.utils.validation import _num_samples
+
+
 class AdaBoost():
     def __init__(self, n_est, loss, learning_rate):
         self.n_est = n_est
@@ -59,7 +64,7 @@ class AdaBoost():
         return sumtot
     
     #MODEL USED FOR BOOSTING
-    def baseline_model2(self, dropout = 0.2, kernel_initializer = 'uniform', nn1 = 15, lr = 0.01, act1 = "softmax"):
+    def baseline_model2(self, dropout = 0.2, kernel_initializer = 'uniform', nn1 = 5, lr = 0.1, act1 = "softmax"):
         with tf.device('/gpu:0'):
             # create model
             #building model
@@ -117,7 +122,7 @@ class AdaBoost():
         dataSampled = self.dataFromIndices(data, weightedSampleIndices)
         
         #fit on boostrapped sample
-        estimator.fit(dataSampled, feedSampled, batch_size=1000, epochs = 200, verbose=2)
+        estimator.fit(dataSampled, feedSampled, batch_size=10000, epochs = 20, verbose=2)
         self.estimators.append(estimator)
 
         #get estimates on initial dataset
@@ -164,7 +169,7 @@ class AdaBoost():
                 beta, (1.-masked_error_vector) * self.learning_rate
             )
             
-        #append self variables TODO
+        #append self variables TODO + ADD SAMPLES USED FOR TRAIN
         
         return weights, estimator_weight, estimator_error, estimator
     
@@ -179,12 +184,12 @@ class AdaBoost():
         
         #clearing vars
         self.estimators = []
-        self.estimatorsWeights = []
+        self.estimatorsWeights = np.zeros(self.n_est, dtype=np.float64)
+
         self.estimatorsSampleWeights = []
         #append first one
         self.estimatorsSampleWeights.append(weights)
-        self.estimatorsErrors = []
-        
+        self.estimatorsErrors = np.ones(self.n_est, dtype=np.float64)        
         #looping
         self.printeq()
         print("AdaBoost.R2, Lucien Ledune Masters Thesis")
@@ -204,8 +209,8 @@ class AdaBoost():
             weights = self.normalizeWeights(weights)
             
             #append        
-            self.estimatorsWeights.append(estimator_weight)
-            self.estimatorsErrors.append(estimator_error)
+            self.estimatorsWeights[iboost] = estimator_weight
+            self.estimatorsErrors[iboost] = estimator_error
             self.estimatorsSampleWeights.append(weights)            
             self.printeq()
             print("Done.")
@@ -221,6 +226,30 @@ class AdaBoost():
                 break
             
         return self
+    
+    def getMedianPred(self, data, limit):
+        predictions = np.array([est.predict(data) for est in self.estimators[:limit]]).T
+        sorted_idx = np.argsort(predictions, axis = 1)
+        #find index of median prediction for each sample
+        weight_cdf = stable_cumsum(self.estimatorsWeights[sorted_idx], axis = 1)
+        median_or_above = weight_cdf >= 0.5 * weight_cdf[:, -1][:, np.newaxis]
+        median_idx = median_or_above.argmax(axis = 1)
+        median_estimators = sorted_idx[np.arrange(_num_samples(data)), median_idx]
+        
+        #return median preds
+        return predictions[np.arrange(_num_samples(data)), median_estimators]
+    
+    def predict(self, data):
+        return self.getMedianPred(data, len(self.estimators))
+    
+    def stagedPredict(self, data):
+        for i, _ in enumerate(self.estimators, 1):
+            yield self.getMedianPred(data, limit = i)
+            
+            
+            
+        
+        
 
 
 #importing datasets
@@ -241,7 +270,7 @@ d1 = pd.DataFrame(d1)
 feed = np.append(y1, d1, axis = 1)
 feed = pd.DataFrame(feed)
 
-est = AdaBoost(5, 'linear', learning_rate = 1)
+est = AdaBoost(10, 'linear', learning_rate = 1)
 
 initWeights = est.initWeights(data)
 
@@ -252,3 +281,16 @@ vectorSampleWeights = est.estimatorsSampleWeights
 vectorEstimators = est.estimators
 vectorErrors = est.estimatorsErrors
             
+xxx = est.predict(data)
+devTest = est.devFull(y1, xxx, d1)
+
+
+limit = 3
+predictions = np.array([est.predict(data) for est in vectorEstimators[:limit]]).T
+sorted_idx = np.argsort(predictions, axis = 1)
+#find index of median prediction for each sample
+vectorWeights = np.array(vectorWeights)
+weight_cdf = stable_cumsum(vectorWeights[sorted_idx], axis = 1)
+median_or_above = weight_cdf >= 0.5 * weight_cdf[:, -1][:, np.newaxis]
+median_idx = median_or_above.argmax(axis = 1)
+median_estimators = sorted_idx[np.arrange(_num_samples(data)), median_idx]
