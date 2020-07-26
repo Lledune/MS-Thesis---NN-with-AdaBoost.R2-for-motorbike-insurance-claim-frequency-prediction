@@ -8,7 +8,7 @@ from math import log, exp
 import os
 from sklearn.model_selection import KFold, StratifiedKFold
 from keras.layers import Dense, Dropout
-
+import pickle
 
 #importing datasets
 data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
@@ -17,6 +17,10 @@ datacats = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-in
 #shuffling because the dataset is ordered by age and the young clients have more accidents which leads to unbalanced k-fold.
 data = data.sample(frac = 1, random_state = 24202).reset_index(drop=True)
 datacats = datacats.sample(frac = 1, random_state = 24202).reset_index(drop=True)
+
+
+
+
 
 #separing columns
 d1 = data['Duration']
@@ -113,13 +117,13 @@ def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 
 clf = KerasRegressor(build_fn=baseline_model2)
 
 param_grid = {
-    'clf__epochs':[300,600,100],
-    'clf__dropout':[0.1,0.5],
+    'clf__epochs':[300,400,100],
+    'clf__dropout':[0.1,0.2,0.3],
     'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[50000, 10000, 1000],
-    'clf__nn1':[10,15,20,25],
-    'clf__lr':[0.1,0.2,0.3],
-    'clf__act1':['exponential', 'softmax']
+    'clf__batch_size':[50000, 10000, 1000,500],
+    'clf__nn1':[5,10,15,25],
+    'clf__lr':[0.1,0.2,0.3,0.05],
+    'clf__act1':['softmax']
 }
 
 pipeline = Pipeline([
@@ -128,21 +132,32 @@ pipeline = Pipeline([
 
 cv = KFold(n_splits=5, shuffle=False)
 
-grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=2, n_iter = 40) #plus de folds pourraient augmenter la variance
+grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 75) #plus de folds pourraient augmenter la variance
 grid.fit(data, feed)
 
 results = pd.DataFrame(grid.cv_results_)
-results.to_csv('NNshallowCV.csv')
+results.to_csv('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/NNshallowCV.csv')
 best = grid.best_estimator_
 
 ypred = best.predict(data)
 devTest = devFull(y1, ypred, d1)
 
-#TODO : TESTER AVEC DONATIEN DE METTRE EXP LINK FUNCTION et voir si les résultats sont meilleurs. 
+######################################
+#SAVE MODEL 
+######################################
 
+#getting model from pipeline
+model_to_save = best.named_steps['clf'].model
 
+#saving model
+model_to_save.save('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/NNmodel')
 
+#load model
+#NEED TO ADD THE CUSTOM LOSS AS OBJECT IN LOAD !!
+reconstructed_model = keras.models.load_model('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/NNmodel', custom_objects={'deviance' : deviance})
 
+ypredrec = reconstructed_model.predict(data)
+devrec = devFull(y1, ypredrec, d1)
 
 
 

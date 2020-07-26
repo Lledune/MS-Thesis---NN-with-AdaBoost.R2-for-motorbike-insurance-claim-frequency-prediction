@@ -6,14 +6,14 @@ import os
 from math import log
 from keras.layers import Dense, Dropout
 import keras
-
-
+import math
+from keras.wrappers.scikit_learn import KerasRegressor
 from sklearn.utils.extmath import stable_cumsum
 from sklearn.utils.validation import _num_samples
-
+import pickle
 
 class AdaBoost():
-    def __init__(self, n_est, loss, learning_rate):
+    def __init__(self, n_est, loss, learning_rate, kerasEpochs, kerasBatchSize):
         self.n_est = n_est
         self.loss = loss
         self.estimators = []
@@ -22,6 +22,8 @@ class AdaBoost():
         self.estimatorsSampleWeights = []
         self.learning_rate = learning_rate
         self.averageLoss = []
+        self.kerasEpochs = kerasEpochs
+        self.kerasBatchSize = kerasBatchSize
         
         
     #Loss function  for Keras    
@@ -64,7 +66,21 @@ class AdaBoost():
         return sumtot
     
     #MODEL USED FOR BOOSTING
-    def baseline_model2(self, dropout = 0.2, kernel_initializer = 'uniform', nn1 = 5, lr = 0.1, act1 = "softmax"):
+    def baseline_model2(self, dropout = 0.2, kernel_initializer = 'uniform', nn1 = 5, lr = 0.15, act1 = "softmax"):
+        with tf.device('/gpu:0'):
+            # create model
+            #building model
+            model = keras.Sequential()
+            model.add(Dense(nn1, input_dim = 21, activation = act1, kernel_initializer=kernel_initializer))
+            model.add(Dropout(dropout))
+            #model.add(Dense(2, activation = "exponential"))
+            model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
+            optimizer = keras.optimizers.adagrad(lr=lr)
+            model.compile(loss=self.deviance, optimizer=optimizer, metrics = [self.deviance, "mean_squared_error"])
+            return model
+        
+    #MODEL USED FOR BOOSTING
+    def baseline_model(self, dropout = 0.2, kernel_initializer = 'uniform', nn1 = 5, lr = 0.15, act1 = "softmax"):
         with tf.device('/gpu:0'):
             # create model
             #building model
@@ -114,7 +130,8 @@ class AdaBoost():
         d = feed.iloc[:,1]
         
         #setting up the estimator
-        estimator = self.baseline_model2()
+        #estimator = self.baseline_model2()
+        estimator = KerasRegressor(build_fn=self.baseline_model)
         
         #weighted sampling
         weightedSampleIndices = self.resampleIndices(data, weights)
@@ -122,8 +139,10 @@ class AdaBoost():
         dataSampled = self.dataFromIndices(data, weightedSampleIndices)
         
         #fit on boostrapped sample
-        estimator.fit(dataSampled, feedSampled, batch_size=10000, epochs = 20, verbose=2)
+        estimator.fit(dataSampled, feedSampled, batch_size=self.kerasBatchSize, epochs = self.kerasEpochs, verbose=2)
         self.estimators.append(estimator)
+            
+        
 
         #get estimates on initial dataset
         preds = pd.DataFrame(estimator.predict(data)).iloc[:,0]
@@ -150,7 +169,7 @@ class AdaBoost():
         estimator_error = (masked_sample_weight * masked_error_vector).sum()
     
         #TODO STOP IF ESTIMATOR ERROR <= 0
-    
+        
         if estimator_error >= 0.5:
             #discard current if it is not first one
             if(len(self.estimators) > 1):
@@ -159,6 +178,7 @@ class AdaBoost():
                 print("Average Loss >= 0.5, stopping AdaBoost.R2 after ", iboost, " runs.")
                 self.printeq()
             return None, None, None, None
+        
         
         #beta
         beta = estimator_error / (1. - estimator_error)
@@ -234,10 +254,10 @@ class AdaBoost():
         weight_cdf = stable_cumsum(self.estimatorsWeights[sorted_idx], axis = 1)
         median_or_above = weight_cdf >= 0.5 * weight_cdf[:, -1][:, np.newaxis]
         median_idx = median_or_above.argmax(axis = 1)
-        median_estimators = sorted_idx[np.arrange(_num_samples(data)), median_idx]
+        median_estimators = sorted_idx[np.arange(_num_samples(data)), median_idx]
         
         #return median preds
-        return predictions[np.arrange(_num_samples(data)), median_estimators]
+        return predictions[np.arange(_num_samples(data)), median_estimators]
     
     def predict(self, data):
         return self.getMedianPred(data, len(self.estimators))
@@ -246,12 +266,67 @@ class AdaBoost():
         for i, _ in enumerate(self.estimators, 1):
             yield self.getMedianPred(data, limit = i)
             
+    def save_model(self, path):
+        #config dictionary and weights
+        config_dic = {
+                'n_est' : self.n_est,
+                'loss' : self.loss,
+                'estimatorsErrors' : self.estimatorsErrors,
+                'estimatorsWeights' : self.estimatorsWeights,
+                'estimatorsSampleWeights' : self.estimatorsSampleWeights,
+                'learning_rate' : self.learning_rate,
+                'averageLoss' : self.averageLoss,
+                'kerasEpochs' : self.kerasEpochs,
+                'kerasBatchSize' : self.kerasBatchSize
+            }
+        dictpath = path + '/savedDict'
+        with open(dictpath, 'wb') as dictfile:
+            pickle.dump(config_dic, dictfile)
+        
+        #models
+        models = self.estimators
+        pathModelFolder = path + '/models'
+        counter = 0
+        for model in models:
+            #convert from keras regressor to keras model 
+            modelKeras = model.model
+            #save it 
+            counter = counter + 1
+            singleModelPath = pathModelFolder + "/model" + str(counter)
+            modelKeras.save(singleModelPath)
+        return
+    
+    #pathADB is the path to AdaBoost folder (same as used in save_model) 
+    def load_model(self, pathADB):
+        print('Loading model ...')
+        dicpath = pathADB + '/savedDict'
+        with open(dicpath, 'rb') as configDicFile:
+            config_dic = pickle.load(configDicFile)
+        #assign configs
+        self.n_est = config_dic['n_est']
+        self.loss = config_dic['loss']
+        self.estimatorsErrors = config_dic['estimatorsErrors']
+        self.estimatorsWeights = config_dic['estimatorsWeights']
+        self.estimatorsSampleWeights = config_dic['estimatorsSampleWeights']
+        self.learning_rate = config_dic['learning_rate']
+        self.averageLoss = config_dic['averageLoss']
+        
+        #models
+        estLoaded = []
+        modelsPath = pathADB + '/models'
+        for i in range(0, len(self.estimatorsWeights)):
+            modelString = '/model' + str(i+1)
+            modelFullString = modelsPath + modelString
             
+            model = KerasRegressor(build_fn=self.baseline_model2, epochs = 300, batch_size = 10, verbose = 2)
+            model.model = keras.models.load_model(modelFullString, custom_objects={'deviance' : self.deviance})
+            estLoaded.append(model)
+        self.estimators = estLoaded
+        
+        print("Model loaded.")
             
         
         
-
-
 #importing datasets
 data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
 
@@ -270,7 +345,7 @@ d1 = pd.DataFrame(d1)
 feed = np.append(y1, d1, axis = 1)
 feed = pd.DataFrame(feed)
 
-est = AdaBoost(10, 'linear', learning_rate = 1)
+est = AdaBoost(2, 'linear', learning_rate = 1, kerasBatchSize=5000, kerasEpochs=50)
 
 initWeights = est.initWeights(data)
 
@@ -284,13 +359,16 @@ vectorErrors = est.estimatorsErrors
 xxx = est.predict(data)
 devTest = est.devFull(y1, xxx, d1)
 
+pathtosave = "c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/python/models/AdaBoost"
+est.save_model(pathtosave)
 
-limit = 3
-predictions = np.array([est.predict(data) for est in vectorEstimators[:limit]]).T
-sorted_idx = np.argsort(predictions, axis = 1)
-#find index of median prediction for each sample
-vectorWeights = np.array(vectorWeights)
-weight_cdf = stable_cumsum(vectorWeights[sorted_idx], axis = 1)
-median_or_above = weight_cdf >= 0.5 * weight_cdf[:, -1][:, np.newaxis]
-median_idx = median_or_above.argmax(axis = 1)
-median_estimators = sorted_idx[np.arrange(_num_samples(data)), median_idx]
+##########
+#test load
+adatest = AdaBoost(2, 'linear', 1, kerasBatchSize=5000, kerasEpochs=50)
+adatest.load_model(pathtosave)
+xxxx = adatest.predict(data)
+xxxxdevTest = adatest.devFull(y1, xxxx, d1)
+
+
+
+

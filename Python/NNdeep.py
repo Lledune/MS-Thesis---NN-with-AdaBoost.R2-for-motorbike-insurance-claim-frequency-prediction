@@ -95,7 +95,7 @@ from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import KFold
 
-def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, lr = 0.001, act1 = "relu"):
+def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, nn3 = 10, lr = 0.001, act1 = "relu"):
     with tf.device('/gpu:0'):
         # create model
         #building model
@@ -104,6 +104,7 @@ def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 
         model.add(Dropout(dropout))
         #model.add(Dense(2, activation = "exponential"))
         model.add(Dense(nn2, activation = act1))
+        model.add(Dense(nn3, activation = act1))
         model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
         optimizer = keras.optimizers.adagrad(lr=lr)
         model.compile(loss=deviance, optimizer=optimizer, metrics = [deviance, "mean_squared_error"])
@@ -114,13 +115,14 @@ clf = KerasRegressor(build_fn=baseline_model2)
 
 param_grid = {
     'clf__epochs':[300,600,100],
-    'clf__dropout':[0.1,0.5],
+    'clf__dropout':[0.1,0.2],
     'clf__kernel_initializer':['uniform'],
     'clf__batch_size':[50000, 10000, 1000],
     'clf__nn1':[10,15,20],
     'clf__nn2':[15,20,25],
-    'clf__lr':[0.1,0.2,0.3],
-    'clf__act1':['exponential', 'softmax']
+    'clf__nn3':[10,15,20],
+    'clf__lr':[0.1,0.2,0.3,0.05],
+    'clf__act1':['softmax']
 }
 
 pipeline = Pipeline([
@@ -129,11 +131,11 @@ pipeline = Pipeline([
 
 cv = KFold(n_splits=5, shuffle=False)
 
-grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=2, n_iter = 40) #plus de folds pourraient augmenter la variance
+grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 10) #plus de folds pourraient augmenter la variance
 grid.fit(data, feed)
 
 results2 = pd.DataFrame(grid.cv_results_)
-results2.to_csv('NNdeepCV.csv')
+results2.to_csv('c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/NNdeepCV.csv')
 best2 = grid.best_estimator_
 
 ypred2 = best2.predict(data)
@@ -141,6 +143,22 @@ devTest = devFull(y1, ypred2, d1)
 
 #TODO : TESTER AVEC DONATIEN DE METTRE EXP LINK FUNCTION et voir si les résultats sont meilleurs. 
 
+###########################
+# SAVE MODEL
+###########################
+
+#getting model from pipeline
+model_to_save = best2.named_steps['clf'].model
+
+#saving model
+model_to_save.save('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/DNNmodel')
+
+#load model
+#NEED TO ADD THE CUSTOM LOSS AS OBJECT IN LOAD !!
+reconstructed_model = keras.models.load_model('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/DNNmodel', custom_objects={'deviance' : deviance})
+
+ypredrec = reconstructed_model.predict(data)
+devrec = devFull(y1, ypredrec, d1)
 
 
 
