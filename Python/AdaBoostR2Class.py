@@ -13,7 +13,28 @@ from sklearn.utils.validation import _num_samples
 import pickle
 
 class AdaBoost():
-    def __init__(self, n_est, loss, learning_rate, kerasEpochs, kerasBatchSize):
+    """
+    A classed used for AdaBoost implementation
+    
+    ...
+    
+    Attributes
+    ----------
+    n_est : int
+    loss : [exponential, linear, square]
+    learning_rate : int > 0
+    kerasEpochs : int
+    kerasBatchSize : int
+    dropout : [0,1]
+    nn1 : int
+    keraslr : [0,1]
+    input_dim : iint
+    
+    """
+    
+    
+    def __init__(self, n_est = 50, loss = 'exponential', learning_rate = 1, kerasEpochs = 300, 
+                 kerasBatchSize = 1000, dropout = 0.2, nn1 = 5, keraslr = 0.1, input_dim = 21):
         self.n_est = n_est
         self.loss = loss
         self.estimators = []
@@ -24,6 +45,10 @@ class AdaBoost():
         self.averageLoss = []
         self.kerasEpochs = kerasEpochs
         self.kerasBatchSize = kerasBatchSize
+        self.dropout = dropout
+        self.nn1 = nn1
+        self.keraslr = keraslr
+        self.input_dim = input_dim
         
         
     #Loss function  for Keras    
@@ -51,7 +76,34 @@ class AdaBoost():
             return 2 * d * yhat
         return print("error")
     
+    def devArray(self, y, yhat, d):
+        """
+        returns array of all deviance values
+        """
+        n = len(y)
+        dev = np.ndarray(n)
+        #convert 
+        
+        
     def devFull(self, y, yhat, d):
+        """
+        Returns full deviance
+
+        Parameters
+        ----------
+        y : vector
+            targets.
+        yhat : vector
+            predictions.
+        d : vector
+            duration.
+
+        Returns
+        -------
+        sumtot : int
+            Full deviance (sum)
+
+        """
         sumtot = 0
         y = pd.DataFrame(y)
         yhat = pd.DataFrame(yhat)
@@ -66,30 +118,16 @@ class AdaBoost():
         return sumtot
     
     #MODEL USED FOR BOOSTING
-    def baseline_model2(self, dropout = 0.2, kernel_initializer = 'uniform', nn1 = 5, lr = 0.15, act1 = "softmax"):
+    def baseline_model(self, kernel_initializer = 'uniform', act1 = "softmax"):
         with tf.device('/gpu:0'):
             # create model
             #building model
             model = keras.Sequential()
-            model.add(Dense(nn1, input_dim = 21, activation = act1, kernel_initializer=kernel_initializer))
-            model.add(Dropout(dropout))
+            model.add(Dense(self.nn1, input_dim = self.input_dim, activation = act1, kernel_initializer=kernel_initializer))
+            model.add(Dropout(self.dropout))
             #model.add(Dense(2, activation = "exponential"))
             model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
-            optimizer = keras.optimizers.adagrad(lr=lr)
-            model.compile(loss=self.deviance, optimizer=optimizer, metrics = [self.deviance, "mean_squared_error"])
-            return model
-        
-    #MODEL USED FOR BOOSTING
-    def baseline_model(self, dropout = 0.2, kernel_initializer = 'uniform', nn1 = 5, lr = 0.15, act1 = "softmax"):
-        with tf.device('/gpu:0'):
-            # create model
-            #building model
-            model = keras.Sequential()
-            model.add(Dense(nn1, input_dim = 21, activation = act1, kernel_initializer=kernel_initializer))
-            model.add(Dropout(dropout))
-            #model.add(Dense(2, activation = "exponential"))
-            model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
-            optimizer = keras.optimizers.adagrad(lr=lr)
+            optimizer = keras.optimizers.adagrad(lr=self.keraslr)
             model.compile(loss=self.deviance, optimizer=optimizer, metrics = [self.deviance, "mean_squared_error"])
             return model
         
@@ -194,6 +232,26 @@ class AdaBoost():
         return weights, estimator_weight, estimator_error, estimator
     
     def fit(self, data, feed, weights):
+        """
+        Fit function for a model
+
+        Parameters
+        ----------
+        data : data
+        feed : feed
+        weights : weights
+
+        Raises
+        ------
+        ValueError
+            DESCRIPTION.
+
+        Returns
+        -------
+        TYPE
+            DESCRIPTION.
+
+        """
         #check if adaboost loss is correctly setup
         if self.loss not in ('linear', 'square', 'exponential'):
             raise ValueError(
@@ -277,7 +335,11 @@ class AdaBoost():
                 'learning_rate' : self.learning_rate,
                 'averageLoss' : self.averageLoss,
                 'kerasEpochs' : self.kerasEpochs,
-                'kerasBatchSize' : self.kerasBatchSize
+                'kerasBatchSize' : self.kerasBatchSize,
+                'dropout' : self.dropout,
+                'nn1' : self.nn1,
+                'keraslr' : self.keraslr,
+                'input_dim' : self.input_dim
             }
         dictpath = path + '/savedDict'
         with open(dictpath, 'wb') as dictfile:
@@ -310,6 +372,12 @@ class AdaBoost():
         self.estimatorsSampleWeights = config_dic['estimatorsSampleWeights']
         self.learning_rate = config_dic['learning_rate']
         self.averageLoss = config_dic['averageLoss']
+        self.kerasEpochs = config_dic['kerasEpochs']
+        self.kerasBatchSize = config_dic['kerasBatchSize']
+        self.dropout = config_dic['dropout']
+        self.nn1 = config_dic['nn1']
+        self.keraslr = config_dic['keraslr']
+        self.input_dim = config_dic['input_dim']
         
         #models
         estLoaded = []
@@ -326,7 +394,7 @@ class AdaBoost():
         print("Model loaded.")
             
         
-        
+
 #importing datasets
 data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
 
@@ -345,6 +413,7 @@ d1 = pd.DataFrame(d1)
 feed = np.append(y1, d1, axis = 1)
 feed = pd.DataFrame(feed)
 
+'''
 est = AdaBoost(2, 'linear', learning_rate = 1, kerasBatchSize=5000, kerasEpochs=50)
 
 initWeights = est.initWeights(data)
@@ -368,6 +437,92 @@ adatest = AdaBoost(2, 'linear', 1, kerasBatchSize=5000, kerasEpochs=50)
 adatest.load_model(pathtosave)
 xxxx = adatest.predict(data)
 xxxxdevTest = adatest.devFull(y1, xxxx, d1)
+'''
+
+#####################################
+# PARAMETER SEARCH ##################
+#####################################
+import random
+#Defining param grid 
+param_grid = {
+        'n_est' : [2,3],
+        'loss' : ['exponential'],
+        'learning_rate' : [1,0.5],
+        'kerasEpochs' : [10],
+        'kerasBatchSize' : [1000],
+        'dropout' : [0.1,0.2],
+        'nn1' : [5,10,15],
+        'keraslr' : [0.1,0.05],
+    }
+
+
+paramdraws = []
+nTests = 3
+
+#generate all the grids for testing 
+for i in range(0, nTests): 
+    paramdraw = {
+            'n_est' : [],
+            'loss' : [],
+            'learning_rate' : [],
+            'kerasEpochs' : [],
+            'kerasBatchSize' : [],
+            'dropout' : [],
+            'nn1' : [],
+            'keraslr' : [],
+        }
+    #choosing randomly
+    paramdraw['n_est'].append(random.choice(param_grid['n_est']))
+    paramdraw['loss'].append(random.choice(param_grid['loss']))
+    paramdraw['learning_rate'].append(random.choice(param_grid['learning_rate']))
+    paramdraw['kerasEpochs'].append(random.choice(param_grid['kerasEpochs']))
+    paramdraw['kerasBatchSize'].append(random.choice(param_grid['kerasBatchSize']))
+    paramdraw['dropout'].append(random.choice(param_grid['dropout']))
+    paramdraw['nn1'].append(random.choice(param_grid['nn1']))
+    paramdraw['keraslr'].append(random.choice(param_grid['keraslr']))
+    
+    paramdraws.append(paramdraw)
+    
+#All the parameters are now sampled, we can create and store the models.
+adastore = []
+predsStore = []
+devianceStore = []
+
+for i in range(0, nTests):
+    params = paramdraws[i]
+    estimator = AdaBoost(n_est=params['n_est'][0], loss = params['loss'][0], learning_rate=params['learning_rate'][0], kerasEpochs=params['kerasEpochs'][0],
+                         kerasBatchSize=params['kerasBatchSize'][0], dropout = params['dropout'][0], nn1=params['nn1'][0], keraslr=params['keraslr'][0], 
+                         input_dim=21)
+    
+    initWeights = estimator.initWeights(data)
+    #fitting model
+    estimator.fit(data, feed, initWeights)
+    #predictions
+    predSingle = estimator.predict(data)
+    #loss
+    devSing = estimator.devFull(y1, predSingle, d1)
+    devianceStore.append(devSing)
+    predsStore.append(predSingle)
+    adastore.append(estimator)
+
+
+#####################
+#devtests
+xxx = pd.DataFrame(xxx)
+y1.iloc[27][0]
+
+fff = estimator.devSingle(y1.iloc[27][0], xxx.iloc[27][0], d1.iloc[27][0])
+ggg = estimator.devSingle(y1.iloc[10][0], xxx.iloc[10][0], d1.iloc[10][0])
+
+
+
+
+
+
+
+
+
+
 
 
 
