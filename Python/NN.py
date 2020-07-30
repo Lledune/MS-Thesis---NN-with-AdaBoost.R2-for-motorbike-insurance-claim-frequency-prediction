@@ -9,32 +9,37 @@ import os
 from sklearn.model_selection import KFold, StratifiedKFold
 from keras.layers import Dense, Dropout
 import pickle
+import matplotlib.pyplot as plt
 
 #importing datasets
-data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
-datacats = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/catOnly.csv")
-
-#shuffling because the dataset is ordered by age and the young clients have more accidents which leads to unbalanced k-fold.
-data = data.sample(frac = 1, random_state = 24202).reset_index(drop=True)
-datacats = datacats.sample(frac = 1, random_state = 24202).reset_index(drop=True)
-
-
-
-
+dataTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTrain.csv")
+datacatsTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTrain.csv")
 
 #separing columns
-d1 = data['Duration']
-d2 = datacats['Duration']
+d1 = dataTrain['Duration']
+d2 = datacatsTrain['Duration']
 
-y1 = data['ClaimFrequency']
-y2 = datacats['NumberClaims']/datacats['Duration']
+y1 = dataTrain['ClaimFrequency']
+y2 = datacatsTrain['NumberClaims']/datacatsTrain['Duration']
 
-nc1 = data['NumberClaims']
-nc2 = datacats['NumberClaims']
+nc1 = dataTrain['NumberClaims']
+nc2 = datacatsTrain['NumberClaims']
+
+#importing test 
+dataTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTest.csv")
+datacatsTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTest.csv")
+
+d1test = dataTest['Duration']
+d2test = datacatsTest['Duration']
+
+y1test = dataTest['ClaimFrequency']
+y2test = datacatsTest['NumberClaims']/datacatsTest['Duration']
 
 #dropping useless dimensions
-data = data.drop(columns=["Duration", "NumberClaims", "ClaimFrequency"])
-datacats = datacats.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost"])
+dataTrain = dataTrain.drop(columns=["Duration", "NumberClaims", "ClaimFrequency", "Unnamed: 0"])
+datacatsTrain = datacatsTrain.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost", "Unnamed: 0"])
+dataTest = dataTest.drop(columns=["Duration", "NumberClaims", "ClaimFrequency", "Unnamed: 0"])
+datacatsTest = datacatsTest.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost", "Unnamed: 0"])
 
 #Passing the Duration into keras is impossible cause there is two arguments only when creating a custom loss function.
 #Therefore we use a trick and pass a tuple with duration and y instead. 
@@ -42,6 +47,12 @@ y1 = pd.DataFrame(y1)
 y2 = pd.DataFrame(y2)
 d1 = pd.DataFrame(d1)
 d2 = pd.DataFrame(d2)
+
+y1test = pd.DataFrame(y1test)
+y2test = pd.DataFrame(y2test)
+d1test = pd.DataFrame(d1test)
+d2test = pd.DataFrame(d2test)
+
 feed = np.append(y1, d1, axis = 1)
 feed2 = np.append(y2, d2, axis = 1)
 
@@ -130,17 +141,25 @@ pipeline = Pipeline([
     ('clf',clf)
 ])
 
-cv = KFold(n_splits=5, shuffle=False)
+cv = KFold(n_splits=3, shuffle=False)
 
-grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 75) #plus de folds pourraient augmenter la variance
-grid.fit(data, feed)
+grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 1) #plus de folds pourraient augmenter la variance
+grid.fit(dataTrain, feed)
 
 results = pd.DataFrame(grid.cv_results_)
 results.to_csv('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/NNshallowCV.csv')
 best = grid.best_estimator_
 
-ypred = best.predict(data)
-devTest = devFull(y1, ypred, d1)
+ypredtest = best.predict(dataTest)
+ypredtrain = best.predict(dataTrain)
+devTest = devFull(y1test, ypredtest, d1test)
+devTrain = devFull(y1, ypredtrain, d1)
+meanDevTest = devTest/len(y1test)
+meanDevTrain = devTrain/len(y1)
+totDevTrain = meanDevTrain * (len(y1) + len(y1test))
+totDevTest = meanDevTest * (len(y1) + len(y1test))
+
+
 
 ######################################
 #SAVE MODEL 
@@ -156,8 +175,286 @@ model_to_save.save('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insura
 #NEED TO ADD THE CUSTOM LOSS AS OBJECT IN LOAD !!
 reconstructed_model = keras.models.load_model('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/NNmodel', custom_objects={'deviance' : deviance})
 
-ypredrec = reconstructed_model.predict(data)
-devrec = devFull(y1, ypredrec, d1)
+
+
+#####################################
+# PLOTS 
+#####################################
+#Learning curves : 
+#take subsets of different size with chosen hyperparameters
+#take mean of deviance because they are different size 
+#####################################
+
+#creating the subsets, then testing on subset train set and FULL test set.
+#without duplicates !!
+
+Xsubsets = []
+Ysubsets = []
+feedSubsets = []
+dSubsets = []
+trError = []
+teError = []
+
+feed = pd.DataFrame(feed)
+
+#subsets fill 
+nsubs = [50, 100, 500, 1000, 2500, 5000, 7500, 10000, 30000, 51600]
+for nsub in nsubs:
+    tempTrain = dataTrain.sample(n = nsub, replace = False, random_state=24202, axis = 0)
+    tempY = y1.sample(n = nsub, replace = False, random_state=24202, axis = 0)
+    tempFeed = feed.sample(n = nsub, replace = False, random_state = 24202, axis = 0)
+    tempD = d1.sample(n = nsub, replace = False, random_state = 24202, axis = 0)
+    Xsubsets.append(tempTrain)
+    Ysubsets.append(tempY)
+    feedSubsets.append(tempFeed)
+    dSubsets.append(tempD)
+    
+#Create model, calculate loss and apend 
+
+#static params, other than nlength for instance
+staticparams = {
+    'clf__epochs':[300],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[50000],
+    'clf__nn1':[15],
+    'clf__lr':[0.1],
+    'clf__act1':['softmax']
+}
+
+cv2 = KFold(n_splits=3, shuffle=False)
+
+
+
+for i in range(0, len(nsubs)):
+    tempModel = KerasRegressor(build_fn=baseline_model2, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv2, param_distributions=staticparams, verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempX = Xsubsets[i]
+    tempY = Ysubsets[i]
+    tempFeed = feedSubsets[i]
+    tempD = dSubsets[i]
+    
+    tempGrid.fit(tempX, tempFeed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(tempX)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(tempY, tempPredTrain, tempD)
+    meanLossTrain = tempLossTrain/len(tempY)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teError.append(meanLossTest)
+    trError.append(meanLossTrain)
+    '''
+    tempResults = tempGrid.cv_results_
+    meanTestScore = tempResults['mean_test_score'][0]
+    meanTrainScore = tempResults['mean_train_score'][0]
+    teError.append(meanTestScore)
+    trError.append(meanTrainScore)    
+    '''
+    
+    
+    
+plt.plot(nsubs, teError, label = "Test Error")
+plt.plot(nsubs, trError, label = "Train Error")
+plt.xlabel('n_samples')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage")
+plt.legend()
+plt.show()
+plt.close()
+    
+#################################
+#Plot for nn1
+#################################
+
+nn1s = [3,5,8,10,15,20,25,30,50]
+teErrorNN = []
+trErrorNN = []
+
+#create static params
+staticparamsList = []
+
+for i in range(0, len(nn1s)):
+    temp = {
+    'clf__epochs':[50],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[50000],
+    'clf__lr':[0.1],
+    'clf__act1':['softmax'],
+    'clf__nn1':[nn1s[i]]
+    }
+    staticparamsList.append(temp)
+    
+cv3 = KFold(n_splits=3, shuffle=False)
+
+
+for i in range(0, len(nn1s)):
+    tempModel = KerasRegressor(build_fn=baseline_model2, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv3, param_distributions=staticparamsList[i], verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempGrid.fit(dataTrain, feed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(dataTrain)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorNN.append(meanLossTest)
+    trErrorNN.append(meanLossTrain)
+
+
+plt.plot(nn1s, teErrorNN, label = "Test Error")
+plt.plot(nn1s, trErrorNN, label = "Train Error")
+plt.xlabel('n_neurons')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage")
+plt.legend()
+plt.show()
+plt.close()
+
+
+#################################
+#Plot for LR
+#################################
+
+lrs = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.5, 1]
+teErrorLR = []
+trErrorLR = []
+
+#create static params
+staticparamsListLR = []
+
+for i in range(0, len(lrs)):
+    temp = {
+    'clf__epochs':[50],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[50000],
+    'clf__lr':[lrs[i]],
+    'clf__act1':['softmax'],
+    'clf__nn1':[10]
+    }
+    staticparamsListLR.append(temp)
+    
+cv3 = KFold(n_splits=3, shuffle=False)
+
+
+for i in range(0, len(lrs)):
+    tempModel = KerasRegressor(build_fn=baseline_model2, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv3, param_distributions=staticparamsListLR[i], verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempGrid.fit(dataTrain, feed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(dataTrain)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorLR.append(meanLossTest)
+    trErrorLR.append(meanLossTrain)
+
+
+plt.plot(lrs, teErrorLR, label = "Test Error")
+plt.plot(lrs, trErrorLR, label = "Train Error")
+plt.xlabel('Learning Rate')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage")
+plt.legend()
+plt.show()
+plt.close()
+
+#################################
+#Plot for epochs
+#################################
+
+epochsList = [5,10,20,50,100,200,300,500,1000]
+teErrorEpochs = []
+trErrorEpochs = []
+
+#create static params
+staticparamsListEpochs = []
+
+for i in range(0, len(epochsList)):
+    temp = {
+    'clf__epochs':[epochsList[i]],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[50000],
+    'clf__lr':[0.15],
+    'clf__act1':['softmax'],
+    'clf__nn1':[10]
+    }
+    staticparamsListEpochs.append(temp)
+    
+cv3 = KFold(n_splits=3, shuffle=False)
+
+
+for i in range(0, len(lrs)):
+    tempModel = KerasRegressor(build_fn=baseline_model2, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv3, param_distributions=staticparamsListEpochs[i], verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempGrid.fit(dataTrain, feed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(dataTrain)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorEpochs.append(meanLossTest)
+    trErrorEpochs.append(meanLossTrain)
+
+
+plt.plot(epochsList, teErrorEpochs, label = "Test Error")
+plt.plot(epochsList, trErrorEpochs, label = "Train Error")
+plt.xlabel('Epochs')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage")
+plt.legend()
+plt.show()
+plt.close()
+
+
+
+
+
+
 
 
 

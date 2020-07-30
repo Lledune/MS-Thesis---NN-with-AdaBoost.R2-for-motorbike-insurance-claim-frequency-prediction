@@ -11,26 +11,34 @@ from keras.layers import Dense, Dropout
 
 
 #importing datasets
-data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
-datacats = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/catOnly.csv")
-
-#shuffling because the dataset is ordered by age and the young clients have more accidents which leads to unbalanced k-fold.
-data = data.sample(frac = 1, random_state = 24202).reset_index(drop=True)
-datacats = datacats.sample(frac = 1, random_state = 24202).reset_index(drop=True)
+dataTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTrain.csv")
+datacatsTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTrain.csv")
 
 #separing columns
-d1 = data['Duration']
-d2 = datacats['Duration']
+d1 = dataTrain['Duration']
+d2 = datacatsTrain['Duration']
 
-y1 = data['ClaimFrequency']
-y2 = datacats['NumberClaims']/datacats['Duration']
+y1 = dataTrain['ClaimFrequency']
+y2 = datacatsTrain['NumberClaims']/datacatsTrain['Duration']
 
-nc1 = data['NumberClaims']
-nc2 = datacats['NumberClaims']
+nc1 = dataTrain['NumberClaims']
+nc2 = datacatsTrain['NumberClaims']
+
+#importing test 
+dataTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTest.csv")
+datacatsTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTest.csv")
+
+d1test = dataTest['Duration']
+d2test = datacatsTest['Duration']
+
+y1test = dataTest['ClaimFrequency']
+y2test = datacatsTest['NumberClaims']/datacatsTest['Duration']
 
 #dropping useless dimensions
-data = data.drop(columns=["Duration", "NumberClaims", "ClaimFrequency"])
-datacats = datacats.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost"])
+dataTrain = dataTrain.drop(columns=["Duration", "NumberClaims", "ClaimFrequency", "Unnamed: 0"])
+datacatsTrain = datacatsTrain.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost", "Unnamed: 0"])
+dataTest = dataTest.drop(columns=["Duration", "NumberClaims", "ClaimFrequency", "Unnamed: 0"])
+datacatsTest = datacatsTest.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost", "Unnamed: 0"])
 
 #Passing the Duration into keras is impossible cause there is two arguments only when creating a custom loss function.
 #Therefore we use a trick and pass a tuple with duration and y instead. 
@@ -38,6 +46,12 @@ y1 = pd.DataFrame(y1)
 y2 = pd.DataFrame(y2)
 d1 = pd.DataFrame(d1)
 d2 = pd.DataFrame(d2)
+
+y1test = pd.DataFrame(y1test)
+y2test = pd.DataFrame(y2test)
+d1test = pd.DataFrame(d1test)
+d2test = pd.DataFrame(d2test)
+
 feed = np.append(y1, d1, axis = 1)
 feed2 = np.append(y2, d2, axis = 1)
 
@@ -131,15 +145,34 @@ pipeline = Pipeline([
 
 cv = KFold(n_splits=5, shuffle=False)
 
-grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 10) #plus de folds pourraient augmenter la variance
-grid.fit(data, feed)
+grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 1) #plus de folds pourraient augmenter la variance
+grid.fit(dataTrain, feed)
 
 results2 = pd.DataFrame(grid.cv_results_)
 results2.to_csv('c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/NNdeepCV.csv')
 best2 = grid.best_estimator_
 
-ypred2 = best2.predict(data)
-devTest = devFull(y1, ypred2, d1)
+ypredTrainDNN = best2.predict(dataTrain)
+ypredTestDNN = best2.predict(dataTest)
+devTrainDNN = devFull(y1, ypredTrainDNN, d1)
+devTestDNN = devFull(y1test, ypredTestDNN, d1test)
+meanDevTrainDNN = devTrainDNN/len(y1)
+meanDevTestDNN = devTestDNN/len(y1test)
+fullDevTrainDNN = meanDevTrainDNN * (len(y1) + len(y1test))
+fullDevTestDNN = meanDevTestDNN * (len(y1) + len(y1test))
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #TODO : TESTER AVEC DONATIEN DE METTRE EXP LINK FUNCTION et voir si les résultats sont meilleurs. 
 
@@ -157,8 +190,6 @@ model_to_save.save('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insura
 #NEED TO ADD THE CUSTOM LOSS AS OBJECT IN LOAD !!
 reconstructed_model = keras.models.load_model('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/DNNmodel', custom_objects={'deviance' : deviance})
 
-ypredrec = reconstructed_model.predict(data)
-devrec = devFull(y1, ypredrec, d1)
 
 
 

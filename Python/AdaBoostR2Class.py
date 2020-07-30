@@ -11,6 +11,8 @@ from keras.wrappers.scikit_learn import KerasRegressor
 from sklearn.utils.extmath import stable_cumsum
 from sklearn.utils.validation import _num_samples
 import pickle
+import time
+
 
 class AdaBoost():
     """
@@ -28,7 +30,7 @@ class AdaBoost():
     dropout : [0,1]
     nn1 : int
     keraslr : [0,1]
-    input_dim : iint
+    input_dim : int
     
     """
     
@@ -49,7 +51,6 @@ class AdaBoost():
         self.nn1 = nn1
         self.keraslr = keraslr
         self.input_dim = input_dim
-        
         
     #Loss function  for Keras    
     def deviance(self, data, y_pred):
@@ -82,7 +83,18 @@ class AdaBoost():
         """
         n = len(y)
         dev = np.ndarray(n)
-        #convert 
+        y = pd.DataFrame(y)
+        yhat = pd.DataFrame(yhat)
+        d = pd.DataFrame(d)
+        y = y.values
+        yhat = yhat.values
+        d = d.values
+
+        #convert params to ndarray
+        for i in range(0, n):
+            temp = self.devSingle(y[i], yhat[i], d[i])
+            dev[i] = temp
+        return dev
         
         
     def devFull(self, y, yhat, d):
@@ -185,26 +197,45 @@ class AdaBoost():
         #get estimates on initial dataset
         preds = pd.DataFrame(estimator.predict(data)).iloc[:,0]
         
-        #error vector
-        error_vect = y-preds
-        error_vect = np.abs(error_vect)    
-        sample_mask = weights > 0
-        masked_sample_weight = weights[sample_mask]
-        masked_error_vector = error_vect[sample_mask]
         
-        #max error
-        error_max = masked_error_vector.max()
-        if error_max != 0:
-            #normalizing
-            masked_error_vector /= error_max
-        #if loss isn't linear then modify it accordingly
-        if self.loss == 'square':
-            masked_error_vector **= 2
-        elif self.loss == 'exponential':
-            masked_error_vector = 1. - np.exp(-masked_error_vector)
+        if(self.loss != 'deviance'):
+            #error vector
+            error_vect = y-preds
+            error_vect = np.abs(error_vect)    
+            sample_mask = weights > 0
+            masked_sample_weight = weights[sample_mask]
+            masked_error_vector = error_vect[sample_mask]
             
-        #average loss
-        estimator_error = (masked_sample_weight * masked_error_vector).sum()
+            #max error
+            error_max = masked_error_vector.max()
+            if error_max != 0:
+                #normalizing
+                masked_error_vector /= error_max
+            #if loss isn't linear then modify it accordingly
+            if self.loss == 'square':
+                masked_error_vector **= 2
+            elif self.loss == 'exponential':
+                masked_error_vector = 1. - np.exp(-masked_error_vector)
+                
+            #average loss
+            estimator_error = (masked_sample_weight * masked_error_vector).sum()
+        else:
+            #if we use deviance
+            error_vect = self.devArray(y, preds, d)
+            sample_mask = weights > 0
+            masked_sample_weight = weights[sample_mask]
+            masked_error_vector = error_vect[sample_mask]
+            #max error
+            error_max = masked_error_vector.max()
+            if error_max != 0:
+                masked_error_vector/= error_max
+            for i in range(0,100):
+                print(masked_error_vector.max())
+                
+            #average loss
+            estimator_error = (masked_sample_weight * masked_error_vector).sum()
+            
+        print('Average loss : ', estimator_error)
     
         #TODO STOP IF ESTIMATOR ERROR <= 0
         
@@ -253,9 +284,10 @@ class AdaBoost():
 
         """
         #check if adaboost loss is correctly setup
-        if self.loss not in ('linear', 'square', 'exponential'):
+        if self.loss not in ('linear', 'square', 'exponential', 'deviance'):
             raise ValueError(
-                "loss must be 'linear', 'square', or 'exponential'")
+                "loss must be 'linear', 'square', or 'exponential', or 'deviance'")
+        
         
         #normalize weights 
         weights = self.normalizeWeights(weights)
@@ -275,7 +307,7 @@ class AdaBoost():
         print(self.n_est, " estimators will be fit (at most)")
         for iboost in range(self.n_est):
             self.printeq()
-            print("Fitting estimator number ", iboost + 1)
+            print("Fitting estimator number ", iboost + 1, " on ", self.n_est)
             
             weights, estimator_weight, estimator_error, estimator = self.boost(iboost, data, feed, weights)
             
@@ -396,37 +428,66 @@ class AdaBoost():
         
 
 #importing datasets
-data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv")
+dataTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTrain.csv")
+datacatsTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTrain.csv")
 
 #separing columns
-d1 = data['Duration']
-y1 = data['ClaimFrequency']
-nc1 = data['NumberClaims']
+d1 = dataTrain['Duration']
+d2 = datacatsTrain['Duration']
+
+y1 = dataTrain['ClaimFrequency']
+y2 = datacatsTrain['NumberClaims']/datacatsTrain['Duration']
+
+nc1 = dataTrain['NumberClaims']
+nc2 = datacatsTrain['NumberClaims']
+
+#importing test 
+dataTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTest.csv")
+datacatsTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTest.csv")
+
+d1test = dataTest['Duration']
+d2test = datacatsTest['Duration']
+
+y1test = dataTest['ClaimFrequency']
+y2test = datacatsTest['NumberClaims']/datacatsTest['Duration']
 
 #dropping useless dimensions
-data = data.drop(columns=["Duration", "NumberClaims", "ClaimFrequency"])
+dataTrain = dataTrain.drop(columns=["Duration", "NumberClaims", "ClaimFrequency", "Unnamed: 0"])
+datacatsTrain = datacatsTrain.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost", "Unnamed: 0"])
+dataTest = dataTest.drop(columns=["Duration", "NumberClaims", "ClaimFrequency", "Unnamed: 0"])
+datacatsTest = datacatsTest.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost", "Unnamed: 0"])
 
 #Passing the Duration into keras is impossible cause there is two arguments only when creating a custom loss function.
 #Therefore we use a trick and pass a tuple with duration and y instead. 
 y1 = pd.DataFrame(y1)
+y2 = pd.DataFrame(y2)
 d1 = pd.DataFrame(d1)
+d2 = pd.DataFrame(d2)
+
+y1test = pd.DataFrame(y1test)
+y2test = pd.DataFrame(y2test)
+d1test = pd.DataFrame(d1test)
+d2test = pd.DataFrame(d2test)
+
 feed = np.append(y1, d1, axis = 1)
+feed2 = np.append(y2, d2, axis = 1)
 feed = pd.DataFrame(feed)
+feed2 = pd.DataFrame(feed2)
 
 '''
-est = AdaBoost(2, 'linear', learning_rate = 1, kerasBatchSize=5000, kerasEpochs=50)
+est = AdaBoost(10, 'linear', learning_rate = 1, kerasBatchSize=51600, kerasEpochs=150)
 
-initWeights = est.initWeights(data)
+initWeights = est.initWeights(dataTrain)
 
-est.fit(data, feed, initWeights)
+est.fit(dataTrain, feed, initWeights)
 
 vectorWeights = est.estimatorsWeights
 vectorSampleWeights = est.estimatorsSampleWeights
 vectorEstimators = est.estimators
 vectorErrors = est.estimatorsErrors
             
-xxx = est.predict(data)
-devTest = est.devFull(y1, xxx, d1)
+xxx = est.predict(dataTest)
+devTest = est.devFull(y1test, xxx, d1test)
 
 pathtosave = "c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/python/models/AdaBoost"
 est.save_model(pathtosave)
@@ -437,27 +498,29 @@ adatest = AdaBoost(2, 'linear', 1, kerasBatchSize=5000, kerasEpochs=50)
 adatest.load_model(pathtosave)
 xxxx = adatest.predict(data)
 xxxxdevTest = adatest.devFull(y1, xxxx, d1)
-'''
 
+'''
 #####################################
 # PARAMETER SEARCH ##################
 #####################################
 import random
 #Defining param grid 
 param_grid = {
-        'n_est' : [2,3],
-        'loss' : ['exponential'],
-        'learning_rate' : [1,0.5],
-        'kerasEpochs' : [10],
-        'kerasBatchSize' : [1000],
-        'dropout' : [0.1,0.2],
+        'n_est' : [100],
+        'loss' : ['deviance'],
+        'learning_rate' : [1],
+        'kerasEpochs' : [1000],
+        'kerasBatchSize' : [51600],
+        'dropout' : [0.1,0.2,0.3],
         'nn1' : [5,10,15],
-        'keraslr' : [0.1,0.05],
+        'keraslr' : [0.1],
     }
 
 
 paramdraws = []
-nTests = 3
+nTests = 1
+
+print(nTests, " tests will be done.")
 
 #generate all the grids for testing 
 for i in range(0, nTests): 
@@ -486,34 +549,47 @@ for i in range(0, nTests):
 #All the parameters are now sampled, we can create and store the models.
 adastore = []
 predsStore = []
-devianceStore = []
+devianceTestStore = []
+devianceMeanStore = []
+devianceFullStore = []
 
 for i in range(0, nTests):
+    print("test : ", i+1)
     params = paramdraws[i]
     estimator = AdaBoost(n_est=params['n_est'][0], loss = params['loss'][0], learning_rate=params['learning_rate'][0], kerasEpochs=params['kerasEpochs'][0],
                          kerasBatchSize=params['kerasBatchSize'][0], dropout = params['dropout'][0], nn1=params['nn1'][0], keraslr=params['keraslr'][0], 
                          input_dim=21)
     
-    initWeights = estimator.initWeights(data)
+    initWeights = estimator.initWeights(dataTrain)
     #fitting model
-    estimator.fit(data, feed, initWeights)
+    estimator.fit(dataTrain, feed, initWeights)
     #predictions
-    predSingle = estimator.predict(data)
+    predSingle = estimator.predict(dataTest)
     #loss
-    devSing = estimator.devFull(y1, predSingle, d1)
-    devianceStore.append(devSing)
+    devSing = estimator.devFull(y1test, predSingle, d1test)
+    meanDev = devSing/len(y1test)
+    fullDev = meanDev * (len(y1) + len(y1test))
+    
+    devianceTestStore.append(devSing)
+    devianceMeanStore.append(meanDev)
+    devianceFullStore.append(fullDev)
     predsStore.append(predSingle)
     adastore.append(estimator)
 
 
+est = adastore[0]
+p = est.predict(dataTrain)
+ddd = est.devFull(y1, p, d1)
+
 #####################
 #devtests
-xxx = pd.DataFrame(xxx)
-y1.iloc[27][0]
-
-fff = estimator.devSingle(y1.iloc[27][0], xxx.iloc[27][0], d1.iloc[27][0])
-ggg = estimator.devSingle(y1.iloc[10][0], xxx.iloc[10][0], d1.iloc[10][0])
-
+devAda = AdaBoost(n_est = 2, loss = "deviance", learning_rate=0.5, kerasEpochs=75, kerasBatchSize=64501, dropout=0.2, nn1=5, keraslr=0.075, input_dim=21)
+initWeights = devAda.initWeights(dataTrain)
+devAda.fit(dataTrain, feed, initWeights)
+predsDev = devAda.predict(dataTest)
+devnew = devAda.devFull(y1test, predsDev, d1test)
+devmeanadb = devnew/len(y1test)
+devtotadb = devmeanadb * (len(y1) + len(y1test))
 
 
 
