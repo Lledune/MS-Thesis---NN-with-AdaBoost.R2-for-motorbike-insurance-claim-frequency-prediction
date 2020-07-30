@@ -109,7 +109,7 @@ from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import KFold
 
-def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, nn3 = 10, lr = 0.001, act1 = "relu"):
+def baseline_modelDNN(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, nn3 = 10, lr = 0.001, act1 = "relu"):
     with tf.device('/gpu:0'):
         # create model
         #building model
@@ -118,14 +118,14 @@ def baseline_model2(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 
         model.add(Dropout(dropout))
         #model.add(Dense(2, activation = "exponential"))
         model.add(Dense(nn2, activation = act1))
-        model.add(Dense(nn3, activation = act1))
+        #model.add(Dense(nn3, activation = act1))
         model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
         optimizer = keras.optimizers.adagrad(lr=lr)
         model.compile(loss=deviance, optimizer=optimizer, metrics = [deviance, "mean_squared_error"])
         return model
 
 
-clf = KerasRegressor(build_fn=baseline_model2)
+clf = KerasRegressor(build_fn=baseline_modelDNN)
 
 param_grid = {
     'clf__epochs':[300,600,100],
@@ -192,7 +192,340 @@ reconstructed_model = keras.models.load_model('C:/users/kryst/desktop/Poisson/Po
 
 
 
+#####################################
+# PLOTS 
+#####################################
+#Learning curves : 
+#take subsets of different size with chosen hyperparameters
+#take mean of deviance because they are different size 
+#####################################
 
+#creating the subsets, then testing on subset train set and FULL test set.
+#without duplicates !!
+import matplotlib.pyplot as plt
+import seaborn as sn
+
+Xsubsets = []
+Ysubsets = []
+feedSubsets = []
+dSubsets = []
+trError = []
+teError = []
+
+feed = pd.DataFrame(feed)
+
+#subsets fill 
+nsubs = [50, 100, 500, 1000, 2500, 5000, 7500, 10000, 30000, 51600]
+for nsub in nsubs:
+    tempTrain = dataTrain.sample(n = nsub, replace = False, random_state=24202, axis = 0)
+    tempY = y1.sample(n = nsub, replace = False, random_state=24202, axis = 0)
+    tempFeed = feed.sample(n = nsub, replace = False, random_state = 24202, axis = 0)
+    tempD = d1.sample(n = nsub, replace = False, random_state = 24202, axis = 0)
+    Xsubsets.append(tempTrain)
+    Ysubsets.append(tempY)
+    feedSubsets.append(tempFeed)
+    dSubsets.append(tempD)
+    
+#Create model, calculate loss and apend 
+
+#static params, other than nlength for instance
+static_params = {
+    'clf__epochs':[100],
+    'clf__dropout':[0.2],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[51600],
+    'clf__nn1':[20],
+    'clf__nn2':[10],
+    'clf__lr':[0.15],
+    'clf__act1':['softmax']
+}
+cv2 = KFold(n_splits=2, shuffle=False)
+
+
+
+for i in range(0, len(nsubs)):
+    tempModel = KerasRegressor(build_fn=baseline_modelDNN, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv2, param_distributions=static_params, verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempX = Xsubsets[i]
+    tempY = Ysubsets[i]
+    tempFeed = feedSubsets[i]
+    tempD = dSubsets[i]
+    
+    tempGrid.fit(tempX, tempFeed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(tempX)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(tempY, tempPredTrain, tempD)
+    meanLossTrain = tempLossTrain/len(tempY)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teError.append(meanLossTest)
+    trError.append(meanLossTrain)
+    '''
+    tempResults = tempGrid.cv_results_
+    meanTestScore = tempResults['mean_test_score'][0]
+    meanTrainScore = tempResults['mean_train_score'][0]
+    teError.append(meanTestScore)
+    trError.append(meanTrainScore)    
+    '''
+    
+    
+    
+plt.plot(nsubs, teError, label = "Test Error")
+plt.plot(nsubs, trError, label = "Train Error")
+plt.xlabel('n_samples')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage DNN")
+plt.legend()
+plt.show()
+plt.close()
+
+
+#################################
+#Plot for nn1
+#################################
+
+cv3 = KFold(n_splits=3, shuffle=False)
+
+nn1s = [3,5,8,10,15,20,25,30,50,500,1000]
+teErrorNN = []
+trErrorNN = []
+
+#create static params
+staticparamsList = []
+
+for i in range(0, len(nn1s)):
+    temp = {
+    'clf__epochs':[100],
+    'clf__dropout':[0.2],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[51600],
+    'clf__nn1':[nn1s[i]],
+    'clf__nn2':[10],
+    'clf__lr':[0.15],
+    'clf__act1':['softmax']
+}
+    staticparamsList.append(temp)
+    
+cv3 = KFold(n_splits=3, shuffle=False)
+
+
+for i in range(0, len(nn1s)):
+    tempModel = KerasRegressor(build_fn=baseline_modelDNN, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv3, param_distributions=staticparamsList[i], verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempGrid.fit(dataTrain, feed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(dataTrain)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorNN.append(meanLossTest)
+    trErrorNN.append(meanLossTrain)
+
+
+plt.plot(nn1s, teErrorNN, label = "Test Error")
+plt.plot(nn1s, trErrorNN, label = "Train Error")
+plt.xlabel('n_neurons_1')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage DNN")
+plt.legend()
+plt.show()
+plt.close()
+
+
+#################################
+#Plot for nn2
+#################################
+
+nn2s = [3,5,8,10,15,20,25,30,50,500,1000]
+teErrorNN2 = []
+trErrorNN2 = []
+
+#create static params
+staticparamsList2 = []
+
+for i in range(0, len(nn1s)):
+    temp = {
+    'clf__epochs':[100],
+    'clf__dropout':[0.2],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[51600],
+    'clf__nn1':[20],
+    'clf__nn2':[nn2s[i]],
+    'clf__lr':[0.15],
+    'clf__act1':['softmax']
+}
+    staticparamsList2.append(temp)
+    
+
+for i in range(0, len(nn1s)):
+    tempModel = KerasRegressor(build_fn=baseline_modelDNN, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv3, param_distributions=staticparamsList2[i], verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempGrid.fit(dataTrain, feed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(dataTrain)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorNN2.append(meanLossTest)
+    trErrorNN2.append(meanLossTrain)
+
+
+plt.plot(nn2s, teErrorNN2, label = "Test Error")
+plt.plot(nn2s, trErrorNN2, label = "Train Error")
+plt.xlabel('n_neurons_2')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage DNN")
+plt.legend()
+plt.show()
+plt.close()
+
+#################################
+#Plot for LR
+#################################
+
+lrs = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.5, 1]
+teErrorLR = []
+trErrorLR = []
+
+#create static params
+staticparamsListLR = []
+
+for i in range(0, len(lrs)):
+    temp = {
+    'clf__epochs':[100],
+    'clf__dropout':[0.2],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[51600],
+    'clf__nn1':[20],
+    'clf__nn2':[10],
+    'clf__lr':[lrs[i]],
+    'clf__act1':['softmax']
+}
+    staticparamsListLR.append(temp)
+    
+
+for i in range(0, len(lrs)):
+    tempModel = KerasRegressor(build_fn=baseline_modelDNN, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv3, param_distributions=staticparamsListLR[i], verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempGrid.fit(dataTrain, feed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(dataTrain)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorLR.append(meanLossTest)
+    trErrorLR.append(meanLossTrain)
+
+
+plt.plot(lrs, teErrorLR, label = "Test Error")
+plt.plot(lrs, trErrorLR, label = "Train Error")
+plt.xlabel('Learning Rate')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage DNN")
+plt.legend()
+plt.show()
+plt.close()
+
+#################################
+#Plot for epochs
+#################################
+
+epochsList = [5,10,20,50,100,200,300,500,1000]
+teErrorEpochs = []
+trErrorEpochs = []
+
+#create static params
+staticparamsListEpochs = []
+
+for i in range(0, len(epochsList)):
+    temp = {
+    'clf__epochs':[epochsList[i]],
+    'clf__dropout':[0.2],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[51600],
+    'clf__nn1':[20],
+    'clf__nn2':[10],
+    'clf__lr':[0.15],
+    'clf__act1':['softmax']
+}
+    staticparamsListEpochs.append(temp)
+    
+
+for i in range(0, len(epochsList)):
+    tempModel = KerasRegressor(build_fn=baseline_modelDNN, verbose = 1)
+    tempPipeline = Pipeline([('clf',tempModel)])
+    tempGrid = RandomizedSearchCV(tempPipeline, cv = cv3, param_distributions=staticparamsListEpochs[i], verbose = 0, n_iter=1, return_train_score=False)
+    
+    tempGrid.fit(dataTrain, feed)
+    tempBest = tempGrid.best_estimator_
+    
+    tempPredTrain = tempBest.predict(dataTrain)
+    tempPredTest = tempBest.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorEpochs.append(meanLossTest)
+    trErrorEpochs.append(meanLossTrain)
+
+
+plt.plot(epochsList, teErrorEpochs, label = "Test Error")
+plt.plot(epochsList, trErrorEpochs, label = "Train Error")
+plt.xlabel('Epochs')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage DNN")
+plt.legend()
+plt.show()
+plt.close()
 
 
 

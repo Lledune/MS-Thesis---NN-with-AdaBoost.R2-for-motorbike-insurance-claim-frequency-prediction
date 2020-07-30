@@ -276,7 +276,7 @@ plt.close()
 #Plot for nn1
 #################################
 
-nn1s = [3,5,8,10,15,20,25,30,50]
+nn1s = [3,5,8,10,15,20,25,30,50,500,1000,2500]
 teErrorNN = []
 trErrorNN = []
 
@@ -417,7 +417,7 @@ for i in range(0, len(epochsList)):
 cv3 = KFold(n_splits=3, shuffle=False)
 
 
-for i in range(0, len(lrs)):
+for i in range(0, len(epochsList)):
     tempModel = KerasRegressor(build_fn=baseline_model2, verbose = 1)
     tempPipeline = Pipeline([('clf',tempModel)])
     tempGrid = RandomizedSearchCV(tempPipeline, cv = cv3, param_distributions=staticparamsListEpochs[i], verbose = 0, n_iter=1, return_train_score=False)
