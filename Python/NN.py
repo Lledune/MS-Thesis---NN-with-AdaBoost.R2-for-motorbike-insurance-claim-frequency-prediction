@@ -9,11 +9,19 @@ import os
 from sklearn.model_selection import KFold, StratifiedKFold
 from keras.layers import Dense, Dropout
 import pickle
+
 import matplotlib.pyplot as plt
 
+#########################################
+#!!! change root to your main folder !!
+#########################################
+root = 'c:/users/kryst/desktop/poisson/poisson-neural-network-insurance-pricing'
+
+
+
 #importing datasets
-dataTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTrain.csv")
-datacatsTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTrain.csv")
+dataTrain = pd.read_csv(root + "/dataTrain.csv")
+datacatsTrain = pd.read_csv(root + "/dataCatsTrain.csv")
 
 #separing columns
 d1 = dataTrain['Duration']
@@ -26,8 +34,8 @@ nc1 = dataTrain['NumberClaims']
 nc2 = datacatsTrain['NumberClaims']
 
 #importing test 
-dataTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTest.csv")
-datacatsTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTest.csv")
+dataTest = pd.read_csv(root + "/dataTest.csv")
+datacatsTest = pd.read_csv(root + "/dataCatsTest.csv")
 
 d1test = dataTest['Duration']
 d2test = datacatsTest['Duration']
@@ -147,7 +155,7 @@ grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, ver
 grid.fit(dataTrain, feed)
 
 results = pd.DataFrame(grid.cv_results_)
-results.to_csv('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/NNshallowCV.csv')
+results.to_csv(root + '/NNshallowCV.csv')
 best = grid.best_estimator_
 
 ypredtest = best.predict(dataTest)
@@ -169,11 +177,11 @@ totDevTest = meanDevTest * (len(y1) + len(y1test))
 model_to_save = best.named_steps['clf'].model
 
 #saving model
-model_to_save.save('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/NNmodel')
+model_to_save.save(root + '/Python/Models/NNmodel')
 
 #load model
 #NEED TO ADD THE CUSTOM LOSS AS OBJECT IN LOAD !!
-reconstructed_model = keras.models.load_model('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/NNmodel', custom_objects={'deviance' : deviance})
+reconstructed_model = keras.models.load_model(root + '/Python/Models/NNmodel', custom_objects={'deviance' : deviance})
 
 
 
@@ -198,7 +206,7 @@ teError = []
 feed = pd.DataFrame(feed)
 
 #subsets fill 
-nsubs = [50, 100, 500, 1000, 2500, 5000, 7500, 10000, 30000, 51600]
+nsubs = [100, 500, 1000, 2500, 5000, 7500, 10000, 30000, 51600]
 for nsub in nsubs:
     tempTrain = dataTrain.sample(n = nsub, replace = False, random_state=24202, axis = 0)
     tempY = y1.sample(n = nsub, replace = False, random_state=24202, axis = 0)
@@ -269,6 +277,7 @@ plt.xlabel('n_samples')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/NNnsamples.png')
 plt.show()
 plt.close()
     
@@ -328,6 +337,7 @@ plt.xlabel('n_neurons')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/NNnn1.png')
 plt.show()
 plt.close()
 
@@ -388,6 +398,7 @@ plt.xlabel('Learning Rate')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/NNLR.png')
 plt.show()
 plt.close()
 
@@ -447,6 +458,7 @@ plt.xlabel('Epochs')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/NNEpochs.png')
 plt.show()
 plt.close()
 

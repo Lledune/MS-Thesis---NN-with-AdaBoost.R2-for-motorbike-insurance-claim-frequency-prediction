@@ -13,6 +13,13 @@ from sklearn.utils.validation import _num_samples
 import pickle
 import time
 
+#########################################
+#!!! change root to your main folder !!
+#########################################
+root = 'c:/users/kryst/desktop/poisson/poisson-neural-network-insurance-pricing'
+
+
+
 
 class AdaBoost():
     """
@@ -176,8 +183,8 @@ class AdaBoost():
     #The reason feed is passed instead of Y is because keras needs a tuple (y, d) to calculate the custom loss function deviance.
     #data is X
     def boost(self, iboost, data, feed, weights):
-        y = feed.iloc[:,0]
-        d = feed.iloc[:,1]
+        y = feed.iloc[:,0].values
+        d = feed.iloc[:,1].values
         
         #setting up the estimator
         #estimator = self.baseline_model2()
@@ -197,9 +204,9 @@ class AdaBoost():
         #get estimates on initial dataset
         preds = pd.DataFrame(estimator.predict(data)).iloc[:,0]
         
-        
         if(self.loss != 'deviance'):
             #error vector
+            #the error vector has length 100??
             error_vect = y-preds
             error_vect = np.abs(error_vect)    
             sample_mask = weights > 0
@@ -428,8 +435,8 @@ class AdaBoost():
         
 
 #importing datasets
-dataTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTrain.csv")
-datacatsTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTrain.csv")
+dataTrain = pd.read_csv(root + "/dataTrain.csv")
+datacatsTrain = pd.read_csv(root + "/dataCatsTrain.csv")
 
 #separing columns
 d1 = dataTrain['Duration']
@@ -442,8 +449,8 @@ nc1 = dataTrain['NumberClaims']
 nc2 = datacatsTrain['NumberClaims']
 
 #importing test 
-dataTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTest.csv")
-datacatsTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTest.csv")
+dataTest = pd.read_csv(root + "/dataTest.csv")
+datacatsTest = pd.read_csv(root + "/dataCatsTest.csv")
 
 d1test = dataTest['Duration']
 d2test = datacatsTest['Duration']
@@ -503,13 +510,16 @@ xxxxdevTest = adatest.devFull(y1, xxxx, d1)
 #####################################
 # PARAMETER SEARCH ##################
 #####################################
+#The results are stored in lists
+#####################################
+
 import random
 #Defining param grid 
 param_grid = {
         'n_est' : [100],
         'loss' : ['deviance'],
         'learning_rate' : [1],
-        'kerasEpochs' : [1000],
+        'kerasEpochs' : [100],
         'kerasBatchSize' : [51600],
         'dropout' : [0.1,0.2,0.3],
         'nn1' : [5,10,15],
@@ -577,21 +587,287 @@ for i in range(0, nTests):
     adastore.append(estimator)
 
 
-est = adastore[0]
-p = est.predict(dataTrain)
-ddd = est.devFull(y1, p, d1)
-
-#####################
-#devtests
-devAda = AdaBoost(n_est = 2, loss = "deviance", learning_rate=0.5, kerasEpochs=75, kerasBatchSize=64501, dropout=0.2, nn1=5, keraslr=0.075, input_dim=21)
-initWeights = devAda.initWeights(dataTrain)
-devAda.fit(dataTrain, feed, initWeights)
-predsDev = devAda.predict(dataTest)
-devnew = devAda.devFull(y1test, predsDev, d1test)
-devmeanadb = devnew/len(y1test)
-devtotadb = devmeanadb * (len(y1) + len(y1test))
 
 
+#####################################
+# PLOTS 
+#####################################
+#Learning curves : 
+#take subsets of different size with chosen hyperparameters
+#take mean of deviance because they are different size 
+#####################################
+
+#creating the subsets, then testing on subset train set and FULL test set.
+#without duplicates !!
+
+import matplotlib.pyplot as plt
+import seaborn as sn
+
+Xsubsets = []
+Ysubsets = []
+feedSubsets = []
+dSubsets = []
+trError = []
+teError = []
+
+feed = pd.DataFrame(feed)
+
+#subsets fill 
+nsubs = [100, 500, 1000, 2500, 5000, 7500, 10000, 30000, 51600]
+for nsub in nsubs:
+    tempTrain = dataTrain.sample(n = nsub, replace = False, random_state=24202, axis = 0)
+    tempY = y1.sample(n = nsub, replace = False, random_state=24202, axis = 0)
+    tempFeed = feed.sample(n = nsub, replace = False, random_state = 24202, axis = 0)
+    tempD = d1.sample(n = nsub, replace = False, random_state = 24202, axis = 0)
+    Xsubsets.append(tempTrain)
+    Ysubsets.append(tempY)
+    feedSubsets.append(tempFeed)
+    dSubsets.append(tempD)
+    
+#Create model, calculate loss and apend 
+
+#static params, other than nlength for instance
+staticparams = {
+            'n_est' : [5],
+            'loss' : ['exponential'],
+            'learning_rate' : [1],
+            'kerasEpochs' : [10],
+            'kerasBatchSize' : [64501],
+            'dropout' : [0.2],
+            'nn1' : [15],
+            'keraslr' : [0.15],
+        }
+
+
+
+for i in range(0, len(nsubs)):
+    params = staticparams
+    estimator = AdaBoost(n_est=params['n_est'][0], loss = params['loss'][0], learning_rate=params['learning_rate'][0], kerasEpochs=params['kerasEpochs'][0],
+                         kerasBatchSize=params['kerasBatchSize'][0], dropout = params['dropout'][0], nn1=params['nn1'][0], keraslr=params['keraslr'][0], 
+                         input_dim=21)
+    
+    tempX = Xsubsets[i]
+    tempY = Ysubsets[i]
+    tempFeed = feedSubsets[i]
+    tempD = dSubsets[i]
+    
+    tempInitWeights = estimator.initWeights(tempX)
+    estimator.fit(tempX, tempFeed, tempInitWeights)
+    
+    tempPredTrain = estimator.predict(tempX)
+    tempPredTest = estimator.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = estimator.devFull(tempY, tempPredTrain, tempD)
+    meanLossTrain = tempLossTrain/len(tempY)
+    
+    #losses test
+    tempLossTest = estimator.devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teError.append(meanLossTest)
+    trError.append(meanLossTrain)
+    '''
+    tempResults = tempGrid.cv_results_
+    meanTestScore = tempResults['mean_test_score'][0]
+    meanTrainScore = tempResults['mean_train_score'][0]
+    teError.append(meanTestScore)
+    trError.append(meanTrainScore)    
+    '''
+    
+    
+    
+plt.plot(nsubs, teError, label = "Test Error")
+plt.plot(nsubs, trError, label = "Train Error")
+plt.xlabel('n_samples')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage AdaBoost.R2")
+plt.legend()
+plt.savefig(root + '/lyx/images/learning/ADBnsamples.png')
+plt.show()
+plt.close()
+    
+#################################
+#Plot for nn1
+#################################
+
+nn1s = [3,5,8,10,15,20,25,30,50,500]
+teErrorNN = []
+trErrorNN = []
+
+#create static params
+staticparamsList = []
+
+for i in range(0, len(nn1s)):
+    temp = {
+            'n_est' : [5],
+            'loss' : ['exponential'],
+            'learning_rate' : [1],
+            'kerasEpochs' : [100],
+            'kerasBatchSize' : [64501],
+            'dropout' : [0.2],
+            'nn1' : [nn1s[i]],
+            'keraslr' : [0.15],
+        }
+    staticparamsList.append(temp)
+    
+
+
+for i in range(0, len(nn1s)):
+    params = staticparamsList[i]
+    estimator = AdaBoost(n_est=params['n_est'][0], loss = params['loss'][0], learning_rate=params['learning_rate'][0], kerasEpochs=params['kerasEpochs'][0],
+                         kerasBatchSize=params['kerasBatchSize'][0], dropout = params['dropout'][0], nn1=params['nn1'][0], keraslr=params['keraslr'][0], 
+                         input_dim=21)
+    
+    initw = estimator.initWeights(dataTrain)
+    estimator.fit(dataTrain, feed, initw)
+    
+    tempPredTrain = estimator.predict(dataTrain)
+    tempPredTest = estimator.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = estimator.devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = estimator.devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorNN.append(meanLossTest)
+    trErrorNN.append(meanLossTrain)
+
+
+plt.plot(nn1s, teErrorNN, label = "Test Error")
+plt.plot(nn1s, trErrorNN, label = "Train Error")
+plt.xlabel('n_neurons_1')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage AdaBoost.R2")
+plt.legend()
+plt.savefig(root + '/lyx/images/learning/ADBnn1.png')
+plt.show()
+plt.close()
+
+#################################
+#Plot for LR adaboost
+#################################
+
+lrsad = [0.1,0.5,0.75,1,2]
+teErrorLRad = []
+trErrorLRad = []
+
+#create static params
+staticparamsListLR = []
+
+for i in range(0, len(lrsad)):
+    temp = {
+            'n_est' : [5],
+            'loss' : ['exponential'],
+            'learning_rate' : [lrsad[i]],
+            'kerasEpochs' : [10],
+            'kerasBatchSize' : [64501],
+            'dropout' : [0.2],
+            'nn1' : [10],
+            'keraslr' : [0.15],
+        }
+    staticparamsListLR.append(temp)
+
+
+for i in range(0, len(lrsad)):
+    params = staticparamsListLR[i]
+    estimator = AdaBoost(n_est=params['n_est'][0], loss = params['loss'][0], learning_rate=params['learning_rate'][0], kerasEpochs=params['kerasEpochs'][0],
+                         kerasBatchSize=params['kerasBatchSize'][0], dropout = params['dropout'][0], nn1=params['nn1'][0], keraslr=params['keraslr'][0], 
+                         input_dim=21)
+    
+    initw = estimator.initWeights(dataTrain)
+    estimator.fit(dataTrain, feed, initw)
+    
+    tempPredTrain = estimator.predict(dataTrain)
+    tempPredTest = estimator.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = estimator.devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = estimator.devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorLRad.append(meanLossTest)
+    trErrorLRad.append(meanLossTrain)
+
+
+plt.plot(lrsad, teErrorLRad, label = "Test Error")
+plt.plot(lrsad, trErrorLRad, label = "Train Error")
+plt.xlabel('Learning Rate ADB')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage AdaBoost.R2")
+plt.legend()
+plt.savefig(root + '/lyx/images/learning/ADBLR.png')
+plt.show()
+plt.close()
+
+#################################
+#Plot for epochs
+#################################
+
+epochsList = [5,10,20,50,100,200,300,500,1000]
+teErrorEpochs = []
+trErrorEpochs = []
+
+#create static params
+staticparamsListEpochs = []
+
+for i in range(0, len(epochsList)):
+    temp = {
+            'n_est' : [5],
+            'loss' : ['exponential'],
+            'learning_rate' : [1],
+            'kerasEpochs' : [epochsList[i]],
+            'kerasBatchSize' : [64501],
+            'dropout' : [0.2],
+            'nn1' : [10],
+            'keraslr' : [0.15],
+        }
+    staticparamsListEpochs.append(temp)
+    
+
+for i in range(0, len(epochsList)):
+    params = staticparamsListEpochs[i]
+    estimator = AdaBoost(n_est=params['n_est'][0], loss = params['loss'][0], learning_rate=params['learning_rate'][0], kerasEpochs=params['kerasEpochs'][0],
+                         kerasBatchSize=params['kerasBatchSize'][0], dropout = params['dropout'][0], nn1=params['nn1'][0], keraslr=params['keraslr'][0], 
+                         input_dim=21)
+    
+    initw = estimator.initWeights(dataTrain)
+    estimator.fit(dataTrain, feed, initw)
+    
+    tempPredTrain = estimator.predict(dataTrain)
+    tempPredTest = estimator.predict(dataTest)
+    
+    #losses train
+    tempLossTrain = estimator.devFull(y1, tempPredTrain, d1)
+    meanLossTrain = tempLossTrain/len(y1)
+    
+    #losses test
+    tempLossTest = estimator.devFull(y1test, tempPredTest, d1test)
+    meanLossTest = tempLossTest/len(y1test)
+    
+    #append
+    teErrorEpochs.append(meanLossTest)
+    trErrorEpochs.append(meanLossTrain)
+
+
+plt.plot(epochsList, teErrorEpochs, label = "Test Error")
+plt.plot(epochsList, trErrorEpochs, label = "Train Error")
+plt.xlabel('Epochs')
+plt.ylabel('Deviance')
+plt.title("Courbes d'apprentissage AdaBost.R2")
+plt.legend()
+plt.savefig(root + '/lyx/images/learning/ADBEpochs.png')
+plt.show()
+plt.close()
 
 
 

@@ -9,10 +9,16 @@ import os
 from sklearn.model_selection import KFold, StratifiedKFold
 from keras.layers import Dense, Dropout
 
+#########################################
+#!!! change root to your main folder !!
+#########################################
+root = 'c:/users/kryst/desktop/poisson/poisson-neural-network-insurance-pricing'
+
+
 
 #importing datasets
-dataTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTrain.csv")
-datacatsTrain = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTrain.csv")
+dataTrain = pd.read_csv(root + "/dataTrain.csv")
+datacatsTrain = pd.read_csv(root + "/dataCatsTrain.csv")
 
 #separing columns
 d1 = dataTrain['Duration']
@@ -25,8 +31,8 @@ nc1 = dataTrain['NumberClaims']
 nc2 = datacatsTrain['NumberClaims']
 
 #importing test 
-dataTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTest.csv")
-datacatsTest = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTest.csv")
+dataTest = pd.read_csv(root + "/dataTest.csv")
+datacatsTest = pd.read_csv(root + "/dataCatsTest.csv")
 
 d1test = dataTest['Duration']
 d2test = datacatsTest['Duration']
@@ -109,7 +115,7 @@ from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import KFold
 
-def baseline_modelDNN(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, nn3 = 10, lr = 0.001, act1 = "relu"):
+def baseline_modelDNN(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, lr = 0.001, act1 = "relu"):
     with tf.device('/gpu:0'):
         # create model
         #building model
@@ -149,7 +155,7 @@ grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, ver
 grid.fit(dataTrain, feed)
 
 results2 = pd.DataFrame(grid.cv_results_)
-results2.to_csv('c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/NNdeepCV.csv')
+results2.to_csv(root + '/NNdeepCV.csv')
 best2 = grid.best_estimator_
 
 ypredTrainDNN = best2.predict(dataTrain)
@@ -161,19 +167,6 @@ meanDevTestDNN = devTestDNN/len(y1test)
 fullDevTrainDNN = meanDevTrainDNN * (len(y1) + len(y1test))
 fullDevTestDNN = meanDevTestDNN * (len(y1) + len(y1test))
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 #TODO : TESTER AVEC DONATIEN DE METTRE EXP LINK FUNCTION et voir si les résultats sont meilleurs. 
 
 ###########################
@@ -184,11 +177,11 @@ fullDevTestDNN = meanDevTestDNN * (len(y1) + len(y1test))
 model_to_save = best2.named_steps['clf'].model
 
 #saving model
-model_to_save.save('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/DNNmodel')
+model_to_save.save(root + '/Python/Models/DNNmodel')
 
 #load model
 #NEED TO ADD THE CUSTOM LOSS AS OBJECT IN LOAD !!
-reconstructed_model = keras.models.load_model('C:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/Python/Models/DNNmodel', custom_objects={'deviance' : deviance})
+reconstructed_model = keras.models.load_model(root + '/Python/Models/DNNmodel', custom_objects={'deviance' : deviance})
 
 
 
@@ -215,7 +208,7 @@ teError = []
 feed = pd.DataFrame(feed)
 
 #subsets fill 
-nsubs = [50, 100, 500, 1000, 2500, 5000, 7500, 10000, 30000, 51600]
+nsubs = [100, 500, 1000, 2500, 5000, 7500, 10000, 30000, 51600]
 for nsub in nsubs:
     tempTrain = dataTrain.sample(n = nsub, replace = False, random_state=24202, axis = 0)
     tempY = y1.sample(n = nsub, replace = False, random_state=24202, axis = 0)
@@ -286,6 +279,7 @@ plt.xlabel('n_samples')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/DNNnsamples.png')
 plt.show()
 plt.close()
 
@@ -349,6 +343,7 @@ plt.xlabel('n_neurons_1')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/DNNnn1.png')
 plt.show()
 plt.close()
 
@@ -408,6 +403,7 @@ plt.xlabel('n_neurons_2')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/DNNnn2.png')
 plt.show()
 plt.close()
 
@@ -466,6 +462,7 @@ plt.xlabel('Learning Rate')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/DNNLR.png')
 plt.show()
 plt.close()
 
@@ -524,6 +521,7 @@ plt.xlabel('Epochs')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
+plt.savefig(root + '/lyx/images/learning/DNNEpochs.png')
 plt.show()
 plt.close()
 
