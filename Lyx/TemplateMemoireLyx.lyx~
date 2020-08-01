@@ -7475,10 +7475,749 @@ Maintenant que les notions qui seront utilisée au cours de cette analyse
  la variable prédite est la fréquence des sinistres, qui correspond au nombre
  de sinistres déclarés divisé par le durée du contrat.
  Dans ce chapitre ...
+ TODO
+\end_layout
+
+\begin_layout Section
+Preprocessing (suite)
+\end_layout
+
+\begin_layout Standard
+Lorsqu'un modèle est entraîné sur un jeu de données, celui-ci est ensuite
+ capable de prédire des valeurs pour de nouvelles observations.
+ L'exactitude de ces observations dépends de beaucoup de facteurs, mais
+ de manière générale, un mauvais modèle renverra de mauvaises prédictions.
+ Comme déjà évoqué au cours de ce mémoire, un modèle peut par exemple souffrir
+ d'overfit ce qui se traduirait par de bonnes prédictions sur le jeu d'entraînem
+ent mais une mauvaise généralisation aux nouveaux cas.
+ Dans le cadre de l'assurance, les bases de données sont composées d'événements
+ rares, ce qui rends les modèles entraînés sur celles-ci très sensible au
+ sûrentraînement
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Overfit.
+\end_layout
+
+\end_inset
+
+.
+ Ce problème peut être en partie résolu grâce à la validation croisée qui
+ a été présentée plus tôt, cependant si celle-ci est réalisée sur le jeu
+ de données au complet, la valeur renvoyée par la fonction de perte sera
+ toujours biaisée.
+\end_layout
+
+\begin_layout Standard
+C'est pour cette raison que dans la vaste majorité des cas, les bases de
+ données sont divisées en un jeu d'entraînement et un jeu de test.
+ 
+\end_layout
+
+\begin_layout Itemize
+Jeu d'entraînement : Utilisé pour entraîner le modèle, et affiner les paramètres
+ de celui-ci.
+ 
+\end_layout
+
+\begin_layout Itemize
+Jeu de test : Utilisé uniquement pour le calcul de la perte du modèle.
+ Le fait que ces données n'influent pas la prise de décision sur les paramètres
+ choisi garanti que le calcul de la perte du modèle est correct.
+ 
+\end_layout
+
+\begin_layout Standard
+De manière générale, les bases de données sont donc divisées suivant des
+ proportions proches de 80% pour le jeu d'entraînement et 20% pour le jeu
+ de test.
+ Dans notre cas, les événements sont plus rares et il est donc important
+ d'en inclure un maximum dans l'entraînement pour maximiser l'efficacité
+ du modèle.
+\end_layout
+
+\begin_layout Standard
+C'est donc une proportion 87.5% (entraînement) et 12.5% (test) qui sera utilisée.
+ Un autre problème spécifique à nos données peu équilibrée apparait cependant
+ lors de l'échantillonnage : Les événements étant rares, la proportion de
+ clients ayant eu un sinistre par rapport à la proportion de clients n'ayant
+ déclaré aucun sinistre risque de ne pas être respectée.
+ 
+\end_layout
+
+\begin_layout Standard
+Afin de contourner ce problème, une variable temporaire prenant pour valeur
+ 1 si la fréquence des sinistres est supérieure à 0 ou 1 si la dite fréquence
+ est égale à 0.
+ Cette variable est donc très similaire à la fréquence des sinistres avec
+ l'exception qu'elle ne tient pas compte du nombre de sinistres.
+ L'échantillonnage est ensuite réalisé en suivant échantillonnage stratifié
+ sur cette variable.
+ De cette manière, nous sommes assurés que les deux parties de la base de
+ donnée contiennent la même proportion de clients ayant déclaré un accident.
+ 
+\end_layout
+
+\begin_layout Section
+Normalisation de la déviance
+\end_layout
+
+\begin_layout Standard
+Pour la bonne compréhension de la suite de cette analyse, un point doit
+ encore être expliqué.
+ Le calcul de la déviance est réalisé comme la somme de la déviance de toutes
+ les observations prédites.
+ Cependant la division en jeu d'entraînent et de test qui ont un nombres
+ d'observations différentes rend la comparaison de ces déviances inadaptées,
+ et le jeu d'entraînement aura systématiquement une déviance totale plus
+ élevée que le jeu de test.
+ Pour palier à ce problème, deux solutions sont possibles.
+ 
+\end_layout
+
+\begin_layout Itemize
+Travailler avec la déviance moyenne : 
+\begin_inset Formula $\bar{D}=\frac{1}{n}\sum_{1}^{N}D(y,\hat{y})$
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Normaliser la déviance par rapport au nombre total de clients : 
+\begin_inset Formula $D=(D_{train}/(N_{train}))*(N_{train}+N_{test})$
+\end_inset
+
+ ou 
+\begin_inset Formula $D=(D_{test}/(N_{test}))*(N_{train}+N_{test})$
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+Normaliser la déviance d'une de ces manières rends la comparaison entre
+ les déviances calculées sur le jeu d'entraînement et les déviances calculées
+ sur le jeu de test possible.
+ 
 \end_layout
 
 \begin_layout Section
 GLM
+\end_layout
+
+\begin_layout Section
+Réseaux de neurones
+\end_layout
+
+\begin_layout Standard
+Les réseaux de neurones représentent un des aspects principaux de ce travail
+ puisque ce sont eux qui serviront d'algorithme de base à AdaBoost.R2.
+ Afin d'avoir différents points de comparaison pour la performance des méthodes
+ de boosting sur les données utilisées, deux modèles consistant de réseaux
+ de neurones seront entraînés.
+ Un réseau de neurone 'classique', constitué d'une seule couche cachée,
+ et un réseau dit d'apprentissage profond, qui est constitué de plusieurs
+ couches cachées.
+ 
+\end_layout
+
+\begin_layout Standard
+Les modèles sont entraînés sur le jeu d'entraînement et les valeurs de la
+ déviance données seront les valeurs de la déviance du jeu de test, normalisées
+ sur le nombre total d'observations de la base de données complète.
+\end_layout
+
+\begin_layout Subsection
+Domaine 
+\end_layout
+
+\begin_layout Standard
+Un modèle est utilisé pour réaliser une prédiction 
+\begin_inset Formula $\hat{y}$
+\end_inset
+
+sur base du vecteur contenant les variables exploratoires 
+\begin_inset Formula $X$
+\end_inset
+
+.
+ Ceci peut être écrit sous la forme : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+f(X)\rightarrow y
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+où 
+\begin_inset Formula $f(.)$
+\end_inset
+
+ représente le modèle utilisé.
+ 
+\end_layout
+
+\begin_layout Standard
+Dépendant du cas étudié, le domaine de cette fonction 
+\begin_inset Formula $f(.)$
+\end_inset
+
+ peut différer.
+ En effet, si dans le plupart des cas il est intéressant d'avoir une fonction
+ avec 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ comme domaine, il existe des exceptions.
+ La variable prédite de ce mémoire est la fréquence des sinistres.
+ Puisqu'il s'agit d'une fréquence, il est impossible que la valeur prédite
+ soit inférieure à 0.
+ En addition à cela, le calcul de la déviance implique de calculer 
+\begin_inset Formula $ln(\hat{y})$
+\end_inset
+
+, ce qui n'est pas un nombre réél si 
+\begin_inset Formula $\hat{y}$
+\end_inset
+
+ est négatif résultant en l'impossibilité pour le modèle d'optimiser les
+ paramètres.
+ 
+\end_layout
+
+\begin_layout Standard
+Il est donc nécessaire de limiter le domaine de la fonction de réponse à
+ 
+\begin_inset Formula $\mathbb{R^{+}}$
+\end_inset
+
+.
+ Dans certains ouvrages, ceci est réalisé en cherchant à prédire non pas
+ 
+\begin_inset Formula $\hat{y}$
+\end_inset
+
+ mais 
+\begin_inset Formula $exp(\hat{y})$
+\end_inset
+
+.
+ Le domaine de la fonction est donc modifié de 
+\begin_inset Formula $\mathbb{R}$
+\end_inset
+
+ à 
+\begin_inset Formula $\mathbb{R^{+}}$
+\end_inset
+
+ 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "StatActu2"
+literal "false"
+
+\end_inset
+
+.
+ Les prédictions de la fréquence des sinistres sont ensuite récupérées simplemen
+t grâce à la formule suivante : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+\hat{y}_{pred}=ln(\hat{y}_{model})
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Dans ce travail, une approche différente mais qui devrait produire des résultats
+ similaire sera utilisée.
+ L'approche précédente utilisait une fonction de lien similaire à celle
+ du GLM afin de restreindre le modèle, mais celle-ci se base sur la fonction
+ d'activation de la couche de sortie.
+ En modifiant cette fonction d'activation par une fonction ayant pour domaine
+ 
+\begin_inset Formula $\mathbb{R^{+}}$
+\end_inset
+
+, il est certain que l'output du réseau suivra le domaine 
+\begin_inset Formula $\mathbb{R^{+}}$
+\end_inset
+
+.
+ L'avantage est que les valeurs 
+\begin_inset Formula $\hat{y}$
+\end_inset
+
+ prédites sont directement les valeurs de la fréquence des sinistres.
+ La fonction utilisée pour ce faire sera la fonction d'activation exponentielle,
+ ce qui aura également comme résultat de produire des résultats très proches
+ de la première méthode.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/exponential.png
+	width 8cm
+	height 6cm
+	keepAspectRatio
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fonction d'activation exponentielle.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsection
+Hyperparamètres
+\end_layout
+
+\begin_layout Standard
+Les hyperparamètres ont été cités plus tôt dans ce travail, mais pour le
+ reste de cette section il est important de bien comprendre ce qu'ils sont
+ et comment les choisir.
+ Lors de l'entraînement d'un modèle, les paramètres de celui-ci sont optimisés
+ par rapport aux données qu'il a reçu, et ce de manière 
+\begin_inset Quotes eld
+\end_inset
+
+automatique
+\begin_inset Quotes erd
+\end_inset
+
+.
+ Cependant, dépendant d'un problème à un autre, cette optimisation doit
+ changer dans le but de maximiser l'efficacité du modèle.
+ Pour ce faire, il suffit de régler les hyperparamètres du modèle pour que
+ ceux-ci soient adéquats pour le cas étudié.
+ 
+\end_layout
+
+\begin_layout Standard
+Il y a cependant une grande différence au niveau de l'entraînement entre
+ les paramètres optimisés par le modèle et les hyperparamètres : il n'existe
+ pas de règle prédéfinie pour l'optimisation des seconds.
+ En ajoutant à cela le fait qu'il est généralement difficile voir impossible
+ de 
+\begin_inset Quotes eld
+\end_inset
+
+deviner
+\begin_inset Quotes erd
+\end_inset
+
+ les meilleurs hyperparamètres, le besoin d'une méthode heuristique pour
+ le choix des hyperparamètres est bien présent.
+\end_layout
+
+\begin_layout Standard
+Pour ce faire, un domaine de 
+\begin_inset Quotes eld
+\end_inset
+
+recherche
+\begin_inset Quotes erd
+\end_inset
+
+ sera défini pour chaque hyperparamètre.
+ Une fois les domaines définis, 
+\begin_inset Formula $N_{hyp}$
+\end_inset
+
+ ensembles de paramètres seront échantillonnés depuis ces domaines (un paramètre
+ dans chaque domaine, 
+\begin_inset Formula $N_{hyp}$
+\end_inset
+
+ fois).
+ Un modèle sera ensuite entrainé avec chacun de ces ensembles de paramètres
+ et leurs résultats seront comparés.
+ 
+\end_layout
+
+\begin_layout Standard
+Dans un monde parfait, toutes les combinaisons possibles des hyperparamètres
+ dans le domaine défini devraient être testées, ceci est cependant impossible
+ à cause du temps de calcul nécessaire à l'entraînement du modèle, ce qui
+ rends la tâche difficile (et encore plus lorsque la validation croisée
+ est utilisée, puisque celle-ci implique la création de 
+\begin_inset Formula $K$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Nombre d'ensembles crées pour la validation croisée.
+\end_layout
+
+\end_inset
+
+ modèles pour chaque combinaison d'hyperparamètres).
+ C'est cette différence qui fait que cette méthode peut être qualifiée d'heurist
+ique.
+ 
+\end_layout
+
+\begin_layout Standard
+Les hyperparamètres qui seront optimisés pour les réseaux de neurones de
+ ce travail sont décris ci-dessous : 
+\end_layout
+
+\begin_layout Itemize
+Nombre d'époques (Epochs) : C'est le nombre de fois que la base de donnée
+ (d'entraînement) complète sera passée dans le réseau de neurones au cours
+ de l'optimisation des poids de celui-ci.
+\end_layout
+
+\begin_layout Itemize
+Taille des lots (Batch size) : Un lot est un ensemble de 
+\begin_inset Formula $N_{BatchSize}$
+\end_inset
+
+ entrées, qui sera passé dans le réseau de neurone en une seule fois lors
+ de l'optimisation.
+ La taille du lot défini combien de de lots au total seront passés dans
+ le réseau de neurones au cours d'une époque.
+ Par exemple, si la base de donnée est composée de 10.000 entrées, et que
+ la taille des lots est de 500, alors 20 lots seront passés à travers le
+ réseau de neurone à chaque époque.
+ En pratique, cela influence l'optimisation des poids car un gradient sera
+ calculé par lot, et les poids seront modifiés à chaque calcul de gradient.
+ 
+\end_layout
+
+\begin_layout Itemize
+Pourcentage d'abandon (Dropout rate) : Il s'agit d'un paramètre de régularisatio
+n permettant de limiter les risques de surentraînement du modèle.
+ Il représente un pourcentage des neurones qui sera ignoré pendant chaque
+ époque.
+ Cela signifie que leur contribution au réseau est temporairement ignorée.
+\end_layout
+
+\begin_layout Itemize
+Nombre de neurones : Il s'agit simplement du nombre de neurones dans une
+ couche cachée.
+ S'il existe plusieurs couches cachées, alors un paramètre sera défini pour
+ chacune d'entre elle.
+ 
+\end_layout
+
+\begin_layout Itemize
+Taux d'apprentissage (Learning Rate) : Ce paramètre détermine à quel point
+ les poids du réseau seront modifiés à chaque fois que les poids seront
+ mis à jour.
+ Il doit être compris entre 0 et 1.
+\end_layout
+
+\begin_layout Subsection
+Courbes d'apprentissage
+\end_layout
+
+\begin_layout Standard
+Le surentraînement d'un modèle peut être vraiment problématique pour les
+ prédictions de celui-ci, comme expliqué plus tôt dans ce travail.
+ Dans le but de réduire celui-ci, la validation croisée est un outil efficace.
+ Si toutes les itérations de la validation croisée ont une déviance similaire,
+ ceci est une bonne indication que le modèle a été correctement entraîné.
+ Cependant d'autres techniques permettent de s'assurer qu'un modèle n'a
+ pas été sous-entrainé ou surentraîné.
+ Une méthode populaire consiste à dessiner les courbes d'apprentissage d'un
+ modèle, afin de s'assurer que les résultats sur la base de données d'entraîneme
+nt et sur celle de test sont cohérents, et reflètent que le modèle est correctem
+ent paramétré.
+ 
+\end_layout
+
+\begin_layout Standard
+Un graphique de courbe d'apprentissage est composé de deux axes : 
+\end_layout
+
+\begin_layout Itemize
+Sur l'axe des abscisses, le paramètre pour lequel il est intéressant de
+ vérifier qu'il est correctement ajusté.
+ Le paramètre peut être un hyperparamètre, ou la taille de la base de donnée
+ utilisée pour l'entraînement.
+\end_layout
+
+\begin_layout Itemize
+Sur l'axe des ordonnées, la déviance moyenne.
+ 
+\end_layout
+
+\begin_layout Standard
+Des courbes représentant la déviance moyenne pour différentes valeurs du
+ paramètre seront dessinées, une pour la déviance sur le jeu d'entraînement,
+ et une autre sur le jeu de test.
+ Sur base de ces courbes, il est possible de détecter un sous-entraînement
+ ou un surentraînement (si l'erreur de test est inférieure à l'erreur d'entraîne
+ment, ou si l'erreur de test est trop supérieure à celle d'entraînement,
+ respectivement).
+ Ce type de graphique peut aussi être utilisé pour explorer le domaine de
+ certains hyperparamètres et choisir le meilleur d'entre eux.
+ 
+\end_layout
+
+\begin_layout Subsection
+Réseau de neurones simple
+\end_layout
+
+\begin_layout Standard
+Dans cette sous-section, la méthodologie utilisée ainsi que les résultats
+ obtenus pour le réseau de neurones contenant une seule couche cachée seront
+ présentés.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Domaine des hyperparamètres
+\end_layout
+
+\begin_layout Standard
+Afin de choisir un des meilleurs modèles possibles, la validation croisée
+ se fera sur le jeu d'entraînement, et les résultats finaux de la déviance
+ seront calculés sur le jeu de test.
+ La liste des domaines explorés pour les hyperparamètres est indiquée ci-dessous.
+ Il est tout de même important de préciser que pour arriver à ces domaines
+ relativement restreints, une première recherche avec des domaines plus
+ vagues a été menée.
+ Sur base des résultats de cette première recherche les critères ont pu
+ être affinés.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="6" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Paramètre
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Domaine
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Époque
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[100,250,400\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Taille du lot
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[500,1000,10000,51600\right]$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+51600 représente la taille de la base de donnée d'entraînement, et donc
+ un seul lot par époque.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+% abandon
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0.1,0.2,0.3\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N.
+ Neurones
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[5,10,15,25\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Taux d'apprentissage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[0.01,0.05,0.1,0.3\right]$
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Liste des domaines des hyperparamètres recherchés pour le réseau de neurones
+ simple.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard

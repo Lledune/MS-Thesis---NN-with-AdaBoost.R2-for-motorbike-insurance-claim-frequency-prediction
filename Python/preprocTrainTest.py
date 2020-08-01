@@ -35,3 +35,18 @@ dataTrain.to_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insuranc
 datacatsTest.to_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTest.csv")
 datacatsTrain.to_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataCatsTrain.csv")
 
+
+
+#plotting exponential func
+# 100 linearly spaced numbers
+x = np.linspace(-5,5,100)
+
+y = np.exp(x)
+import matplotlib.pyplot as plt
+plt.plot(x, y)
+plt.grid()
+plt.xlabel('x')
+plt.ylabel('exp(x)')
+plt.title("Fonction d'activation exponentielle")
+plt.show()
+plt.close()

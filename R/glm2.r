@@ -1,29 +1,44 @@
 #GLM
 
-path = "c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/preprocFull.csv"
-path2 = "c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/catOnly.csv"
+path = "c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTrain.csv"
+pathtest = "c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/dataTest.csv"
 
-data = read.csv(path)
-data2 = read.csv(path2)
+dataTrain = read.csv(path)
+dataTest = read.csv(pathtest)
+
+#Deviance
+devianceSingle = function(yt, yp, duration){
+  if(yt == 0){
+    return(2*duration*yp)
+  }
+  if(yt != 0){
+    return(2*duration * (yt*log(yt) - yt*log(yp) - yt + yp))
+  } 
+}
+
+devianceFull = function(yt, yp, duration){
+  x = matrix(nrow = length(yt), ncol = 1)
+  for(i in 1:length(x)){
+    x[i] = devianceSingle(yt[i], yp[i], duration[i])
+  }
+  return(sum(x))
+}
 
 #Y : nclaims
-y1 = data$NumberClaims
-y2 = data2$NumberClaims
-
-#duration
-d1 = data$Duration
-d2 = data$Duration
+y1train = dataTrain$NumberClaims
+y1test = dataTest$ClaimFrequency
+d1train = dataTrain$Duration
+d1test = dataTest$Duration
 
 #delete the columns that we don't need for X
-data = data[, -match(c("ClaimFrequency"), names(data))]
-data2 = data2[, -match(c("X", "ClaimCost"), names(data2))]
+dataTrain = dataTrain[, -match(c("ClaimFrequency"), names(dataTrain))]
 
 model = glm(formula = NumberClaims ~ Gender.F + Zone.1 + Zone.2 + Zone.3 + Zone.4 + Zone.5 + Zone.6 + 
               Class.1 + Class.2 + Class.3 + Class.4 + Class.5 + Class.6 + 
               BonusClass.1 + BonusClass.2 + BonusClass.3 + BonusClass.4 + BonusClass.5 + BonusClass.6 + 
               OwnersAge + VehiculeAge, 
             family = poisson(link = "log"),
-            data = data,
+            data = dataTrain,
             offset = log(Duration)
             )
 
@@ -33,12 +48,40 @@ fitted(model) #predictions ?
 plot(model)
 step(model)
 
+#predictions
+predsTest = predict(model, newdata = dataTest)
+predsTest = exp(predsTest)
+
+devFirstModel = devianceFull(y1test, predsTest, d1test)
+devFirstModelNorm = (devFirstModel/length(y1test))*(length(y1train) + length(y1test))
+
 #refined model after step
 refModel = glm(formula = NumberClaims ~ Gender.F + Zone.1 + Zone.2 + Zone.3 + 
-      Class.3 + Class.4 + Class.6 + BonusClass.4 + OwnersAge + 
-      VehiculeAge, family = poisson(link = "log"), data = data, 
-    offset = log(Duration))
+                 Class.3 + Class.4 + Class.6 + BonusClass.4 + OwnersAge + 
+                 VehiculeAge, family = poisson(link = "log"), data = dataTrain, 
+               offset = log(Duration))
 summary(refModel)
+
+#preds
+predsTestRefined = predict(refModel, newdata = dataTest)
+predsTestRefined = exp(predsTestRefined)
+
+devSecondModel = devianceFull(y1test, predsTestRefined, d1test)
+devSecondModelNorm = (devSecondModel/length(y1test))*(length(y1test) + length(y1train))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #second dataset
 model2 = glm(formula = NumberClaims ~ Gender_M + Zone_2 + Zone_3 + Zone_4 + Zone_5 + Zone_6 + Zone_7 + 
@@ -48,7 +91,7 @@ model2 = glm(formula = NumberClaims ~ Gender_M + Zone_2 + Zone_3 + Zone_4 + Zone
                OwnersAgeCat_6 + OwnersAgeCat_7 + 
                VehiculeAgeCat_1 + VehiculeAgeCat_2 + VehiculeAgeCat_3 + VehiculeAgeCat_4 + VehiculeAgeCat_5,
              family = poisson(link = "log"),
-             data = data2,
+             data = dataTrain,
              offset = log(Duration)
              )
 
