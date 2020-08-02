@@ -618,8 +618,8 @@ Présentation des données
 \end_layout
 
 \begin_layout Standard
-Afin de réaliser ce travail, nous avons besoin d'une base de donnée adéquate,
- nous présentons celle-ci dans cette sous-section.
+Afin de réaliser ce travail, une base de donnée adéquate est nécessaire,
+ celle-ci est présentée dans cette sous-section.
  La base de données est constituée d'informations sur les clients d'une
  compagnie d'assurance nommée Wasa, entre 1994 et 1998.
  Les véhicules assurées sont composés uniquement de motos.
@@ -982,8 +982,8 @@ Analyse exploratoire
 
 \begin_layout Standard
 Maintenant que les différentes variables ont été brièvement présentées et
- leur fonction plus claire, nous allons maintenant passer à l'analyse exploratoi
-re de celles-ci.
+ leur fonction plus claire, l'analyse exploratoire de celles-ci peu être
+ effectuée.
  Le but de cette analyse est de mieux comprendre les données qui serviront
  à entraîner les différents algorithmes, ainsi que de repérer d'éventuelles
  anomalies.
@@ -1094,13 +1094,13 @@ Distribution OwnersAge
 \end_layout
 
 \begin_layout Standard
-Sur ces deux premières figures nous observons respectivement les distributions
+Sur ces deux premières figures il est possible d'observer les distributions
  des variables Gender et OwnersAge.
- La première chose que nous pouvons voir est la grande disparité entre le
- nombre d'hommes de et femmes clients de l'assurance.
- Notre jeu de données est composé d'hommes pour la grande majorité.
- Pour ce qui est de la variable OwnersAge, nous constatons que les valeurs
- sont réparties entre 16 et 92 ans, avec deux 
+ La première chose qui saute aux yeux est la grande disparité entre le nombre
+ d'hommes de et femmes clients de l'assurance.
+ Le jeu de données est composé d'hommes pour la grande majorité.
+ Pour ce qui est de la variable OwnersAge, les valeurs sont réparties entre
+ 16 et 92 ans, avec deux 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1109,10 +1109,10 @@ pics
 \end_inset
 
  vers 25 et 45 ans.
- Les valeurs maximales et minimales de nos variables continues seront importante
+ Les valeurs maximales et minimales de ces variables continues seront importante
  pour la suite, car elles sont nécessaires afin d'appliquer une normalisation
  des données, qui sera discutée plus tard dans ce travail.
- Ci dessous les distributions des variables VehiculeAge et Zone :
+ Ci-dessous les distributions des variables VehiculeAge et Zone :
 \end_layout
 
 \begin_layout Standard
@@ -1217,14 +1217,14 @@ Distribution Zone
 \end_layout
 
 \begin_layout Standard
-La distribution de vehicule est indiquée en années, et nous pouvons donc
- observer que si la plupart des véhicules assurés ont moins de 20 ans, un
- grand nombre de ceux-ci sont bien plus vieux, avec comme maximum 99 ans.
+La distribution de vehicule est indiquée en années, et si la plupart des
+ véhicules assurés ont moins de 20 ans, un grand nombre de ceux-ci sont
+ bien plus vieux, avec comme maximum 99 ans.
  Il est possible que ce véhicule soit considéré comme outlier et il sera
  reconsidéré dans la partie preprocessing.
- La distribution de la variable Zone est intéressante, elle nous révèle
- que la plupart des véhicules assurés sont conduits dans des villages, mais
- aussi que très peu d'entre eux le sont dans le Gotland.
+ La distribution de la variable Zone est intéressante, elle révèle que la
+ plupart des véhicules assurés sont conduits dans des villages, mais aussi
+ que très peu d'entre eux le sont dans le Gotland.
  Ceci n'est pas surprenant puisque la population de la Suède est d'environ
  10 millions d'habitants, pour seulement 60.000 habitants dans la région
  du Gotland.
@@ -1347,8 +1347,8 @@ Pour la variable Class nous observons qu'assez peu de véhicules appartiennent
  En fait, la plupart des véhicules se situent dans les classes 3, 4 et 5,
  ce qui montre que les vehicules les moins puissants et les plus puissants
  sont minoritaires.
- Les graphiques suivants nous montrent la répartitions des sinistres par
- bonus et par classe de véhicule.
+ Les graphiques suivants montrent la répartitions des sinistres par bonus
+ et par classe de véhicule.
 \end_layout
 
 \begin_layout Standard
@@ -1456,7 +1456,7 @@ Class Claims
 Il parait logique de supposer que plus un client a un bonus élevé, moins
  celui-ci causera d'accident, puisque le bonus monte uniquement si le client
  parvient à compléter une année sans causer d'accident.
- Cependant en observant la figure 7, il apparait que la majorité des cas
+ Cependant en observant la figure 2.7, il apparait que la majorité des cas
  d'accidents sont déclarés par des clients appartenant aux classes 3 à 6
  de bonus.
  Ce qui est d'autant plus étonnant lorsque l'on associe ce résultat avec
@@ -1468,11 +1468,11 @@ e.
 \begin_inset Newline newline
 \end_inset
 
-Les résultats de la figure 8 sont moins surprenant : plus un véhicule est
+Les résultats de la figure 2.8 sont moins surprenant : plus un véhicule est
  puissant, plus le risque d'accident sera important.
  Les déviations de cette régle par les classes 3 et 7 sont expliquées par
  la distribution de la population à travers les différentes classes (figure
- 6), ainsi il y a peu d'accidents pour les véhicules de classe 7 simplement
+ 2.6), ainsi il y a peu d'accidents pour les véhicules de classe 7 simplement
  car ceux-ci sont peu nombreux, une conclusion similaire peut être énoncée
  pour la classe 3.
 \end_layout
@@ -1584,12 +1584,12 @@ es de causer des accidents que les femmes.
  Il faut prendre en compte que les hommes sont bien plus nombreux que les
  femmes dans nos données, mais la conclusion ne change pas puisque la proportion
  de femmes est de 18%, alors que celles-ci ne causent que 8.7% des sinistres.
- Sur la figure 10, nous observons que les classes 1 et 3 sont celles qui
- déclarent le plus de sinistres.
- La première classe étant plutôt minoritaire (figure 4) nous observons que
- les personnes habitant dans les parties centrales et semi-centrales de
- Norvège semblent causer bien plus d'accidents que les autres catégories,
- la même conclusion peut être faite pour la deuxième classe (Banlieues et
+ Sur la figure 2.10, les classes 1 et 3 sont celles qui déclarent le plus
+ de sinistres.
+ La première classe étant plutôt minoritaire (figure 2.4), les personnes
+ habitant dans les parties centrales et semi-centrales de Norvège semblent
+ causer bien plus d'accidents que les autres catégories.
+ La même conclusion peut être faite pour la deuxième classe (Banlieues et
  villes moyennes).
  Pour ce qui est de nord de la Suède, nous constatons l'inverse puisque
  ceux-ci semblent causer assez peu d'accidents.
@@ -1697,12 +1697,12 @@ Distribution ClaimCost
 \end_layout
 
 \begin_layout Standard
-La figure 11 a pour but de mieux comprendre cette disparité entre les hommes
+La figure 2.11 a pour but de mieux comprendre cette disparité entre les hommes
  et les femmes dans la déclaration des sinistres.
  Une comparaison par âge permet de mettre en évidence une information importante.
  En effet, si les hommes semblent bien causer plus d'accidents que les femmes
  jusqu'à la treintaine, cette tendance s'égalise passé ce cap.
- Enfin, la figure 12 nous informe de la distribution de la variable ClaimCost,
+ Enfin, la figure 2.12 nous informe de la distribution de la variable ClaimCost,
  représentant le coût total des sinistres d'un client.
  Il est important de noter qu'il s'agit bien de la somme de tous les sinistres
  déclarés du client, ainsi si une personne a reçu une compensation de l'assuranc
@@ -2081,8 +2081,7 @@ Y=X/v
 Il existe différents ratios mais ici ne sera présenté que celui utilisé
  dans l'analyse à venir : La fréquence des réclamations.
  Il s'agit du rapport entre le nombre de réclamations et la durée du contrat,
- nous obtenons ainsi une fréquence qui sera la variable prédite par nos
- modèles.
+ une fréquence qui sera la variable prédite par les modèles est ainsi obtenue.
 \end_layout
 
 \begin_layout Subsection
@@ -2230,8 +2229,8 @@ Preprocessing
 \end_layout
 
 \begin_layout Standard
-Le preprocessing des données est une étape très importante lorsque nous
- travaillons avec ce type de données et celui-ci n'est pas à négliger.
+Le preprocessing des données est une étape très importante et celui-ci n'est
+ pas à négliger.
  Il consiste a préparer les données pour les algorithmes, afin que ceux-ci
  puissent fonctionner de manière optimale.
  Dans ce travail, plusieurs méthodes de preprocessing ont été utilisées.
@@ -2242,8 +2241,8 @@ Variables binaires (Dummy variables)
 \end_layout
 
 \begin_layout Standard
-Certaines de nos variables sont catégorielles, et plus particulièrement
- sont des variables non-ordinales.
+Certaines des variables sont catégorielles, et plus particulièrement sont
+ des variables non-ordinales.
  Cela signifie que les différentes catégories ne peuvent pas être ordonnées,
  il s'agit purement de l'assignation d'un client à un groupe donné.
  Ce type de variable ne peut pas être encodé tel quel et doit être transformé
@@ -2282,7 +2281,7 @@ binaires
 \begin_inset Formula $j$
 \end_inset
 
-, nous pouvons écrire :
+, il est possible d'écrire :
 \end_layout
 
 \begin_layout Standard
@@ -2317,23 +2316,24 @@ Classification And REgression Tools : Package de machine learning pour R.
 
  variables binaires, la dernière sera donc supprimée car celle-ci ne représente
  aucune information.
- Prenons pour exemple la variable Gender.
+ La variable Gender sera prise en guise d'exemple.
  Si 
 \begin_inset Formula $x_{iGender}=1$
 \end_inset
 
  alors le client est une femme.
- Cependant nous ne devons pas créer une deuxième variable binaire puisque
- si 
+ Cependant il n'est pas nécessaire de créer une deuxième variable binaire
+ puisque si 
 \begin_inset Formula $x_{iGender}=0$
 \end_inset
 
- nous pouvons en déduire que le client est un homme.
- Ceci explique pourquoi nous n'avons besoin que de 
+, il est facile d'en déduire que le client est un homme.
+ Ceci explique pourquoi 
 \begin_inset Formula $n-1$
 \end_inset
 
- variables binaires pour représenter toute l'information de 
+ variables binaires sont suffisantes pour représenter toute l'information
+ de 
 \begin_inset Formula $n$
 \end_inset
 
@@ -2347,7 +2347,7 @@ Normalisation
 \begin_layout Standard
 Les données quantitatives ne doivent pas être transformées en variables
  binaires (bien que celles-ci peuvent être converties en intervalles puis
- en variables binaires, ce ne sera pas le cas dans le cadre de ce travail).
+ en variables binaires).
  Cependant cela ne signifie pas qu'aucune méthode de preprocessing ne doit
  être appliquée à ces données.
  La normalisation des données quantitatives aide certains algoithmes à converger
@@ -2374,8 +2374,8 @@ Voir chapitre 3
 
 Plusieurs méthodes peuvent être utilisées afin de procéder à la normalisation
  des données.
- Cependant nous ne décrirons que celle qui sera utilisée dans le cadre de
- ce travail : la normalisation Min Max 
+ Cependant ne sera décrite dans ce travail que celle qui sera utilisée par
+ la suite : la normalisation Min Max 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "StatActu2"
@@ -2452,12 +2452,12 @@ Outliers
 Lors de l'encodage des données, il arrive que certaines valeurs des variables
  quantitatives soient assez extrêmes et semblent fort distantes des autres
  observations.
- Dans ce cas nous pouvons soit garder la valeur si celle-ci semble ajouter
- de l'information au modèle ou la supprimer dans le but d'une meilleure
+ Dans ce il est possible de soit garder la valeur si celle-ci semble ajouter
+ de l'information au modèle soit de la supprimer dans le but d'une meilleure
  généralisation par celui-ci.
- Dans la section 2.2 une donnée a particulièrement attiré notre attention
- comme outlier potentiel : une moto de 99 ans.
- Pour celle-ci nous pouvons entrevoir deux possibilités :
+ Dans la section 2.2 une donnée a particulièrement attiré l'attention comme
+ outlier potentiel : une moto de 99 ans.
+ Pour celle-ci deux possibilités sont à envisager :
 \end_layout
 
 \begin_layout Itemize
@@ -2499,7 +2499,8 @@ Durée de contrat
 \begin_layout Standard
 Pour le bon fonctionement du modèle, certaines autres données ont du être
  modifiées car celles-ci entrainaient des erreurs dans la fonction de déviance
- utilisée pour la calibration des poids des réseaux de neurones.
+ utilisée pour la calibration des poids des réseaux de neurones (empêchant
+ la convergence).
  Les observations incriminées sont celles ayant une durée de contrat nulle.
  Ces valeurs nulles de durée de contrat sont peu cohérentes (impossible
  d'avoir un sinistre déclaré au cours du contrat si celui-ci n'est pas encore
@@ -2570,7 +2571,7 @@ Les deux algorithmes de bases que sont les modèles linéaires généralisés
 \begin_inset Quotes eld
 \end_inset
 
-meta-algorithme
+méta-algorithme
 \begin_inset Quotes erd
 \end_inset
 
@@ -2661,7 +2662,7 @@ Un modèle cherche à approximer une fonction cible (choisie), dans le cas
 \begin_inset Newline newline
 \end_inset
 
-Dans notre étude seuls les modèles supervisés
+Dans cette étude seuls les modèles supervisés
 \begin_inset Foot
 status open
 
@@ -2725,8 +2726,7 @@ apprendre
  et se calibrer sur le problème que l'on cherche à résoudre.
  Cette phase d'apprentissage est différente d'un algorithme à un autre.
  Une fois cette phase d'apprentissage terminée le modèle ainsi créé peut
- être utilisé pour la prédiction (après que celui-ci ait été validé, voir
- section 3.1.4).
+ être utilisé pour la prédiction.
  Les valeurs prédites par l'algorithmes seront notées 
 \begin_inset Formula $\hat{y_{i}}$
 \end_inset
@@ -2895,7 +2895,7 @@ La déviance non mise à l'échelle peut ensuite être obtenue en multipliant
  (voir section 2.3.3).
  La dérivation de cette déviance non mise à l'échelle appliquée à la loi
  de poisson résulte en la déviance de Poisson non-mise à l'échelle, c'est
- ce critère qui sera utilisé pour l'apprentissage de nos modèles 
+ ce critère qui sera utilisé pour l'apprentissage des modèles 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "StatActu2"
@@ -2953,7 +2953,7 @@ D(y_{i},\hat{y}_{i})=2v_{i}\hat{y_{i},}\;\:\forall y_{i}=0
 \end_layout
 
 \begin_layout Standard
-Cette formule est obtenue en remplaçant 
+Cette formule est simplement obtenue en remplaçant 
 \begin_inset Formula $y_{i}$
 \end_inset
 
@@ -2962,45 +2962,16 @@ Cette formule est obtenue en remplaçant
 \end_inset
 
 .
- Bien que trivial, ce développement est important car sans cette formule
- simplifiée, le cas 
-\begin_inset Formula $y_{i}=0$
-\end_inset
-
- pose problème pour l'optimisation.
- En effet, le terme 
-\begin_inset Formula $y_{i}ln(y_{i})$
-\end_inset
-
- vaut évidemment 
-\begin_inset Formula $0$
-\end_inset
-
- dans ce cas précis, cependant 
-\begin_inset Formula $ln(0)=-\infty$
-\end_inset
-
- et ceci était source d'erreurs de convergence pour l'optimisation
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Optimisation faite avec le package Keras, ceci était plus un problème informatiq
-ue que mathématique.
-\end_layout
-
-\end_inset
-
-.
+ 
 \end_layout
 
 \begin_layout Subsection
-Overfit, AIC et BIC
+Overfit (surentraînement)
 \end_layout
 
 \begin_layout Standard
 Il est important de comprendre le but derrière la création d'un tel modèle.
- Nous cherchons à approximer une fonction de réponse 
+ L'objectif principal est d' approximer une fonction de réponse 
 \begin_inset Formula $Y$
 \end_inset
 
@@ -3015,95 +2986,16 @@ Il est important de comprendre le but derrière la création d'un tel modèle.
 , ce qui amène à des méthodes permettant de vérifier que cette fonction
  est correctement approximée.
  Plus particulièrement le but est d'éviter un maximum l'overfit.
- L'overfit survient lorsqu'un modèle approxime bien les valeurs du jeu de
- données utilisé pour l'entraînement mais que celui-ci est incapable de
- déterminer des valeurs cohérentes pour des nouvelles entrées, il peut être
- notamment causé par un trop grand nombre de variables explicatives ou une
- phase d'apprentissage mal configurée.
+ L'overfit (ou surentraînement) survient lorsqu'un modèle approxime bien
+ les valeurs du jeu de données utilisé pour l'entraînement mais que celui-ci
+ est incapable de déterminer des valeurs cohérentes pour des nouvelles entrées,
+ il peut être notamment causé par un trop grand nombre de variables explicatives
+ ou une phase d'apprentissage mal configurée.
  Le modèle est alors inutilisable dans un scénario réél.
 \begin_inset Newline newline
 \end_inset
 
-Afin de choisir des modèles limitant l'overfit, deux nouveaux critères seront
- introduits : AIC et BIC.
- Comme les autres critères vus, ce sont des mesures de la qualité d'un modèle
- statistique.
- Il est (presque) toujours possible d'améliorer les résultats d'un modèle
- sur les critères basiques en augmentant le nombre de variables explicatives.
- Cependant cette pratique augmente les risque d'overfit, c'est la raison
- pour laquelle dans la création d'un modèle la parcimonie
-\begin_inset Foot
-status open
 
-\begin_layout Plain Layout
-Principe consistant à utiliser le moins de variables explicatives possible
- pour expliquer un phénomène afin de réduire le phénomène d'overfit.
-\end_layout
-
-\end_inset
-
- du modèle est importante.
- Ces deux critères permettent de prendre en compte le nombre de variables
- explicatives dans le calcul de la qualité de modèle 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "StatActu2,aicbic"
-literal "false"
-
-\end_inset
-
-.
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $AIC=2k-2ln(L)$
-\end_inset
-
- 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Akaike Information Criterion
-\end_layout
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-(Où 
-\begin_inset Formula $k$
-\end_inset
-
- est le nombre de paramètres à estimer du modèle et L est le maximum de
- la fonction de vraisemblance du modèle)
-\end_layout
-
-\begin_layout Itemize
-\begin_inset Formula $BIC=k\,ln(N)-2ln(L)$
-\end_inset
-
- 
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Bayesian Information Criterion
-\end_layout
-
-\end_inset
-
-
-\begin_inset Newline newline
-\end_inset
-
-(Où 
-\begin_inset Formula $N$
-\end_inset
-
- est le nombre d'observations dans l'échantillon)
 \end_layout
 
 \begin_layout Subsection
@@ -3129,18 +3021,11 @@ identiques
  Généralement la base de données utilisée est divisée en un jeu d'entraînement
  et un jeu de test qui ne sera pas utilisé pour l'entraînement mais pour
  calculer les résultats du modèle aux différents critères statistiques.
- Dans le cas étudié ici, les événements sont rares, c'est pourquoi il est
- souvent préférable de travailler avec la base de donnée complète en évitant
- cette division 
-\begin_inset CommandInset citation
-LatexCommand citep
-key "StatActu2"
-literal "false"
-
-\end_inset
-
-.
- C'est pour palier à ce problème que la validation croisée sera utilisée.
+ Dans le cas étudié ici, les événements sont rares, et le jeu de test sera
+ d'une taille réduite afin de garder un maximum de données pour l'entraînement.
+ Afin de vérifier que l'entraînement se déroule correctement et que les
+ modèles ont du sens, la validation croisée sera également utilisée sur
+ le jeu d'entraînement.
 \begin_inset Newline newline
 \end_inset
 
@@ -3229,24 +3114,6 @@ begin{algorithmic}[1]
 \end_inset
 
 
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE 
-\end_layout
-
-\end_inset
-
-
-\series bold
-begin
 \end_layout
 
 \begin_layout Plain Layout
@@ -3443,24 +3310,6 @@ return
 
 \begin_layout Plain Layout
 \begin_inset ERT
-status collapsed
-
-\begin_layout Plain Layout
-
-
-\backslash
-STATE 
-\end_layout
-
-\end_inset
-
- 
-\series bold
-end
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset ERT
 status open
 
 \begin_layout Plain Layout
@@ -3535,11 +3384,11 @@ Ordinary Least Squares (régression linéaire)
 \begin_layout Itemize
 La distribution de probabilité : Dans l'OLS, nous supposons que les données
  suivent une loi gaussienne.
- Avec les GLM, nous travaillons avec une classe de distrution (les distributions
- EDM) dont la fonction de distribution générale a été présentée plus tôt
- dans ce travail.
- Plus particulièrement dans notre cas, cela va nous permettre de construire
- nos modèles avec la loi de Poisson.
+ Avec les GLM, une classe de distrution (les distributions EDM) dont la
+ fonction de distribution générale a été présentée plus tôt dans ce travail
+ est utilisée.
+ Plus particulièrement pour ce travail, cela permet de construire les modèles
+ avec la loi de Poisson.
  
 \end_layout
 
@@ -3630,7 +3479,7 @@ Hypothèse 1 : Indépendance des polices d'assurances
 \end_layout
 
 \begin_layout Standard
-Considérons que nous avons 
+En considérant 
 \begin_inset Formula $n$
 \end_inset
 
@@ -3638,8 +3487,8 @@ Considérons que nous avons
 \begin_inset Formula $X_{i}$
 \end_inset
 
- correspondant à la réponse de la police i.
- Nous supposons que 
+ correspondant à la réponse de la police i, et en supposant également que
+ 
 \begin_inset Formula $X_{1},...,X_{n}$
 \end_inset
 
@@ -3661,7 +3510,7 @@ Hypothèse 2 : Indépendance temporelle
 \end_layout
 
 \begin_layout Standard
-Considérons 
+En considérant 
 \begin_inset Formula $n$
 \end_inset
 
@@ -3686,8 +3535,8 @@ Hypothèse 3 : Homogénéité
 \end_layout
 
 \begin_layout Standard
-Considérons deux polices dans la même plage de tarifs et ayant la même durée
- de contrat, avec 
+En considérant deux polices dans la même plage de tarifs et ayant la même
+ durée de contrat, avec 
 \begin_inset Formula $X_{i}$
 \end_inset
 
@@ -3798,11 +3647,11 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 
 \begin_layout Standard
 Dans le cas étudié, c'est la fréquence des sinistres qui est importante.
- Considérons 
+ En considérant 
 \begin_inset Formula $N(t)$
 \end_inset
 
- comme le nombre de sinistres d'un indivitu au cours de la période 
+ comme le nombre de sinistres d'un individu au cours de la période 
 \begin_inset Formula $[0,t]$
 \end_inset
 
@@ -3825,7 +3674,7 @@ literal "false"
 \begin_inset Formula $\omega_{i}$
 \end_inset
 
- et prenons 
+ et en prenant 
 \begin_inset Formula $\mu_{i}$
 \end_inset
 
@@ -3933,8 +3782,8 @@ Forme de tableau
 \end_layout
 
 \begin_layout Standard
-Dans ce travail, nous avons jusqu'ici considéré que les données étaient
- exprimées sous forme de liste, soit un vecteur 
+Dans ce travail, il a jusqu'ici été considéré que les données étaient exprimées
+ sous forme de liste, soit un vecteur 
 \begin_inset Formula $y'=(y_{1},...,y_{n})$
 \end_inset
 
@@ -3948,8 +3797,8 @@ Dans ce travail, nous avons jusqu'ici considéré que les données étaient
 
  ainsi que les facteurs d'évaluations correspondants.
  Cette forme représente la forme de liste, et est celle qui sera préférée
- lorsque nous travaillons dans des logiciels tels que SAS, R, ou encore
- Python afin de gérer et représenter les données.
+ dans des logiciels tels que SAS, R, ou encore Python afin de gérer et représent
+er les données.
  Il existe cependant une autre manière de représenter les données qui s'avère
  très utile pour certaines démonstrations : la forme de tableau 
 \begin_inset CommandInset citation
@@ -4358,9 +4207,9 @@ Fonction de lien
 
 \begin_layout Standard
 Maintenant que les notations utilisées dans cette parties sont expliquées,
- nous pouvons nous pencher sur la deuxième partie de la généralisation des
- GLMs, la fonction de lien.
- Considérons que 
+ il faut se pencher sur la deuxième partie de la généralisation des GLMs,
+ la fonction de lien.
+ Il est également considéré que 
 \begin_inset Formula $\mu_{ij}$
 \end_inset
 
@@ -4377,8 +4226,8 @@ Maintenant que les notations utilisées dans cette parties sont expliquées,
 \end_inset
 
  représentent respectivement la permière et la deuxième variable catégorielle.
- Pour cet exemple nous allons considérer que la première variable comporte
- deux classes et la deuxième en comporte trois, ci dessous une représentation
+ Pour cet exemple, il est supposé que la première variable comporte deux
+ classes et la deuxième en comporte trois, ci dessous une représentation
  en forme de tableau.
  
 \end_layout
@@ -4573,8 +4422,8 @@ La fonction de lien sert à généraliser le modèle linéaire basique (OLS),
 \end_layout
 
 \begin_layout Standard
-Il faut maintenant choisir une cellule comme la cellule de base, ce qui
- nous servira à ajouter des contraintes, en particulier que sa moyenne 
+Il faut maintenant choisir une cellule comme la cellule de base, qui servira
+ à ajouter des contraintes, en particulier que sa moyenne 
 \begin_inset Formula $\mu_{ij}$
 \end_inset
 
@@ -4583,7 +4432,7 @@ Il faut maintenant choisir une cellule comme la cellule de base, ce qui
 \end_inset
 
 .
- Si nous suivons notre exemple et choisissons la cellule 
+ Pour continuer avec cet exemple, choisissons la cellule 
 \begin_inset Formula $(1,1)$
 \end_inset
 
@@ -4626,8 +4475,8 @@ Et donc :
 \end_layout
 
 \begin_layout Standard
-Nous réécrivons maintenant le modèle sous forme de liste et définissons
- :
+Le modèle est réécrit sous forme de liste et les égalités suivantes sont
+ définies :
 \end_layout
 
 \begin_layout Itemize
@@ -4666,7 +4515,7 @@ En forme de liste,
  représente la moyenne d'une plage de tarif.
  Les deux variables catégorielles sont également transformées en variables
  binaires, de la même manière que dans la partie 2.4.1.
- Définissons maintenant : 
+ Est maintenant défini : 
 \end_layout
 
 \begin_layout Standard
@@ -4694,7 +4543,8 @@ Cette équation représente la structure linéaire et peut être écrit sous
 \end_layout
 
 \begin_layout Standard
-Généralisons maintenant l'exemple ci dessus, avec l'équation : 
+Il est maintenant possible de généraliser l'exemple ci dessus, avec l'équation
+ : 
 \end_layout
 
 \begin_layout Standard
@@ -4716,11 +4566,11 @@ Généralisons maintenant l'exemple ci dessus, avec l'équation :
 \end_layout
 
 \begin_layout Standard
-Nous introduisons maintenant la fonction de lien 
+La fonction de lien 
 \begin_inset Formula $g(.)$
 \end_inset
 
-.
+ est maintenant introduite :
 \end_layout
 
 \begin_layout Standard
@@ -4742,7 +4592,7 @@ Ici
  représente la fonction de lien est doit être monotone et dérivable.
  Cette fonction est le lien entre la moyenne et la structure linéaire.
  Par exemple dans le cas d'un modèle multiplicatif (et pour reprendre le
- cas étudié ci-dessus) nous cherchons à avoir 
+ cas étudié ci-dessus) le but est d'avoir 
 \begin_inset Formula $\mu_{ij}=\gamma_{o}\gamma_{1i}\gamma_{2j}$
 \end_inset
 
@@ -4896,7 +4746,7 @@ Il suffit maintenant de prendre ces
 
 \begin_layout Standard
 La résolution de ce système d'équation doit se faire de manière numérique
- et nous donne l'estimation des paramètres 
+ et donne l'estimation des paramètres 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -4916,12 +4766,12 @@ Modélisation de Poisson
 \end_layout
 
 \begin_layout Standard
-Nous allons maintenant discuter du cas où 
+Cette sous-section traite du cas où 
 \begin_inset Formula $Y$
 \end_inset
 
  suit une loi de poisson, ce qui est le cas pour notre base de données.
- Supposons : 
+ En supposant : 
 \end_layout
 
 \begin_layout Standard
@@ -4974,8 +4824,8 @@ v(\mu_{i})=\mu_{i}
 \end_layout
 
 \begin_layout Standard
-Et la fonction de lien utilisée dans ce cas-ci sera le logarithme (qui nous
- permet de passer du domaine 
+Et la fonction de lien utilisée dans ce cas-ci sera le logarithme (qui permet
+ de passer du domaine 
 \begin_inset Formula $[0,\infty]$
 \end_inset
 
@@ -5086,7 +4936,7 @@ Le perceptron est le modèle à la base des réseaux de neurones artificiels
  modernes, celui-ci a été inventé dès 1957 par Frank Rosenblatt.
  Il s'agissait alors d'un algorithme permettant l'apprentissage automatique
  par l'erreur (apprentissage supervisé).
- Son fonctionnement est très similaire à celui d'un neurone humain, puisqu'il
+ Son fonctionnement est similaire à celui d'un neurone humain, puisqu'il
  en est inspiré.
  Mathématiquement, un perceptron est la somme d'un biais et de multiplications
  entre les valeurs des variables et les poids du perceptron passant par
@@ -5102,9 +4952,9 @@ d'activation
  La fonction d'activation représente le potentiel d'activation du neurone.
  L'exemple le plus simple serait une fonction renvoyant 1 si l'entrée est
  positive et 0 (ou -1) si l'entrée est négative (bien que cette fonction
- ne sera pas utilisée dans nos algorithmes car non différentiable, ce qui
- est un problème pour la calibration, voir sections suivantes), c'est d'ailleurs
- cette fonction qui a été utilisée en premier pour les perceptrons 
+ ne sera pas utilisée dans les algorithmes de ce travail car non différentiable,
+ ce qui est un problème pour la calibration), c'est d'ailleurs cette fonction
+ qui a été utilisée en premier pour les perceptrons 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Geron2017"
@@ -5148,12 +4998,12 @@ Exemple de fonction d'activation : Step function
 
 \end_inset
 
-Pour en revenir au perceptron, notons que les données d'un individu sont
- considérées comme un vecteur 
+Pour en revenir au perceptron, les données d'un individu sont considérées
+ comme un vecteur 
 \begin_inset Formula $X_{i}$
 \end_inset
 
- et que l'ensemble des données constituent la matrice de données 
+ et l'ensemble des données constituent la matrice de données 
 \begin_inset Formula $X$
 \end_inset
 
@@ -5293,9 +5143,8 @@ Lorsqu'il est question d'apprentissage automatique, cela signifie en fait
  Pour être plus précis, l'algorithme va prendre en entrée une ligne de notre
  base de données et faire une prédiction.
  Si cette prédiction est correcte alors les poids ne sont pas modifiés,
- cependant dans le cas ou la prédiction est incorrecte nous utilisons une
- règle de mise à jour des poids, afin de donner plus d'importance aux entrées
- qui auraient rendu la prédiction correcte.
+ cependant dans le cas ou la prédiction est incorrecte une règle de mise
+ à jour des poids sera appliquée.
  Ce procédé sera expliqué plus en détail dans la section suivante, mais
  nous pouvons déjà observer l'équation de mise à jour des poids d'un perceptron
  simple 
@@ -5336,8 +5185,8 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_inset
 
  le taux d'apprentissage, il s'agit d'un paramètre déterminant à quel point
- nous devons modifier les poids lors d'une erreur, celui-ci est inclus dans
- l'intervalle 
+ les poids sont modifiés lors d'une erreur, celui-ci est inclus dans l'intervall
+e 
 \begin_inset Formula $[0,1]$
 \end_inset
 
@@ -5501,10 +5350,17 @@ Computer vision.
  Il faut savoir qu'il existe différent types de MLP, dont certains avec
  des relations circulaires entre les neurones.
  Cependant ce type de réseau ne sera pas utilisé dans ce travail et ne seront
- donc pas vus en détails, les réseaux de neurones artificiels utilisés seront
- uniquement des réseaux feed-forward ; l'information arrive à l'entrée du
- réseau, transite à travers celui-ci dans une direction unique, et le modèle
- nous renvoie une réponse 
+ donc pas expliqués, les réseaux de neurones artificiels utilisés seront
+ uniquement des réseaux 
+\begin_inset Quotes eld
+\end_inset
+
+feed-forward
+\begin_inset Quotes erd
+\end_inset
+
+ ; l'information arrive à l'entrée du réseau, transite à travers celui-ci
+ dans une direction unique, et le modèle renvoie une réponse 
 \begin_inset Formula $\hat{y_{i}}$
 \end_inset
 
@@ -5674,7 +5530,8 @@ représentant la sortie du neurone
  La couche de sortie peut être composée d'un seul neurone mais cela n'est
  pas obligatoire.
  Si nous cherchons par exemple à estimer à quelle classe une instance appartient
- nous pouvons représenter chaque classe par un neurone dans cette couche.
+ il est possible de représenter chaque classe par un neurone dans cette
+ couche.
 \end_layout
 
 \begin_layout Standard
@@ -6339,7 +6196,7 @@ supposition de l'apprentissage faible
 \end_layout
 
 \begin_layout Standard
-Afin d'améliorer le précision d'AdaBoost, des apprenants faibles sont construits
+Afin d'améliorer la précision d'AdaBoost, des apprenants faibles sont construits
 , et ceux-ci nécessitent un jeu de données afin d'être entraînés.
  C'est ici qu'un autre problème se pose car si les apprenants faibles sont
  tous entraînés sur le même jeu de données alors on peut supposer que ceux-ci
@@ -6817,7 +6674,7 @@ s, et parmis ces formes, certaines permettent de travailler avec des problèmes
  de régression.
  C'est notamment le cas de Adaboost.R2, présenté par Drucker, qui sera l'algorith
 me utilisé dans ce travail.
- Celui-ci est présenté ci-dessous dans la section 3.4.6.
+ Celui-ci est présenté ci-dessous dans la section 3.4.5.
 \end_layout
 
 \begin_layout Subsection
@@ -7172,7 +7029,7 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
 \begin_inset Formula $0.5$
 \end_inset
 
-.
+ (mais un nombre maximum est généralement spécifié en pratique).
 \end_layout
 
 \begin_layout Subsection
@@ -8731,6 +8588,7 @@ Nombre d'échantillons : Si le nombre d'échantillons est trop petit, alors
  peut être expliquée par le fait que l'échantillon étant trop petit, il
  y a probablement eu très peu d'observations ayant déclaré un sinistre.
  L'erreur de test élevée pour cette valeur renforce cette hypothèse.
+ Note : L'échantillonnage est réalisé sans remise.
  
 \end_layout
 
@@ -8857,7 +8715,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Paramètre
 \end_layout
 
 \end_inset
@@ -8866,6 +8724,29 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+Domaine
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Époque
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+\begin_inset Formula $\left[150,250,350,450\right]$
+\end_inset
+
 
 \end_layout
 
@@ -8877,7 +8758,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Taille du lot
 \end_layout
 
 \end_inset
@@ -8886,6 +8767,9 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\left[500,10000,51600\right]$
+\end_inset
+
 
 \end_layout
 
@@ -8897,7 +8781,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+% abandon
 \end_layout
 
 \end_inset
@@ -8906,6 +8790,9 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\left[0.1,0.2\right]$
+\end_inset
+
 
 \end_layout
 
@@ -8917,6 +8804,17 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+N.
+ neurones (1)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Première couche.
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -8926,6 +8824,9 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\left[10,15,20,40\right]$
+\end_inset
+
 
 \end_layout
 
@@ -8937,6 +8838,17 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+N.
+ neurones (2)
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Deuxième couche.
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
@@ -8946,26 +8858,9 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
-\end_layout
-
+\begin_inset Formula $\left[15,20,25,40\right]$
 \end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
-\begin_inset Text
 
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-</cell>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
 
 \end_layout
 
@@ -8977,7 +8872,7 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
-
+Taux d'apprentissage
 \end_layout
 
 \end_inset
@@ -8986,6 +8881,9 @@ status open
 \begin_inset Text
 
 \begin_layout Plain Layout
+\begin_inset Formula $\left[0.05,0.1,0.2,0.3\right]$
+\end_inset
+
 
 \end_layout
 
@@ -9019,6 +8917,620 @@ Liste des domaines des hyperparamètres recherchés pour le réseau de neurones
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+40 modèles ont étés entraînés par validation croisée : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="10">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="5text%">
+<column alignment="center" valignment="top" width="7text%">
+<column alignment="center" valignment="top" width="7text%">
+<column alignment="center" valignment="top" width="8text%">
+<column alignment="center" valignment="top" width="8text%">
+<column alignment="center" valignment="top" width="8text%">
+<column alignment="center" valignment="top" width="6text%">
+<column alignment="center" valignment="top" width="8text%">
+<column alignment="center" valignment="top" width="8text%">
+<column alignment="center" valignment="top" width="9text%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rang
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Époques
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lot
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+% abandon
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N.
+ neurones (1)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N.
+ neurones (2)
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+T.
+ app.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dév.
+ moy.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Dév.
+ tot.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Std.
+ dév
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+250
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+40
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.09341
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6025.04
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.00903
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+250
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10.000
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+20
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.09360
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6037.29
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.00594
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+150
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.09410
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+6069.54
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.01055
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultats de l'analyse sur les réseau de neurones simples.
+ Note : Les déviances de ce tableau sont calculées comme la moyenne de la
+ deviance des jeux de test de la validation croisée.
+ La déviance totale est égale à la déviance moyenne normalisée pour les
+ 64501 observations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le choix se fera ici entre le premier et le deuxième, qui ont des performances
+ et des paramètres très similaires.
+ Cependant le premier modèle dispose d'un bien plus grand nombre de paramètres
+ (suite au plus grand nombre de neurones) et d'un écart type pour la déviance
+ de la validation croisée également beaucoup plus grand.
+ Dans ce cas-ci, c'est donc le deuxième modèle qui sera choisi.
+ 
+\end_layout
+
+\begin_layout Standard
+Les courbes d'apprentissage vont maintenant être présentées : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/learning/DNNnsamples.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Courbes d'apprentissage pour le nombre d'échantillons.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Nombre d'échantillons : Les mêmes conclusions que pour le réseau de neurones
+ simple peuvent être tirées.
+ Les erreurs de test et d'entraînement convergent pour se rejoindre au fur
+ et à mesure que le nombre d'échantillons utilisés sont atteints.
+ 
+\end_layout
+
+\begin_layout Standard
+Note : L'échantillonnage est réalisé sans remise.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/learning/DNNnn1.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/learning/DNNnn2.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Courbes d'apprentissage pour le nombre de neurones de chaque couche cachée.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+N.
+ neurones (1 et 2) : Encore une fois, des conclusions très similaires au
+ réseau de neurones simple peuvent être déduites.
+ En effet, ajouter des neurones ne sert en rien le modèle et aura juste
+ pour conséquence de surentraîner celui-ci à cause de tous les nouveaux
+ paramètres (poids) créés.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/learning/DNNLR.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/learning/DNNEpochs.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Courbes d'apprentissage pour le taux d'apprentissage et le nombre d'époques.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Taux d'apprentissage : La courbe montre que le modèle est dans la bonne
+ fourchette de taux d'apprentissage.
+ Entre 0.1 et 0.3, le modèle dispose de bonnes performances, qui commencent
+ à se dégrader au fur et à mesure que le taux d'apprentissage augmente.
+ 
+\end_layout
+
+\begin_layout Itemize
+Époques : Ici aussi, la graphique semble indiquer que le nombre d'époques
+ paramétré est raisonnable et n'entraîne pas de surentraînement.
+ 
 \end_layout
 
 \begin_layout Standard

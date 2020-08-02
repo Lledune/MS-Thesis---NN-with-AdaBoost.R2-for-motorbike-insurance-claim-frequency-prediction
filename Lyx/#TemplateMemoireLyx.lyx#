@@ -4432,7 +4432,7 @@ Il faut maintenant choisir une cellule comme la cellule de base, qui servira
 \end_inset
 
 .
- Pour continuer avec cet exemple, choisissons la cellule 
+ Pour continuer  et choisissons la cellule 
 \begin_inset Formula $(1,1)$
 \end_inset
 
@@ -4475,8 +4475,8 @@ Et donc :
 \end_layout
 
 \begin_layout Standard
-Le modèle est réécrit sous forme de liste et les égalités suivantes sont
- définies :
+Nous réécrivons maintenant le modèle sous forme de liste et définissons
+ :
 \end_layout
 
 \begin_layout Itemize
@@ -4515,7 +4515,7 @@ En forme de liste,
  représente la moyenne d'une plage de tarif.
  Les deux variables catégorielles sont également transformées en variables
  binaires, de la même manière que dans la partie 2.4.1.
- Est maintenant défini : 
+ Définissons maintenant : 
 \end_layout
 
 \begin_layout Standard
@@ -4543,8 +4543,7 @@ Cette équation représente la structure linéaire et peut être écrit sous
 \end_layout
 
 \begin_layout Standard
-Il est maintenant possible de généraliser l'exemple ci dessus, avec l'équation
- : 
+Généralisons maintenant l'exemple ci dessus, avec l'équation : 
 \end_layout
 
 \begin_layout Standard
@@ -4566,11 +4565,11 @@ Il est maintenant possible de généraliser l'exemple ci dessus, avec l'équatio
 \end_layout
 
 \begin_layout Standard
-La fonction de lien 
+Nous introduisons maintenant la fonction de lien 
 \begin_inset Formula $g(.)$
 \end_inset
 
- est maintenant introduite :
+.
 \end_layout
 
 \begin_layout Standard
@@ -4592,7 +4591,7 @@ Ici
  représente la fonction de lien est doit être monotone et dérivable.
  Cette fonction est le lien entre la moyenne et la structure linéaire.
  Par exemple dans le cas d'un modèle multiplicatif (et pour reprendre le
- cas étudié ci-dessus) le but est d'avoir 
+ cas étudié ci-dessus) nous cherchons à avoir 
 \begin_inset Formula $\mu_{ij}=\gamma_{o}\gamma_{1i}\gamma_{2j}$
 \end_inset
 
@@ -4746,7 +4745,7 @@ Il suffit maintenant de prendre ces
 
 \begin_layout Standard
 La résolution de ce système d'équation doit se faire de manière numérique
- et donne l'estimation des paramètres 
+ et nous donne l'estimation des paramètres 
 \begin_inset Formula $\beta$
 \end_inset
 
@@ -4766,12 +4765,12 @@ Modélisation de Poisson
 \end_layout
 
 \begin_layout Standard
-Cette sous-section traite du cas où 
+Nous allons maintenant discuter du cas où 
 \begin_inset Formula $Y$
 \end_inset
 
  suit une loi de poisson, ce qui est le cas pour notre base de données.
- En supposant : 
+ Supposons : 
 \end_layout
 
 \begin_layout Standard
@@ -4824,8 +4823,8 @@ v(\mu_{i})=\mu_{i}
 \end_layout
 
 \begin_layout Standard
-Et la fonction de lien utilisée dans ce cas-ci sera le logarithme (qui permet
- de passer du domaine 
+Et la fonction de lien utilisée dans ce cas-ci sera le logarithme (qui nous
+ permet de passer du domaine 
 \begin_inset Formula $[0,\infty]$
 \end_inset
 
@@ -4936,7 +4935,7 @@ Le perceptron est le modèle à la base des réseaux de neurones artificiels
  modernes, celui-ci a été inventé dès 1957 par Frank Rosenblatt.
  Il s'agissait alors d'un algorithme permettant l'apprentissage automatique
  par l'erreur (apprentissage supervisé).
- Son fonctionnement est similaire à celui d'un neurone humain, puisqu'il
+ Son fonctionnement est très similaire à celui d'un neurone humain, puisqu'il
  en est inspiré.
  Mathématiquement, un perceptron est la somme d'un biais et de multiplications
  entre les valeurs des variables et les poids du perceptron passant par
@@ -4952,9 +4951,9 @@ d'activation
  La fonction d'activation représente le potentiel d'activation du neurone.
  L'exemple le plus simple serait une fonction renvoyant 1 si l'entrée est
  positive et 0 (ou -1) si l'entrée est négative (bien que cette fonction
- ne sera pas utilisée dans les algorithmes de ce travail car non différentiable,
- ce qui est un problème pour la calibration), c'est d'ailleurs cette fonction
- qui a été utilisée en premier pour les perceptrons 
+ ne sera pas utilisée dans nos algorithmes car non différentiable, ce qui
+ est un problème pour la calibration, voir sections suivantes), c'est d'ailleurs
+ cette fonction qui a été utilisée en premier pour les perceptrons 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Geron2017"
@@ -4998,12 +4997,12 @@ Exemple de fonction d'activation : Step function
 
 \end_inset
 
-Pour en revenir au perceptron, les données d'un individu sont considérées
- comme un vecteur 
+Pour en revenir au perceptron, notons que les données d'un individu sont
+ considérées comme un vecteur 
 \begin_inset Formula $X_{i}$
 \end_inset
 
- et l'ensemble des données constituent la matrice de données 
+ et que l'ensemble des données constituent la matrice de données 
 \begin_inset Formula $X$
 \end_inset
 
@@ -5143,8 +5142,9 @@ Lorsqu'il est question d'apprentissage automatique, cela signifie en fait
  Pour être plus précis, l'algorithme va prendre en entrée une ligne de notre
  base de données et faire une prédiction.
  Si cette prédiction est correcte alors les poids ne sont pas modifiés,
- cependant dans le cas ou la prédiction est incorrecte une règle de mise
- à jour des poids sera appliquée.
+ cependant dans le cas ou la prédiction est incorrecte nous utilisons une
+ règle de mise à jour des poids, afin de donner plus d'importance aux entrées
+ qui auraient rendu la prédiction correcte.
  Ce procédé sera expliqué plus en détail dans la section suivante, mais
  nous pouvons déjà observer l'équation de mise à jour des poids d'un perceptron
  simple 
@@ -5185,8 +5185,8 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_inset
 
  le taux d'apprentissage, il s'agit d'un paramètre déterminant à quel point
- les poids sont modifiés lors d'une erreur, celui-ci est inclus dans l'intervall
-e 
+ nous devons modifier les poids lors d'une erreur, celui-ci est inclus dans
+ l'intervalle 
 \begin_inset Formula $[0,1]$
 \end_inset
 
@@ -5350,17 +5350,10 @@ Computer vision.
  Il faut savoir qu'il existe différent types de MLP, dont certains avec
  des relations circulaires entre les neurones.
  Cependant ce type de réseau ne sera pas utilisé dans ce travail et ne seront
- donc pas expliqués, les réseaux de neurones artificiels utilisés seront
- uniquement des réseaux 
-\begin_inset Quotes eld
-\end_inset
-
-feed-forward
-\begin_inset Quotes erd
-\end_inset
-
- ; l'information arrive à l'entrée du réseau, transite à travers celui-ci
- dans une direction unique, et le modèle renvoie une réponse 
+ donc pas vus en détails, les réseaux de neurones artificiels utilisés seront
+ uniquement des réseaux feed-forward ; l'information arrive à l'entrée du
+ réseau, transite à travers celui-ci dans une direction unique, et le modèle
+ nous renvoie une réponse 
 \begin_inset Formula $\hat{y_{i}}$
 \end_inset
 
@@ -5530,8 +5523,7 @@ représentant la sortie du neurone
  La couche de sortie peut être composée d'un seul neurone mais cela n'est
  pas obligatoire.
  Si nous cherchons par exemple à estimer à quelle classe une instance appartient
- il est possible de représenter chaque classe par un neurone dans cette
- couche.
+ nous pouvons représenter chaque classe par un neurone dans cette couche.
 \end_layout
 
 \begin_layout Standard
@@ -6196,7 +6188,7 @@ supposition de l'apprentissage faible
 \end_layout
 
 \begin_layout Standard
-Afin d'améliorer la précision d'AdaBoost, des apprenants faibles sont construits
+Afin d'améliorer le précision d'AdaBoost, des apprenants faibles sont construits
 , et ceux-ci nécessitent un jeu de données afin d'être entraînés.
  C'est ici qu'un autre problème se pose car si les apprenants faibles sont
  tous entraînés sur le même jeu de données alors on peut supposer que ceux-ci
@@ -6674,7 +6666,7 @@ s, et parmis ces formes, certaines permettent de travailler avec des problèmes
  de régression.
  C'est notamment le cas de Adaboost.R2, présenté par Drucker, qui sera l'algorith
 me utilisé dans ce travail.
- Celui-ci est présenté ci-dessous dans la section 3.4.5.
+ Celui-ci est présenté ci-dessous dans la section 3.4.6.
 \end_layout
 
 \begin_layout Subsection
@@ -7029,7 +7021,7 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
 \begin_inset Formula $0.5$
 \end_inset
 
- (mais un nombre maximum est généralement spécifié en pratique).
+.
 \end_layout
 
 \begin_layout Subsection
@@ -7052,7 +7044,7 @@ les hypothèses suffisantes les plus simples doivent être choisies
 \begin_inset Quotes erd
 \end_inset
 
-.
+ (réf wiki).
  En d'autres termes, il s'agit de construire un modèle avec assez de paramètres
  pour être efficace mais assez simple pour pouvoir être généralisable.
  Ce principe a été largement vérifié dans la plupart des cas, mais il est

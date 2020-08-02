@@ -19,8 +19,6 @@ import time
 root = 'c:/users/kryst/desktop/poisson/poisson-neural-network-insurance-pricing'
 
 
-
-
 class AdaBoost():
     """
     A classed used for AdaBoost implementation
@@ -516,19 +514,19 @@ xxxxdevTest = adatest.devFull(y1, xxxx, d1)
 import random
 #Defining param grid 
 param_grid = {
-        'n_est' : [100],
-        'loss' : ['deviance'],
-        'learning_rate' : [1],
-        'kerasEpochs' : [100],
-        'kerasBatchSize' : [51600],
-        'dropout' : [0.1,0.2,0.3],
+        'n_est' : [10,50,100,250],
+        'loss' : ['exponential'],
+        'learning_rate' : [0.1,0.5,1],
+        'kerasEpochs' : [50,100,250],
+        'kerasBatchSize' : [51600,10000,500],
+        'dropout' : [0.1,0.2],
         'nn1' : [5,10,15],
-        'keraslr' : [0.1],
+        'keraslr' : [0.1,0.01,0.5],
     }
 
 
 paramdraws = []
-nTests = 1
+nTests = 50
 
 print(nTests, " tests will be done.")
 
@@ -564,7 +562,7 @@ devianceMeanStore = []
 devianceFullStore = []
 
 for i in range(0, nTests):
-    print("test : ", i+1)
+    print("test : ", i+1, "out of ", nTests)
     params = paramdraws[i]
     estimator = AdaBoost(n_est=params['n_est'][0], loss = params['loss'][0], learning_rate=params['learning_rate'][0], kerasEpochs=params['kerasEpochs'][0],
                          kerasBatchSize=params['kerasBatchSize'][0], dropout = params['dropout'][0], nn1=params['nn1'][0], keraslr=params['keraslr'][0], 
