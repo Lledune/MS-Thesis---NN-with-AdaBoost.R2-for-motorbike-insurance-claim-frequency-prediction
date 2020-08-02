@@ -366,9 +366,9 @@ for i in range(0, len(nsubs)):
     
 plt.plot(nsubs, teError, label = "Test Error")
 plt.plot(nsubs, trError, label = "Train Error")
-plt.xlabel('n_samples')
+plt.xlabel('N. échantillons')
 plt.ylabel('Deviance')
-plt.title("Courbes d'apprentissage")
+plt.title("Courbes d'apprentissage NN")
 plt.legend()
 plt.savefig(root + '/lyx/images/learning/NNnsamples.png')
 plt.show()
@@ -426,9 +426,9 @@ for i in range(0, len(nn1s)):
 
 plt.plot(nn1s, teErrorNN, label = "Test Error")
 plt.plot(nn1s, trErrorNN, label = "Train Error")
-plt.xlabel('n_neurons')
+plt.xlabel('N. neurones')
 plt.ylabel('Deviance')
-plt.title("Courbes d'apprentissage")
+plt.title("Courbes d'apprentissage NN")
 plt.legend()
 plt.savefig(root + '/lyx/images/learning/NNnn1.png')
 plt.show()
@@ -487,9 +487,9 @@ for i in range(0, len(lrs)):
 
 plt.plot(lrs, teErrorLR, label = "Test Error")
 plt.plot(lrs, trErrorLR, label = "Train Error")
-plt.xlabel('Learning Rate')
+plt.xlabel("Taux d'apprentissage")
 plt.ylabel('Deviance')
-plt.title("Courbes d'apprentissage")
+plt.title("Courbes d'apprentissage NN")
 plt.legend()
 plt.savefig(root + '/lyx/images/learning/NNLR.png')
 plt.show()
@@ -547,16 +547,54 @@ for i in range(0, len(epochsList)):
 
 plt.plot(epochsList, teErrorEpochs, label = "Test Error")
 plt.plot(epochsList, trErrorEpochs, label = "Train Error")
-plt.xlabel('Epochs')
+plt.xlabel('Époques')
 plt.ylabel('Deviance')
-plt.title("Courbes d'apprentissage")
+plt.title("Courbes d'apprentissage NN")
 plt.legend()
 plt.savefig(root + '/lyx/images/learning/NNEpochs.png')
 plt.show()
 plt.close()
 
 
+###################################
+#Last model refining test
+###################################
 
+clf = KerasRegressor(build_fn=baseline_model2)
+
+#hyperparameters domain
+param_grid = {
+    'clf__epochs':[125],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[500],
+    'clf__nn1':[50],
+    'clf__lr':[0.1],
+    'clf__act1':['softmax']
+}
+
+pipeline = Pipeline([
+    ('clf',clf)
+])
+
+#cross validation, only 4 because the computation time is huge. 
+cv = KFold(n_splits=4, shuffle=False)
+grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 1) 
+grid.fit(dataTrain, feed)
+
+resultsRedinedNN = pd.DataFrame(grid.cv_results_)
+best = grid.best_estimator_
+
+ypredtest = best.predict(dataTest)
+ypredtrain = best.predict(dataTrain)
+devTest = devFull(y1test, ypredtest, d1test)
+devTrain = devFull(y1, ypredtrain, d1)
+meanDevTest = devTest/len(y1test)
+meanDevTrain = devTrain/len(y1)
+
+#the normalized deviances
+totDevTrain = meanDevTrain * (len(y1) + len(y1test))
+totDevTest = meanDevTest * (len(y1) + len(y1test))
 
 
 

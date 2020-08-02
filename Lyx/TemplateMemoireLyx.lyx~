@@ -14,6 +14,7 @@
 
 
 \usepackage{a4wide}
+\usepackage{graphicx}
 \usepackage{amsmath,amsthm,amssymb}
 \newtheorem{Theorem}{Theorem}[section]
 \newtheorem{Lemma}[Theorem]{Lemma}
@@ -7254,10 +7255,6 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-TODO : Faire graphique learning curves pour montrer + conclusions.
-\end_layout
-
-\begin_layout Standard
 Dans son rapport de recherche, et pour prouver son hypothèse, Breiman applique
  le boosting à un algorithme connu pour sa variance faible (Analyse discriminant
 e linéaire) et les résultats obtenus semblent pencher en sa faveur puisque
@@ -7627,6 +7624,21 @@ Les réseaux de neurones représentent un des aspects principaux de ce travail
 Les modèles sont entraînés sur le jeu d'entraînement et les valeurs de la
  déviance données seront les valeurs de la déviance du jeu de test, normalisées
  sur le nombre total d'observations de la base de données complète.
+\end_layout
+
+\begin_layout Standard
+Afin de limiter un peu plus le temps d'entraînement, la majorité des calculs
+ seront executés sur un processeur graphique
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+GPU : Nvidia 1060 6Go
+\end_layout
+
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Subsection
@@ -8014,7 +8026,7 @@ Dans cette sous-section, la méthodologie utilisée ainsi que les résultats
 \end_layout
 
 \begin_layout Subsubsection
-Domaine des hyperparamètres
+Domaine des hyperparamètres et résultats
 \end_layout
 
 \begin_layout Standard
@@ -8204,6 +8216,795 @@ Taux d'apprentissage
 \begin_layout Plain Layout
 Liste des domaines des hyperparamètres recherchés pour le réseau de neurones
  simple.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+L'entraînement d'un réseau de neurone par validation croisée prenant un
+ temps considérable, et ce malgré l'utilisation d'un processeur graphique
+ pour l'apprentissage.
+ Pour cette raison, l'approche présentée plus tôt sera utilisée : 
+\begin_inset Formula $40$
+\end_inset
+
+ ensembles de paramètres seront échantillonnés depuis les domaines ci-dessus,
+ et un modèle sera entraîné par validation croisée pour chacun d'entre eux.
+ 
+\end_layout
+
+\begin_layout Standard
+Les résultats de la recherche sont indiqués dans le tableau ci-dessous :
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="9">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top" width="7text%">
+<column alignment="center" valignment="top" width="7text%">
+<column alignment="center" valignment="top" width="6.5text%">
+<column alignment="center" valignment="top" width="7text%">
+<column alignment="center" valignment="top" width="8text%">
+<column alignment="center" valignment="top" width="10text%">
+<column alignment="center" valignment="top" width="10text%">
+<column alignment="center" valignment="top" width="10text%">
+<column alignment="center" valignment="top" width="10text%">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Rang
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Époque
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Lot
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+% abandon
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+N neurones
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+T.
+ Apprentissage
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Déviance moy.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Déviance Tot.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Std.
+ déviance
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Écart-type des scores de test de la validation croisée.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+250
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+25
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0908163
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5857.74
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.00573
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+250
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+15
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0908278
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5858.48
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.00604
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+400
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+500
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+10
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.0912018
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+5882.60
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.00631
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultats de l'analyse sur les réseau de neurones simples.
+ Note : Les déviances de ce tableau sont calculées comme la moyenne de la
+ deviance des jeux de test de la validation croisée.
+ La déviance totale est égale à la déviance moyenne normalisée pour les
+ 64501 observations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le choix entre les deux premiers modèles est assez difficile au vu de leurs
+ performances très similaires.
+ Le principe de parcimonie
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Pour deux modèles aux résultats similaires, il est préférable de choisir
+ celui avec le moins de paramètres, qui permet une meilleure généralisation.
+\end_layout
+
+\end_inset
+
+ indique de choisir le deuxième modèle, cependant celui-ci dispose aussi
+ d'un écart type inférieur pour la déviance sur les différents tests, ce
+ qui indique qu'il peut potentiellement être plus général que le deuxième
+ modèle.
+ Les deux choix peuvent donc se défendre, mais pour le reste de cette analyse
+ c'est le premier modèle qui sera utilisé.
+ 
+\end_layout
+
+\begin_layout Standard
+Les courbes d'apprentissage du modèle vont maintenant être présentées.
+ Note : L'erreur de test est calculée sur le jeu d'entraînement de test
+ séparé.
+ Pour la création des courbes d'apprentissage, les paramètres du modèle
+ sont tous identiques aux paramètres du modèle choisi dans le tableau précédent
+ excepté le paramètre recherché.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/learning/NNnsamples.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/learning/NNnn1.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Courbes d'apprentissage pour le nombre d'échantillons et le nombre de neurones.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Nombre d'échantillons : Si le nombre d'échantillons est trop petit, alors
+ l'erreur de test est trop élevée.
+ Au fur et à mesure que le nombre d'échantillons augmentent, les courbes
+ se rapprochent, indiquant une bonne convergence du modèle.
+ La valeur très faible prise par l'erreur d'entraînement pour 100 échantillons
+ peut être expliquée par le fait que l'échantillon étant trop petit, il
+ y a probablement eu très peu d'observations ayant déclaré un sinistre.
+ L'erreur de test élevée pour cette valeur renforce cette hypothèse.
+ 
+\end_layout
+
+\begin_layout Itemize
+Nombre de neurones : Ce graphique montre l'importance de ne pas créer une
+ couche contenant trop de neurones.
+ Passé un certain cap, au fur et à mesure que des neurones sont ajoutés,
+ l'erreur de test augmente alors que l'erreur d'entraînement diminue, signe
+ indégnable de surentraînement.
+ Cependant il est intéressant de noter que le modèle avec 50 neurones semblent
+ obtenir de meilleures performances que le modèle avec 25 neurones.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/learning/NNEpochs.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/learning/NNLR.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Courbes d'apprentissage pour le nombre d'époques et le taux d'apprentissage.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Époques : La courbe d'apprentissage indique que passé les 100 époques, l'erreur
+ d'entraînement diminue alors que l'erreur de test semble stable.
+ Ceci peut indiquer un début de surentraînement mais la différence entre
+ les deux courbes reste raisonnable jusque la barre des 300 époques.
+\end_layout
+
+\begin_layout Itemize
+Taux d'apprentissage : La courbe semble indiquer que 0.1 est une bonne valeur
+ pour le paramètre.
+ Au delà, l'erreur de test commence à augmenter.
+ 
+\end_layout
+
+\begin_layout Standard
+Les conclusions quand au nombre d'époques et au nombre de neurones semblent
+ indiquer que les paramètres peuvent potentiellement bénéficier d'un dernier
+ affinage.
+ Un nouveau modèle est donc entraîné, avec 125 époques et 50 neurones.
+ Celui-ci n'améliorant cependant pas les résultats (déviance et variance
+ plus élevées), le premier modèle restera le modèle choisi.
+\end_layout
+
+\begin_layout Subsection
+Réseau de neurones profond
+\end_layout
+
+\begin_layout Standard
+Comme évoqué précédemment, un réseau de neurones profond est simplement
+ un réseau disposant de plusieurs couches cachées.
+ Ce type de réseau est capable de résoudre des problèmes extrêmement complexes
+ mais sont aussi très sensibles au surentraînement.
+ En suivant la même méthodologie que pour le réseau de neurones simple,
+ un réseau de neurones profond sera construit dans cette sous-section.
+ Pour la création de celui-ci, le nombre de couches cachées sera limitée
+ à deux, ce qui est suffisant pour approximer la grande majorité des fonctions.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Domaine des hyperparamètres et résultats
+\end_layout
+
+\begin_layout Standard
+Le domaine de recherche des hyperparamètres est indiqué ci-dessous : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="7" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Liste des domaines des hyperparamètres recherchés pour le réseau de neurones
+ profond.
 \end_layout
 
 \end_inset

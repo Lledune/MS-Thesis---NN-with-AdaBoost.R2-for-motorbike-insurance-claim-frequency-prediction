@@ -134,13 +134,12 @@ def baseline_modelDNN(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 
 clf = KerasRegressor(build_fn=baseline_modelDNN)
 
 param_grid = {
-    'clf__epochs':[300,600,100],
+    'clf__epochs':[150,250,350,450],
     'clf__dropout':[0.1,0.2],
     'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[50000, 10000, 1000],
-    'clf__nn1':[10,15,20],
-    'clf__nn2':[15,20,25],
-    'clf__nn3':[10,15,20],
+    'clf__batch_size':[51600, 10000, 500],
+    'clf__nn1':[10,15,20,40],
+    'clf__nn2':[15,20,25,40],
     'clf__lr':[0.1,0.2,0.3,0.05],
     'clf__act1':['softmax']
 }
@@ -149,9 +148,9 @@ pipeline = Pipeline([
     ('clf',clf)
 ])
 
-cv = KFold(n_splits=5, shuffle=False)
+cv = KFold(n_splits=4, shuffle=False)
 
-grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 1) #plus de folds pourraient augmenter la variance
+grid = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid, verbose=3, n_iter = 40) #plus de folds pourraient augmenter la variance
 grid.fit(dataTrain, feed)
 
 results2 = pd.DataFrame(grid.cv_results_)
@@ -167,7 +166,17 @@ meanDevTestDNN = devTestDNN/len(y1test)
 fullDevTrainDNN = meanDevTrainDNN * (len(y1) + len(y1test))
 fullDevTestDNN = meanDevTestDNN * (len(y1) + len(y1test))
 
-#TODO : TESTER AVEC DONATIEN DE METTRE EXP LINK FUNCTION et voir si les résultats sont meilleurs. 
+#Given this analysis, the chosen parameters are :
+#epochs : 250
+#batch : 10000
+#dropout : 0.1
+#nn1 = 20
+#nn2 = 15
+#lr : 0.3
+
+
+
+
 
 ###########################
 # SAVE MODEL
@@ -223,13 +232,13 @@ for nsub in nsubs:
 
 #static params, other than nlength for instance
 static_params = {
-    'clf__epochs':[100],
-    'clf__dropout':[0.2],
+    'clf__epochs':[250],
+    'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[51600],
+    'clf__batch_size':[10000],
     'clf__nn1':[20],
-    'clf__nn2':[10],
-    'clf__lr':[0.15],
+    'clf__nn2':[15],
+    'clf__lr':[0.3],
     'clf__act1':['softmax']
 }
 cv2 = KFold(n_splits=2, shuffle=False)
@@ -275,7 +284,7 @@ for i in range(0, len(nsubs)):
     
 plt.plot(nsubs, teError, label = "Test Error")
 plt.plot(nsubs, trError, label = "Train Error")
-plt.xlabel('n_samples')
+plt.xlabel('N. échantillons')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
@@ -290,7 +299,7 @@ plt.close()
 
 cv3 = KFold(n_splits=3, shuffle=False)
 
-nn1s = [3,5,8,10,15,20,25,30,50,500,1000]
+nn1s = [5,20,25,30,50,500]
 teErrorNN = []
 trErrorNN = []
 
@@ -299,13 +308,13 @@ staticparamsList = []
 
 for i in range(0, len(nn1s)):
     temp = {
-    'clf__epochs':[100],
-    'clf__dropout':[0.2],
+    'clf__epochs':[250],
+    'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[51600],
+    'clf__batch_size':[10000],
     'clf__nn1':[nn1s[i]],
-    'clf__nn2':[10],
-    'clf__lr':[0.15],
+    'clf__nn2':[15],
+    'clf__lr':[0.3],
     'clf__act1':['softmax']
 }
     staticparamsList.append(temp)
@@ -339,7 +348,7 @@ for i in range(0, len(nn1s)):
 
 plt.plot(nn1s, teErrorNN, label = "Test Error")
 plt.plot(nn1s, trErrorNN, label = "Train Error")
-plt.xlabel('n_neurons_1')
+plt.xlabel('N. neurones (1)')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
@@ -352,7 +361,7 @@ plt.close()
 #Plot for nn2
 #################################
 
-nn2s = [3,5,8,10,15,20,25,30,50,500,1000]
+nn2s = [5,20,25,30,50,500]
 teErrorNN2 = []
 trErrorNN2 = []
 
@@ -361,13 +370,13 @@ staticparamsList2 = []
 
 for i in range(0, len(nn1s)):
     temp = {
-    'clf__epochs':[100],
-    'clf__dropout':[0.2],
+    'clf__epochs':[250],
+    'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[51600],
+    'clf__batch_size':[10000],
     'clf__nn1':[20],
     'clf__nn2':[nn2s[i]],
-    'clf__lr':[0.15],
+    'clf__lr':[0.3],
     'clf__act1':['softmax']
 }
     staticparamsList2.append(temp)
@@ -399,7 +408,7 @@ for i in range(0, len(nn1s)):
 
 plt.plot(nn2s, teErrorNN2, label = "Test Error")
 plt.plot(nn2s, trErrorNN2, label = "Train Error")
-plt.xlabel('n_neurons_2')
+plt.xlabel('N. neurones (2)')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
@@ -411,7 +420,7 @@ plt.close()
 #Plot for LR
 #################################
 
-lrs = [0.0001, 0.001, 0.01, 0.1, 0.2, 0.5, 1]
+lrs = [0.001, 0.01, 0.1, 0.2, 0.5, 1]
 teErrorLR = []
 trErrorLR = []
 
@@ -420,12 +429,12 @@ staticparamsListLR = []
 
 for i in range(0, len(lrs)):
     temp = {
-    'clf__epochs':[100],
-    'clf__dropout':[0.2],
+    'clf__epochs':[250],
+    'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[51600],
+    'clf__batch_size':[10000],
     'clf__nn1':[20],
-    'clf__nn2':[10],
+    'clf__nn2':[15],
     'clf__lr':[lrs[i]],
     'clf__act1':['softmax']
 }
@@ -458,7 +467,7 @@ for i in range(0, len(lrs)):
 
 plt.plot(lrs, teErrorLR, label = "Test Error")
 plt.plot(lrs, trErrorLR, label = "Train Error")
-plt.xlabel('Learning Rate')
+plt.xlabel("Taux d'apprentissage")
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
@@ -470,7 +479,7 @@ plt.close()
 #Plot for epochs
 #################################
 
-epochsList = [5,10,20,50,100,200,300,500,1000]
+epochsList = [5,10,20,50,100,200,300,500]
 teErrorEpochs = []
 trErrorEpochs = []
 
@@ -480,12 +489,12 @@ staticparamsListEpochs = []
 for i in range(0, len(epochsList)):
     temp = {
     'clf__epochs':[epochsList[i]],
-    'clf__dropout':[0.2],
+    'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
-    'clf__batch_size':[51600],
+    'clf__batch_size':[10000],
     'clf__nn1':[20],
-    'clf__nn2':[10],
-    'clf__lr':[0.15],
+    'clf__nn2':[15],
+    'clf__lr':[0.3],
     'clf__act1':['softmax']
 }
     staticparamsListEpochs.append(temp)
@@ -517,7 +526,7 @@ for i in range(0, len(epochsList)):
 
 plt.plot(epochsList, teErrorEpochs, label = "Test Error")
 plt.plot(epochsList, trErrorEpochs, label = "Train Error")
-plt.xlabel('Epochs')
+plt.xlabel('Époques')
 plt.ylabel('Deviance')
 plt.title("Courbes d'apprentissage DNN")
 plt.legend()
