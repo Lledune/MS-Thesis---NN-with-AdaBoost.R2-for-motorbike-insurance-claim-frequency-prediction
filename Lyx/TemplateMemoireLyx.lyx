@@ -7507,7 +7507,7 @@ Un modèle est utilisé pour réaliser une prédiction
 \begin_inset Formula $\hat{y}$
 \end_inset
 
-sur base du vecteur contenant les variables exploratoires 
+ sur base du vecteur contenant les variables exploratoires 
 \begin_inset Formula $X$
 \end_inset
 

@@ -7052,7 +7052,7 @@ les hypothèses suffisantes les plus simples doivent être choisies
 \begin_inset Quotes erd
 \end_inset
 
- (réf wiki).
+.
  En d'autres termes, il s'agit de construire un modèle avec assez de paramètres
  pour être efficace mais assez simple pour pouvoir être généralisable.
  Ce principe a été largement vérifié dans la plupart des cas, mais il est

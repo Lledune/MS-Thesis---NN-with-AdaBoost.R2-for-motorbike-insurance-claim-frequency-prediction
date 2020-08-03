@@ -514,7 +514,7 @@ xxxxdevTest = adatest.devFull(y1, xxxx, d1)
 import random
 #Defining param grid 
 param_grid = {
-        'n_est' : [10,50,100,250],
+        'n_est' : [10,50,100],
         'loss' : ['exponential'],
         'learning_rate' : [0.1,0.5,1],
         'kerasEpochs' : [50,100,250],
@@ -526,7 +526,7 @@ param_grid = {
 
 
 paramdraws = []
-nTests = 50
+nTests = 10
 
 print(nTests, " tests will be done.")
 
@@ -867,6 +867,7 @@ plt.savefig(root + '/lyx/images/learning/ADBEpochs.png')
 plt.show()
 plt.close()
 
+print("a")
 
 
 
