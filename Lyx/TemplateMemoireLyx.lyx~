@@ -7461,6 +7461,367 @@ Normaliser la déviance d'une de ces manières rends la comparaison entre
 GLM
 \end_layout
 
+\begin_layout Subsection
+Premier GLM
+\end_layout
+
+\begin_layout Standard
+Afin de disposer d'un point de comparaison quant aux performances des algorithme
+s suivants, un modèle linéaire généralisé va être construit.
+ Dans un premier temps, le modèle sera construit sur toutes les variables
+ explicatives.
+ La durée de contrat est également passée dans le modèle en tant que paramètre
+ connu.
+ Concernant la distribution ED utilisée, il s'agit de la distribution de
+ poisson, avec le logarithme néperien comme fonction de lien.
+ Il est important de préciser que le modèle est entraîné sur le jeu d'entraîneme
+nt uniquement.
+ Les résultats suivants sont obtenus : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Déviance moy.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Déviance tot.
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Les déviances sont calculées sur le jeu de test.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.1169581
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7543.92
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat du premier modèle GLM.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Stepwise
+\end_layout
+
+\begin_layout Standard
+Un modèle avec moins de paramètres généralise mieux les données.
+ C'est pour cette raison qu'après la création du modèle GLM, celui-ci doit
+ encore être modifié car il est nécessaire de supprimer les variables trop
+ peu utiles dans les prédictions de celui-ci.
+ Pour ce faire, la méthode 
+\begin_inset Quotes eld
+\end_inset
+
+stepwise
+\begin_inset Quotes erd
+\end_inset
+
+ sera utilisée.
+ Á chaque itération, la variable dont la suppression améliore le plus le
+ score (déviance) du modèle est retirée du prédicteur linéaire.
+ Sans rentrer dans les détails, cela permet généralement d'améliorer le
+ score du modèle sur le jeu de test.
+ Les variables sélectionnées pour le modèle final sont : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="5">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Gender.F
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zone.1
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zone.2
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Zone.3
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Class.3
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Class.4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Class.6
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+BonusClass.4
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+OwnersAge
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+VehiculeAge
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Variables sélectionnées pour le GLM final.
+ (La plupart de ces variables sont des variables binaires)
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Les résultats suivants sont obtenus : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="2" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Déviance moy.
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Déviance tot.
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+0.113632
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+7329.38
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Résultat du GLM final.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Comme prévu, les performances sont meilleures que celles du premier modèle.
+\end_layout
+
 \begin_layout Section
 Réseaux de neurones
 \end_layout
@@ -7496,6 +7857,13 @@ GPU : Nvidia 1060 6Go
 \end_inset
 
 .
+\end_layout
+
+\begin_layout Standard
+Un dernier point à mentionner est le fait que la sélection des variables
+ n'est pas nécessaire en travaillent avec les réseaux de neurones, car les
+ poids associés aux variables peuvent tendre vers 0 si la variable qui leur
+ est associée n'est pas utile dans la prédiction.
 \end_layout
 
 \begin_layout Subsection
@@ -9646,7 +10014,8 @@ La modification des poids se fera avec la formule :
 
 \begin_layout Standard
 Ces modifications ont pour effet de diminuer l'importance des modèles et
- la vitesse à laquelle les poids sont modifiés.
+ la vitesse à laquelle les poids sont modifiés si le taux d'apprentissage
+ spécifié est inférieur à 1.
  De ce fait, l'erreur moyenne aura tendance à augmenter moins vite, et plus
  de modèles seront créés avant d'arriver à une erreyr moyenne de 0.5.
 \end_layout
@@ -10441,8 +10810,7 @@ on.
  graphique qu'à être traitées par celui-ci.
  Le fait que le modèle le plus performant de cette recherche dispose de
  ces particularité motive l'éxecution d'une deuxième recherche, avec des
- domaines différents.
- 
+ domaines différents (basés sur les paramètres du meilleur modèle).
 \end_layout
 
 \begin_layout Standard
