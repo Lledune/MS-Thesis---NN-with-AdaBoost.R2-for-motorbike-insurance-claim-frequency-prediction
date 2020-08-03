@@ -56,6 +56,7 @@ class AdaBoost():
         self.nn1 = nn1
         self.keraslr = keraslr
         self.input_dim = input_dim
+
         
     #Loss function  for Keras    
     def deviance(self, data, y_pred):
@@ -429,6 +430,32 @@ class AdaBoost():
         self.estimators = estLoaded
         
         print("Model loaded.")
+        
+def getParams(ada = AdaBoost()):
+    config_dic = {}
+    config_dic['n_est'] = ada.n_est
+    config_dic['loss'] = ada.loss
+    config_dic['estimatorsErrors'] = ada.estimatorsErrors
+    config_dic['estimatorsWeights'] = ada.estimatorsWeights
+    config_dic['estimatorsSampleWeights'] = ada.estimatorsSampleWeights
+    config_dic['learning_rate'] = ada.learning_rate
+    config_dic['averageLoss'] = ada.averageLoss
+    config_dic['kerasEpochs'] = ada.kerasEpochs
+    config_dic['kerasBatchSize'] = ada.kerasBatchSize
+    config_dic['dropout'] = ada.dropout
+    config_dic['nn1'] = ada.nn1
+    config_dic['keraslr'] = ada.keraslr
+    config_dic['input_dim'] = ada.input_dim
+    #adding the losses
+    preds = ada.predict(dataTest)
+    testLoss = ada.devFull(y1test, preds, d1test)
+    meanTestLoss = testLoss/len(preds)
+    fullTestLoss = meanTestLoss * 64501
+    config_dic['testLoss'] = testLoss 
+    config_dic['meanTestLoss'] = meanTestLoss
+    config_dic['fullTestLoss'] = fullTestLoss
+    config_dic['real_n_est'] = len(ada.estimators)
+    return config_dic
             
         
 
@@ -514,19 +541,19 @@ xxxxdevTest = adatest.devFull(y1, xxxx, d1)
 import random
 #Defining param grid 
 param_grid = {
-        'n_est' : [10,50,100],
+        'n_est' : [10,15,20],
         'loss' : ['exponential'],
-        'learning_rate' : [0.1,0.5,1],
-        'kerasEpochs' : [50,100,250],
-        'kerasBatchSize' : [51600,10000,500],
-        'dropout' : [0.1,0.2],
-        'nn1' : [5,10,15],
-        'keraslr' : [0.1,0.01,0.5],
+        'learning_rate' : [0.1,0.25,0.5],
+        'kerasEpochs' : [100,200,300],
+        'kerasBatchSize' : [10000,25000],
+        'dropout' : [0.1],
+        'nn1' : [8,10,12],
+        'keraslr' : [0.3,0.5,0.7],
     }
 
 
 paramdraws = []
-nTests = 10
+nTests = 20
 
 print(nTests, " tests will be done.")
 
@@ -583,9 +610,17 @@ for i in range(0, nTests):
     devianceFullStore.append(fullDev)
     predsStore.append(predSingle)
     adastore.append(estimator)
+    
+    
+#creating the dataframe of results
+paramDicts = []
+for ada in adastore:
+    dic = getParams(ada)
+    paramDicts.append(dic)
 
+paramDF = pd.DataFrame(paramDicts)
 
-
+#paramDF.to_csv(root + '/ADB1st.csv') saving the results of the first iteration
 
 #####################################
 # PLOTS 
@@ -867,7 +902,10 @@ plt.savefig(root + '/lyx/images/learning/ADBEpochs.png')
 plt.show()
 plt.close()
 
-print("a")
+
+
+
+
 
 
 
