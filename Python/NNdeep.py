@@ -4,9 +4,8 @@ import keras
 import numpy as np 
 import pandas as pd
 import keras.backend as KB
-from math import log, exp
-import os
-from sklearn.model_selection import KFold, StratifiedKFold
+from math import log
+from sklearn.model_selection import KFold
 from keras.layers import Dense, Dropout
 
 #########################################
@@ -15,8 +14,73 @@ from keras.layers import Dense, Dropout
 root = 'c:/users/kryst/desktop/poisson/poisson-neural-network-insurance-pricing'
 
 
+#########################################
+# Functions
+#########################################
 
-#importing datasets
+#Loss function     
+def deviance(data, y_pred):
+        y_true = data[:, 0]
+        d = data[:, 1]
+        
+        lnY = KB.log(y_true)
+        bool1 = KB.equal(y_true, 0)
+        zeros = KB.zeros_like(y_true)
+        lnY = KB.switch(bool1, zeros, lnY)
+        
+        lnYp = KB.log(y_pred)
+        bool2 = KB.equal(y_pred, 0)
+        zeross = KB.zeros_like(y_pred)
+        lnYp = KB.switch(bool2, zeross, lnYp)
+        
+        loss = 2 * d * (y_true * lnY - y_true * lnYp[:, 0] - y_true + y_pred[:, 0])
+        return loss
+
+def devSingle(y, yhat, d):
+    if y != 0:
+        return 2 * d * (y * log(y) - y * log(yhat) - y + yhat)
+    else:
+        return 2 * d * yhat
+    return print("error")
+
+def devFull(y, yhat, d):
+    sumtot = 0
+    y = pd.DataFrame(y)
+    yhat = pd.DataFrame(yhat)
+    d = pd.DataFrame(d)
+    arr = np.append(y, yhat, axis = 1)
+    arr = np.append(arr, d, axis = 1)
+    arr = pd.DataFrame(arr)
+    arr.columns = ["y", "yhat", "d"]
+    for index, row in arr.iterrows():
+        dev = devSingle(row["y"], row["yhat"], row["d"])
+        sumtot = sumtot + dev
+    return sumtot
+
+def baseline_modelDNN(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, lr = 0.001, act1 = "relu"):
+    with tf.device('/gpu:0'):
+        # create model
+        #building model
+        model = keras.Sequential()
+        model.add(Dense(nn1, input_dim = 21, activation = act1, kernel_initializer=kernel_initializer))
+        model.add(Dropout(dropout))
+        #model.add(Dense(2, activation = "exponential"))
+        model.add(Dense(nn2, activation = act1))
+        #model.add(Dense(nn3, activation = act1))
+        model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
+        optimizer = keras.optimizers.adagrad(lr=lr)
+        model.compile(loss=deviance, optimizer=optimizer, metrics = [deviance, "mean_squared_error"])
+        return model
+
+#used to check that keras is well using GPU
+from tensorflow.python.client import device_lib
+print(device_lib.list_local_devices())
+
+
+#########################################
+# Importing datasets
+#########################################
+
 dataTrain = pd.read_csv(root + "/dataTrain.csv")
 datacatsTrain = pd.read_csv(root + "/dataCatsTrain.csv")
 
@@ -61,74 +125,15 @@ d2test = pd.DataFrame(d2test)
 feed = np.append(y1, d1, axis = 1)
 feed2 = np.append(y2, d2, axis = 1)
 
-#Loss function     
-def deviance(data, y_pred):
-        y_true = data[:, 0]
-        d = data[:, 1]
-        
-        lnY = KB.log(y_true)
-        bool1 = KB.equal(y_true, 0)
-        zeros = KB.zeros_like(y_true)
-        lnY = KB.switch(bool1, zeros, lnY)
-        
-        lnYp = KB.log(y_pred)
-        bool2 = KB.equal(y_pred, 0)
-        zeross = KB.zeros_like(y_pred)
-        lnYp = KB.switch(bool2, zeross, lnYp)
-        
-        loss = 2 * d * (y_true * lnY - y_true * lnYp[:, 0] - y_true + y_pred[:, 0])
-        return loss
 
-def devSingle(y, yhat, d):
-    if y != 0:
-        return 2 * d * (y * log(y) - y * log(yhat) - y + yhat)
-    else:
-        return 2 * d * yhat
-    return print("error")
-
-def devFull(y, yhat, d):
-    sumtot = 0
-    y = pd.DataFrame(y)
-    yhat = pd.DataFrame(yhat)
-    d = pd.DataFrame(d)
-    arr = np.append(y, yhat, axis = 1)
-    arr = np.append(arr, d, axis = 1)
-    arr = pd.DataFrame(arr)
-    arr.columns = ["y", "yhat", "d"]
-    for index, row in arr.iterrows():
-        dev = devSingle(row["y"], row["yhat"], row["d"])
-        sumtot = sumtot + dev
-    return sumtot
-
-#used to check that keras is well using GPU
-from tensorflow.python.client import device_lib
-print(device_lib.list_local_devices())
-
-
-####################
-#Trying to insert keras into sklearn, and search hyperparameters
-#This is the first iteration of it, we check the big domains of hyperparameter and will refine them afterwards depending on the results.
-####################
+#######################################
+# Parameter search 
+#######################################
 
 from keras.wrappers.scikit_learn import KerasRegressor
 from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import KFold
-
-def baseline_modelDNN(dropout = 0.2, kernel_initializer = 'glorot_uniform', nn1 = 15, nn2 = 10, lr = 0.001, act1 = "relu"):
-    with tf.device('/gpu:0'):
-        # create model
-        #building model
-        model = keras.Sequential()
-        model.add(Dense(nn1, input_dim = 21, activation = act1, kernel_initializer=kernel_initializer))
-        model.add(Dropout(dropout))
-        #model.add(Dense(2, activation = "exponential"))
-        model.add(Dense(nn2, activation = act1))
-        #model.add(Dense(nn3, activation = act1))
-        model.add(Dense(1, activation = "exponential", kernel_initializer=kernel_initializer))
-        optimizer = keras.optimizers.adagrad(lr=lr)
-        model.compile(loss=deviance, optimizer=optimizer, metrics = [deviance, "mean_squared_error"])
-        return model
 
 
 clf = KerasRegressor(build_fn=baseline_modelDNN)
@@ -174,10 +179,6 @@ fullDevTestDNN = meanDevTestDNN * (len(y1) + len(y1test))
 #nn2 = 15
 #lr : 0.3
 
-
-
-
-
 ###########################
 # SAVE MODEL
 ###########################
@@ -188,11 +189,13 @@ model_to_save = best2.named_steps['clf'].model
 #saving model
 model_to_save.save(root + '/Python/Models/DNNmodel')
 
-#load model
+###########################
+# Load model
+###########################
 #NEED TO ADD THE CUSTOM LOSS AS OBJECT IN LOAD !!
+###########################
+
 reconstructed_model = keras.models.load_model(root + '/Python/Models/DNNmodel', custom_objects={'deviance' : deviance})
-
-
 
 #####################################
 # PLOTS 
@@ -534,6 +537,73 @@ plt.savefig(root + '/lyx/images/learning/DNNEpochs.png')
 plt.show()
 plt.close()
 
+#############################
+# Test set deviance
+#############################
+
+param_grid1 = {
+    'clf__epochs':[250],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[10000],
+    'clf__nn1':[40],
+    'clf__nn2':[20],
+    'clf__lr':[0.3],
+    'clf__act1':['softmax']
+}
+
+param_grid2 = {
+    'clf__epochs':[250],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[10000],
+    'clf__nn1':[20],
+    'clf__nn2':[15],
+    'clf__lr':[0.3],
+    'clf__act1':['softmax']
+}
+
+param_grid3 = {
+    'clf__epochs':[150],
+    'clf__dropout':[0.2],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[500],
+    'clf__nn1':[10],
+    'clf__nn2':[25],
+    'clf__lr':[0.2],
+    'clf__act1':['softmax']
+}
+
+clf = KerasRegressor(build_fn=baseline_modelDNN)
+pipeline = Pipeline([
+    ('clf',clf)
+])
+cv = KFold(n_splits=2, shuffle=False)
+
+grid1 = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid1, verbose=3, n_iter = 1) 
+grid1.fit(dataTrain, feed)
+grid2 = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid2, verbose=3, n_iter = 1) 
+grid2.fit(dataTrain, feed)
+grid3 = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid3, verbose=3, n_iter = 1) 
+grid3.fit(dataTrain, feed)
 
 
+best1 = grid1.best_estimator_
+best2 = grid2.best_estimator_
+best3 = grid3.best_estimator_
+
+ypredtest1 = best1.predict(dataTest)
+ypredtest2 = best2.predict(dataTest)
+ypredtest3 = best3.predict(dataTest)
+
+devTest1 = devFull(y1test, ypredtest1, d1test)
+devTest2 = devFull(y1test, ypredtest2, d1test)
+devTest3 = devFull(y1test, ypredtest3, d1test)
+
+normDevTest1 = (devTest1/len(y1test))*(len(y1test) + len(y1))
+normDevTest2 = (devTest2/len(y1test))*(len(y1test) + len(y1))
+normDevTest3 = (devTest3/len(y1test))*(len(y1test) + len(y1))
+meanDevTest1 = (devTest1/len(y1test))
+meanDevTest2 = (devTest2/len(y1test))
+meanDevTest3 = (devTest3/len(y1test))
 

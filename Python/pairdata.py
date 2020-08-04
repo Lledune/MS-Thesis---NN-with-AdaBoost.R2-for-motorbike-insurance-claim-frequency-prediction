@@ -9,7 +9,7 @@ data = pd.read_csv("c:/users/kryst/desktop/Poisson/Poisson-neural-network-insura
 data["ClaimFrequency"] = data["NumberClaims"]/data['Duration']
 data["ClaimFrequency"] = data["ClaimFrequency"].fillna(0)
 
-numsNames = ['OwnersAge', 'VehiculeAge', 'Duration', 'NumberClaims', 'ClaimFrequency', 'ClaimCost']
+numsNames = ['OwnersAge', 'VehiculeAge', 'Duration', 'ClaimCost']
 catsNames = ['Gender', 'Zone', 'Class', 'BonusClass']
 
 for name in catsNames:

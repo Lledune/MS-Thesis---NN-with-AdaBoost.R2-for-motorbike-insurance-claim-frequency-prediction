@@ -48,12 +48,19 @@ fitted(model) #predictions ?
 plot(model)
 step(model)
 
+
+
+
 #predictions
 predsTest = predict(model, newdata = dataTest)
 predsTest = exp(predsTest)
 
 devFirstModel = devianceFull(y1test, predsTest, d1test)
 devFirstModelNorm = (devFirstModel/length(y1test))*(length(y1train) + length(y1test))
+
+
+
+
 
 #refined model after step
 refModel = glm(formula = NumberClaims ~ Gender.F + Zone.1 + Zone.2 + Zone.3 + 
@@ -68,13 +75,6 @@ predsTestRefined = exp(predsTestRefined)
 
 devSecondModel = devianceFull(y1test, predsTestRefined, d1test)
 devSecondModelNorm = (devSecondModel/length(y1test))*(length(y1test) + length(y1train))
-
-
-
-
-
-
-
 
 
 

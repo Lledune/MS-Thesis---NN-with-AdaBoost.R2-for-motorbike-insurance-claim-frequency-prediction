@@ -4,15 +4,12 @@ import keras
 import numpy as np 
 import pandas as pd
 import keras.backend as KB
-from math import log, exp
-import os
-from sklearn.model_selection import KFold, StratifiedKFold
-from keras.layers import Dense, Dropout
-import pickle
-from keras.wrappers.scikit_learn import KerasRegressor
-from sklearn.model_selection import GridSearchCV, RandomizedSearchCV
-from sklearn.pipeline import Pipeline
+from math import log
 from sklearn.model_selection import KFold
+from keras.layers import Dense, Dropout
+from keras.wrappers.scikit_learn import KerasRegressor
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.pipeline import Pipeline
 import matplotlib.pyplot as plt
 
 
@@ -318,7 +315,7 @@ staticparams = {
     'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
     'clf__batch_size':[500],
-    'clf__nn1':[25],
+    'clf__nn1':[15],
     'clf__lr':[0.1],
     'clf__act1':['softmax']
 }
@@ -386,7 +383,7 @@ trErrorNN = []
 staticparamsList = []
 
 for i in range(0, len(nn1s)):
-    temp = {
+    temp = param_grid2 = {
     'clf__epochs':[250],
     'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
@@ -447,12 +444,12 @@ trErrorLR = []
 staticparamsListLR = []
 
 for i in range(0, len(lrs)):
-    temp = {
+    temp = param_grid2 = {
     'clf__epochs':[250],
     'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
     'clf__batch_size':[500],
-    'clf__nn1':[25],
+    'clf__nn1':[15],
     'clf__lr':[lrs[i]],
     'clf__act1':['softmax']
 }
@@ -512,7 +509,7 @@ for i in range(0, len(epochsList)):
     'clf__dropout':[0.1],
     'clf__kernel_initializer':['uniform'],
     'clf__batch_size':[500],
-    'clf__nn1':[25],
+    'clf__nn1':[15],
     'clf__lr':[0.1],
     'clf__act1':['softmax']
 }
@@ -595,6 +592,78 @@ meanDevTrain = devTrain/len(y1)
 #the normalized deviances
 totDevTrain = meanDevTrain * (len(y1) + len(y1test))
 totDevTest = meanDevTest * (len(y1) + len(y1test))
+
+
+
+############################
+# Test dev of best models
+############################
+
+#hyperparameters domain
+param_grid1 = {
+    'clf__epochs':[250],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[500],
+    'clf__nn1':[25],
+    'clf__lr':[0.1],
+    'clf__act1':['softmax']
+}
+
+#hyperparameters domain
+param_grid2 = {
+    'clf__epochs':[250],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[500],
+    'clf__nn1':[15],
+    'clf__lr':[0.1],
+    'clf__act1':['softmax']
+}
+
+#hyperparameters domain
+param_grid3 = {
+    'clf__epochs':[400],
+    'clf__dropout':[0.1],
+    'clf__kernel_initializer':['uniform'],
+    'clf__batch_size':[500],
+    'clf__nn1':[10],
+    'clf__lr':[0.1],
+    'clf__act1':['softmax']
+}
+
+clf = KerasRegressor(build_fn=baseline_model2)
+pipeline = Pipeline([
+    ('clf',clf)
+])
+cv = KFold(n_splits=2, shuffle=False)
+
+grid1 = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid1, verbose=3, n_iter = 1) 
+grid1.fit(dataTrain, feed)
+grid2 = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid2, verbose=3, n_iter = 1) 
+grid2.fit(dataTrain, feed)
+grid3 = RandomizedSearchCV(pipeline, cv = cv, param_distributions=param_grid3, verbose=3, n_iter = 1) 
+grid3.fit(dataTrain, feed)
+
+
+best1 = grid1.best_estimator_
+best2 = grid2.best_estimator_
+best3 = grid3.best_estimator_
+
+ypredtest1 = best1.predict(dataTest)
+ypredtest2 = best2.predict(dataTest)
+ypredtest3 = best3.predict(dataTest)
+
+devTest1 = devFull(y1test, ypredtest1, d1test)
+devTest2 = devFull(y1test, ypredtest2, d1test)
+devTest3 = devFull(y1test, ypredtest3, d1test)
+
+normDevTest1 = (devTest1/len(y1test))*(len(y1test) + len(y1))
+normDevTest2 = (devTest2/len(y1test))*(len(y1test) + len(y1))
+normDevTest3 = (devTest3/len(y1test))*(len(y1test) + len(y1))
+meanDevTest1 = (devTest1/len(y1test))
+meanDevTest2 = (devTest2/len(y1test))
+meanDevTest3 = (devTest3/len(y1test))
 
 
 
