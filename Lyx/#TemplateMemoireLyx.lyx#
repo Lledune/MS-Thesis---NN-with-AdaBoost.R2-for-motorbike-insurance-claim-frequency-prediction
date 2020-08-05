@@ -13362,68 +13362,7 @@ Pour rappel, le but principal de ce mémoire était à la fois de prouver que
  ce problème, et en particulier tester l'application des réseaux de neurones
  comme apprenant faible du méta-algorithme AdaBoost.
  Afin de disposer d'un point de comparaison pertinent, un modèle linéaire
- généralisé a été construit sur la base de donnée, ce qui permet de déterminer
- si les modèles construits dans ce travail sont réellement efficaces.
- 
-\end_layout
-
-\begin_layout Standard
-Un élément central de cette analyse est la recherche des hyperparamètres
- adéquats.
- Trouver de bonnes valeurs pour les domaines de ceux-ci a pris du temps,
- mais a également amélioré les performances des algorithmes de manière considéra
-ble.
-\end_layout
-
-\begin_layout Standard
-Premièrement, un réseau de neurones simple a été entrainé, produisant de
- biens meilleurs résultats que la référence.
- Par la suite, un réseau de neurones profond a également été construit.
- Celui-ci dispose également de meilleures performances que le modèle linéaire
- généralisé, cependant le nombre important de paramètres induit par les
- nombreux neurones des différentes couches le rendent sensible au surentraînemen
-t, et celui-ci ne parvient pas à battre le premier réseau de neurones construit.
- 
-\end_layout
-
-\begin_layout Standard
-Enfin, AdaBoost.R2, variation d'AdaBoost modifiée pour fonctionner dans le
- cas de la régression a été utilisé en combinaison avec des réseaux de neurones
- afin de tenter de produire de meilleurs résultats que tout les modèles
- précédents.
- Les résultats de cette combinaison sont réellement encourageant, les modèles
- entraîné avec le boosting associé aux réseaux de neurones produisent de
- loin les meilleurs résultats de ce travail.
- 
-\end_layout
-
-\begin_layout Standard
-Une normalisation de la déviance, fonction de perte utilisée pour l'optimisation
- des paramètres des perceptrons multicouches, a ensuite été incorporée dans
- l'algorithme d'AdaBoost en temps que fonction de perte.
- Les résultats obtenus sont cependant décevants et parviennent à peine à
- battre les résultats obtenus par le GLM.
-\end_layout
-
-\begin_layout Standard
-Au vu de ces résultats, il est clair que l'application de nouveaux algorithmes
- à ce type de problème peut être bénéfique.
- 
-\end_layout
-
-\begin_layout Standard
-Cependant, AdaBoost n'est pas la seule méthode de boosting existante (les
- GBM
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Gradient Boosting Machine.
-\end_layout
-
-\end_inset
-
- peuvent être cités comme exemple)
+ généralisé a été construit sur la base de donnée, ce qui permet 
 \end_layout
 
 \begin_layout Standard

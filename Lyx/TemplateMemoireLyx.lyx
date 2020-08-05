@@ -106,7 +106,7 @@
 \quotes_style english
 \dynamic_quotes 0
 \papercolumns 1
-\papersides 2
+\papersides 1
 \paperpagestyle fancy
 \tracking_changes false
 \output_changes false
@@ -212,7 +212,8 @@ begin{center}
 \backslash
 large {
 \backslash
-bf Application d'AdaBoost aux réseaux de neurones dans un cas de régression}}
+bf Estimation de la fréquence des sinistres par l'application des réseaux
+ de neurones à AdaBoost}}
 \end_layout
 
 \begin_layout Plain Layout
@@ -491,22 +492,137 @@ frontmatter
 \end_layout
 
 \begin_layout Section*
-Preface.
+Préface
 \end_layout
 
 \begin_layout Standard
-This dissertation has been prepared in partial fulfillment of the requirements
- for the master degree in actuarial sciences delivered by the Université
- Catholique de Louvain.
+Ce mémoire de fin d'étude peut être vu comme la conclusion de mon parcours
+ dans l'enseignement supérieur.
+ Celui-ci a représenté pour moi une grande quantité de travail, mais a également
+ été l'occasion d'approfondir mes connaissances sur de nombreux sujets relatifs
+ aux études entreprises.
+ La rédaction de celui-ci a pour but de compléter et finaliser ma formation,
+ tout en respectant les exigences de l'université en vue d'obtenir une maîtrise
+ en sciences des données (orientation statistique) à l'UCL.
+ Le commencement de ces études a été compliqué, notamment dû à certaines
+ lacunes de mon bagage mathématique, mais au fil des années j'ai été en
+ mesure de travailler sur ces problèmes.
+ Plus particulièrement, la rédaction de ce travail m'a permis de comprendre
+ comment apprendre de nouveaux concepts sur base de papiers scientifiques,
+ mais aussi à travailler de manière indépendante.
+ Le choix du sujet de mémoire a été fait en concertation avec le professeur
+ Donatien Hainaut, et a pour but de trouver des pistes pour l'amélioration
+ des modèles utilisés dans la prédiction des fréquences de sinistres d'une
+ assurance non-vie.
+ Dans cette optique, la rédaction de ce mémoire m'a aussi permi d'en apprendre
+ plus sur ce domaine, que je ne connaissait que de nom auparavant.
+ La recherche associée a ce travail fut laborieuse et le nombre de travaux
+ scientifiques sur le sujet étaient assez limités, mais cette investigation
+ a finalement été fructueuse.
+ Afin de mener à bien ce projet, il a également fallu que j'aiguise mes
+ compétences de programmation (particulièrement en Python) afin de produire
+ un travail de qualité.
+ Il s'agit probablement du plus gros projet que j'ai jamais mené, et la
+ programmation de celui-ci m'a appris énormément de chose.
+ Le temps de calcul de certains algorithmes utilisés étant conséquent, cela
+ a aussi été l'occasion pour moi d'apprendre à optimiser le code et la recherche
+ des paramètres par diverses techniques, comme l'utilisation d'un processeur
+ graphique pour la réalisation de certains calculs.
+\end_layout
+
+\begin_layout Standard
+En espérant que cette lecture vous soit agréable, 
+\begin_inset Newline newline
+\end_inset
+
+
+\begin_inset Newline newline
+\end_inset
+
+Lucien Ledune
+\begin_inset Newline newline
+\end_inset
+
+Quaregnon, 5 août 2020
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace*{
+\backslash
+fill}
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Section*
-Acknowledgment.
+Remerciements
 \end_layout
 
 \begin_layout Standard
-Many people have contributed to the completion of this dissertation.
+Un grand nombre de personnes m'ont été d'une grande aide au cours de la
+ rédaction de ce mémoire de fin d'études.
+ Je tiens à remercier mes amis et ma famille : même s'ils ne comprenaient
+ pas toujours ce que j'avais à raconter, ils ont été un grand soutien moral
+ tout au long de l'écriture de ce travail.
+ Plus particulièrement je remercie ma soeur, qui a accepté avec joie d'effectuer
+ la relecture du projet.
+ Mes remerciements vont également à Iasonas Topsis Giotis, mon maître de
+ stage.
+ Si ce travail n'a pas été réalisé dans le cadre du stage, j'ai néanmoins
+ appris une quantité innombrable de choses aux côtés de cette personne,
+ notamment en ce qui concerne la programmation en Python.
+ Un grand merci également au professeur Johan Segers pour avoir accepté
+ d'être lecteur de ce mémoire.
  
+\end_layout
+
+\begin_layout Standard
+Enfin, je tiens surtout à remercier mon promoteur, le professeur Donatien
+ Hainaut, pour son aide et son assistance dans la rédaction de ce mémoire
+ de fin d'études, mais aussi pour sa patience.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+vspace*{
+\backslash
+fill}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage pagebreak
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -558,7 +674,11 @@ Partout dans le monde, la facilité montante de l'accès à une puissance de
  Cette avancée technologique a permi d'utiliser des techniques de modélisations
  et de prédictions qui étaient jusqu'à lors trop longues à mettre en place
  pour avoir un réel intérêt pratique.
- Le secteur des assurances n'a pas été épargné par le phénomène et évolue
+ 
+\end_layout
+
+\begin_layout Standard
+Le secteur des assurances n'a pas été épargné par le phénomène et évolue
  avec son temps.
  Le machine learning
 \begin_inset Foot
@@ -579,34 +699,45 @@ Apprentissage automatique : Méthodes statistique permettant à un ordinateur
 \begin_inset Newline newline
 \end_inset
 
-La modélisation de prédiction n'est pas nouvelle dans ce secteur, mais les
+L'utilisation de prédicteurs n'est pas nouvelle dans ce secteur, mais les
  algorithmes utilisés changent avec l'essort actuel de la technologie.
- Ainsi nous pouvons maintenant facilement utiliser des réseaux de neurones
+ Ainsi il est maintenant possible facilement utiliser des réseaux de neurones
  afin de répondre aux problèmes pour lesquels des algorithmes moins complexes
  étaient utilisés auparavant.
- Le but de ce travail est de montrer que ces nouveaux
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-La plupart de ces algorithmes sont en fait assez peu récents mais étaient
- difficilement applicables en raison d'une puissance de calcul trop faible,
- citons par exemple le perceptron, élement de base des réseaux de neurones
- qui a été inventé dès 1957.
-\end_layout
-
-\end_inset
-
- algorithmes sont efficaces et représentent un espoir d'amélioration pour
- le futur.
- TODO : expliquer le mémoire rapidement.
+ 
 \end_layout
 
 \begin_layout Standard
-\begin_inset Newpage pagebreak
+Le cadre dans lequel les analyses de ce mémoire seront réalisées est la
+ prédiction de la fréquence de sinistres des clients d'une assurance (moto).
+ Les différentes parties du travail seront articulées autour de ce but final.
+ Afin de prouver que les techniques utilisées dans ce travail sont efficaces,
+ celles-ci seront comparées avec un type de modèle étant encore majoritairement
+ utilisé pour le calcul de la fréquence des accidents : le modèle linéaire
+ généralisé.
+ Au coeur de ce travail se situent les réseaux de neurones ainsi que l'algorithm
+e de boosting bien connu 
+\begin_inset Quotes eld
 \end_inset
 
+AdaBoost
+\begin_inset Quotes erd
+\end_inset
 
+.
+ Plus particulièrement, les réseaux de neurones précédemment cités seront
+ appliqués à l'algorithme AdaBoost afin de tenter de produire de meilleurs
+ résultats que ceux du modèle linéaire généralisé.
+ 
+\end_layout
+
+\begin_layout Standard
+Dans la première partie de cet ouvrage seront traités les questions relatives
+ à l'anlyse et la préparation de la base de données utilisée.
+ Dans la deuxième partie, les algorithmes utilisés ainsi que les concepts
+ importants à leur compréhension seront abordés et expliqués.
+ Enfin, la troisième partie de ce travail aura pour but d'appliquer les
+ algorithmes au cas étudié et de comparer les résultats obtenus
 \end_layout
 
 \begin_layout Chapter
@@ -619,10 +750,10 @@ Présentation des données
 
 \begin_layout Standard
 Afin de réaliser ce travail, une base de donnée adéquate est nécessaire,
- celle-ci est présentée dans cette sous-section.
+ celle-ci est présentée et analysée dans ce chapitre.
  La base de données est constituée d'informations sur les clients d'une
  compagnie d'assurance nommée Wasa, entre 1994 et 1998.
- Les véhicules assurées sont composés uniquement de motos.
+ Les véhicules assurés sont composés uniquement de motos.
  Il est difficile d'obtenir des données plus récentes à cause des clauses
  de confidentialité des assurances.
  La version originelle de ce jeu de données est utilisée dans une étude
@@ -1799,6 +1930,7 @@ Il est important de noter que cette mesure ne prends en compte que les relations
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -1807,8 +1939,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename Images/corrmat.png
-	width 8cm
-	height 8cm
+	scale 75
 
 \end_inset
 
@@ -1860,7 +1991,7 @@ ms et ClaimCost.
 \begin_layout Itemize
 La corrélation positive entre ClaimFrequency et NumberClaims est quant à
  elle expliquée par le fait que ClaimFrequency est un ratio divisant NumberClaim
-s par Duration (voir 2.4.2).
+s par Duration (voir sous-section 2.5.2).
 \end_layout
 
 \begin_layout Itemize
@@ -1996,9 +2127,8 @@ Assurances
 \end_layout
 
 \begin_layout Standard
-Dans cette section seront expliquées les particularités de l'analyse de
- données dans le cadre de l'assurance, et plus précisement dans le cas qui
- nous intéresse ici.
+Dans cette sous-section seront expliquées les particularités de l'analyse
+ de données dans le cadre de l'assurance pour le cas étudié.
  
 \end_layout
 
@@ -2068,7 +2198,7 @@ Il est important de comprendre ce que l'on cherche à expliquer avec un modèle,
 status open
 
 \begin_layout Plain Layout
-L'exposition peut être le nombre de sinistres ou la durée du contrat.
+L'exposition est égale à la durée du contrat dans le cadre de ce travail.
 \end_layout
 
 \end_inset
@@ -2093,7 +2223,8 @@ Y=X/v
 \end_inset
 
 Il existe différents ratios mais ici ne sera présenté que celui utilisé
- dans l'analyse à venir : La fréquence des réclamations.
+ dans l'analyse à venir : La fréquence des réclamations (ou fréquence des
+ sinistres).
  Il s'agit du rapport entre le nombre de réclamations et la durée du contrat,
  une fréquence qui sera la variable prédite par les modèles est ainsi obtenue.
 \end_layout
@@ -2231,15 +2362,8 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_
 .
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
-Preprocessing
+Préparation des données (preprocessing)
 \end_layout
 
 \begin_layout Standard
@@ -2373,7 +2497,7 @@ Les données quantitatives ne doivent pas être transformées en variables
 status open
 
 \begin_layout Plain Layout
-Voir chapitre 3
+Voir sous-section 3.3.1.
 \end_layout
 
 \end_inset
@@ -2513,8 +2637,8 @@ Durée de contrat
 \begin_layout Standard
 Pour le bon fonctionement du modèle, certaines autres données ont du être
  modifiées car celles-ci entrainaient des erreurs dans la fonction de déviance
- utilisée pour la calibration des poids des réseaux de neurones (empêchant
- la convergence).
+ utilisée pour la calibration des poids des réseaux de neurones (limitant
+ ou empêchant parfois la convergence).
  Les observations incriminées sont celles ayant une durée de contrat nulle.
  Ces valeurs nulles de durée de contrat sont peu cohérentes (impossible
  d'avoir un sinistre déclaré au cours du contrat si celui-ci n'est pas encore
@@ -2535,6 +2659,8 @@ Pour le bon fonctionement du modèle, certaines autres données ont du être
 \end_inset
 
  soit un sinistre par jour ce qui pourrait grandement biaiser le modèle.
+ À la fin des différentes étapes de preprocessing, la base de données passe
+ de 64505 observations à 64501.
 \end_layout
 
 \begin_layout Standard
@@ -2614,7 +2740,7 @@ Avant de pouvoir rentrer dans les détails, il est important de définir les
 \begin_inset Formula $P$
 \end_inset
 
- grâce à des expériences
+, et ce grâce à des expériences
 \begin_inset Foot
 status open
 
@@ -2741,7 +2867,7 @@ apprendre
  Cette phase d'apprentissage est différente d'un algorithme à un autre.
  Une fois cette phase d'apprentissage terminée le modèle ainsi créé peut
  être utilisé pour la prédiction.
- Les valeurs prédites par l'algorithmes seront notées 
+ Les valeurs prédites par l'algorithme seront notées 
 \begin_inset Formula $\hat{y_{i}}$
 \end_inset
 
@@ -2834,7 +2960,7 @@ Modèle où les
 \begin_inset Formula $\hat{y_{i}}$
 \end_inset
 
-sont définis comme les véritables valeurs 
+ sont définis comme les véritables valeurs 
 \begin_inset Formula $y_{i},$
 \end_inset
 
@@ -2951,8 +3077,11 @@ La base de donnée utilisée portant sur des événements rares, beaucoup de
 \begin_inset Formula $y_{i}=0$
 \end_inset
 
- seront étudiés, en modifiant la formule ci dessus la formule adéquate pour
- ce cas particulier est donnée par :
+ seront étudiés, en modifiant la formule ci dessus (en remplaçant 
+\begin_inset Formula $y_{i}$
+\end_inset
+
+ par 0) la formule adéquate pour ce cas particulier est donnée par :
 \end_layout
 
 \begin_layout Standard
@@ -2966,21 +3095,8 @@ D(y_{i},\hat{y}_{i})=2v_{i}\hat{y_{i},}\;\:\forall y_{i}=0
 
 \end_layout
 
-\begin_layout Standard
-Cette formule est simplement obtenue en remplaçant 
-\begin_inset Formula $y_{i}$
-\end_inset
-
- par 
-\begin_inset Formula $0$
-\end_inset
-
-.
- 
-\end_layout
-
 \begin_layout Subsection
-Overfit (surentraînement)
+Surentraînement (Overfit)
 \end_layout
 
 \begin_layout Standard
@@ -3006,10 +3122,6 @@ Il est important de comprendre le but derrière la création d'un tel modèle.
  il peut être notamment causé par un trop grand nombre de variables explicatives
  ou une phase d'apprentissage mal configurée.
  Le modèle est alors inutilisable dans un scénario réél.
-\begin_inset Newline newline
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -3663,7 +3775,7 @@ Dans le cas étudié, c'est la fréquence des sinistres qui est importante.
 \end_inset
 
 .
- Beard, Pentikäinen et Pesonen montrent que ce processus statistique suit
+ Beard, Pentikainen et Pesonen montrent que ce processus statistique suit
  une loi de poisson 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -3784,7 +3896,7 @@ Qui est la une forme de la distribution de probabilité des EDM vue plus
 La fonction de lien 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Forme de tableau
 \end_layout
 
@@ -4208,7 +4320,7 @@ Forme de tableau
 
 \end_layout
 
-\begin_layout Subsubsection*
+\begin_layout Subsubsection
 Fonction de lien
 \end_layout
 
@@ -4922,6 +5034,7 @@ status open
 
 \begin_layout Plain Layout
 Schéma d'un neurone biologique.
+ Source : https://fr.wikipedia.org/wiki/Fichier:Neuron-figure-fr.svg
 \end_layout
 
 \end_inset
@@ -5049,7 +5162,7 @@ Pour en revenir au perceptron, les données d'un individu sont considérées
 \begin_inset Formula $x_{i}$
 \end_inset
 
-mais par 
+ mais par 
 \begin_inset Formula $1$
 \end_inset
 
@@ -5078,8 +5191,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename Images/2000px-Perceptron-bias.svg.png
-	width 7cm
-	height 5cm
+	scale 40
 
 \end_inset
 
@@ -5090,7 +5202,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Représentation d'un perceptron
+Représentation d'un perceptron.
 \end_layout
 
 \end_inset
@@ -5142,7 +5254,7 @@ C'est donc cette réponse
 Lorsqu'il est question d'apprentissage automatique, cela signifie en fait
  que les paramètres du modèle sont optimisés en fonction de notre base de
  données.
- Pour le perceptron cela signifie trouver les valeurs optimales 
+ Pour le perceptron cela veut dire trouver les valeurs optimales 
 \begin_inset Formula $w$
 \end_inset
 
@@ -5357,7 +5469,7 @@ Computer vision.
  Il faut savoir qu'il existe différent types de MLP, dont certains avec
  des relations circulaires entre les neurones.
  Cependant ce type de réseau ne sera pas utilisé dans ce travail et ne seront
- donc pas expliqués, les réseaux de neurones artificiels utilisés seront
+ donc pas détaillé, les réseaux de neurones artificiels utilisés seront
  uniquement des réseaux 
 \begin_inset Quotes eld
 \end_inset
@@ -5376,9 +5488,9 @@ feed-forward
 \begin_inset Newline newline
 \end_inset
 
-Un réseau tel que celui-ci est composé de plusieurs couches à travers l'informat
-ion passe successivement.
- La première couche est la couche d'entrée, celle-qui va recevoir les données.
+Un réseau tel que celui-ci est composé de plusieurs couches à travers lesquelles
+ l'information passe successivement.
+ La première couche est la couche d'entrée, celle qui va recevoir les données.
  Ensuite, il y a une ou plusieurs couches cachées
 \begin_inset Foot
 status open
@@ -5410,7 +5522,7 @@ Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
 \begin_inset Newline newline
 \end_inset
 
-Le fonctionement de ce réseau est similaire à celui du perceptron, cependant
+Le fonctionnement de ce réseau est similaire à celui du perceptron, cependant
  son architecture est plus complexe et nécessite certains changements dans
  les notations utilisées, aussi :
 \end_layout
@@ -5875,15 +5987,14 @@ literal "false"
 
 \end_layout
 
-\begin_layout Standard
-\begin_inset Newpage pagebreak
-\end_inset
-
-
-\end_layout
-
 \begin_layout Section
 Boosting
+\end_layout
+
+\begin_layout Standard
+Dans cette section, le boosting sera introduit et expliqué, et plus particulière
+ment AdaBoost et ses variations.
+ 
 \end_layout
 
 \begin_layout Subsection
@@ -6004,6 +6115,8 @@ Celui-ci consiste en un échantillonage aléatoire (équiprobable) avec remise.
 
  entrées sélectionnées de manière aléatoire parmi le set d'entraînement
  de base.
+ Une variante pondérée de cette technique d'échantillonnage est également
+ utilisée dans le boosting introduit dans le reste de cette section.
  
 \end_layout
 
@@ -6064,9 +6177,9 @@ fort
 \end_inset
 
 .
- Elles se basent souvent sur une règle de décision basée sur les réponses
- des différents prédicteurs, dans le cas d'une classification binaire cela
- peut par exemple être représenté par un vote majoritaire de ceux-ci.
+ Ils se basent souvent sur une règle de décision elle même basée sur les
+ réponses des différents prédicteurs, dans le cas d'une classification binaire
+ cela peut par exemple être représenté par un vote majoritaire de ceux-ci.
  Avec le boosting, les prédicteurs sont entrainés l'un après l'autre sur
  un sous-ensemble des données du jeu d'entraînement.
  Une fois le prédicteur entraîné, toutes les données du jeu d'entraînement
@@ -6083,7 +6196,7 @@ fort
 \begin_inset Quotes eld
 \end_inset
 
-Adaptative boosting
+Adaptative Boosting
 \begin_inset Quotes erd
 \end_inset
 
@@ -6125,7 +6238,8 @@ literal "false"
  qu'il tient compte de l'erreur de chaque apprenant faible afin de tenter
  de les corriger lors de la création des prochains apprenants faibles.
  Cet algorithme a gagné énormément de popularité au cours des années en
- remportant un grand nombre de compétitions dans le domaine de la classification.
+ remportant un grand nombre de compétitions (surtout dans le domaine de
+ la classification).
  Celui-ci a notamment montré sa supériorité par rapport au 
 \begin_inset Quotes eld
 \end_inset
@@ -6135,10 +6249,10 @@ bagging
 \end_inset
 
 , un autre méta-algorithme populaire.
- Il faut cependant noter que puisque AdaBoost, les résultats de chaque modèle
- influent la création du suivant, il est impossible d'entraîner les modèles
- de manière parallèle sur les différents coeurs d'un processeur ou d'un
- GPU (contrairement au bagging)
+ Il faut cependant noter que puisque dans AdaBoost, les résultats de chaque
+ modèle influent la création du suivant, il est impossible d'entraîner les
+ modèles de manière parallèle sur les différents coeurs d'un processeur
+ ou d'un GPU (contrairement au bagging)
 \begin_inset Foot
 status open
 
@@ -6162,7 +6276,7 @@ literal "false"
 
 \begin_layout Standard
 AdaBoost suppose qu'un apprenant de base (apprenant faible) peut être utilisé
- pour crée une hypothèse de base (hypothèse faible).
+ pour créer une hypothèse de base (hypothèse faible).
  Cette hypothèse faible ne doit pas être particulièrement complexe ou efficace
  sur le jeu de données, la seule supposition faite est qu'elle doit être
  légèrement plus efficace qu'une sélection aléatoire de la classe finale.
@@ -7064,8 +7178,16 @@ les hypothèses suffisantes les plus simples doivent être choisies
  pour être efficace mais assez simple pour pouvoir être généralisable.
  Ce principe a été largement vérifié dans la plupart des cas, mais il est
  intéressant de noter que le boosting peut constituer une exception à cette
- règle, comme nous allons le voir dans cette section.
- (boosting margin ref).
+ règle, comme il le sera expliqué dans cette section 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingMarginSchapire"
+literal "false"
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -7157,15 +7279,15 @@ Erreur naturelle
 \end_layout
 
 \begin_layout Standard
-En suivant cette méthode nous pouvons réduire l'erreur à chaque nouveau
- prédicteur ajouté.
+En suivant la méthode d'AdaBoost, nous pouvons réduire l'erreur à chaque
+ nouveau prédicteur ajouté.
  Cependant il serait naïf de penser que l'on peut utiliser cette méthode
  infiniment afin d'approcher une erreur nulle, d'abord à cause d'un possible
  overfit empêchant la généralisation sur le jeu de test, mais surtout car
  il est possible de démontrer qu'il existe une erreur minimum due aux bruits
  des données, qui est donc inévitable.
- Adaboost est donc très sensible au bruit des données comme il est possible
- de le démontrer 
+ Adaboost est donc très sensible au bruit des données comme il l'a été démontré.
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BoostingRegressionDrucker"
@@ -7324,7 +7446,15 @@ Ce qui laisse supposer l'existence d'une erreur de prédiction minimum due
 
 .
  Il ne sert donc à rien d'augmenter indéfiniment le nombre d'estimateurs
- utilisés pour AdaBoost.
+ utilisés pour AdaBoost 
+\begin_inset CommandInset citation
+LatexCommand citep
+key "BoostingRegressionDrucker"
+literal "false"
+
+\end_inset
+
+.
  
 \end_layout
 
@@ -7338,12 +7468,17 @@ Maintenant que les notions qui seront utilisée au cours de cette analyse
  Pour rappel, les données utilisées sont issues d'une assurance moto et
  la variable prédite est la fréquence des sinistres, qui correspond au nombre
  de sinistres déclarés divisé par le durée du contrat.
- Dans ce chapitre ...
- TODO
+ Dans ce chapitre la préparation des données sera revue et de nouveaux éléments
+ relatifs à celle-ci seront introduits.
+ Par la suite, des modèles seront construits pour chaque algorithme présenté,
+ et les résultats seront analysés.
+ Certaines modifications à l'algorithme original AdaBoost.R2 seront également
+ expliquées et mises en pratique.
+ 
 \end_layout
 
 \begin_layout Section
-Preprocessing (suite)
+Préparation des données (suite)
 \end_layout
 
 \begin_layout Standard
@@ -7352,21 +7487,11 @@ Lorsqu'un modèle est entraîné sur un jeu de données, celui-ci est ensuite
  L'exactitude de ces observations dépends de beaucoup de facteurs, mais
  de manière générale, un mauvais modèle renverra de mauvaises prédictions.
  Comme déjà évoqué au cours de ce mémoire, un modèle peut par exemple souffrir
- d'overfit ce qui se traduirait par de bonnes prédictions sur le jeu d'entraînem
-ent mais une mauvaise généralisation aux nouveaux cas.
+ de surentraînement ce qui se traduirait par de bonnes prédictions sur le
+ jeu d'entraînement mais une mauvaise généralisation aux nouveaux cas.
  Dans le cadre de l'assurance, les bases de données sont composées d'événements
  rares, ce qui rends les modèles entraînés sur celles-ci très sensible au
- sûrentraînement
-\begin_inset Foot
-status open
-
-\begin_layout Plain Layout
-Overfit.
-\end_layout
-
-\end_inset
-
-.
+ sûrentraînement.
  Ce problème peut être en partie résolu grâce à la validation croisée qui
  a été présentée plus tôt, cependant si celle-ci est réalisée sur le jeu
  de données au complet, la valeur renvoyée par la fonction de perte sera
@@ -7442,7 +7567,7 @@ Pour la bonne compréhension de la suite de cette analyse, un point doit
 
 \begin_layout Itemize
 Travailler avec la déviance moyenne : 
-\begin_inset Formula $\bar{D}=\frac{1}{n}\sum_{1}^{N}D(y,\hat{y})$
+\begin_inset Formula $\bar{D}=\frac{1}{n}\sum_{1}^{N}D(y_{n},\hat{y}_{n})$
 \end_inset
 
 
@@ -7450,11 +7575,11 @@ Travailler avec la déviance moyenne :
 
 \begin_layout Itemize
 Normaliser la déviance par rapport au nombre total de clients : 
-\begin_inset Formula $D=(D_{train}/(N_{train}))*(N_{train}+N_{test})$
+\begin_inset Formula $D=(D_{train}/N_{train})*(N_{train}+N_{test})$
 \end_inset
 
  ou 
-\begin_inset Formula $D=(D_{test}/(N_{test}))*(N_{train}+N_{test})$
+\begin_inset Formula $D=(D_{test}/N_{test})*(N_{train}+N_{test})$
 \end_inset
 
 .
@@ -7522,7 +7647,7 @@ Déviance tot.
 status open
 
 \begin_layout Plain Layout
-Les déviances sont calculées sur le jeu de test.
+Les déviances sont calculées sur le jeu de test séparé.
 \end_layout
 
 \end_inset
@@ -7860,8 +7985,9 @@ Les réseaux de neurones représentent un des aspects principaux de ce travail
 
 \begin_layout Standard
 Les modèles sont entraînés sur le jeu d'entraînement et les valeurs de la
- déviance données seront les valeurs de la déviance du jeu de test, normalisées
- sur le nombre total d'observations de la base de données complète.
+ déviance par validation croisée seront données ainsi que les valeurs de
+ la déviance du jeu de test séparé, normalisées sur le nombre total d'observatio
+ns de la base de données.
 \end_layout
 
 \begin_layout Standard
@@ -7881,9 +8007,10 @@ GPU : Nvidia 1060 6Go
 
 \begin_layout Standard
 Un dernier point à mentionner est le fait que la sélection des variables
- n'est pas nécessaire en travaillent avec les réseaux de neurones, car les
- poids associés aux variables peuvent tendre vers 0 si la variable qui leur
- est associée n'est pas utile dans la prédiction.
+ (comme celle réalisée pour le GLM) n'est pas nécessaire en travaillant
+ avec les réseaux de neurones, car les poids associés aux variables peuvent
+ tendre vers 0 si la variable qui leur est associée n'est pas utile dans
+ la prédiction.
 \end_layout
 
 \begin_layout Subsection
@@ -8004,14 +8131,14 @@ t grâce à la formule suivante :
 Dans ce travail, une approche différente mais qui devrait produire des résultats
  similaire sera utilisée.
  L'approche précédente utilisait une fonction de lien similaire à celle
- du GLM afin de restreindre le modèle, mais celle-ci se base sur la fonction
- d'activation de la couche de sortie.
+ du GLM afin de restreindre le modèle, mais celle utilisée dans ce travail
+ se base sur la fonction d'activation de la couche de sortie.
  En modifiant cette fonction d'activation par une fonction ayant pour domaine
  
 \begin_inset Formula $\mathbb{R^{+}}$
 \end_inset
 
-, il est certain que l'output du réseau suivra le domaine 
+, il est certain que la sortie du réseau suivra le domaine 
 \begin_inset Formula $\mathbb{R^{+}}$
 \end_inset
 
@@ -9245,7 +9372,7 @@ Comme évoqué précédemment, un réseau de neurones profond est simplement
  En suivant la même méthodologie que pour le réseau de neurones simple,
  un réseau de neurones profond sera construit dans cette sous-section.
  Pour la création de celui-ci, le nombre de couches cachées sera limitée
- à deux, ce qui est suffisant pour approximer la grande majorité des fonctions.
+ à deux, ce qui est suffisant pour approximer n'importe quelle fonction.
  
 \end_layout
 
@@ -10944,7 +11071,7 @@ Déviance Tot.
 status open
 
 \begin_layout Plain Layout
-Les déviances sont calculées sur le jeu de test.
+Les déviances sont calculées sur le jeu de test séparé.
 \end_layout
 
 \end_inset
@@ -11727,7 +11854,7 @@ Déviance Tot.
 status open
 
 \begin_layout Plain Layout
-Les déviances sont calculées sur le jeu de test.
+Les déviances sont calculées sur le jeu de test séparé.
 \end_layout
 
 \end_inset
@@ -12395,7 +12522,7 @@ Déviance Tot.
 status open
 
 \begin_layout Plain Layout
-Les déviances sont calculées sur le jeu de test.
+Les déviances sont calculées sur le jeu de test séparé.
 \end_layout
 
 \end_inset
@@ -12603,7 +12730,7 @@ Résultat de la troisième recherche des hyperparamètres (20 itérations ont
 Si le premier modèle obtient des résultats légèrement meilleurs que le meilleur
  modèle de l'itération précédente, la différence est trop petite pour justifier
  une telle augmentation dans le nombre de paramètres.
- En effet le nouveau modèle est constitué du double de neurones.
+ En effet le nouveau modèle de base est constitué du double de neurones.
  
 \end_layout
 
@@ -12632,15 +12759,15 @@ Dans la sous-section 3.4.4, AdaBoost.R2 est présenté.
 \begin_layout Standard
 Dans cette sous-section il sera tenté d'utiliser la déviance comme fonction
  de perte d'AdaBoost.R2.
- Afin de pouvoir utiliser celle-ci, il est nécessaire de modifier le calcul
- de celle-ci, afin que son domaine respecte bien les contraintes imposées.
+ Afin de pouvoir utiliser celle-ci, il est nécessaire de modifier sa formule,
+ afin que son domaine respecte bien les contraintes imposées.
  Si 
 \begin_inset Formula $max(D^{*})$
 \end_inset
 
  représente la valeur maximum prise par la déviance de toutes les observations,
  alors il suffit de diviser chaque valeur par ce maximum afin de normaliser
- les résultats afin qu'ils se situent tous dans le domaine 
+ les résultats et qu'ils se situent tous dans le domaine 
 \begin_inset Formula $\left[0,1\right]$
 \end_inset
 
@@ -13223,6 +13350,98 @@ ment des apprenants faibles qui se rapproche trop vite de 0.5.
  
 \end_layout
 
+\begin_layout Chapter
+Conclusion
+\end_layout
+
+\begin_layout Standard
+Pour rappel, le but principal de ce mémoire était à la fois de prouver que
+ l'essort actuel de l'apprentissage automatique pouvait être bénéfique dans
+ le cadre de l'estimation de la fréquence des sinistres pour les clients
+ d'une assurance, mais également de tester l'efficacité du boosting sur
+ ce problème, et en particulier tester l'application des réseaux de neurones
+ comme apprenant faible du méta-algorithme AdaBoost.
+ Afin de disposer d'un point de comparaison pertinent, un modèle linéaire
+ généralisé a été construit sur la base de donnée, ce qui permet de déterminer
+ si les modèles construits dans ce travail sont réellement efficaces.
+ 
+\end_layout
+
+\begin_layout Standard
+Un élément central de cette analyse est la recherche des hyperparamètres
+ adéquats.
+ Trouver de bonnes valeurs pour les domaines de ceux-ci a pris du temps,
+ mais a également amélioré les performances des algorithmes de manière considéra
+ble.
+\end_layout
+
+\begin_layout Standard
+Premièrement, un réseau de neurones simple a été entrainé, produisant de
+ biens meilleurs résultats que la référence.
+ Par la suite, un réseau de neurones profond a également été construit.
+ Celui-ci dispose également de meilleures performances que le modèle linéaire
+ généralisé, cependant le nombre important de paramètres induit par les
+ nombreux neurones des différentes couches le rendent sensible au surentraînemen
+t, et celui-ci ne parvient pas à battre le premier réseau de neurones construit.
+ 
+\end_layout
+
+\begin_layout Standard
+Enfin, AdaBoost.R2, variation d'AdaBoost modifiée pour fonctionner dans le
+ cas de la régression a été utilisé en combinaison avec des réseaux de neurones
+ afin de tenter de produire de meilleurs résultats que tout les modèles
+ précédents.
+ Les résultats de cette combinaison sont réellement encourageant, les modèles
+ entraîné avec le boosting associé aux réseaux de neurones produisent de
+ loin les meilleurs résultats de ce travail.
+ 
+\end_layout
+
+\begin_layout Standard
+Une normalisation de la déviance, fonction de perte utilisée pour l'optimisation
+ des paramètres des perceptrons multicouches, a ensuite été incorporée dans
+ l'algorithme d'AdaBoost en temps que fonction de perte.
+ Les résultats obtenus sont cependant décevants et parviennent à peine à
+ battre les résultats obtenus par le GLM.
+\end_layout
+
+\begin_layout Standard
+Au vu de ces résultats, il est clair que l'application de nouveaux algorithmes
+ à ce type de problème peut être bénéfique.
+ 
+\end_layout
+
+\begin_layout Standard
+Cependant, AdaBoost n'est pas la seule méthode de boosting existante (les
+ GBM
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Gradient Boosting Machine.
+\end_layout
+
+\end_inset
+
+ peuvent être cités comme exemple), et l'application de ces autres techniques
+ à la problématique de ce mémoire pourrait également produire de bons résultats,
+ voir de meilleurs résultats.
+ Si ce travail était surtout articulé autout de l'algorithme d'AdaBoost,
+ il serait donc tout de même pertinent de continuer la recherche sur les
+ autres algorithmes de boosting existants
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Autres versions d'AdaBoost, ou encore GBM.
+\end_layout
+
+\end_inset
+
+.
+ 
+\end_layout
+
 \begin_layout Standard
 \begin_inset CommandInset bibtex
 LatexCommand bibtex
@@ -13241,6 +13460,10 @@ Annexes
 
 \begin_layout Section*
 Annexe 1
+\end_layout
+
+\begin_layout Subsection*
+Pair-plot (sexe)
 \end_layout
 
 \begin_layout Standard
@@ -13288,6 +13511,10 @@ Pair-plot
 
 \begin_layout Section*
 Annexe 2
+\end_layout
+
+\begin_layout Subsection*
+Pair-plot (Zone)
 \end_layout
 
 \begin_layout Standard
@@ -13343,6 +13570,10 @@ Zone
 
 \begin_layout Section*
 Annexe 3
+\end_layout
+
+\begin_layout Subsection*
+Pair-plot (Class)
 \end_layout
 
 \begin_layout Standard
