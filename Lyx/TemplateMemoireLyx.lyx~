@@ -586,7 +586,7 @@ Un grand nombre de personnes m'ont été d'une grande aide au cours de la
  Mes remerciements vont également à Iasonas Topsis Giotis, mon maître de
  stage.
  Si ce travail n'a pas été réalisé dans le cadre du stage, j'ai néanmoins
- appris une quantité innombrable de choses aux côtés de cette personne,
+ appris une quantité innombrable de choses en travaillant avec cette personne,
  notamment en ce qui concerne la programmation en Python.
  Un grand merci également au professeur Johan Segers pour avoir accepté
  d'être lecteur de ce mémoire.
@@ -13423,7 +13423,23 @@ Gradient Boosting Machine.
 
 \end_inset
 
- peuvent être cités comme exemple)
+ peuvent être cités comme exemple), et l'application de ces autres techniques
+ à la problématique de ce mémoire pourrait également produire de bons résultats,
+ voir de meilleurs résultats.
+ Si ce travail était surtout articulé autout de l'algorithme d'AdaBoost,
+ il serait donc tout de même pertinent de continuer la recherche sur les
+ autres algorithmes de boosting existants
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Autres versions d'AdaBoost, ou encore GBM.
+\end_layout
+
+\end_inset
+
+.
+ 
 \end_layout
 
 \begin_layout Standard
