@@ -31,4 +31,4 @@ plot = sns.heatmap(corrmat, cmap = plt.get_cmap('jet'), annot=True).set_title('M
 plt.show()
 
 fig = plot.get_figure()
-fig.savefig(root + 'Lyx/Images/corrmat.png')
+fig.savefig(root + '/Lyx/Images/corrmat.png')

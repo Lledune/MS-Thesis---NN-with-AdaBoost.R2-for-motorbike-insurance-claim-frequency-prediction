@@ -69,6 +69,11 @@ refModel = glm(formula = NumberClaims ~ Gender.F + Zone.1 + Zone.2 + Zone.3 +
                offset = log(Duration))
 summary(refModel)
 
+#save
+pathsave = 'c:/users/kryst/desktop/poisson/poisson-neural-network-insurance-pricing/R/glm'
+model_rdspath = paste(pathsave, ".rds", sep = '')
+model_deppath = paste(pathsave, ".dep", sep = '')
+
 #preds
 predsTestRefined = predict(refModel, newdata = dataTest)
 predsTestRefined = exp(predsTestRefined)

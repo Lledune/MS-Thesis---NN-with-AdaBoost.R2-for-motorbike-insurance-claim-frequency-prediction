@@ -1,6 +1,10 @@
+#This file was used to test if a dataset with intervals for continuous variables would be beneficial
+#results wern't very good so it won't be used.
+
+
+
 import numpy as np 
 import pandas as pd
-
 import seaborn as sn
 import matplotlib.pyplot as plt
 

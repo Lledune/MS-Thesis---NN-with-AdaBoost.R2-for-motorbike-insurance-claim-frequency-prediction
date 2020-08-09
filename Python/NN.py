@@ -267,6 +267,10 @@ model_to_save.save(root + '/Python/Models/NNmodel')
 ######################################
 reconstructed_model = keras.models.load_model(root + '/Python/Models/NNmodel', custom_objects={'deviance' : deviance})
 
+preds = reconstructed_model.predict(dataTest)
+devTest = devFull(y1test, preds, d1test)
+devMean = devTest/len(y1test)
+devFull = devMean * 64501
 
 
 
