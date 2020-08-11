@@ -437,7 +437,7 @@ class AdaBoost():
         return
     
     #pathADB is the path to AdaBoost folder (same as used in save_model) 
-    def load_model(self, pathADB):
+    def load_model(self, pathADB, nModels = 10):
         """
         Loads model from given path
         """
@@ -463,7 +463,8 @@ class AdaBoost():
         #models
         estLoaded = []
         modelsPath = pathADB + '/models'
-        for i in range(0, len(self.estimatorsWeights)):
+        for i in range(0, nModels):
+            print(i)
             modelString = '/model' + str(i+1)
             modelFullString = modelsPath + modelString
             
@@ -1045,8 +1046,8 @@ def devFull(y, yhat, d):
 
 #GLM
 import statsmodels.api as sm 
-X = dataTrain[['Gender.F', 'Zone.1', 'Zone.3', 'Class.3', 'Class.4', 'Class.6', 'BonusClass.4', 'OwnersAge', 'VehiculeAge']].copy()
-Xtest = dataTest[['Gender.F', 'Zone.1', 'Zone.3', 'Class.3', 'Class.4', 'Class.6', 'BonusClass.4', 'OwnersAge', 'VehiculeAge']].copy()
+X = dataTrain
+Xtest = dataTest
 y = y1
 X = sm.add_constant(X)
 Xtest = sm.add_constant(Xtest)
@@ -1062,6 +1063,8 @@ impDNN = keras.models.load_model(root + '/Python/Models/DNNmodel', custom_object
 #ADB
 impADB = AdaBoost()
 impADB.load_model(root + '/Python/Models/AdaBoost')
+
+
 
 #####################################################
 # Mean deviance for classes
@@ -1273,13 +1276,13 @@ class0CF.append(np.mean(class0['cf']))
 x = np.arange(len(labels))
 width = 0.1
 fig, ax = plt.subplots()
-rects0 = ax.bar(x-3*width, class0CF, width, label = 'Class.0')
-rects1 = ax.bar(x-2*width, class1CF, width, label = 'Class.1')
-rects2 = ax.bar(x-1*width, class2CF, width, label = 'Class.2')
-rects3 = ax.bar(x-0*width, class3CF, width, label = 'Class.3')
-rects4 = ax.bar(x+1*width, class4CF, width, label = 'Class.4')
-rects5 = ax.bar(x+2*width, class5CF, width, label = 'Class.5')
-rects6 = ax.bar(x+3*width, class6CF, width, label = 'Class.6')
+rects0 = ax.bar(x-3*width, class0CF, width, label = 'Classe 0')
+rects1 = ax.bar(x-2*width, class1CF, width, label = 'Classe 1')
+rects2 = ax.bar(x-1*width, class2CF, width, label = 'Classe 2')
+rects3 = ax.bar(x-0*width, class3CF, width, label = 'Classe 3')
+rects4 = ax.bar(x+1*width, class4CF, width, label = 'Classe 4')
+rects5 = ax.bar(x+2*width, class5CF, width, label = 'Classe 5')
+rects6 = ax.bar(x+3*width, class6CF, width, label = 'Classe 6')
 
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
@@ -1360,13 +1363,13 @@ Bonusclass0CF.append(np.mean(Bonusclass0['cf']))
 x = np.arange(len(labels))
 width = 0.1
 fig, ax = plt.subplots()
-rects0 = ax.bar(x-3*width, Bonusclass0CF, width, label = 'BonusClass.0')
-rects1 = ax.bar(x-2*width, Bonusclass1CF, width, label = 'BonusClass.1')
-rects2 = ax.bar(x-1*width, Bonusclass2CF, width, label = 'BonusClass.2')
-rects3 = ax.bar(x-0*width, Bonusclass3CF, width, label = 'BonusClass.3')
-rects4 = ax.bar(x+1*width, Bonusclass4CF, width, label = 'BonusClass.4')
-rects5 = ax.bar(x+2*width, Bonusclass5CF, width, label = 'BonusClass.5')
-rects6 = ax.bar(x+3*width, Bonusclass6CF, width, label = 'BonusClass.6')
+rects0 = ax.bar(x-3*width, Bonusclass0CF, width, label = 'Classe de bonus 0')
+rects1 = ax.bar(x-2*width, Bonusclass1CF, width, label = 'Classe de bonus 1')
+rects2 = ax.bar(x-1*width, Bonusclass2CF, width, label = 'Classe de bonus 2')
+rects3 = ax.bar(x-0*width, Bonusclass3CF, width, label = 'Classe de bonus 3')
+rects4 = ax.bar(x+1*width, Bonusclass4CF, width, label = 'Classe de bonus 4')
+rects5 = ax.bar(x+2*width, Bonusclass5CF, width, label = 'Classe de bonus 5')
+rects6 = ax.bar(x+3*width, Bonusclass6CF, width, label = 'Classe de bonus 6')
 
 ax.set_xticks(x)
 ax.set_xticklabels(labels)
@@ -1476,9 +1479,706 @@ ax.set_title('Fréquence des sinistres moyenne par age')
 fig.tight_layout()
 plt.show()
 
+#make bar graph of claim frequ totals for each model and reality
+claimfreqs = []
+
+claimfreqs.append(np.sum(dataTestPred['predGLM']))
+claimfreqs.append(np.sum(dataTestPred['predNN']))
+claimfreqs.append(np.sum(dataTestPred['predDNN']))
+claimfreqs.append(np.sum(dataTestPred['predADB']))
+claimfreqs.append(np.sum(dataTestPred['cf']))
+
+x = np.arange(len(labels))
+width = 0.4
+fig, ax = plt.subplots()
+rects0 = ax.bar(x-0*width, claimfreqs, width, label = 'Fréquence des sinistres totale')
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+ax.legend()
+ax.set_ylabel('Fréquence des sinistres totale')
+ax.set_title('Fréquence des sinistres moyenne par modèle')
+fig.tight_layout()
+plt.show()
+
+#################################################################################################
+# Création d'assurés types
+#################################################################################################
+
+#Medianes ? 
+datattt = pd.read_csv(root + '/mcc.csv')
+np.median(datattt['VehiculeAge']) #12
+#Zone : 4, Bonus : 7, Class : 3
+#max of vehiculeage is 83 (for normalization, without the removed outlier)
+#max of driver age is 92
+
+#Homme, 20 ans, village
+h20 = np.array([[0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.2174,0.1445]])
+h20glm = [1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.2174,0.1445]
+
+#Homme, 50 ans, village
+h50 = np.array([[0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.6024,0.1445]])
+h50glm = [1,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.6024,0.1445]
+
+#Femme, 20 ans, village
+f20 = np.array([[1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.2174,0.1445]])
+f20glm = [1,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.2174,0.1445]
+
+#Femme, 50 ans, village
+f50 = np.array([[1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.6024,0.1445]])
+f50glm = [1,1,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.6024,0.1445]
+
+#Homme, 20 ans, grande ville
+h20V = np.array([[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.2174,0.1445]])
+h20glmV = [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.2174,0.1445]
+
+#Homme, 50 ans, grande ville
+h50V = np.array([[0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.6024,0.1445]])
+h50glmV = [1,0,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.6024,0.1445]
+
+#Femme, 20 ans, grande ville
+f20V = np.array([[1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.2174,0.1445]])
+f20glmV = [1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.2174,0.1445]
+
+#Femme, 50 ans, grande ville
+f50V = np.array([[1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.6024,0.1445]])
+f50glmV = [1,1,0,0,0,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0.6024,0.1445]
+
+##############
+# Prédictions village
+##############
+
+#Age man
+
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+predADBdev = []
+
+ranged = range(1,93)
+
+for i in range(1, 93): 
+    temp2 = h20.copy()
+    temp2glm = h20glm.copy()
+    
+    #change age
+    temp2[0][19] = i/92.
+    temp2glm[20] = i/92.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Homme, village')
+plt.xlabel('Age')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#Age woman
+
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,93)
+
+for i in range(1, 93): 
+    temp2 = f20.copy()
+    temp2glm = f20glm.copy()
+    
+    #change age
+    temp2[0][19] = i/92.
+    temp2glm[20] = i/92.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Femme, village')
+plt.xlabel('Age')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+##################
+#VehiculeAge
+##################
+
+#man, 20
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,84)
+
+for i in range(1, 84): 
+    temp2 = h20.copy()
+    temp2glm = h20glm.copy()
+    
+    #change age of vehicle
+    temp2[0][20] = i/83.
+    temp2glm[21] = i/83.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Homme, 20 ans, village')
+plt.xlabel('Age du véhicule')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
 
 
+#man, 50
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,84)
+
+for i in range(1, 84): 
+    temp2 = h50.copy()
+    temp2glm = h50glm.copy()
+    
+    #change age of vehicle
+    temp2[0][20] = i/83.
+    temp2glm[21] = i/83.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Homme, 50 ans, village')
+plt.xlabel('Age du véhicule')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
 
 
+#woman, 20
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,84)
+
+for i in range(1, 84): 
+    temp2 = f20.copy()
+    temp2glm = f20glm.copy()
+    
+    #change age of vehicle
+    temp2[0][20] = i/83.
+    temp2glm[21] = i/83.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Femme, 20 ans, village')
+plt.xlabel('Age du véhicule')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#woman, 50
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,84)
+
+for i in range(1, 84): 
+    temp2 = f50.copy()
+    temp2glm = f50glm.copy()
+    
+    #change age of vehicle
+    temp2[0][20] = i/83.
+    temp2glm[21] = i/83.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Femme, 50 ans, village')
+plt.xlabel('Age du véhicule')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+
+##############
+# Prédictions grande ville
+##############
+
+#Age man
+
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,93)
+
+for i in range(1, 93): 
+    temp2 = h20V.copy()
+    temp2glm = h20glmV.copy()
+    
+    #change age
+    temp2[0][19] = i/92.
+    temp2glm[20] = i/92.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Homme, grande ville')
+plt.xlabel('Age')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#Age woman
+
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,93)
+
+for i in range(1, 93): 
+    temp2 = f20V.copy()
+    temp2glm = f20glmV.copy()
+    
+    #change age
+    temp2[0][19] = i/92.
+    temp2glm[20] = i/92.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Femme, grande ville')
+plt.xlabel('Age')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+##################
+#VehiculeAge
+##################
+
+#man, 20
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,84)
+
+for i in range(1, 84): 
+    temp2 = h20V.copy()
+    temp2glm = h20glmV.copy()
+    
+    #change age of vehicle
+    temp2[0][20] = i/83.
+    temp2glm[21] = i/83.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Homme, 20 ans, grande ville')
+plt.xlabel('Age du véhicule')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+
+#man, 50
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,84)
+
+for i in range(1, 84): 
+    temp2 = h50V.copy()
+    temp2glm = h50glmV.copy()
+    
+    #change age of vehicle
+    temp2[0][20] = i/83.
+    temp2glm[21] = i/83.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Homme, 50 ans, grande ville')
+plt.xlabel('Age du véhicule')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+
+#woman, 20
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,84)
+
+for i in range(1, 84): 
+    temp2 = f20V.copy()
+    temp2glm = f20glmV.copy()
+    
+    #change age of vehicle
+    temp2[0][20] = i/83.
+    temp2glm[21] = i/83.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Femme, 20 ans, grande ville')
+plt.xlabel('Age du véhicule')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#woman, 50
+temp = [] #storing the data that will be used 
+predGLM = []
+predNN = []
+predDNN = []
+predADB = []
+
+ranged = range(1,84)
+
+for i in range(1, 84): 
+    temp2 = f50V.copy()
+    temp2glm = f50glmV.copy()
+    
+    #change age of vehicle
+    temp2[0][20] = i/83.
+    temp2glm[21] = i/83.
+
+    temp.append(temp2)
+    predGLM.append(impGLM.predict(temp2glm)[0])
+    predNN.append(impNN.predict(temp2)[0])
+    predDNN.append(impDNN.predict(temp2)[0])
+    predADB.append(impADB.predict(temp2)[0])
+
+plt.plot(ranged, predGLM, label = 'GLM')
+plt.plot(ranged, predNN, label = 'NN')
+plt.plot(ranged, predDNN, label = 'DNN')
+plt.plot(ranged, predADB, label = 'ADB')
+plt.title('Femme, 50 ans, grande ville')
+plt.xlabel('Age du véhicule')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#######################################################
+# Analyse de la déviance en fonction de la prédiction (graphe montrant l'évolution de la déviance pour y = 0 et y = 1)
+#######################################################
+
+
+###############################
+# Plotting estimator errors
+###############################
+
+plt.plot(range(1,len(impADB.estimatorsErrors)+1), impADB.estimatorsErrors)
+plt.title('Erreurs des prédicteurs ADB')
+plt.show()
+plt.close()
+
+
+#different learning rates on client examples
+#create multiple adaboost 
+lrsad = [0.01, 0.1, 0.5, 1]
+adbstore = []
+#create static params
+staticparamsListLR = []
+
+for i in range(0, len(lrsad)):
+    temp = {
+            'n_est' : [500],
+            'loss' : ['exponential'],
+            'learning_rate' : [lrsad[i]],
+            'kerasEpochs' : [300],
+            'kerasBatchSize' : [51600],
+            'dropout' : [0.1],
+            'nn1' : [12],
+            'keraslr' : [0.15],
+        }
+    staticparamsListLR.append(temp)
+
+
+for i in range(0, len(lrsad)):
+    print(i)
+    params = staticparamsListLR[i]
+    estimator = AdaBoost(n_est=params['n_est'][0], loss = params['loss'][0], learning_rate=params['learning_rate'][0], kerasEpochs=params['kerasEpochs'][0],
+                         kerasBatchSize=params['kerasBatchSize'][0], dropout = params['dropout'][0], nn1=params['nn1'][0], keraslr=params['keraslr'][0], 
+                         input_dim=21)
+    
+    initw = estimator.initWeights(dataTrain)
+    estimator.fit(dataTrain, feed, initw)
+    adbstore.append(estimator)    
+adb1 = adbstore[0]
+adb2 = adbstore[1]
+adb3 = adbstore[2]
+adb4 = adbstore[3]
+
+#Homme, village
+
+temp = [] #storing the data that will be used 
+predadb1 = []
+predadb2 = []
+predadb3 = []
+predadb4 = []
+
+ranged = range(1,93)
+
+for i in range(1, 93): 
+    temp2 = h20.copy()
+    print(i)
+    
+    #change age
+    temp2[0][19] = i/92.
+
+    temp.append(temp2)
+    predadb1.append(adb1.predict(temp2)[0])
+    predadb2.append(adb2.predict(temp2)[0])
+    predadb3.append(adb3.predict(temp2)[0])
+    predadb4.append(adb4.predict(temp2)[0])
+
+plt.plot(ranged, predadb1, label = 'LR = 0.01')
+plt.plot(ranged, predadb2, label = 'LR = 0.1')
+plt.plot(ranged, predadb3, label = 'LR = 0.5')
+plt.plot(ranged, predadb4, label = 'LR = 1')
+plt.title('Homme, village')
+plt.xlabel('Age')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#Homme, ville
+
+temp = [] #storing the data that will be used 
+predadb1 = []
+predadb2 = []
+predadb3 = []
+predadb4 = []
+
+ranged = range(1,93)
+
+for i in range(1, 93): 
+    temp2 = h20V.copy()
+    print(i)
+    
+    #change age
+    temp2[0][19] = i/92.
+
+    temp.append(temp2)
+    predadb1.append(adb1.predict(temp2)[0])
+    predadb2.append(adb2.predict(temp2)[0])
+    predadb3.append(adb3.predict(temp2)[0])
+    predadb4.append(adb4.predict(temp2)[0])
+
+plt.plot(ranged, predadb1, label = 'LR = 0.01')
+plt.plot(ranged, predadb2, label = 'LR = 0.1')
+plt.plot(ranged, predadb3, label = 'LR = 0.5')
+plt.plot(ranged, predadb4, label = 'LR = 1')
+plt.title('Homme, ville')
+plt.xlabel('Age')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#femme, village
+
+temp = [] #storing the data that will be used 
+predadb1 = []
+predadb2 = []
+predadb3 = []
+predadb4 = []
+
+ranged = range(1,93)
+
+for i in range(1, 93): 
+    temp2 = f20.copy()
+    print(i)
+    
+    #change age
+    temp2[0][19] = i/92.
+
+    temp.append(temp2)
+    predadb1.append(adb1.predict(temp2)[0])
+    predadb2.append(adb2.predict(temp2)[0])
+    predadb3.append(adb3.predict(temp2)[0])
+    predadb4.append(adb4.predict(temp2)[0])
+
+plt.plot(ranged, predadb1, label = 'LR = 0.01')
+plt.plot(ranged, predadb2, label = 'LR = 0.1')
+plt.plot(ranged, predadb3, label = 'LR = 0.5')
+plt.plot(ranged, predadb4, label = 'LR = 1')
+plt.title('Femme, village')
+plt.xlabel('Age')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#femme, ville
+temp = [] #storing the data that will be used 
+predadb1 = []
+predadb2 = []
+predadb3 = []
+predadb4 = []
+
+ranged = range(1,93)
+
+for i in range(1, 93): 
+    temp2 = f20V.copy()
+    print(i)
+    
+    #change age
+    temp2[0][19] = i/92.
+
+    temp.append(temp2)
+    predadb1.append(adb1.predict(temp2)[0])
+    predadb2.append(adb2.predict(temp2)[0])
+    predadb3.append(adb3.predict(temp2)[0])
+    predadb4.append(adb4.predict(temp2)[0])
+
+plt.plot(ranged, predadb1, label = 'LR = 0.01')
+plt.plot(ranged, predadb2, label = 'LR = 0.1')
+plt.plot(ranged, predadb3, label = 'LR = 0.5')
+plt.plot(ranged, predadb4, label = 'LR = 1')
+plt.title('Femme, ville')
+plt.xlabel('Age')
+plt.ylabel('Fréquence des sinistres prédite')
+plt.legend()
+plt.tight_layout()
+plt.show()
+plt.close()
+
+#dev ada
 
 

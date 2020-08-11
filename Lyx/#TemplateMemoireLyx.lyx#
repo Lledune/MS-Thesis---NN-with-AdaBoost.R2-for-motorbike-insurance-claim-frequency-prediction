@@ -13945,7 +13945,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-
+Fréquence des sinistres prédite pour les clients types.
 \end_layout
 
 \end_inset
@@ -13959,6 +13959,10 @@ status open
 
 \end_inset
 
+
+\end_layout
+
+\begin_layout Itemize
 
 \end_layout
 

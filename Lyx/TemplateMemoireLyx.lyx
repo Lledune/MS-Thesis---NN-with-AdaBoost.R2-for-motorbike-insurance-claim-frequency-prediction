@@ -10501,6 +10501,99 @@ Ces modifications ont pour effet de diminuer l'importance des modèles et
  de modèles seront créés avant d'arriver à une erreur moyenne de 0.5.
 \end_layout
 
+\begin_layout Standard
+Pour comprendre comment ce nouveau paramètre influe sur l'apprentissage,
+ des illustrations sont présentées ci-dessous.
+ Les modèles illustrés ici ont été construits pour la démonstration et ne
+ représentent pas les courbes des algorithmes entraînés plus loin dans cette
+ sous-section.
+ Les paramètres utilisés sont cependant très similaires à ceux qui seront
+ construits plus tard, mis à part le taux d'apprentissage qui est étudié
+ ici.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/Comparaison LR/importance.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/Comparaison LR/erreurmoyenne.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Observations des paramètres pour différentes valeurs de taux d'apprentissage
+ pour les 20 premières itérations.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Le premier graphique montre l'évolution de l'importance des apprenants faibles
+ au fil des itérations.
+ L'influence du taux d'apprentissage est clairement visible ici, plus celui-ci
+ se rapproche de 0 et plus l'importance sera faible dès le départ.
+ La valeur de ce paramètre permet donc un grand contrôle sur l'entraînement
+ des apprenants faibles.
+ Les valeurs prises par la version originale semblent quant à elles commencer
+ à des valeurs plus basses et monter progressivement.
+ 
+\end_layout
+
+\begin_layout Itemize
+Le deuxième graphique montre l'évolution de l'erreur moyenne sur les 20
+ première itérations.
+ Puisque l'algorithme s'arrête lorsque cette erreur dépasse 0.5, il est donc
+ normal que certaines des courbes s'arrêtent avant les 20 itérations (une
+ fois qu'elle ont dépassé la valeur maximale permise).
+ C'est notamment le cas pour la version originale d'AdaBoost.R2 mais également
+ pour la version modifiée avec un taux d'apprentissage de 1.
+ On s'apperçoit d'abord que ces deux courbes sont assez similaires, surtout
+ pour les 5 premières itérations.
+ Un taux d'apprentissage de 1 permet donc de se rapprocher des résultats
+ qui seraient obtenus avec la version originale d'AdaBoost.
+ Un autre fait intéressant peut être observé en regardans la courbe pour
+ le taux d'apprentissage de 0.1.
+ En effet, celle-ci évolue bien plus lentement que les autres.
+ En fait, plus le taux d'apprentissage est bas et plus cette augmentation
+ va être lente.
+ Le taux d'apprentissage permet donc en effet un grand contrôle sur le nombre
+ d'apprenants faibles qui seront créés.
+ 
+\end_layout
+
 \begin_layout Subsubsection
 Domaine des hyperparamètres et résultats
 \end_layout
@@ -13350,6 +13443,580 @@ ment des apprenants faibles qui se rapproche trop vite de 0.5.
  
 \end_layout
 
+\begin_layout Subsection
+Analyses complémentaires
+\end_layout
+
+\begin_layout Standard
+Maintenant que tous les modèles ont été entraînés et choisis, leurs résultats
+ vont être analysés de plus près.
+ Dans cette partie seront présentés les graphiques résultant de l'analyse
+ des prédicteurs.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Prédiction des fréquences de sinistres par classe
+\end_layout
+
+\begin_layout Standard
+Afin de pouvoir tarifer correctement les clients, il est intéressant de
+ regarder la fréquence moyenne des sinistres prédite par groupe de clients.
+ En effet, s'il est difficile de prédire la fréquence exacte pour un client
+ donné, la prédiction pour un groupe peut parfois être meilleure.
+ Note : Les algorithmes sont entraînés sur le jeu d'entraînement et les
+ estimations sont faites sur le jeu de test.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/cf-classes/cf-sexe.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/cf-classes/cf-age.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres par âge et par sexe.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Les graphiques ci-dessus nous apprennent des choses intéressantes : 
+\end_layout
+
+\begin_layout Itemize
+Sexe : 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Le constat est clair, tout les modèles basés sur les réseaux de neurones,
+ y compris AdaBoost.R2, sous-estime la fréquence moyenne.
+ Le modèle GLM, bien que moins performant en terme de déviance, s'en rapproche
+ beaucoup plus.
+ 
+\end_layout
+
+\begin_layout Itemize
+La différence entre homme et femme (en termes de proportion) également être
+ mieux représentée par le GLM.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+Age : 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+Tous les modèles semblent opter pour une fonction dégressive en fonction
+ de l'âge, qui est légèrement différente de la réalité (du moins pour le
+ jeu de données utilisé ici).
+ 
+\end_layout
+
+\begin_layout Itemize
+Les modèles basés sur les RNA
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Réseaux de neurones artificiels.
+\end_layout
+
+\end_inset
+
+ semblent grandement sous-estimer la fréquence des sinistres moyenne pour
+ les clients âgés de 16 à 24 ans.
+ 
+\end_layout
+
+\begin_layout Itemize
+Le GLM surrestime légèrement la moyenne du groupe 16-24 et sous-estime ceux
+ des groupes 45-54 et 55-64.
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Les résultats sont assez inattendus, le modèle GLM semble être le seul à
+ être à même d'estimer assez bien les moyennes par groupes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/cf-classes/cf-classe.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/cf-classes/cf-zone.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres moyenne par classe de véhicule et par région.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+Les mêmes conclusions que pour les graphiques précédents peuvent être tirées.
+ Dans l'annexe 4 se trouve un graphique similaire pour la fréquence moyenne
+ prédite de tout le jeu d'entraînement.
+ 
+\end_layout
+
+\begin_layout Subsubsection
+Client type 
+\end_layout
+
+\begin_layout Standard
+Afin d'analyser la manière dont les modèles se comportent, il est possible
+ de créer des profils fictifs de clients 
+\begin_inset Quotes eld
+\end_inset
+
+typiques
+\begin_inset Quotes erd
+\end_inset
+
+ et d'observer la manière dont les prédictions varie selon certains critères.
+ Ceci est particulièrement intéressant pour les valeurs continues.
+ 
+\end_layout
+
+\begin_layout Standard
+Au total, 8 profils seront créés et analysés : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Tabular
+<lyxtabular version="3" rows="9" columns="1">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Profil type
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Homme, 20 ans, Village 
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Homme, 20 ans, Banlieue
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Homme, 50 ans, Village
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Homme, 50 ans, Banlieue
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Femme, 20 ans, Village
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Femme, 20 ans, Banlieue
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Femme, 50 ans, Village
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Femme, 50 ans, Banlieue
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Profils types utilisés.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Subsubsection
+Effet du taux d'apprentissage sur les clients types
+\end_layout
+
+\begin_layout Standard
+La fonction de décision utilisée dans AdaBoost.R2, pour rappel, s'écrit comme
+ ceci : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Formula 
+\[
+h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}\sum_{t}log\left(\frac{1}{\beta_{t}}\right)\right\} 
+\]
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Comme décrit dans l'équation, si des dizaines voir des centaines de prédicteurs
+ peuvent être entraînés, c'est au final la prédiction d'un seul des apprenants
+ faibles qui sera choisi et renvoyée comme réponse finale.
+ Cette propriété, couplée au contrôle accordé par le taux d'apprentissage
+ sur le nombre d'estimateurs qui seront construit dans un modèle, implique
+ que la fonction finale peut être vue comme une combinaisons des différentes
+ fonctions des apprenants faibles.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/learning rate/homme-village.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/learning rate/homme-ville.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres prédites par âge pour un homme habitant dans un
+ village et en banlieue.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Sur ces graphiques, il est possible d'observer l'influence du taux d'apprentissa
+ge introduit plus tôt sur la déviance prédite des clients types en fonction
+ de l'âge.
+ Plusieurs fait peuvent être notés : 
+\end_layout
+
+\begin_layout Itemize
+Plus le taux d'apprentissage est élevé, plus la valeur vers laquelle la
+ valeur prédite converte est élevée.
+ 
+\end_layout
+
+\begin_layout Itemize
+Plus le taux d'apprentissage est élevé, et plus la fonction de réponse va
+ ressembler à une aggrégation des fonctions de réponses des apprenants faibles.
+ 
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+La courbe représentant le taux d'apprentissage de 1 semble donc naturellement
+ assez lisse, car moins de modèles sont utilisés pour la prédiction.
+ 
+\end_layout
+
+\begin_layout Itemize
+La courbe représentant le taux d'apprentissage de 0.01 semble par contre
+ être beaucoup moins nette, ce qui est clairement du au nombre bien plus
+ grand d'apprenants faibles entraînés.
+ 
+\end_layout
+
+\end_deeper
+\begin_layout Standard
+Des graphiques similaires représentant les prédictions pour les femmes sont
+ disponibles dans l'annexe 5.
+\end_layout
+
+\begin_layout Subsubsection
+Prédictions des modèles entraînés pour les clients types
+\end_layout
+
+\begin_layout Standard
+Dans cette sous-section seront présentés les résultats des prédictions des
+ modèles entraînés pour les différents clients types.
+ Ces représentations peuvent être intéressantes pour comprendre comment
+ les modèles réagissent par rapport à une variable, tout choses égales par
+ ailleurs.
+ Premièrement, les graphiques en fonction de l'âge du conducteur sont présentés
+ : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/cf-models/femme-village-age.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/cf-models/homme-village-age.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres prédite pour les clients types.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+En regardant ces graphiques, il est facile de remarquer que les modèles
+ basés sur les RNA semblent estimer une fréquence des sinistres bien plus
+ basses que les prédictions du GLM dans la quasi majorité des cas.
+ Ce résultat peut en partie expliquer pourquoi les fréquences de sinistres
+ par âge ont été sous-estimées dans la partie 4.4.7.1.
+\end_layout
+
+\begin_layout Itemize
+La fréquence de sinistre prédite semble également être plus faible pour
+ les femmes, et ce particulièrement lorsque les clients sont jeunes.
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/cf-models/homme-20-village.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/cf-models/homme-50-village.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres prédite pour les clients types.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \begin_layout Chapter
 Conclusion
 \end_layout
@@ -13611,6 +14278,107 @@ Pair-plot
 
 \end_inset
 
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Annexe 4
+\end_layout
+
+\begin_layout Subsection*
+Fréquence moyenne des sinistres
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/cf-classes/cf-mean.png
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence moyenne des sinistres par algorithme utilisé.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Annexe 5
+\end_layout
+
+\begin_layout Subsection*
+Effet du taux d'apprentissage sur les clients types (femmes)
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/learning rate/femme-village.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/learning rate/femme-ville.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres prédites par âge pour une femme habitant dans un
+ village et en banlieue.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
 
 \end_layout
 
