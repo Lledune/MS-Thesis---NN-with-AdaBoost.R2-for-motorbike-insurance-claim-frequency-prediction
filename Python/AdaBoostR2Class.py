@@ -1998,7 +1998,7 @@ plt.close()
 # Plotting estimator errors
 ###############################
 
-plt.plot(range(1,len(impADB.estimatorsErrors)+1), impADB.estimatorsErrors)
+plt.plot(range(1,len(impADB.estimatorsErrors)+1), impADB.estimatorsErrors, linestyle = 'dashed', alpha = 0.7)
 plt.title('Erreurs des prédicteurs ADB')
 plt.show()
 plt.close()
@@ -2180,5 +2180,102 @@ plt.show()
 plt.close()
 
 #dev ada
+adb = AdaBoost(20,'deviance', 1, 200, 51600, 0.1, 15, 0.3, 21)
+initWeights = adb.initWeights(dataTrain)
+adb.fit(dataTrain, feed, initWeights)
+
+
+estErrors = adb.estimatorsErrors
+ranged = range(0, len(estErrors))
+plt.plot(ranged[0:19], estErrors[0:19], alpha = 0.7, linestyle = 'dashed')
+plt.title("Évolution de l'erreur moyenne (AdaBoost.R2 déviance)")
+plt.xlabel('Itérations')
+plt.ylabel('Erreur moyenne')
+
+
+#Comparaison claim freq certains clients
+#création jeu de données (4 clients)
+glmtempdata = dataTest.copy()
+glmtempdata = sm.add_constant(glmtempdata)
+
+c1data = pd.DataFrame(dataTest.iloc[57]).T #cf 0.5, homme, villes du nord de la suède, 49 ans
+c2data = pd.DataFrame(dataTest.iloc[233]).T #cf 0.7, homme, ville moyenne, 29 ans
+c3data = pd.DataFrame(dataTest.iloc[254]).T #femme, campagne du nord, 43 ans
+c4data = pd.DataFrame(dataTest.iloc[300]).T #homme, ville moyenne, 27 ans
+
+c1dataglm = np.array(glmtempdata.iloc[57]) #cf 0.5
+c2dataglm = np.array(glmtempdata.iloc[233]) #cf 0.7
+c3dataglm = np.array(glmtempdata.iloc[254])
+c4dataglm = np.array(glmtempdata.iloc[300])
+
+c1y = y1test.iloc[57]
+c2y = y1test.iloc[233]
+c3y = y1test.iloc[250]
+c4y = y1test.iloc[300]
+
+#predictions
+glmpreds = []
+nnpreds = []
+dnnpreds = []
+adbpreds = []
+reality = []
+
+reality.append(c1y[0])
+reality.append(c2y[0])
+reality.append(c3y[0])
+reality.append(c4y[0])
+
+glmpreds.append(impGLM.predict(c1dataglm)[0])
+glmpreds.append(impGLM.predict(c2dataglm)[0])
+glmpreds.append(impGLM.predict(c3dataglm)[0])
+glmpreds.append(impGLM.predict(c4dataglm)[0])
+
+nnpreds.append(impNN.predict(c1data)[0][0])
+nnpreds.append(impNN.predict(c2data)[0][0])
+nnpreds.append(impNN.predict(c3data)[0][0])
+nnpreds.append(impNN.predict(c4data)[0][0])
+
+dnnpreds.append(impDNN.predict(c1data)[0][0])
+dnnpreds.append(impDNN.predict(c2data)[0][0])
+dnnpreds.append(impDNN.predict(c3data)[0][0])
+dnnpreds.append(impDNN.predict(c4data)[0][0])
+
+adbpreds.append(impADB.predict(c1data)[0])
+adbpreds.append(impADB.predict(c2data)[0])
+adbpreds.append(impADB.predict(c3data)[0])
+adbpreds.append(impADB.predict(c4data)[0])
+
+
+labels = ["H, 49 ans", "H, 29 ans", "F, 43 ans", "H, 27 ans"]
+
+
+x = np.arange(len(labels))
+
+width = 0.1
+fig, ax = plt.subplots()
+rects0 = ax.bar(x-2*width, glmpreds, width, label = 'GLM')
+rects2 = ax.bar(x-1*width, nnpreds, width, label = 'NN')
+rects3 = ax.bar(x-0*width, dnnpreds, width, label = 'DNN')
+rects4 = ax.bar(x+1*width, adbpreds, width, label = 'ADB')
+rects4 = ax.bar(x+2*width, reality, width, label = 'Reality')
+
+ax.set_xticks(x)
+ax.set_xticklabels(labels)
+ax.legend()
+ax.set_ylabel('Fréquence des sinistres prédite')
+ax.set_title('Fréquence des sinistres prédites vs valeurs réelles')
+fig.tight_layout()
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
 
 

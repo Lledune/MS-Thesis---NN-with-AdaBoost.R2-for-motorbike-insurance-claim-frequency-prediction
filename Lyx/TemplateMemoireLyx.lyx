@@ -2204,7 +2204,7 @@ L'exposition est égale à la durée du contrat dans le cadre de ce travail.
 \end_inset
 
  
-\begin_inset Formula $v$
+\begin_inset Formula $\upsilon$
 \end_inset
 
 .
@@ -2213,7 +2213,7 @@ L'exposition est égale à la durée du contrat dans le cadre de ce travail.
 \begin_layout Standard
 \begin_inset Formula 
 \[
-Y=X/v
+Y=X/\upsilon
 \]
 
 \end_inset
@@ -2320,7 +2320,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \[
-f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_{i}}\right\} c(y,\phi,v_{i})
+f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/\upsilon_{i}}\right\} c(y,\phi,\upsilon_{i})
 \]
 
 \end_inset
@@ -3018,7 +3018,7 @@ En utilisant la fonction de distribution des ED vue précédemment, le résultat
 \begin_layout Standard
 \begin_inset Formula 
 \[
-D^{*}(y_{i},\hat{y_{i})}=\frac{2}{\phi}v_{i}(y_{i}h(y_{i}))-a(h(y_{i}))-y_{i}h(\hat{y_{i}})+a(h(\hat{y_{i}})))
+D^{*}(y_{i},\hat{y_{i})}=\frac{2}{\phi}\upsilon_{i}(y_{i}h(y_{i}))-a(h(y_{i}))-y_{i}h(\hat{y_{i}})+a(h(\hat{y_{i}})))
 \]
 
 \end_inset
@@ -3063,7 +3063,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \[
-D(y_{i},\hat{y_{i}})=2v_{i}(y_{i}ln(y_{i})-y_{i}ln(\hat{y_{i}})-y_{i}+\hat{y_{i}}),\:\;\forall y_{i}>0
+D(y_{i},\hat{y_{i}})=2\upsilon_{i}(y_{i}ln(y_{i})-y_{i}ln(\hat{y_{i}})-y_{i}+\hat{y_{i}}),\:\;\forall y_{i}>0
 \]
 
 \end_inset
@@ -3087,7 +3087,7 @@ La base de donnée utilisée portant sur des événements rares, beaucoup de
 \begin_layout Standard
 \begin_inset Formula 
 \[
-D(y_{i},\hat{y}_{i})=2v_{i}\hat{y_{i},}\;\:\forall y_{i}=0
+D(y_{i},\hat{y}_{i})=2\upsilon_{i}\hat{y_{i},}\;\:\forall y_{i}=0
 \]
 
 \end_inset
@@ -3710,7 +3710,7 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \[
-f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/v_{i}}\right\} c(y,\phi,v_{i})
+f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/\upsilon_{i}}\right\} c(y,\phi,\upsilon_{i})
 \]
 
 \end_inset
@@ -3790,7 +3790,7 @@ literal "false"
 \end_inset
 
  représente le nombre de plaintes dans une classe de durée 
-\begin_inset Formula $\omega_{i}$
+\begin_inset Formula $\upsilon_{i}$
 \end_inset
 
  et en prenant 
@@ -3798,7 +3798,7 @@ literal "false"
 \end_inset
 
  comme l'espérence lorsque 
-\begin_inset Formula $\omega_{i}=1$
+\begin_inset Formula $\upsilon_{i}=1$
 \end_inset
 
 .
@@ -3812,13 +3812,13 @@ literal "false"
 \begin_layout Standard
 \begin_inset Formula 
 \[
-f_{X_{i}}(x_{i};\mu_{i})=e^{-\omega_{i}\mu_{i}}\frac{(\omega_{i}\mu_{i})^{x_{i}}}{x_{i}!},\;x_{i}=0,1,2,...
+f_{X_{i}}(x_{i};\mu_{i})=e^{-\upsilon_{i}\mu_{i}}\frac{(\upsilon_{i}\mu_{i})^{x_{i}}}{x_{i}!},\;x_{i}=0,1,2,...
 \]
 
 \end_inset
 
  La distribution du ratio 
-\begin_inset Formula $Y_{i}=X_{i}/w_{i}$
+\begin_inset Formula $Y_{i}=X_{i}/\upsilon_{i}$
 \end_inset
 
  est aussi étudiée et tombe également sur une distribution de Poisson 
@@ -3854,7 +3854,7 @@ relative
 \begin_layout Standard
 \begin_inset Formula 
 \[
-f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\omega_{i}y_{i})
+f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\upsilon_{i}y_{i})
 \]
 
 \end_inset
@@ -3865,7 +3865,7 @@ f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\omega_{i}y_{i})
 \begin_layout Standard
 \begin_inset Formula 
 \[
-=exp\{w_{i}(y_{i}\theta_{i}-e^{\theta_{i}})+c(y_{i},\omega_{i})\}
+=exp\{\upsilon_{i}(y_{i}\theta_{i}-e^{\theta_{i}})+c(y_{i},\upsilon_{i})\}
 \]
 
 \end_inset
@@ -3911,7 +3911,7 @@ Dans ce travail, il a jusqu'ici été considéré que les données étaient expr
 \end_inset
 
  contient également la durée 
-\begin_inset Formula $\omega_{i}$
+\begin_inset Formula $\upsilon_{i}$
 \end_inset
 
  ainsi que les facteurs d'évaluations correspondants.
@@ -4790,7 +4790,7 @@ Dans le cadre des GLMs, les paramètres
 \begin_layout Standard
 \begin_inset Formula 
 \[
-l(\theta;\phi;y)=\frac{1}{\phi}\sum_{i}\omega_{i}(y_{i}\theta_{i}-b(\theta_{i}))+\sum_{i}c(y_{i},\phi,\omega_{i})
+l(\theta;\phi;y)=\frac{1}{\phi}\sum_{i}\upsilon_{i}(y_{i}\theta_{i}-b(\theta_{i}))+\sum_{i}c(y_{i},\phi,\upsilon_{i})
 \]
 
 \end_inset
@@ -4821,7 +4821,7 @@ En réécrivant l'équation en fonction de
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\frac{\partial l}{\partial\beta_{k}}=\frac{1}{\phi}\omega_{i}\frac{y_{i}-\mu_{i}}{v(\mu_{i})g'(\mu_{i})}x_{ij}
+\frac{\partial l}{\partial\beta_{k}}=\frac{1}{\phi}\upsilon_{i}\frac{y_{i}-\mu_{i}}{v(\mu_{i})g'(\mu_{i})}x_{ij}
 \]
 
 \end_inset
@@ -4855,7 +4855,7 @@ Il suffit maintenant de prendre ces
 \begin_layout Standard
 \begin_inset Formula 
 \[
-\sum_{i}\omega_{i}\frac{y_{i}-\mu_{i}}{v(\mu_{i})g'(\mu_{i})}x_{ij}=0,\qquad i=1,...,r
+\sum_{i}\upsilon_{i}\frac{y_{i}-\mu_{i}}{v(\mu_{i})g'(\mu_{i})}x_{ij}=0,\qquad i=1,...,r
 \]
 
 \end_inset
@@ -7542,7 +7542,9 @@ Afin de contourner ce problème, une variable temporaire prenant pour valeur
  Cette variable est donc très similaire à la fréquence des sinistres avec
  l'exception qu'elle ne tient pas compte du nombre de sinistres.
  L'échantillonnage est ensuite réalisé en suivant échantillonnage stratifié
- sur cette variable.
+ sur cette variable (un échantillonnage respectant les proportions de cette
+ variable, si 1% des clients déclarent un sinistres dans la base de donnée,
+ alors 1% des clients de la base test exactement aura déclaré un accident).
  De cette manière, nous sommes assurés que les deux parties de la base de
  donnée contiennent la même proportion de clients ayant déclaré un accident.
  
@@ -8276,7 +8278,7 @@ Dans un monde parfait, toutes les combinaisons possibles des hyperparamètres
 status open
 
 \begin_layout Plain Layout
-Nombre d'ensembles crées pour la validation croisée.
+Nombre d'ensembles créés pour la validation croisée.
 \end_layout
 
 \end_inset
@@ -9032,6 +9034,7 @@ Les performances des modèles sur le jeu de test séparé sont également prése
 
 \begin_layout Standard
 \begin_inset Float table
+placement H
 wide false
 sideways false
 status open
@@ -9208,8 +9211,8 @@ Pour deux modèles aux résultats similaires, il est préférable de choisir
  modèle.
  Les deux choix peuvent donc se défendre, mais pour le reste de cette analyse
  c'est le deuxième modèle qui sera utilisé puisque celui-ci dispose de moins
- de paramètres et obtient de meilleures performances sur le jeu de test
- séparé.
+ de paramètres (330 poids contre 550) et obtient de meilleures performances
+ sur le jeu de test séparé.
  
 \end_layout
 
@@ -10205,7 +10208,7 @@ Déviances calculées sur le jeu de test séparé.
 \begin_layout Standard
 Les performances du deuxième modèle sont biens meilleures sur le jeu de
  test séparé, et celui-ci dispose également de bien moins de paramètres
- que le premier modèle.
+ que le premier modèle (735 poids contre 1655).
  Ceci indique que le deuxième modèle est sans aucun doute le meilleur choix
  ici.
 \end_layout
@@ -10382,7 +10385,7 @@ Taux d'apprentissage : La courbe montre que le modèle est dans la bonne
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Section
 AdaBoost.R2
 \end_layout
 
@@ -10438,7 +10441,7 @@ C'est afin de palier à ce problème que la validation croisée ne sera pas
  déjà prendre plus d'une journée).
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Taux d'apprentissage d'AdaBoost.R2
 \end_layout
 
@@ -10495,8 +10498,8 @@ La modification des poids se fera avec la formule :
 
 \begin_layout Standard
 Ces modifications ont pour effet de diminuer l'importance des modèles et
- la vitesse à laquelle les poids sont modifiés si le taux d'apprentissage
- spécifié est inférieur à 1.
+ la vitesse à laquelle les poids sont modifiés, et d'apporter un certain
+ contrôle sur le phénomène.
  De ce fait, l'erreur moyenne aura tendance à augmenter moins vite, et plus
  de modèles seront créés avant d'arriver à une erreur moyenne de 0.5.
 \end_layout
@@ -10569,22 +10572,23 @@ Le premier graphique montre l'évolution de l'importance des apprenants faibles
  des apprenants faibles.
  Les valeurs prises par la version originale semblent quant à elles commencer
  à des valeurs plus basses et monter progressivement.
- 
+ La courbe pour le taux d'apprentissage le plus faible semble bien plus
+ lisse que les autres et moins sensibles aux changements brusques.
 \end_layout
 
 \begin_layout Itemize
 Le deuxième graphique montre l'évolution de l'erreur moyenne sur les 20
  première itérations.
- Puisque l'algorithme s'arrête lorsque cette erreur dépasse 0.5, il est donc
- normal que certaines des courbes s'arrêtent avant les 20 itérations (une
- fois qu'elle ont dépassé la valeur maximale permise).
+ Puisque l'algorithme s'arrête lorsque cette erreur dépasse 0.5, il est normal
+ que certaines des courbes s'arrêtent avant les 20 itérations (une fois
+ qu'elle ont dépassé la valeur maximale permise).
  C'est notamment le cas pour la version originale d'AdaBoost.R2 mais également
  pour la version modifiée avec un taux d'apprentissage de 1.
  On s'apperçoit d'abord que ces deux courbes sont assez similaires, surtout
  pour les 5 premières itérations.
  Un taux d'apprentissage de 1 permet donc de se rapprocher des résultats
  qui seraient obtenus avec la version originale d'AdaBoost.
- Un autre fait intéressant peut être observé en regardans la courbe pour
+ Un autre fait intéressant peut être observé en regardant la courbe pour
  le taux d'apprentissage de 0.1.
  En effet, celle-ci évolue bien plus lentement que les autres.
  En fait, plus le taux d'apprentissage est bas et plus cette augmentation
@@ -10594,7 +10598,7 @@ Le deuxième graphique montre l'évolution de l'erreur moyenne sur les 20
  
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Domaine des hyperparamètres et résultats
 \end_layout
 
@@ -12832,7 +12836,7 @@ Le prédicteur choisi reste donc pour l'instant reste donc le meilleur modèle
  de l'itération précédente d'AdaBoost.R2.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Déviance et AdaBoost.R2
 \end_layout
 
@@ -13443,7 +13447,48 @@ ment des apprenants faibles qui se rapproche trop vite de 0.5.
  
 \end_layout
 
-\begin_layout Subsection
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/ermoy.png
+	scale 60
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Erreur moyenne d'un modèle entraîné avec la déviance comme fonction de perte
+ d'AdaBoost.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section
 Analyses complémentaires
 \end_layout
 
@@ -13455,7 +13500,7 @@ Maintenant que tous les modèles ont été entraînés et choisis, leurs résult
  
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Prédiction des fréquences de sinistres par classe
 \end_layout
 
@@ -13626,8 +13671,8 @@ Les mêmes conclusions que pour les graphiques précédents peuvent être tirée
  
 \end_layout
 
-\begin_layout Subsubsection
-Client type 
+\begin_layout Subsection
+Effet du taux d'apprentissage sur les clients types
 \end_layout
 
 \begin_layout Standard
@@ -13643,154 +13688,6 @@ typiques
  et d'observer la manière dont les prédictions varie selon certains critères.
  Ceci est particulièrement intéressant pour les valeurs continues.
  
-\end_layout
-
-\begin_layout Standard
-Au total, 8 profils seront créés et analysés : 
-\end_layout
-
-\begin_layout Standard
-\begin_inset Float table
-placement H
-wide false
-sideways false
-status open
-
-\begin_layout Plain Layout
-\align center
-\begin_inset Tabular
-<lyxtabular version="3" rows="9" columns="1">
-<features tabularvalignment="middle">
-<column alignment="center" valignment="top">
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Profil type
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Homme, 20 ans, Village 
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Homme, 20 ans, Banlieue
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Homme, 50 ans, Village
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Homme, 50 ans, Banlieue
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Femme, 20 ans, Village
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Femme, 20 ans, Banlieue
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Femme, 50 ans, Village
-\end_layout
-
-\end_inset
-</cell>
-</row>
-<row>
-<cell alignment="center" valignment="top" topline="true" bottomline="true" leftline="true" rightline="true" usebox="none">
-\begin_inset Text
-
-\begin_layout Plain Layout
-Femme, 50 ans, Banlieue
-\end_layout
-
-\end_inset
-</cell>
-</row>
-</lyxtabular>
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-\begin_inset Caption Standard
-
-\begin_layout Plain Layout
-Profils types utilisés.
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Plain Layout
-
-\end_layout
-
-\end_inset
-
-
-\end_layout
-
-\begin_layout Subsubsection
-Effet du taux d'apprentissage sur les clients types
 \end_layout
 
 \begin_layout Standard
@@ -13892,8 +13789,8 @@ La courbe représentant le taux d'apprentissage de 1 semble donc naturellement
 \begin_layout Itemize
 La courbe représentant le taux d'apprentissage de 0.01 semble par contre
  être beaucoup moins nette, ce qui est clairement du au nombre bien plus
- grand d'apprenants faibles entraînés.
- 
+ grand d'apprenants faibles entraînés, et peut permettre d'atteindre des
+ fonctions de réponses plus complexes.
 \end_layout
 
 \end_deeper
@@ -13902,7 +13799,7 @@ Des graphiques similaires représentant les prédictions pour les femmes sont
  disponibles dans l'annexe 5.
 \end_layout
 
-\begin_layout Subsubsection
+\begin_layout Subsection
 Prédictions des modèles entraînés pour les clients types
 \end_layout
 
@@ -13926,14 +13823,14 @@ status open
 \begin_layout Plain Layout
 \align center
 \begin_inset Graphics
-	filename Images/clients type/cf-models/femme-village-age.png
+	filename Images/clients type/cf-models/homme-village-age.png
 	scale 50
 
 \end_inset
 
 
 \begin_inset Graphics
-	filename Images/clients type/cf-models/homme-village-age.png
+	filename Images/clients type/cf-models/femme-village-age.png
 	scale 50
 
 \end_inset
@@ -13976,6 +13873,11 @@ La fréquence de sinistre prédite semble également être plus faible pour
 \end_layout
 
 \begin_layout Standard
+Les graphiques suivants représente l'évolution des prédictions en fonction
+ de l'âge du véhicule : 
+\end_layout
+
+\begin_layout Standard
 \begin_inset Float figure
 placement H
 wide false
@@ -14015,6 +13917,127 @@ Fréquence des sinistres prédite pour les clients types.
 \end_inset
 
 
+\end_layout
+
+\begin_layout Itemize
+La fréquence des sinistres est bien moins grande pour le client type de
+ 50 ans, et ce pour tout les modèles.
+\end_layout
+
+\begin_layout Itemize
+Des conclusions similaires aux graphiques de la figure 4.14 peuvent être
+ prises par rapport à la forme des courbes.
+ 
+\end_layout
+
+\begin_layout Standard
+Plus de graphiques similaires sont disponibles pour d'autres clients types
+ dans l'annexe 6.
+\end_layout
+
+\begin_layout Subsection
+Comparaison des prédictions et des valeurs réelles
+\end_layout
+
+\begin_layout Standard
+Dans le cadre du calcul de la prime d'un assuré, deux modèles sont généralement
+ construits.
+ Tout d'abord, un modèle estimant la fréquence des sinistres (objet de ce
+ travail), et deuxièmement un modèle estimant la gravité des sinistres (montant).
+ Une analyse de ces primes pourrait être intéressante, mais comme aucun
+ modèle ayant pour but de prédire la gravité des sinistres n'a été construit,
+ ce sont directement les fréquences des sinistres qui seront comparées.
+\end_layout
+
+\begin_layout Standard
+Dans cette sous-section seront présentées les prédictions des différents
+ modèles choisis, en comparaison avec les valeurs réelles.
+ Pour ce faire, 4 clients sont choisis au hasard dans la base de donnée
+ de test (2 clients avec une fréquence des sinistres nulle, et deux avec
+ une fréquence positive).
+ Les 4 clients qui seront utilisés dans cette analyse sont présentés ici
+ : 
+\end_layout
+
+\begin_layout Itemize
+Homme, 49 ans, habitant dans les villes du nord de la Suède.
+ (fréquence positive)
+\end_layout
+
+\begin_layout Itemize
+Homme, 29 ans, habitant une ville de taille moyenne.
+ (fréquence positive)
+\end_layout
+
+\begin_layout Itemize
+Femme, 43 ans, habitant les campagnes du nord.
+ (fréquence nulle)
+\end_layout
+
+\begin_layout Itemize
+Homme, 27 ans, habitant une ville de taille moyenne.
+ (fréquence nulle)
+\end_layout
+
+\begin_layout Standard
+Les résultats sont présentés dans ce graphique : 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/lastcomp.png
+	scale 60
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquences des sinistres prédite par les différents modèles comparées au
+ valeurs réelles.
+ 
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Plusieurs constats intéressants peuvent être évoqués : 
+\end_layout
+
+\begin_layout Itemize
+La tendance du GLM à prédire des valeurs plus élevées que les autres modèles
+ se retrouve bien ici, à part contre le réseau de neurones profonds pour
+ le troisième client.
+ 
+\end_layout
+
+\begin_layout Itemize
+Tous les modèles sous-estiment la valeur de la fréquence prédite lorsque
+ celle-ci n'est pas nulle.
+\end_layout
+
+\begin_layout Itemize
+Tous les modèles surestiment la valeur de la fréquence prédite lorsque celle-ci
+ est nulle.
 \end_layout
 
 \begin_layout Chapter
@@ -14060,7 +14083,7 @@ Enfin, AdaBoost.R2, variation d'AdaBoost modifiée pour fonctionner dans le
  précédents.
  Les résultats de cette combinaison sont réellement encourageant, les modèles
  entraîné avec le boosting associé aux réseaux de neurones produisent de
- loin les meilleurs résultats de ce travail.
+ loin les meilleurs résultats de ce travail en terme de déviance.
  
 \end_layout
 
@@ -14068,13 +14091,66 @@ Enfin, AdaBoost.R2, variation d'AdaBoost modifiée pour fonctionner dans le
 Une normalisation de la déviance, fonction de perte utilisée pour l'optimisation
  des paramètres des perceptrons multicouches, a ensuite été incorporée dans
  l'algorithme d'AdaBoost en temps que fonction de perte.
- Les résultats obtenus sont cependant décevants et parviennent à peine à
- battre les résultats obtenus par le GLM.
+ Les résultats obtenus sont cependant décevants.
+\end_layout
+
+\begin_layout Standard
+Par la suite, les prédictions des différents algorithmes ont été analysées
+ plus en détail et plusieurs constats sont à mentionner.
+\end_layout
+
+\begin_layout Standard
+En terme de fréquence des sinistres moyenne (par groupe de clients), le
+ GLM apparait clairement comme un meilleur estimateur, même si celui-ci
+ tends à parfois surestimer les valeurs prédites.
+ Les modèles basés sur les réseaux de neurones ont quant à eux une grande
+ tendance à sous-estimer ces fréquences moyennes par groupe.
 \end_layout
 
 \begin_layout Standard
 Au vu de ces résultats, il est clair que l'application de nouveaux algorithmes
- à ce type de problème peut être bénéfique.
+ à ce type de problème peut être bénéfique, mais nécessiterait encore des
+ améliorations.
+ 
+\end_layout
+
+\begin_layout Standard
+Dans le cadre de l'assurance, il est difficile de prédire la fréquence de
+ sinistre de manière individuelle, y arriver voudrait dire réussire à faire
+ une discrimination parfaite des clients et une connaissance exacte de tout
+ les profils.
+ Ceci étant en pratique impossible, c'est souvent par groupes d'individus
+ que les primes seront calculées, et le GLM semble bien plus adapté pour
+ cette tâche.
+ 
+\end_layout
+
+\begin_layout Standard
+Il faut cependant noter que si le GLM semble produire de très bonnes estimations
+ pour les classes disposant d'un nombre d'individus élevés
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Comparaison entre hommes et femmes de la figure 4.11 par exemple.
+\end_layout
+
+\end_inset
+
+, celui-ci est plutôt mauvais si le nombre d'individus est faible
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Groupe 54-65 ans de la figure 4.11 par exemple.
+\end_layout
+
+\end_inset
+
+.
+ Ce comportement vis-à-vis des groupes peu peuplés se retrouve également
+ dans les autres modèles entraînés au cours de ce travail mais en moindre
+ mesure.
  
 \end_layout
 
@@ -14379,6 +14455,143 @@ Fréquence des sinistres prédites par âge pour une femme habitant dans un
 \end_layout
 
 \begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Annexe 6
+\end_layout
+
+\begin_layout Subsection*
+Prédictions des modèles entraînés sur les clients types
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/cf-models/femme-20-village.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/cf-models/femme-20-ville.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres prédites en fonction de l'âge du véhicule pour une
+ femme de 20 ans habitant dans un village et en ville.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/cf-models/femme-50-village.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/cf-models/femme-50-ville.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres prédites en fonction de l'âge du véhicule pour une
+ femme de 50 ans habitant dans un village et en ville.
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement H
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename Images/clients type/cf-models/homme-20-village.png
+	scale 50
+
+\end_inset
+
+
+\begin_inset Graphics
+	filename Images/clients type/cf-models/homme-20-ville.png
+	scale 50
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Fréquence des sinistres prédites en fonction de l'âge du véhicule pour un
+ homme de 20 ans habitant dans un village et en ville.
+\end_layout
+
+\end_inset
+
 
 \end_layout
 
