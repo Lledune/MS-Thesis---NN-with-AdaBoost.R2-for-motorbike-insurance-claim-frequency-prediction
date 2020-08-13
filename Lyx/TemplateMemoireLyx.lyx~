@@ -752,7 +752,8 @@ Présentation des données
 Afin de réaliser ce travail, une base de donnée adéquate est nécessaire,
  celle-ci est présentée et analysée dans ce chapitre.
  La base de données est constituée d'informations sur les clients d'une
- compagnie d'assurance nommée Wasa, entre 1994 et 1998.
+ compagnie d'assurance nommée Wasa, dans une période de temps située entre
+ 1994 et 1998.
  Les véhicules assurés sont composés uniquement de motos.
  Il est difficile d'obtenir des données plus récentes à cause des clauses
  de confidentialité des assurances.
@@ -826,7 +827,7 @@ ClaimCost : Le coût des sinistres.
 \end_layout
 
 \begin_layout Standard
-La variable Zone est décrite dans la table 1.
+La variable Zone est décrite dans la table 2.1.
 \end_layout
 
 \begin_layout Standard
@@ -1113,8 +1114,8 @@ Analyse exploratoire
 
 \begin_layout Standard
 Maintenant que les différentes variables ont été brièvement présentées et
- leur fonction plus claire, l'analyse exploratoire de celles-ci peu être
- effectuée.
+ que leur fonction est plus claire, l'analyse exploratoire de celles-ci
+ peut être effectuée.
  Le but de cette analyse est de mieux comprendre les données qui serviront
  à entraîner les différents algorithmes, ainsi que de repérer d'éventuelles
  anomalies.
@@ -1225,13 +1226,36 @@ Distribution OwnersAge
 \end_layout
 
 \begin_layout Standard
-Sur ces deux premières figures il est possible d'observer les distributions
- des variables Gender et OwnersAge.
+Sur ces deux premières figures, il est possible d'observer les distributions
+ des variables 
+\begin_inset Quotes eld
+\end_inset
+
+Gender
+\begin_inset Quotes erd
+\end_inset
+
+ et 
+\begin_inset Quotes eld
+\end_inset
+
+OwnersAge
+\begin_inset Quotes erd
+\end_inset
+
+.
  La première chose qui saute aux yeux est la grande disparité entre le nombre
- d'hommes de et femmes clients de l'assurance.
- Le jeu de données est composé d'hommes pour la grande majorité.
- Pour ce qui est de la variable OwnersAge, les valeurs sont réparties entre
- 16 et 92 ans, avec deux 
+ de femmes et d'hommes clients auprès de l'assurance.
+ Le jeu de données est composé d'hommes dans sa grande majorité.
+ Pour ce qui est de la variable 
+\begin_inset Quotes eld
+\end_inset
+
+OwnersAge
+\begin_inset Quotes erd
+\end_inset
+
+, les valeurs sont réparties entre 16 et 92 ans, avec deux 
 \begin_inset Quotes eld
 \end_inset
 
@@ -1239,11 +1263,27 @@ pics
 \begin_inset Quotes erd
 \end_inset
 
- vers 25 et 45 ans.
+ situés vers 25 et 45 ans.
  Les valeurs maximales et minimales de ces variables continues seront importante
  pour la suite, car elles sont nécessaires afin d'appliquer une normalisation
  des données, qui sera discutée plus tard dans ce travail.
- Ci-dessous les distributions des variables VehiculeAge et Zone :
+ Ci-dessous sont présentées les distributions des variables 
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge
+\begin_inset Quotes erd
+\end_inset
+
+ et 
+\begin_inset Quotes eld
+\end_inset
+
+Zone
+\begin_inset Quotes erd
+\end_inset
+
+ :
 \end_layout
 
 \begin_layout Standard
@@ -1348,20 +1388,45 @@ Distribution Zone
 \end_layout
 
 \begin_layout Standard
-La distribution de vehicule est indiquée en années, et si la plupart des
- véhicules assurés ont moins de 20 ans, un grand nombre de ceux-ci sont
- bien plus vieux, avec comme maximum 99 ans.
- Il est possible que ce véhicule soit considéré comme outlier et il sera
- reconsidéré dans la partie preprocessing.
- La distribution de la variable Zone est intéressante, elle révèle que la
- plupart des véhicules assurés sont conduits dans des villages, mais aussi
- que très peu d'entre eux le sont dans le Gotland.
+La distribution de 
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge
+\begin_inset Quotes erd
+\end_inset
+
+ est indiquée en années, et, si la plupart des véhicules assurés ont moins
+ de 20 ans, un grand nombre de ceux-ci sont bien plus vieux, avec comme
+ maximum 99 ans.
+ Il est possible que ce véhicule soit considéré comme donnée aberrante
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Outlier.
+\end_layout
+
+\end_inset
+
+ et il sera reconsidéré dans la sous-section 2.6.3.
+ La distribution de la variable 
+\begin_inset Quotes eld
+\end_inset
+
+Zone
+\begin_inset Quotes erd
+\end_inset
+
+ est intéressante, elle révèle que la plupart des véhicules assurés sont
+ conduits dans des villages, mais aussi que très peu d'entre eux le sont
+ dans le Gotland.
  Ceci n'est pas surprenant puisque la population de la Suède est d'environ
  10 millions d'habitants, pour seulement 60.000 habitants dans la région
  du Gotland.
  Les classes 5 et 6 sont elles aussi minoritaires, cela était aussi à prévoir
  puisque ces catégories représentent le nord de la Suède alors que la plupart
- de la population vis dans le sud du pays.
+ de la population vit dans le sud du pays.
 \end_layout
 
 \begin_layout Standard
@@ -1467,8 +1532,8 @@ Distribution Class
 
 \begin_layout Standard
 Les classes de bonus les plus fréquentes sont les classes 1 et 7, respectivement
- le minimum (entrée dans la compagnie d'assurance) et le maximum (client
- fidèle depuis sept années au minimum).
+ le minimum ( c'est à dire l'année d'entrée dans la compagnie d'assurance)
+ et le maximum (représentant un client fidèle depuis sept années au minimum).
  
 \begin_inset Newline newline
 \end_inset
@@ -1478,8 +1543,8 @@ Pour la variable Class nous observons qu'assez peu de véhicules appartiennent
  En fait, la plupart des véhicules se situent dans les classes 3, 4 et 5,
  ce qui montre que les vehicules les moins puissants et les plus puissants
  sont minoritaires.
- Les graphiques suivants montrent la répartitions des sinistres par bonus
- et par classe de véhicule.
+ Les graphiques suivants montrent quant à eux la répartitions des sinistres
+ par bonus et par classe de véhicule.
 \end_layout
 
 \begin_layout Standard
@@ -1601,11 +1666,11 @@ e.
 
 Les résultats de la figure 2.8 sont moins surprenant : plus un véhicule est
  puissant, plus le risque d'accident sera important.
- Les déviations de cette régle par les classes 3 et 7 sont expliquées par
+ Les déviations de cette règle par les classes 3 et 7 sont expliquées par
  la distribution de la population à travers les différentes classes (figure
  2.6), ainsi il y a peu d'accidents pour les véhicules de classe 7 simplement
  car ceux-ci sont peu nombreux, une conclusion similaire peut être énoncée
- pour la classe 3.
+ concernant la classe 3.
 \end_layout
 
 \begin_layout Standard
@@ -1710,11 +1775,12 @@ Zone claims
 \end_layout
 
 \begin_layout Standard
-La répartition des sinistres par sexe indique que les hommes sont plus suceptibl
-es de causer des accidents que les femmes.
+La répartition des sinistres par sexe indique que les hommes sont plus susceptib
+les de causer des accidents que les femmes.
  Il faut prendre en compte que les hommes sont bien plus nombreux que les
- femmes dans nos données, mais la conclusion ne change pas puisque la proportion
- de femmes est de 18%, alors que celles-ci ne causent que 8.7% des sinistres.
+ femmes dans nos données, cependant la conclusion ne change pas puisque
+ la proportion de femmes est de 18%, alors que celles-ci ne causent que
+ 8.7% des sinistres.
  Sur la figure 2.10, les classes 1 et 3 sont celles qui déclarent le plus
  de sinistres.
  La première classe étant plutôt minoritaire (figure 2.4), les personnes
@@ -1722,8 +1788,8 @@ es de causer des accidents que les femmes.
  causer bien plus d'accidents que les autres catégories.
  La même conclusion peut être faite pour la deuxième classe (Banlieues et
  villes moyennes).
- Pour ce qui est de nord de la Suède, nous constatons l'inverse puisque
- ceux-ci semblent causer assez peu d'accidents.
+ Pour ce qui est de nord de la Suède, nous constatons le phénomène inverse
+ puisque cette partie de la population semblent causer assez peu d'accidents.
 \end_layout
 
 \begin_layout Standard
@@ -1832,23 +1898,25 @@ La figure 2.11 a pour but de mieux comprendre cette disparité entre les hommes
  et les femmes dans la déclaration des sinistres.
  Une comparaison par âge permet de mettre en évidence une information importante.
  En effet, si les hommes semblent bien causer plus d'accidents que les femmes
- jusqu'à la treintaine, cette tendance s'égalise passé ce cap.
+ jusqu'à la treintaine, mais passé ce cap, cette tendance s'égalise.
  Enfin, la figure 2.12 nous informe de la distribution de la variable ClaimCost,
  représentant le coût total des sinistres d'un client.
  Il est important de noter qu'il s'agit bien de la somme de tous les sinistres
- déclarés du client, ainsi si une personne a reçu une compensation de l'assuranc
-e pour plusieurs sinistres, la variable contient la somme du coût de tous
- ces sinistres déclarés.
+ déclarés du client.
+ Ainsi si une personne a reçu une compensation de l'assurance pour plusieurs
+ sinistres, la variable contient la somme du coût de tous ces sinistres
+ déclarés.
  Il semble que la grande majorité des clients ne dépassent pas 5000€ de
  compensation venant de l'assurance (Le graphique ne montre que les valeurs
- non-nulles, ainsi les clients n'ayant jamais déclaté de sinistres ne sont
+ non-nulles, ainsi les clients n'ayant jamais déclaré de sinistre ne sont
  pas comptés dans l'intervalle 
 \begin_inset Formula $\left[0,5000\right]$
 \end_inset
 
 .
  La distribution de cette variable montre bien qu'assez peu de clients dépassent
- les 20.000€ de compensation, mais certains peuvent monter à près de 200.000€.
+ les 20.000€ de compensation, mais pourtant certains peuvent monter à près
+ de 200.000€.
 \end_layout
 
 \begin_layout Section
@@ -1903,9 +1971,9 @@ r=\frac{Cov(X,Y)}{\sigma_{X}\sigma_{Y}}
 \end_layout
 
 \begin_layout Standard
-Il est important de noter que cette mesure ne prends en compte que les relations
+Il est important de noter que cette mesure ne prend en compte que les relations
  linéaires entre les variables, mais elle permet de se faire une première
- idée des relations dans la base de donnée lors de l'analyse exploratoire.
+ idée des relations dans la base de données lors de l'analyse exploratoire.
  Une corrélation positive implique que si 
 \begin_inset Formula $Y$
 \end_inset
@@ -1915,7 +1983,7 @@ Il est important de noter que cette mesure ne prends en compte que les relations
 \end_inset
 
  a tendance à augmenter aussi.
- Au contraire, si la correlation est négative, 
+ Au contraire, si la corrélation est négative, 
 \begin_inset Formula $X$
 \end_inset
 
@@ -1966,14 +2034,15 @@ Matrice des corrélations.
 
 \begin_layout Standard
 Cette métrique n'a que peu d'intérêt à être appliquée aux variables catégorielle
-s alors seules les variables continues sont représentées ici.
+s, c'est pour cela que seules les variables continues sont représentées
+ ici.
  
 \end_layout
 
 \begin_layout Itemize
 Les variables ClaimFrequency et ClaimCost sont positivement corrélées, ce
- qui est facilement expliquable par le fait que ClaimCost est la somme des
- coûts des différents sinistres venus.
+ qui est facilement explicable par le fait que ClaimCost est la somme des
+ coûts des différents sinistres survenus.
  Ceci implique que si aucun sinistre n'a été déclaré (ClaimFrequency 
 \begin_inset Formula $=$
 \end_inset
@@ -1983,8 +2052,8 @@ Les variables ClaimFrequency et ClaimCost sont positivement corrélées, ce
 \end_layout
 
 \begin_layout Itemize
-Le même raisonement peut être tenu pour la corrélation positive entre NumberClai
-ms et ClaimCost.
+Le même raisonnement peut être tenu pour la corrélation positive entre NumberCla
+ims et ClaimCost.
  
 \end_layout
 
@@ -2091,21 +2160,44 @@ En ce qui concerne la variable OwnersAge et sa densité, il est intéressant
  Claim.
  Il y a plus de clients qui déclarent un sinistre vers le pic de 25 ans
  que de clients qui n'en déclarent pas, et il y a moins de clients qui déclarent
- un sinitre vers 45 ans que de clients qui en déclarent un.
+ un sinistre vers 45 ans que de clients qui en déclarent un.
  
 \end_layout
 
 \begin_layout Itemize
-Pour la variable VehicleAge, la forme de la densité du groupe ayant déclaré
- un sinistre ou plus indique que beaucoup d'accidents surviennent lorsqu'un
- véhicule est encore relativement neuf.
- Ce qui semble aussi être indiqué par les graphiques VehiculeAge/NumberClaims
- et VehiculeAge/ClaimFrequency.
+Pour la variable 
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge
+\begin_inset Quotes erd
+\end_inset
+
+, la forme de la densité du groupe ayant déclaré un sinistre ou plus indique
+ que beaucoup d'accidents surviennent lorsqu'un véhicule est encore relativement
+ neuf.
+ Ce qui semble aussi être indiqué par les graphiques 
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge/NumberClaims
+\begin_inset Quotes erd
+\end_inset
+
+ et 
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge/ClaimFrequency
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \begin_layout Itemize
 La durée du contrat (Duration) semble quant à elle avoir moins d'influence
- sur l'appartenance à un des groupes de la variable Claim.
+ sur l'appartenance à l'un des groupes de la variable Claim.
 \end_layout
 
 \begin_layout Standard
@@ -2117,7 +2209,7 @@ pair-plots
 \begin_inset Quotes erd
 \end_inset
 
- similaire séparant les observations selon des critères différents sont
+ similaires séparant les observations selon des critères différents sont
  disponibles.
  
 \end_layout
@@ -2142,10 +2234,10 @@ Un contrat entre l'assureur et l'assuré implique le payement d'une prime
  est déclaré.
  Le fait de regrouper un grand nombre de clients va avoir un effet stabilisateur
  de variance pour l'assureur.
- En effet il est difficile de prédire précisemment le nombre d'accidents
+ En effet il est difficile de prédire précisément le nombre d'accidents
  qu'un assuré aura, cependant plus le nombre d'assurés sera élevé et plus
  le nombre (total) de sinistres sera prévisible.
- Ceci est du à la loi des grands nombres qui implique :
+ Ceci est dû à la loi des grands nombres qui implique :
 \end_layout
 
 \begin_layout Standard
@@ -2174,8 +2266,8 @@ La moyenne de l'échantillon
 \end_inset
 
 Dans le cadre de l'assurance, les variables explicatives sont aussi appelées
- facteur d'évaluations, les deux termes seront utilisés indifférement au
- cours de ce travail.
+ facteurs d'évaluations, les deux termes seront utilisés indifféremment
+ au cours de ce travail.
 \end_layout
 
 \begin_layout Subsection
@@ -2222,9 +2314,9 @@ Y=X/\upsilon
 \begin_inset Newline newline
 \end_inset
 
-Il existe différents ratios mais ici ne sera présenté que celui utilisé
- dans l'analyse à venir : La fréquence des réclamations (ou fréquence des
- sinistres).
+Bien qu'il existe différents ratios, il ne sera présenté ici que celui qui
+ sera utilisé dans l'analyse à venir : La fréquence des réclamations (ou
+ fréquence des sinistres).
  Il s'agit du rapport entre le nombre de réclamations et la durée du contrat,
  une fréquence qui sera la variable prédite par les modèles est ainsi obtenue.
 \end_layout
@@ -2234,7 +2326,7 @@ Distribution du ratio
 \end_layout
 
 \begin_layout Standard
-Pour la création d'un modèle cherchant à prédire la fréquence des réclamations
+Pour la création d'un modèle cherchant à prédire la fréquence des réclamations,
  c'est souvent la distribution Poisson qui est utilisée.
  Une loi poisson de paramètre 
 \begin_inset Formula $\lambda$
@@ -2278,10 +2370,10 @@ Var[Y]=\lambda
 \end_inset
 
 Afin de vérifier que la distribution de la fréquence des sinistres suit
- bien une loi de poisson celle-ci est affichée.
- En effet la plupart des valeurs se situent près de 0, les valeurs supérieures
+ bien une loi de poisson, cette dernière est affichée.
+ En effet, la plupart des valeurs se situent près de 0, les valeurs supérieures
  à 1 sont présentes mais extrêmement rares et ne sont donc pas affichées
- afin d'observer plus précisemment les valeurs types.
+ afin d'observer plus précisément les valeurs types.
 \begin_inset Newline newline
 \end_inset
 
@@ -2304,7 +2396,7 @@ Afin de vérifier que la distribution de la fréquence des sinistres suit
 \align block
 La loi de poisson fait partie de la famille des modèles à dispersion exponentiel
 le (ED), une catégorie regroupant un grand nombre de lois statistiques connues
- comme la loi normale, gamma ou encore binomiale.
+ comme la loi normale, gamma ou encore la loi binomiale.
  Une variable aléatoire Y suit une dispersion exponentielle si sa fonction
  de distribution suit la forme suivante 
 \begin_inset CommandInset citation
@@ -2332,7 +2424,7 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/\u
 \begin_inset Formula $\theta_{i}$
 \end_inset
 
-: paramètre dépendant de 
+: Paramètre dépendant de 
 \begin_inset Formula $i$
 \end_inset
 
@@ -2343,12 +2435,12 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/\u
 \begin_inset Formula $\phi$
 \end_inset
 
-: paramètre identique pour tous les 
+: Paramètre identique pour tous les 
 \begin_inset Formula $i$
 \end_inset
 
 .
- C'est le paramètre de dispersion.
+ Il s'agit du paramètre de dispersion.
 \end_layout
 
 \begin_layout Itemize
@@ -2367,11 +2459,19 @@ Préparation des données (preprocessing)
 \end_layout
 
 \begin_layout Standard
-Le preprocessing des données est une étape très importante et celui-ci n'est
- pas à négliger.
- Il consiste a préparer les données pour les algorithmes, afin que ceux-ci
+Le 
+\begin_inset Quotes eld
+\end_inset
+
+preprocessing
+\begin_inset Quotes erd
+\end_inset
+
+ des données est une étape très importante et celui-ci n'est pas à négliger.
+ Il consiste à préparer les données pour les algorithmes, afin que ces derniers
  puissent fonctionner de manière optimale.
- Dans ce travail, plusieurs méthodes de preprocessing ont été utilisées.
+ Dans ce travail, plusieurs méthodes de préparation des données ont été
+ utilisées.
 \end_layout
 
 \begin_layout Subsection
@@ -2406,8 +2506,8 @@ binaires
 \begin_inset Formula $0$
 \end_inset
 
- sinon.
- Par exemple si 
+ le cas échéant.
+ Par exemple, si 
 \begin_inset Formula $x_{ij}$
 \end_inset
 
@@ -2435,8 +2535,39 @@ x_{ij}=\begin{cases}
 \begin_inset Newline newline
 \end_inset
 
-Les variables Gender, Zone, Class, et BonusClass peuvent être transformées
- de la sorte.
+Les variables 
+\begin_inset Quotes eld
+\end_inset
+
+Gender
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+Zone
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+Class
+\begin_inset Quotes erd
+\end_inset
+
+, et 
+\begin_inset Quotes eld
+\end_inset
+
+BonusClass
+\begin_inset Quotes erd
+\end_inset
+
+ peuvent être transformées de la sorte.
  Ce travail sera effectué avec le package caret
 \begin_inset Foot
 status open
@@ -2454,7 +2585,15 @@ Classification And REgression Tools : Package de machine learning pour R.
 
  variables binaires, la dernière sera donc supprimée car celle-ci ne représente
  aucune information.
- La variable Gender sera prise en guise d'exemple.
+ La variable 
+\begin_inset Quotes eld
+\end_inset
+
+Gender
+\begin_inset Quotes erd
+\end_inset
+
+ sera prise en guise d'exemple.
  Si 
 \begin_inset Formula $x_{iGender}=1$
 \end_inset
@@ -2486,10 +2625,10 @@ Normalisation
 Les données quantitatives ne doivent pas être transformées en variables
  binaires (bien que celles-ci peuvent être converties en intervalles puis
  en variables binaires).
- Cependant cela ne signifie pas qu'aucune méthode de preprocessing ne doit
+ Cependant cela ne signifie pas qu'aucune méthode de préparation ne doit
  être appliquée à ces données.
- La normalisation des données quantitatives aide certains algoithmes à converger
- plus rapidement et peut même parfois améliorer leur précision.
+ La normalisation des données quantitatives aide certains algorithmes à
+ converger plus rapidement et peut même parfois améliorer leur précision.
  Cette normalisation des données est particulièrement importante pour les
  réseaux de neurones, car l'optimisation de ceux-ci est basée sur les résultats
  des fonctions d'activation
@@ -2578,7 +2717,23 @@ z_{ij} & =\frac{x_{ij}-min(x_{j})}{max(x_{j})-min(x_{j})}
 \begin_inset Newline newline
 \end_inset
 
-Cette transformation sera appliquée aux variables OwnersAge et VehiculeAge.
+Cette transformation sera appliquée aux variables 
+\begin_inset Quotes eld
+\end_inset
+
+OwnersAge
+\begin_inset Quotes erd
+\end_inset
+
+ et 
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge
+\begin_inset Quotes erd
+\end_inset
+
+.
  
 \end_layout
 
@@ -2590,9 +2745,9 @@ Outliers
 Lors de l'encodage des données, il arrive que certaines valeurs des variables
  quantitatives soient assez extrêmes et semblent fort distantes des autres
  observations.
- Dans ce il est possible de soit garder la valeur si celle-ci semble ajouter
- de l'information au modèle soit de la supprimer dans le but d'une meilleure
- généralisation par celui-ci.
+ Dans ce cas il est possible de soit garder la valeur si celle-ci semble
+ ajouter de l'information au modèle soit de la supprimer dans le but d'une
+ meilleure généralisation par celui-ci.
  Dans la section 2.2 une donnée a particulièrement attiré l'attention comme
  outlier potentiel : une moto de 99 ans.
  Pour celle-ci deux possibilités sont à envisager :
@@ -2613,7 +2768,7 @@ ancêtre
 \end_inset
 
 , cependant ce genre de véhicule ne se conduit pas de la même manière qu'un
- véhicule utilisé au quotidien, et on peut supporser que les risques d'accidents
+ véhicule utilisé au quotidien, et on peut supposer que les risques d'accidents
  sont bien moindres.
  Dans ce cas-ci la suppression de la donnée n'est pas obligatoire mais peut
  aider à une meilleure généralisation du modèle.
@@ -2627,7 +2782,7 @@ Puisqu'aucun moyen simple de vérifier cette hypothèse n'est disponible,
 \end_inset
 
 La suppression de trop d'information peut cependant nuire au modèle, les
- données extrêmes mais non-aberantes seront donc conservées.
+ données extrêmes mais non-aberrantes seront donc conservées.
 \end_layout
 
 \begin_layout Subsection
@@ -2635,15 +2790,15 @@ Durée de contrat
 \end_layout
 
 \begin_layout Standard
-Pour le bon fonctionement du modèle, certaines autres données ont du être
+Pour le bon fonctionnement du modèle, certaines autres données ont du être
  modifiées car celles-ci entrainaient des erreurs dans la fonction de déviance
  utilisée pour la calibration des poids des réseaux de neurones (limitant
  ou empêchant parfois la convergence).
  Les observations incriminées sont celles ayant une durée de contrat nulle.
- Ces valeurs nulles de durée de contrat sont peu cohérentes (impossible
- d'avoir un sinistre déclaré au cours du contrat si celui-ci n'est pas encore
- en vigueur) et elles seront donc changées par la valeur correspondant à
- un jour (
+ Ces valeurs nulles de durée de contrat sont peu cohérentes (il est en effet
+ impossible d'avoir un sinistre déclaré au cours du contrat si celui-ci
+ n'est pas encore en vigueur) et elles seront donc changées par la valeur
+ correspondant à un jour (
 \begin_inset Formula $1/365\simeq0.00274$
 \end_inset
 
@@ -2653,13 +2808,13 @@ Pour le bon fonctionement du modèle, certaines autres données ont du être
  dans des contrats dont la durée est nulle.
  Ce cas de figure n'étant pas possible, elles seront supprimées car il s'agit
  probablement d'erreur d'encodage.
- De plus changer la valeur de la durée du contrat par 0.00274 dans ce cas
+ De plus, changer la valeur de la durée du contrat par 0.00274 dans ce cas
  reviendrait à considérer une fréquence de sinistre de 
 \begin_inset Formula $\simeq365$
 \end_inset
 
  soit un sinistre par jour ce qui pourrait grandement biaiser le modèle.
- À la fin des différentes étapes de preprocessing, la base de données passe
+ À la fin des différentes étapes de préparation, la base de données passe
  de 64505 observations à 64501.
 \end_layout
 
@@ -2694,7 +2849,7 @@ machine learning
 \begin_layout Standard
 Dans cette section, les différents algorithmes utilisés lors des analyses
  seront présentés à des fins de compréhension du travail.
- Pour commencer, des explications seront données sur le fonctionement général
+ Pour commencer, des explications seront données sur le fonctionnement général
  d'un modèle prédictif, et plus particulièrement dans le cas de la régression.
  Les bases nécessaires pour comprendre comment évaluer un modèle afin de
  déterminer la supériorité de l'un d'entre eux par rapport à d'autres seront
@@ -2704,8 +2859,8 @@ Dans cette section, les différents algorithmes utilisés lors des analyses
 \end_layout
 
 \begin_layout Standard
-Les deux algorithmes de bases que sont les modèles linéaires généralisés
- et les réseaux de neurones artificiels seront introduit et leur fonctionement
+Les deux algorithmes de base que sont les modèles linéaires généralisés
+ et les réseaux de neurones artificiels seront introduits et leur fonctionement
  expliqué.
  Enfin, le boosting sera également étudié et plus particulièrement le 
 \begin_inset Quotes eld
@@ -2759,11 +2914,11 @@ Données.
 \begin_inset Formula $X$
 \end_inset
 
- les variables explicatives et de 
+, les variables explicatives et de 
 \begin_inset Formula $Y$
 \end_inset
 
- la variable expliquée.
+, la variable expliquée.
  Dans notre cas :
 \end_layout
 
@@ -2853,7 +3008,7 @@ Algorithmes nécessitant une base de données
 \end_inset
 
 .
- Pour ce faire l'algorithme doit subir une phase d'apprentissage, aucours
+ Pour ce faire, l'algorithme doit subir une phase d'apprentissage, au cours
  de laquelle celui-ci va recevoir des entrées provenant de la base de données
  et se servir de celles-ci pour 
 \begin_inset Quotes eld
@@ -2882,7 +3037,7 @@ apprendre
 Pour l'apprentissage, les algorithmes supervisés se basent sur un critère
  mesurant l'erreur d'un modèle : la fonction de perte.
  Ce critère permet la comparaison entre différents modèles et un choix optimal
- parmis ceux-ci, en sélectionnant celui qui minimise l'erreur commise dans
+ parmi ceux-ci, en sélectionnant celui qui minimise l'erreur commise dans
  les prédictions.
  Il existe un grand nombre de critères pouvant servir pour l'évaluation
  des modèles mais le choix de celui-ci doit se faire en fonction du problème
@@ -2906,7 +3061,7 @@ Le critère peut être défini comme
 
  mesurant la différence entre les prédictions et la réalité d'une certaine
  manière.
- Une fonction de perte intuitive est donnée en guise d'example par la racine
+ Une fonction de perte intuitive est donnée en guise d'exemple par la racine
  de l'erreur quadratique moyenne (RMSE).
 \end_layout
 
@@ -3072,12 +3227,12 @@ D(y_{i},\hat{y_{i}})=2\upsilon_{i}(y_{i}ln(y_{i})-y_{i}ln(\hat{y_{i}})-y_{i}+\ha
 \begin_inset Newline newline
 \end_inset
 
-La base de donnée utilisée portant sur des événements rares, beaucoup de
+La base de données utilisée portant sur des événements rares, beaucoup de
  cas 
 \begin_inset Formula $y_{i}=0$
 \end_inset
 
- seront étudiés, en modifiant la formule ci dessus (en remplaçant 
+ seront étudiés, en modifiant la formule ci-dessus (en remplaçant 
 \begin_inset Formula $y_{i}$
 \end_inset
 
@@ -3106,22 +3261,22 @@ Il est important de comprendre le but derrière la création d'un tel modèle.
 \end_inset
 
  à l'aide de celui-ci.
- Afin que cette fonction sois au mieux approchée, il est important que le
+ Afin que cette fonction soit au mieux approchée, il est important que le
  modèle reste général.
- En effet le but final du modèle est de prédire des valeurs de Y pour des
+ En effet, le but final du modèle est de prédire des valeurs de Y pour des
  nouvelles entrées 
 \begin_inset Formula $X_{i}$
 \end_inset
 
 , ce qui amène à des méthodes permettant de vérifier que cette fonction
  est correctement approximée.
- Plus particulièrement le but est d'éviter un maximum l'overfit.
+ Plus particulièrement, le but est d'éviter un maximum l'overfit.
  L'overfit (ou surentraînement) survient lorsqu'un modèle approxime bien
  les valeurs du jeu de données utilisé pour l'entraînement mais que celui-ci
  est incapable de déterminer des valeurs cohérentes pour des nouvelles entrées,
  il peut être notamment causé par un trop grand nombre de variables explicatives
- ou une phase d'apprentissage mal configurée.
- Le modèle est alors inutilisable dans un scénario réél.
+ ou par une phase d'apprentissage mal configurée.
+ Le modèle est alors inutilisable dans un scénario réel.
 \end_layout
 
 \begin_layout Subsection
@@ -3150,8 +3305,8 @@ identiques
  Dans le cas étudié ici, les événements sont rares, et le jeu de test sera
  d'une taille réduite afin de garder un maximum de données pour l'entraînement.
  Afin de vérifier que l'entraînement se déroule correctement et que les
- modèles ont du sens, la validation croisée sera également utilisée sur
- le jeu d'entraînement.
+ modèles ont du sens.
+ La validation croisée sera également utilisée sur le jeu d'entraînement.
 \begin_inset Newline newline
 \end_inset
 
@@ -3475,7 +3630,7 @@ Cette méthode permet de limiter l'overfit et de le détecter dans la plupart
  variance inférieure aux résultats donnés sans celle-ci.
  Comme dit précédemment la base de donnée est constituée d'événements rares
  et cette méthode sera donc préférée à la traditionnelle décomposition entrainem
-ent/test
+ent/test.
 \end_layout
 
 \begin_layout Section
@@ -3503,11 +3658,11 @@ Ordinary Least Squares (régression linéaire)
 \begin_layout Itemize
 La distribution de probabilité : Dans l'OLS, nous supposons que les données
  suivent une loi gaussienne.
- Avec les GLM, une classe de distrution (les distributions EDM) dont la
+ Avec les GLM, une classe de distribution (les distributions EDM) dont la
  fonction de distribution générale a été présentée plus tôt dans ce travail
  est utilisée.
- Plus particulièrement pour ce travail, cela permet de construire les modèles
- avec la loi de Poisson.
+ Plus particulièrement, dans le cadre de ce travail, cela permet de construire
+ les modèles avec la loi de Poisson.
  
 \end_layout
 
@@ -3528,7 +3683,7 @@ on des ratios dans les assurances.
 \begin_layout Itemize
 L'existence de différentes recherches menées sur le sujet ainsi que de méthodes
  déjà définies pour l'estimation des différents paramètres du modèle, d'interval
-les de confiances, ...
+les de confiance, ...
 \end_layout
 
 \begin_layout Itemize
@@ -3573,7 +3728,7 @@ La fonction de variance :
 \end_layout
 
 \begin_layout Standard
-Ces composants seront décrit plus précisemment plus loin dans ce chapitre.
+Ces composants seront décrit plus précisément plus loin dans ce chapitre.
 \end_layout
 
 \begin_layout Subsection
@@ -3581,8 +3736,9 @@ Hypothèses
 \end_layout
 
 \begin_layout Standard
-Afin que les raisonements à suivre restent corrects, il est nécessaire de
- faire 3 hypothèses pour que nos modèles statistiques restent valides 
+Afin que les raisonnements à suivre restent corrects, il est nécessaire
+ de faire 3 hypothèses pour que nos modèles statistiques restent valides
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Ohlsson2010"
@@ -3617,11 +3773,11 @@ En considérant
 
 \begin_layout Standard
 Même si cette hypothèse est primordiale, il n'est pas difficile de trouver
- des cas ou celle-ci n'est pas respectée.
- Par exemple dans le cas des grandes catastrophes naturelles qui impliquent
+ des cas où celle-ci n'est pas respectée.
+ Par exemple, dans le cas des grandes catastrophes naturelles qui impliquent
  qu'un grand nombre de personnes déclarent des sinistres pour la même raison.
- Pour ce genre de cas il est nécessaire d'utiliser des modèles différents
- cependant nous ne nous y intéresseront pas dans le cadre de ce travail.
+ Pour ce genre de cas, il est nécessaire d'utiliser des modèles différents,
+ cependant, nous ne nous y intéresserons pas dans le cadre de ce travail.
 \end_layout
 
 \begin_layout Paragraph*
@@ -3683,7 +3839,7 @@ Cette hypothèse n'est dans les fait pas complètement respectée.
 \end_inset
 
 Les hypothèses 1 et 2 ont pour conséquence que les coûts des sinistres sont
- indépendants : Il concernent soit une police différente soit un intervalle
+ indépendants : Ils concernent soit une police différente soit un intervalle
  de temps différent.
 \end_layout
 
@@ -3692,7 +3848,7 @@ Modèles à dispersion exponentielle (EDM)
 \end_layout
 
 \begin_layout Standard
-Les modèles à dispersion exponentielles font parties des GLMs, et généralisent
+Les modèles à dispersion exponentielle font partie des GLMs, et généralisent
  la distribution normale utilisée dans les modèles linéaires.
  En utilisant les hypothèses ci-dessus, la distribution de probabilité d'un
  EDM peut être déterminée 
@@ -3749,7 +3905,7 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/\u
 \end_inset
 
  : fonction cumulante, le choix de cette fonction revient à choisir une
- famille de distributions de probabilité (Normale, Poisson, ...).
+ famille de distribution de probabilité (Normale, Poisson, ...).
  
 \end_layout
 
@@ -3776,7 +3932,7 @@ Dans le cas étudié, c'est la fréquence des sinistres qui est importante.
 
 .
  Beard, Pentikainen et Pesonen montrent que ce processus statistique suit
- une loi de poisson 
+ une loi de Poisson 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "beard1977risk"
@@ -3790,15 +3946,15 @@ literal "false"
 \end_inset
 
  représente le nombre de plaintes dans une classe de durée 
-\begin_inset Formula $\omega_{i}$
+\begin_inset Formula $\upsilon_{i}$
 \end_inset
 
  et en prenant 
 \begin_inset Formula $\mu_{i}$
 \end_inset
 
- comme l'espérence lorsque 
-\begin_inset Formula $\omega_{i}=1$
+ comme l'espérance lorsque 
+\begin_inset Formula $\upsilon_{i}=1$
 \end_inset
 
 .
@@ -3818,7 +3974,7 @@ f_{X_{i}}(x_{i};\mu_{i})=e^{-\upsilon_{i}\mu_{i}}\frac{(\upsilon_{i}\mu_{i})^{x_
 \end_inset
 
  La distribution du ratio 
-\begin_inset Formula $Y_{i}=X_{i}/w_{i}$
+\begin_inset Formula $Y_{i}=X_{i}/\upsilon_{i}$
 \end_inset
 
  est aussi étudiée et tombe également sur une distribution de Poisson 
@@ -3874,7 +4030,7 @@ f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\upsilon_{i}y_{i})
 \end_layout
 
 \begin_layout Standard
-Qui est la une forme de la distribution de probabilité des EDM vue plus
+Il s'agit là une forme de la distribution de probabilité des EDM vue plus
  haut, avec :
 \end_layout
 
@@ -3914,8 +4070,8 @@ Dans ce travail, il a jusqu'ici été considéré que les données étaient expr
 \begin_inset Formula $\upsilon_{i}$
 \end_inset
 
- ainsi que les facteurs d'évaluations correspondants.
- Cette forme représente la forme de liste, et est celle qui sera préférée
+ ainsi que les facteurs d'évaluation correspondants.
+ Cette notation représente la forme de liste, et est celle qui sera préférée
  dans des logiciels tels que SAS, R, ou encore Python afin de gérer et représent
 er les données.
  Il existe cependant une autre manière de représenter les données qui s'avère
@@ -4325,7 +4481,7 @@ Fonction de lien
 \end_layout
 
 \begin_layout Standard
-Maintenant que les notations utilisées dans cette parties sont expliquées,
+Maintenant que les notations utilisées dans cette parties ont été expliquées,
  il faut se pencher sur la deuxième partie de la généralisation des GLMs,
  la fonction de lien.
  Il est également considéré que 
@@ -4346,8 +4502,8 @@ Maintenant que les notations utilisées dans cette parties sont expliquées,
 
  représentent respectivement la permière et la deuxième variable catégorielle.
  Pour cet exemple, il est supposé que la première variable comporte deux
- classes et la deuxième en comporte trois, ci dessous une représentation
- en forme de tableau.
+ classes et la deuxième en comporte trois, ce qui est ci-dessous observable
+ dans une représentation en forme de tableau.
  
 \end_layout
 
@@ -4631,7 +4787,7 @@ En forme de liste,
 \begin_inset Formula $\mu_{i}$
 \end_inset
 
- représente la moyenne d'une plage de tarif.
+ représente la moyenne d'une plage de tarifs.
  Les deux variables catégorielles sont également transformées en variables
  binaires, de la même manière que dans la partie 2.4.1.
  Est maintenant défini : 
@@ -4649,7 +4805,7 @@ En forme de liste,
 \end_layout
 
 \begin_layout Standard
-Cette équation représente la structure linéaire et peut être écrit sous
+Cette équation représente la structure linéaire et peut être écrite sous
  la forme matricielle :
 \begin_inset Formula 
 \[
@@ -4662,7 +4818,7 @@ Cette équation représente la structure linéaire et peut être écrit sous
 \end_layout
 
 \begin_layout Standard
-Il est maintenant possible de généraliser l'exemple ci dessus, avec l'équation
+Il est maintenant possible de généraliser l'exemple ci-dessus, avec l'équation
  : 
 \end_layout
 
@@ -4708,14 +4864,14 @@ Ici
 \begin_inset Formula $g(.)$
 \end_inset
 
- représente la fonction de lien est doit être monotone et dérivable.
+ représente la fonction de lien et doit être monotone et dérivable.
  Cette fonction est le lien entre la moyenne et la structure linéaire.
- Par exemple dans le cas d'un modèle multiplicatif (et pour reprendre le
+ Par exemple, dans le cas d'un modèle multiplicatif (et pour reprendre le
  cas étudié ci-dessus) le but est d'avoir 
 \begin_inset Formula $\mu_{ij}=\gamma_{o}\gamma_{1i}\gamma_{2j}$
 \end_inset
 
-, ce qui peut être obtenu grâce au logarithmes : 
+, ce qui peut être obtenu grâce au logarithme : 
 \end_layout
 
 \begin_layout Standard
@@ -4815,7 +4971,7 @@ En réécrivant l'équation en fonction de
 \begin_inset Formula $\beta$
 \end_inset
 
- la fonction de score est obtenue : 
+, la fonction de score est obtenue : 
 \end_layout
 
 \begin_layout Standard
@@ -4864,7 +5020,7 @@ Il suffit maintenant de prendre ces
 \end_layout
 
 \begin_layout Standard
-La résolution de ce système d'équation doit se faire de manière numérique
+La résolution de ce système d'équations doit se faire de manière numérique
  et donne l'estimation des paramètres 
 \begin_inset Formula $\beta$
 \end_inset
@@ -4889,7 +5045,7 @@ Cette sous-section traite du cas où
 \begin_inset Formula $Y$
 \end_inset
 
- suit une loi de poisson, ce qui est le cas pour notre base de données.
+ suit une loi de Poisson, ce qui est le cas pour notre base de données.
  En supposant : 
 \end_layout
 
@@ -4905,7 +5061,7 @@ Y_{i}\sim Poisson(\lambda_{i})
 \end_layout
 
 \begin_layout Standard
-Alors les propritétés de la loi de poisson donnent : 
+Alors les propriétés de la loi de Poisson donnent : 
 \end_layout
 
 \begin_layout Standard
@@ -4928,7 +5084,7 @@ var(Y_{i})=\lambda_{i}
 \end_layout
 
 \begin_layout Standard
-Donc la fonction de variance sera : 
+Donc la fonction de variance sera donc : 
 \end_layout
 
 \begin_layout Standard
@@ -4981,9 +5137,8 @@ Réseaux de neurones
 Avant de comprendre comment cet algorithme fonctionne d'un point de vue
  mathématique, il est intéressant de comprendre de quoi est inspiré son
  fonctionnement.
- Comme son nom peut l'indiquer, le réseau de neurones artificiels est un
- algorithme d'apprentissage automatique inspiré du fonctionnement du cerveau
- humain.
+ Comme son nom l'indique, le réseau de neurones artificiels est un algorithme
+ d'apprentissage automatique inspiré du fonctionnement du cerveau humain.
  Un neurone biologique est composé du corps de la cellule qui contient les
  composants les plus importants, de plusieurs extrémités nommées les dendrites,
  ainsi que de l'axone (une extension du neurone pouvant être des milliers
@@ -4998,8 +5153,8 @@ signaux
 \begin_inset Quotes erd
 \end_inset
 
-, et lorsqu'un neurone reçoit un certain nombre de signaux en même temps,
- celui-ci va déclencher son propre signal 
+, de plus lorsqu'un neurone reçoit un certain nombre de signaux en même
+ temps, celui-ci va déclencher son propre signal 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "StatActu2"
@@ -5072,9 +5227,10 @@ d'activation
  La fonction d'activation représente le potentiel d'activation du neurone.
  L'exemple le plus simple serait une fonction renvoyant 1 si l'entrée est
  positive et 0 (ou -1) si l'entrée est négative (bien que cette fonction
- ne sera pas utilisée dans les algorithmes de ce travail car non différentiable,
- ce qui est un problème pour la calibration), c'est d'ailleurs cette fonction
- qui a été utilisée en premier pour les perceptrons 
+ ne sera pas utilisée dans les algorithmes de ce travail car elle n'est
+ pas différentiable, ce qui est un problème pour la calibration), c'est
+ d'ailleurs cette fonction qui a été utilisée en premier pour les perceptrons
+ 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Geron2017"
@@ -5166,7 +5322,7 @@ Pour en revenir au perceptron, les données d'un individu sont considérées
 \begin_inset Formula $1$
 \end_inset
 
-, il n'intéragit donc pas avec les valeurs prises par les variables.
+, il n'interagit donc pas avec les valeurs prises par les variables.
  La fonction d'activation est quant à elle notée 
 \begin_inset Formula $\varphi(.)$
 \end_inset
@@ -5176,7 +5332,7 @@ Pour en revenir au perceptron, les données d'un individu sont considérées
 \begin_inset Formula $J$
 \end_inset
 
-, soit le nombre de variable explicatives utilisées.
+, soit le nombre de variables explicatives utilisées.
  Un perceptron peut être représenté comme ceci :
 \end_layout
 
@@ -5245,7 +5401,7 @@ C'est donc cette réponse
  qui sera considérée comme le résultat du perceptron.
  Le perceptron reste cependant un modèle simple et il ne peut être utilisé
  que pour des problèmes relevant de classification séparable linéairement,
- et son fonctionement pourrait être schématisé par la recherche d'un seuil
+ et son fonctionnement pourrait être schématisé par la recherche d'un seuil
  représentant la valeur des variables à partir de laquelle un exemple serait
  considéré comme appartenant à une classe ou à l'autre.
 \begin_inset Newline newline
@@ -5262,11 +5418,11 @@ Lorsqu'il est question d'apprentissage automatique, cela signifie en fait
  Pour être plus précis, l'algorithme va prendre en entrée une ligne de notre
  base de données et faire une prédiction.
  Si cette prédiction est correcte alors les poids ne sont pas modifiés,
- cependant dans le cas ou la prédiction est incorrecte une règle de mise
+ cependant, dans le cas ou la prédiction est incorrecte une règle de mise
  à jour des poids sera appliquée.
  Ce procédé sera expliqué plus en détail dans la section suivante, mais
- nous pouvons déjà observer l'équation de mise à jour des poids d'un perceptron
- simple 
+ nous pouvons d'ores et déjà observer l'équation de mise à jour des poids
+ d'un perceptron simple 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Geron2017"
@@ -5292,7 +5448,7 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \begin_inset Formula $w_{i}$
 \end_inset
 
- le poids du neurone 
+ : le poids du neurone 
 \begin_inset Formula $i$
 \end_inset
 
@@ -5303,9 +5459,9 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \begin_inset Formula $\eta$
 \end_inset
 
- le taux d'apprentissage, il s'agit d'un paramètre déterminant à quel point
- les poids sont modifiés lors d'une erreur, celui-ci est inclus dans l'intervall
-e 
+ : le taux d'apprentissage, il s'agit d'un paramètre déterminant à quel
+ point les poids sont modifiés lors d'une erreur, celui-ci est inclus dans
+ l'intervalle 
 \begin_inset Formula $[0,1]$
 \end_inset
 
@@ -5316,14 +5472,14 @@ e
 \begin_inset Formula $\hat{y_{j}}$
 \end_inset
 
- la prédiction du perceptron
+ : la prédiction du perceptron
 \end_layout
 
 \begin_layout Itemize
 \begin_inset Formula $y_{j}$
 \end_inset
 
- la valeur cible
+ : la valeur cible
 \end_layout
 
 \begin_layout Standard
@@ -5357,8 +5513,8 @@ Perceptrons
 \begin_inset Quotes erd
 \end_inset
 
- qui met en avant un certaines faiblesses du perceptron.
- Suite à ces découvertes la recherche dans le domaine va être mise de côté.
+ qui met en avant certaines faiblesses du perceptron.
+ Suite à ces découvertes la recherche dans le domaine sera mise de côté.
  Cependant il est plus tard apparu que ces faiblesses pouvaient pour la
  plupart (y compris le problème XOR) être éliminées en empilant plusieurs
  perceptrons en couches de neurones artificiels 
@@ -5465,10 +5621,10 @@ Computer vision.
 
 .
  Comme observable sur le graphique, l'information circule dans un seul sens
- sur notre schéma.
- Il faut savoir qu'il existe différent types de MLP, dont certains avec
+ sur le schéma.
+ Il faut savoir qu'il existe différents types de MLP, dont certains avec
  des relations circulaires entre les neurones.
- Cependant ce type de réseau ne sera pas utilisé dans ce travail et ne seront
+ Cependant ce type de réseau ne sera pas utilisé dans ce travail et ne sera
  donc pas détaillé, les réseaux de neurones artificiels utilisés seront
  uniquement des réseaux 
 \begin_inset Quotes eld
@@ -5479,7 +5635,7 @@ feed-forward
 \end_inset
 
  ; l'information arrive à l'entrée du réseau, transite à travers celui-ci
- dans une direction unique, et le modèle renvoie une réponse 
+ dans une direction unique, puis, le modèle renvoie une réponse 
 \begin_inset Formula $\hat{y_{i}}$
 \end_inset
 
@@ -5503,8 +5659,8 @@ Si il y a une seule couche cachée on parle de réseau peu profond (shallow
 
 \end_inset
 
- et enfin le couche de sortie renvoyant la réponse du réseau.
- Le nombre de neurones par couche et le nombre de couches cachées sont tout
+ et enfin la couche de sortie renvoyant la réponse du réseau.
+ Le nombre de neurones par couche et le nombre de couches cachées sont tous
  deux des hyperparamètres
 \begin_inset Foot
 status open
@@ -5522,7 +5678,7 @@ Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
 \begin_inset Newline newline
 \end_inset
 
-Le fonctionnement de ce réseau est similaire à celui du perceptron, cependant
+Le fonctionnement de ce réseau est similaire à celui du perceptron, cependant,
  son architecture est plus complexe et nécessite certains changements dans
  les notations utilisées, aussi :
 \end_layout
@@ -5654,10 +5810,10 @@ représentant la sortie du neurone
 \end_layout
 
 \begin_layout Standard
-Le fonctionement d'un réseau de neurones étant expliqué, il est maintenant
+Le fonctionnement d'un réseau de neurones étant expliqué, il est maintenant
  nécessaire de comprendre comment un tel réseau est calibré, car sans cette
- phase de calibration le réseau de neurone serait inefficace.
- Il existe diverses méthodes permettant d'optimiser un réseau de neurone
+ phase de calibration le réseau de neurones serait inefficace.
+ Il existe diverses méthodes permettant d'optimiser un réseau de neurones
  mais nous ne détaillerons que la 
 \begin_inset Quotes eld
 \end_inset
@@ -6048,7 +6204,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-Sur base de ceci 
+Sur base de ceci, 
 \begin_inset Formula $\varphi(x,\mathcal{L})$
 \end_inset
 
@@ -6065,7 +6221,7 @@ Sur base de ceci
 \end_inset
 
 .
- En supposant que de plusieurs sets d'apprentissages dénotés 
+ En supposant que plusieurs sets d'apprentissages dénotés 
 \begin_inset Formula $\{\mathcal{L}_{k}\}$
 \end_inset
 
@@ -6077,7 +6233,7 @@ Sur base de ceci
 \begin_inset Formula $\varphi(x_{k},\mathcal{L}_{k})$
 \end_inset
 
- et de les combiner afin de d'obtenir un résulat pour la prédiction.
+ et de les combiner afin d'obtenir un résulat pour la prédiction.
  Dans le cas de la régression, ce résultat peut être obtenu en prenant simplemen
 t la moyenne des résultats des différents prédicteurs : 
 \end_layout
@@ -6094,7 +6250,7 @@ t la moyenne des résultats des différents prédicteurs :
 \end_layout
 
 \begin_layout Standard
-Un raisonement similaire peut être tenu pour le cas de la classification
+Un raisonnement similaire peut être tenu pour le cas de la classification
  mais celui-ci ne sera pas expliqué ici car il ne rentre pas dans le cadre
  de ce travail.
  Le problème principal du bagging est qu'il nécessite 
@@ -6108,7 +6264,7 @@ Un raisonement similaire peut être tenu pour le cas de la classification
 \end_layout
 
 \begin_layout Standard
-Celui-ci consiste en un échantillonage aléatoire (équiprobable) avec remise.
+Celui-ci consiste en un échantillonnage aléatoire (équiprobable) avec remise.
  Les sets d'entraînements générés sont donc composés de 
 \begin_inset Formula $n$
 \end_inset
@@ -6143,10 +6299,10 @@ méta-algorithme
 \begin_inset Quotes erd
 \end_inset
 
- que d'algorithme à proprement parler, c'est à dire qu'il s'agit d'une famille
+ que d'algorithme à proprement parler, c'est-à-dire qu'il s'agit d'une famille
  d'algorithmes utilisant d'autres algorithmes (apprenants faibles) dans
  certaines de ses étapes afin d'améliorer les performances que l'apprenant
- faible choisi aurait eu sans l'utilisation du méta-algortithme.
+ faible choisi aurait eu sans l'utilisation du méta-algorithme.
  Ces méthodes se basent sur l'entrainement d'apprenants faibles
 \begin_inset Foot
 status open
@@ -6168,7 +6324,7 @@ fort
 
 \end_inset
 
- combinés afin de créer un ensemble de prédicteurs considéré comme 
+ combinés afin de créer un ensemble de ces prédicteurs considéré comme 
 \begin_inset Quotes eld
 \end_inset
 
@@ -6177,15 +6333,16 @@ fort
 \end_inset
 
 .
- Ils se basent souvent sur une règle de décision elle même basée sur les
+ Ils se basent souvent sur une règle de décision elle-même basée sur les
  réponses des différents prédicteurs, dans le cas d'une classification binaire
- cela peut par exemple être représenté par un vote majoritaire de ceux-ci.
+ cela peut, par exemple, être représenté par un vote majoritaire de ces
+ derniers.
  Avec le boosting, les prédicteurs sont entrainés l'un après l'autre sur
  un sous-ensemble des données du jeu d'entraînement.
  Une fois le prédicteur entraîné, toutes les données du jeu d'entraînement
  sont passées dans celui-ci et l'erreur du prédicteur sur les prédictions
  est enregistrée.
- Concrètement c'est la distance entre l'observation et sa prédiction qui
+ Concrètement, c'est la distance entre l'observation et sa prédiction qui
  est observée, puisque nous tentons avec le boosting de donner l'accent
  aux données mal prédites pour l'entraînement des prochains prédicteurs.
  Les probabilités des données les plus incorrectes sont ensuite modifiées
@@ -6331,8 +6488,8 @@ Afin d'améliorer la précision d'AdaBoost, des apprenants faibles sont construi
 \end_inset
 
  modifiée a chaque itération de l'algorithme, cela permet aux apprenants
- de bases de produires des hypothèses de bases différentes et variées, ce
- qui au final permet d'obtenir de biens meilleur résultats.
+ de bases de produire des hypothèses de base différentes et variées, ce
+ qui au final permet d'obtenir de bien meilleurs résultats.
  C'est d'ailleurs l'idée principale du boosting, choisir les jeux d'entraînement
  de telle manière que l'on force l'apprenant faible à déduire une nouvelle
  hypothèse faible.
@@ -6624,11 +6781,11 @@ Pour la prochaine étape, il est nécessaire de mettre à jour la distribution
 \begin_inset Formula $D_{t+1}$
 \end_inset
 
- qui permets une hypothèse 
+ qui permet une hypothèse 
 \begin_inset Formula $h_{t+1}$
 \end_inset
 
- efficace sur les examples mal classés par l'hypothèse précédente.
+ efficace sur les exemples mal classés par l'hypothèse précédente.
  L'idée principale ici est de donner plus d'importance aux éléments mal
  classés par 
 \begin_inset Formula $h_{t}$
@@ -6658,7 +6815,7 @@ D_{t+1}(i)=\frac{D_{t}(i)exp(-\alpha_{t}y_{i}h_{t}(x_{i}))}{Z_{t}}
 \end_layout
 
 \begin_layout Standard
-Qui peut être scindée en deux cas (si l'exemple 
+Celle-ci peut être scindée en deux cas (si l'exemple 
 \begin_inset Formula $i$
 \end_inset
 
@@ -6675,7 +6832,7 @@ literal "false"
 \begin_inset Formula $Z_{t}$
 \end_inset
 
- est le facteur de normalisation, c'est à dire que c'est un facteur qui
+ est le facteur de normalisation, c'est-à-dire que c'est un facteur qui
  sert à maintenir l'équation 
 \begin_inset Formula $D_{t+1}=1$
 \end_inset
@@ -6761,12 +6918,12 @@ AdaBoost combine un grand nombre d'apprenants faibles afin d'obtenir une
  classification la plus précise possible.
  Les apprenants faibles sont des modèles avec une prise de décision simple.
  Dans le cas de la classification, il s'agit souvent d'une série d'arbres
- de décision prenant leur décision en se basant sur une seule variable,
+ de décision effectuant leur choix en se basant sur une seule variable,
  les apprenants faibles sont généralement rapides et simples à entraîner
  puisque c'est potentiellement un très grand nombre d'entre eux qui seront
  utilisés.
  Ceci dit, le boosting est aussi possible avec des algorithmes plus puissants,
- le seul réél problème dans ce cas étant le temps de calcul et que les apprenant
+ le seul réel problème dans ce cas étant le temps de calcul et que les apprenant
 s de base soient plus efficaces qu'une sélection aléatoire (équiprobable)
  de la réponse.
  
@@ -6774,7 +6931,7 @@ s de base soient plus efficaces qu'une sélection aléatoire (équiprobable)
 
 \begin_layout Itemize
 Tous les algorithmes entrainés n'ont pas le même poids lors de la prise
- de décision, en effet ceux qui sont le plus confiants quant à leur décisions
+ de décision, en effet ceux qui sont les plus confiants quant à leur décision
  seront plus impactants lors de la décision finale.
  
 \end_layout
@@ -6791,11 +6948,11 @@ Chaque apprenant faible est entraîné en prenant en compte les erreurs commises
 
 \begin_layout Standard
 L'algorithme a été dévié dans plusieurs formes portant toutes des noms différent
-s, et parmis ces formes, certaines permettent de travailler avec des problèmes
+s, et parmi ces formes, certaines permettent de travailler avec des problèmes
  de régression.
  C'est notamment le cas de Adaboost.R2, présenté par Drucker, qui sera l'algorith
 me utilisé dans ce travail.
- Celui-ci est présenté ci-dessous dans la section 3.4.5.
+ Celui-ci est présenté ci-dessous dans la section 3.4.4.
 \end_layout
 
 \begin_layout Subsection
@@ -7048,16 +7205,16 @@ Calcul de l'importance de l'apprenant faible.
 \end_layout
 
 \begin_layout Itemize
-Mise à jour des poids : C'est cette étape qui différencie réellement le
- boosting du bagging, en effet le fait de modifier les probabilités de sélection
- des éléments de manière individuelle permet aux apprenants faibles suivant
- de se concentrer sur les exemple mal prédits.
+Mise à jour des poids : c'est cette étape qui différencie réellement le
+ boosting du bagging, en effet, le fait de modifier les probabilités de
+ sélection des éléments de manière individuelle permet aux apprenants faibles
+ suivants de se concentrer sur les exemple mal prédits.
  
 \end_layout
 
 \begin_layout Itemize
-Aggrégation des hypothèses faibles en une hypothèse forte pour la décision
- finale : Dans AdaBoost, cela correspond à un vote majoritaire (pondéré
+Agrégation des hypothèses faibles en une hypothèse forte pour la décision
+ finale : dans AdaBoost, cela correspond à un vote majoritaire (pondéré
  par l'importance de l'hypothèse) et dans AdaBoost.R2 la formule suivante
  est utilisée : 
 \end_layout
@@ -7093,7 +7250,7 @@ Afin de déterminer la réponse finale, toutes les hypothèses faibles sont
 
  (importance de l'hypothèse de base) est ensuite associée à la prédiction
  de son hypothèse faible.
- Les examples sont ensuites triés de la manière suivante : 
+ Les exemples sont ensuite triés de la manière suivante : 
 \end_layout
 
 \begin_layout Standard
@@ -7109,7 +7266,7 @@ y_{1}^{(t)}\leq y_{2}^{(t)}\leq...\leq y_{i}^{(t)}
 
 \begin_layout Standard
 Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
- d'additioner (en suivant l'odre ci-dessus) les 
+ d'additionner (en suivant l'ordre ci-dessus) les 
 \begin_inset Formula $log(\frac{1}{\beta_{t}})$
 \end_inset
 
@@ -7136,7 +7293,7 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
  étaient égaux (chaque hypothèse disposant de la même importance) alors
  la réponse finale correspondrait à la médiane simple des prédictions.
  Une grande différence entre AdaBoost et AdaBoost.R2 peut cependant être
- mentionnée : Dans AdaBoost, 
+ mentionnée : dans AdaBoost, 
 \begin_inset Formula $T$
 \end_inset
 
@@ -7162,9 +7319,9 @@ Lorsqu'un modèle est entrainé, il est important que celui-ci soit assez
  général pour avoir de bonnes performances sur le jeu d'entraînement, mais
  aussi et surtout sur le jeu de test qui sert à évaluer les performances
  réelles de l'algorithme.
- Le principe de rasoir d'Ockham est un principe qui vient de la philosophie,
- mais dont le raisonement a été largement adopté dans la communauté de recherche
- sur l'apprentissage automatique.
+ Le principe du rasoir d'Ockham est un principe qui vient de la philosophie,
+ mais dont le raisonnement a été largement adopté dans la communauté de
+ recherche sur l'apprentissage automatique.
  Il soutient que 
 \begin_inset Quotes eld
 \end_inset
@@ -7178,7 +7335,7 @@ les hypothèses suffisantes les plus simples doivent être choisies
  pour être efficace mais assez simple pour pouvoir être généralisable.
  Ce principe a été largement vérifié dans la plupart des cas, mais il est
  intéressant de noter que le boosting peut constituer une exception à cette
- règle, comme il le sera expliqué dans cette section 
+ règle, comme cela sera expliqué dans cette sous-section 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BoostingMarginSchapire"
@@ -7193,11 +7350,11 @@ literal "false"
 \begin_layout Standard
 Dans une étude menée par Schapire, Freund, Bartlett et Lee, les performances
  d'AdaBoost ont été comparées aux performances du bagging, et plus particulièrem
-ent c'est un fait intéressant concernant AdaBoost qui a été à l'origine
+ent, c'est un fait intéressant concernant AdaBoost qui a été à l'origine
  de cette recherche.
  En observant les graphiques de performances d'AdaBoost et du bagging entrainés
- avec le même type d'apprenant faible et sur le même jeu de données, il
- est possible de voir que dans certains cas, l'erreur sur le jeu de test
+ avec le même type d'apprenant faible et sur le même jeu de données.
+ Il est possible de voir que dans certains cas, l'erreur sur le jeu de test
  d'Adaboost continuait de descendre en tendant vers une asymptote après
  que l'erreur sur le jeu d'entrainement était déjà nulle, ce qui n'a pas
  été observé pour le bagging et constitue un comportement à la fois particulier
@@ -7210,12 +7367,12 @@ literal "false"
 \end_inset
 
 .
- Il était jusque là supposé que les méthodes de vote d'ensemble
+ Il était jusque-là supposé que les méthodes de vote d'ensemble
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Décision basée sur l'aggrégation du vote de plusieurs modèles, comme dans
+Décision basée sur l'agrégation du vote de plusieurs modèles, comme dans
  le boosting.
 \end_layout
 
@@ -7235,8 +7392,8 @@ literal "false"
  Cette explication, qui peut être utilisée comme argument en parlant du
  bagging (qui est connu pour fonctionner particulièrement bien lorsque la
  variance est grande), n'est cependant pas applicable dans le cas du boosting.
- En effet celui-ci ne recquiert pas que la variance soit élevée afin de
- délivrer de bonnes performances.
+ En effet celui-ci ne requiert pas que la variance soit élevée afin de délivrer
+ de bonnes performances.
  
 \end_layout
 
@@ -7250,8 +7407,8 @@ e linéaire) et les résultats obtenus semblent pencher en sa faveur puisque
  Le boosting permettrait dans certains cas de faire diminuer l'erreur de
  test après que l'erreur d'entraînement soit déjà nulle, comme mentionné
  plus haut.
- En plus du fait que AdaBoost a été testé avec succès sur des problèmes
- à faible variance, les chercheurs évoquent deux hypothèses qui expliqueraient
+ En plus du fait qu'AdaBoost a été testé avec succès sur des problèmes à
+ faible variance, les chercheurs évoquent deux hypothèses qui expliqueraient
  pourquoi le boosting peut ne pas être performant dans certains cas 
 \begin_inset CommandInset citation
 LatexCommand citep
