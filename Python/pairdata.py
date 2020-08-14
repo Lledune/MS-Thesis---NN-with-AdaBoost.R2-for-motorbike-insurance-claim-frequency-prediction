@@ -1,3 +1,5 @@
+#Code for pair plots
+
 import numpy as np 
 import pandas as pd
 

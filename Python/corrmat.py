@@ -1,3 +1,6 @@
+#This file is used to create the matrix of correlations
+
+
 import numpy as np 
 import pandas as pd
 import seaborn as sns

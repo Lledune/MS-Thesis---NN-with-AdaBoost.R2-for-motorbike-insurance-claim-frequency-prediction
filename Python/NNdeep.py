@@ -1,3 +1,11 @@
+#############################################
+# This file contains the deep NN            #
+# implementation, the parameter search      #
+# and the learning curves plots.            #
+#############################################
+
+
+
 #NN file 
 import tensorflow as tf
 import keras 

@@ -1,3 +1,11 @@
+#############################################
+# This file contains the ADB classes        #
+# implementation, the parameter search      #
+# and the learning curves plots.            #
+#############################################
+
+
+
 import numpy as np
 import pandas as pd
 import tensorflow as tf
@@ -971,50 +979,35 @@ if __name__ == "__main__":
     # Importing datasets
     ###############################
     dataTrain = pd.read_csv(root + "/dataTrain.csv")
-    datacatsTrain = pd.read_csv(root + "/dataCatsTrain.csv")
     
     #separing columns
     d1 = dataTrain['Duration']
-    d2 = datacatsTrain['Duration']
     
     y1 = dataTrain['ClaimFrequency']
-    y2 = datacatsTrain['NumberClaims']/datacatsTrain['Duration']
     
     nc1 = dataTrain['NumberClaims']
-    nc2 = datacatsTrain['NumberClaims']
     
     #importing test 
     dataTest = pd.read_csv(root + "/dataTest.csv")
-    datacatsTest = pd.read_csv(root + "/dataCatsTest.csv")
     
     d1test = dataTest['Duration']
-    d2test = datacatsTest['Duration']
     
     y1test = dataTest['ClaimFrequency']
-    y2test = datacatsTest['NumberClaims']/datacatsTest['Duration']
     
     #dropping useless dimensions
     dataTrain = dataTrain.drop(columns=["Duration", "NumberClaims", "ClaimFrequency", "Unnamed: 0"])
-    datacatsTrain = datacatsTrain.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost", "Unnamed: 0"])
     dataTest = dataTest.drop(columns=["Duration", "NumberClaims", "ClaimFrequency", "Unnamed: 0"])
-    datacatsTest = datacatsTest.drop(columns=["Unnamed: 0", "Duration", "NumberClaims", "ClaimCost", "Unnamed: 0"])
     
     #Passing the Duration into keras is impossible cause there is two arguments only when creating a custom loss function.
     #Therefore we use a trick and pass a tuple with duration and y instead. 
     y1 = pd.DataFrame(y1)
-    y2 = pd.DataFrame(y2)
     d1 = pd.DataFrame(d1)
-    d2 = pd.DataFrame(d2)
     
     y1test = pd.DataFrame(y1test)
-    y2test = pd.DataFrame(y2test)
     d1test = pd.DataFrame(d1test)
-    d2test = pd.DataFrame(d2test)
     
     feed = np.append(y1, d1, axis = 1)
-    feed2 = np.append(y2, d2, axis = 1)
     feed = pd.DataFrame(feed)
-    feed2 = pd.DataFrame(feed2)
     
     #####################################
     # PARAMETER SEARCH ##################
@@ -1453,10 +1446,58 @@ if __name__ == "__main__":
     plt.show()
     plt.close()
     
-    
-    
-    
-    
+import statsmodels.api as sm
+
+X = dataTrain
+Xt = dataTest
+y = y1
+yt = y1test
+
+X = sm.add_constant(X)
+Xt = sm.add_constant(Xt)
+
+Xbis = X[["Gender.F", "Zone.1", "Zone.2", "Zone.3", "Class.3", "Class.4", "BonusClass.4", "OwnersAge", "VehiculeAge"]]
+Xtbis = Xt[["Gender.F", "Zone.1", "Zone.2", "Zone.3", "Class.3", "Class.4", "BonusClass.4", "OwnersAge", "VehiculeAge"]]
+
+Xbis = sm.add_constant(Xbis)
+Xtbis = sm.add_constant(Xtbis)
+
+glm = sm.GLM(y, X, family = sm.families.Poisson(link = sm.families.links.log), duration = d1)    
+glm = glm.fit()    
+glm.summary()    
+
+preds = glm.predict(Xt)
+adb = AdaBoost()
+devtot = adb.devFull(yt, preds, d1test)
+devtot = devtot / 12901
+devtot = devtot * 64501
+
+glm2 = sm.GLM(y, Xbis, family = sm.families.Poisson(link=sm.families.links.log), duration = d1)
+glm2 = glm2.fit()
+
+preds2 = glm2.predict(Xtbis)
+devtot2 = adb.devFull(yt, preds2, d1test)/12901*64501
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
     
     
