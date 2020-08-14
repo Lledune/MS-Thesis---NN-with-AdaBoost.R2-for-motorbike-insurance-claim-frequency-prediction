@@ -41,7 +41,7 @@
 \end_preamble
 \use_default_options false
 \maintain_unincluded_children false
-\language english
+\language french
 \language_package default
 \inputencoding auto
 \fontencoding global
@@ -576,13 +576,12 @@ Remerciements
 \end_layout
 
 \begin_layout Standard
-Un grand nombre de personnes m'ont été d'une grande aide au cours de la
- rédaction de ce mémoire de fin d'études.
- Je tiens à remercier mes amis et ma famille : même s'ils ne comprenaient
- pas toujours ce que j'avais à raconter, ils ont été un grand soutien moral
- tout au long de l'écriture de ce travail.
- Plus particulièrement je remercie ma soeur, qui a accepté avec joie d'effectuer
- la relecture du projet.
+Un grand nombre de personnes m'ont été d'une aide précieuse au cours de
+ la rédaction de ce mémoire de fin d'études.
+ Je tiens à remercier mes amis et ma famille : ils ont été un grand soutien
+ moral tout au long de l'écriture de ce travail.
+ Plus particulièrement, je remercie ma soeur, qui a accepté avec joie d'effectue
+r la relecture du projet.
  Mes remerciements vont également à Iasonas Topsis Giotis, mon maître de
  stage.
  Si ce travail n'a pas été réalisé dans le cadre du stage, j'ai néanmoins
@@ -660,6 +659,63 @@ status open
 
 \backslash
 nocite{*}
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+labelitemi{
+\backslash
+textbullet} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+labelitemii{
+\backslash
+normalfont
+\backslash
+bfseries
+\backslash
+textendash} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+labelitemiii{
+\backslash
+textasteriskcentered} 
+\end_layout
+
+\begin_layout Plain Layout
+
+
+\backslash
+renewcommand
+\backslash
+labelitemiv{
+\backslash
+textperiodcentered}
 \end_layout
 
 \end_inset
@@ -827,7 +883,7 @@ ClaimCost : Le coût des sinistres.
 \end_layout
 
 \begin_layout Standard
-La variable Zone est décrite dans la table 2.1.
+La variable Zone est décrite dans le tableau 2.1.
 \end_layout
 
 \begin_layout Standard
@@ -1650,14 +1706,21 @@ Class Claims
 
 \begin_layout Standard
 Il parait logique de supposer que plus un client a un bonus élevé, moins
- celui-ci causera d'accident, puisque le bonus monte uniquement si le client
+ celui-ci causera d'accidents, puisque le bonus monte uniquement si le client
  parvient à compléter une année sans causer d'accident.
  Cependant en observant la figure 2.7, il apparait que la majorité des cas
  d'accidents sont déclarés par des clients appartenant aux classes 3 à 6
  de bonus.
  Ce qui est d'autant plus étonnant lorsque l'on associe ce résultat avec
- la distribution de la variable Class (figure 5) : les classes 3 à 6 sont
- celles contenant le moins d'utilisateurs.
+ la distribution de la variable 
+\begin_inset Quotes eld
+\end_inset
+
+BonusClass
+\begin_inset Quotes erd
+\end_inset
+
+ (figure 2.5) : les classes 3 à 6 sont celles contenant le moins d'utilisateurs.
  Les clients appartenant à la classe de bonus 7 semblent cependant causer
  très peu d'accidents malgré le fait qu'ils soient la classe de bonus majoritair
 e.
@@ -1939,6 +2002,10 @@ r=\frac{Cov(X,Y)}{\sigma_{X}\sigma_{Y}}
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -1968,6 +2035,10 @@ r=\frac{Cov(X,Y)}{\sigma_{X}\sigma_{Y}}
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2037,39 +2108,174 @@ Cette métrique n'a que peu d'intérêt à être appliquée aux variables catég
 s, c'est pour cela que seules les variables continues sont représentées
  ici.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
-Les variables ClaimFrequency et ClaimCost sont positivement corrélées, ce
- qui est facilement explicable par le fait que ClaimCost est la somme des
- coûts des différents sinistres survenus.
+Les variables 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimFrequency
+\begin_inset Quotes erd
+\end_inset
+
+ et 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimCost
+\begin_inset Quotes erd
+\end_inset
+
+ sont positivement corrélées, ce qui est facilement explicable par le fait
+ que 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimCost
+\begin_inset Quotes erd
+\end_inset
+
+ est la somme des coûts des différents sinistres survenus.
  Ceci implique que si aucun sinistre n'a été déclaré (ClaimFrequency 
 \begin_inset Formula $=$
 \end_inset
 
-0 ) alors ClaimCost sera nul.
+0 ) alors 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimCost
+\begin_inset Quotes erd
+\end_inset
+
+ sera nul.
  
 \end_layout
 
 \begin_layout Itemize
-Le même raisonnement peut être tenu pour la corrélation positive entre NumberCla
-ims et ClaimCost.
+Le même raisonnement peut être tenu pour la corrélation positive entre 
+\begin_inset Quotes eld
+\end_inset
+
+NumberClaims
+\begin_inset Quotes erd
+\end_inset
+
+ et 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimCost
+\begin_inset Quotes erd
+\end_inset
+
+.
  
 \end_layout
 
 \begin_layout Itemize
-La corrélation positive entre ClaimFrequency et NumberClaims est quant à
- elle expliquée par le fait que ClaimFrequency est un ratio divisant NumberClaim
-s par Duration (voir sous-section 2.5.2).
+La corrélation positive entre 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimFrequency
+\begin_inset Quotes erd
+\end_inset
+
+ et 
+\begin_inset Quotes eld
+\end_inset
+
+NumberClaims
+\begin_inset Quotes erd
+\end_inset
+
+ est quant à elle expliquée par le fait que 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimFrequency
+\begin_inset Quotes erd
+\end_inset
+
+ est un ratio divisant 
+\begin_inset Quotes eld
+\end_inset
+
+NumberClaims
+\begin_inset Quotes erd
+\end_inset
+
+ par 
+\begin_inset Quotes eld
+\end_inset
+
+Duration
+\begin_inset Quotes erd
+\end_inset
+
+ (voir sous-section 2.5.2).
 \end_layout
 
 \begin_layout Itemize
-Les variables Duration, NumberClaims, ClaimFrequency, ClaimCost ne sont
- pas utilisées dans la prédiction.
- Si les autres variables (OwnersAge et VehiculeAge) sont mises en évidence,
- la corrélation presque nulle est une bonne chose puisqu'il est bon d'éviter
- de mettre trop de variables corrélées dans un même modèle (ce qui ne veut
- cependant pas dire qu'elles n'ont pas une relation non-linéaire possible).
+Les variables 
+\begin_inset Quotes eld
+\end_inset
+
+Duration
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+NumberClaims
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimFrequency
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimCost
+\begin_inset Quotes erd
+\end_inset
+
+ ne sont pas utilisées dans la prédiction.
+ Si les autres variables (
+\begin_inset Quotes eld
+\end_inset
+
+OwnersAge
+\begin_inset Quotes erd
+\end_inset
+
+ et 
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge
+\begin_inset Quotes erd
+\end_inset
+
+) sont mises en évidence, la corrélation presque nulle est une bonne chose
+ puisqu'il est bon d'éviter de mettre trop de variables corrélées dans un
+ même modèle (ce qui ne veut cependant pas dire qu'elles n'ont pas une relation
+ non-linéaire possible).
  
 \end_layout
 
@@ -2078,8 +2284,8 @@ Observation des sinistres
 \end_layout
 
 \begin_layout Standard
-En plus de la matrice des corrélations, il est possible de mettre regarder
- les variables numériques deux à deux afin de mettre en évidence d'éventuelles
+En plus de la matrice des corrélations, il est possible de regarder les
+ variables numériques deux à deux afin de mettre en évidence d'éventuelles
  relations.
 \end_layout
 
@@ -2141,23 +2347,58 @@ Claim
 
 \begin_layout Standard
 La figure 2.14 montre plusieurs choses : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
 Les individus sont colorés en fonction d'une nouvelle variable catégorielle
- créée pour l'occasion : Claim.
+ créée pour l'occasion : 
+\begin_inset Quotes eld
+\end_inset
+
+Claim
+\begin_inset Quotes erd
+\end_inset
+
+.
  Elle indique si un individu a déclaré un sinistre ou non.
  Sur la diagonale se situent les fonctions de densité, scindées selon la
- variable Claim.
+ variable 
+\begin_inset Quotes eld
+\end_inset
+
+Claim
+\begin_inset Quotes erd
+\end_inset
+
+.
  Les autres graphiques montrent les relations entre les différentes variables
  numériques, deux à deux.
  
 \end_layout
 
 \begin_layout Itemize
-En ce qui concerne la variable OwnersAge et sa densité, il est intéressant
- de noter que les deux pics observés sont inversés en fonction de la variable
- Claim.
+En ce qui concerne la variable 
+\begin_inset Quotes eld
+\end_inset
+
+OwnersAge
+\begin_inset Quotes erd
+\end_inset
+
+ et sa densité, il est intéressant de noter que les deux pics observés sont
+ inversés en fonction de la variable 
+\begin_inset Quotes eld
+\end_inset
+
+Claim
+\begin_inset Quotes erd
+\end_inset
+
+.
  Il y a plus de clients qui déclarent un sinistre vers le pic de 25 ans
  que de clients qui n'en déclarent pas, et il y a moins de clients qui déclarent
  un sinistre vers 45 ans que de clients qui en déclarent un.
@@ -2196,8 +2437,28 @@ VehiculeAge/ClaimFrequency
 \end_layout
 
 \begin_layout Itemize
-La durée du contrat (Duration) semble quant à elle avoir moins d'influence
- sur l'appartenance à l'un des groupes de la variable Claim.
+La durée du contrat (
+\begin_inset Quotes eld
+\end_inset
+
+Duration
+\begin_inset Quotes erd
+\end_inset
+
+) semble quant à elle avoir moins d'influence sur l'appartenance à l'un
+ des groupes de la variable 
+\begin_inset Quotes eld
+\end_inset
+
+Claim
+\begin_inset Quotes erd
+\end_inset
+
+.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2219,8 +2480,8 @@ Assurances
 \end_layout
 
 \begin_layout Standard
-Dans cette sous-section seront expliquées les particularités de l'analyse
- de données dans le cadre de l'assurance pour le cas étudié.
+Dans cette section seront expliquées les particularités de l'analyse de
+ données dans le cadre de l'assurance pour le cas étudié.
  
 \end_layout
 
@@ -2415,6 +2676,10 @@ literal "false"
 f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/\upsilon_{i}}\right\} c(y,\phi,\upsilon_{i})
 \]
 
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -2751,6 +3016,10 @@ Lors de l'encodage des données, il arrive que certaines valeurs des variables
  Dans la section 2.2 une donnée a particulièrement attiré l'attention comme
  outlier potentiel : une moto de 99 ans.
  Pour celle-ci deux possibilités sont à envisager :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -2772,6 +3041,10 @@ ancêtre
  sont bien moindres.
  Dans ce cas-ci la suppression de la donnée n'est pas obligatoire mais peut
  aider à une meilleure généralisation du modèle.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -2803,7 +3076,11 @@ Pour le bon fonctionnement du modèle, certaines autres données ont du être
 \end_inset
 
 ).
- Certaines de ces observations n'ont cependant pas une valeur nulle pour
+ 
+\end_layout
+
+\begin_layout Standard
+Certaines de ces observations n'ont cependant pas une valeur nulle pour
  la variable NbClaims, ce qui signifie que des sinistres auraient été déclarés
  dans des contrats dont la durée est nulle.
  Ce cas de figure n'étant pas possible, elles seront supprimées car il s'agit
@@ -2847,7 +3124,7 @@ machine learning
 \end_layout
 
 \begin_layout Standard
-Dans cette section, les différents algorithmes utilisés lors des analyses
+Dans ce chapitre, les différents algorithmes utilisés lors des analyses
  seront présentés à des fins de compréhension du travail.
  Pour commencer, des explications seront données sur le fonctionnement général
  d'un modèle prédictif, et plus particulièrement dans le cas de la régression.
@@ -2920,6 +3197,10 @@ Données.
 
 , la variable expliquée.
  Dans notre cas :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -2942,6 +3223,10 @@ Données.
 
  : Base de données 
 \begin_inset Formula $X\rightarrow Y$
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -3099,6 +3384,10 @@ literal "false"
  Elle peut être vue comme une forme de distance (d'où son utilisation en
  temps que critère).
  Aussi : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -3152,6 +3441,10 @@ sont parfaitement prédits.
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3187,7 +3480,7 @@ La déviance non mise à l'échelle peut ensuite être obtenue en multipliant
 \begin_inset Formula $\phi$
 \end_inset
 
- (voir section 2.3.3).
+.
  La dérivation de cette déviance non mise à l'échelle appliquée à la loi
  de poisson résulte en la déviance de Poisson non-mise à l'échelle, c'est
  ce critère qui sera utilisé pour l'apprentissage des modèles 
@@ -3199,6 +3492,10 @@ literal "false"
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -3210,6 +3507,10 @@ literal "false"
 
 \begin_layout Itemize
 \begin_inset Formula $h(y)=ln(y)$
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -3280,7 +3581,7 @@ Il est important de comprendre le but derrière la création d'un tel modèle.
 \end_layout
 
 \begin_layout Subsection
-Validation croisée (K-fold)
+Validation croisée (K-folds)
 \end_layout
 
 \begin_layout Standard
@@ -3314,7 +3615,7 @@ Le principe de base est de diviser le jeu de données en
 \begin_inset Formula $K$
 \end_inset
 
- ensembles de taille égale.
+ ensembles de tailles égales.
  Un modèle sera ensuite entrainé pour chaque ensemble en utilisant cet ensemble
  comme jeu de test et la totalité des autres ensembles comme jeu d'entraînement.
  Le résultat de la métrique est alors la moyenne des résultats des différents
@@ -3328,6 +3629,10 @@ literal "false"
 
 .
  Plus formellement :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -3624,13 +3929,11 @@ Validation croisée (K-folds)
 
 \begin_layout Standard
 \SpecialChar allowbreak
-Cette méthode permet de limiter l'overfit et de le détecter dans la plupart
- des cas.
+Cette méthode permet de détecter le surentraînement dans la plupart des
+ cas.
  La valeur de la métrique donnée par la validation croisée dispose d'une
  variance inférieure aux résultats donnés sans celle-ci.
- Comme dit précédemment la base de donnée est constituée d'événements rares
- et cette méthode sera donc préférée à la traditionnelle décomposition entrainem
-ent/test.
+ 
 \end_layout
 
 \begin_layout Section
@@ -3653,15 +3956,19 @@ Ordinary Least Squares (régression linéaire)
 \end_inset
 
  dans deux directions : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
 La distribution de probabilité : Dans l'OLS, nous supposons que les données
  suivent une loi gaussienne.
  Avec les GLM, une classe de distribution (les distributions EDM) dont la
- fonction de distribution générale a été présentée plus tôt dans ce travail
+ fonction de distribution générale a été présentée plus tôt dans ce travail,
  est utilisée.
- Plus particulièrement, dans le cadre de ce travail, cela permet de construire
+ Plus particulièrement, dans le cadre de ce mémoire, cela permet de construire
  les modèles avec la loi de Poisson.
  
 \end_layout
@@ -3672,12 +3979,20 @@ Modèle pour la moyenne : Dans les modèles linéaires classiques, la moyenne
  Dans les GLMs, c'est une transformation monotone de la moyenne qui est
  une fonction linéaire des variables exploratoires.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Les GLMs se sont vite présentés comme un modèle très efficace pour la modélisati
 on des ratios dans les assurances.
  Ceux-ci présentent en effet nombres d'avantages : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -3693,10 +4008,18 @@ Ils sont utilisés à la fois dans le cadre des assurances, mais pas uniquement.
 \begin_layout Itemize
 Il existe un bon nombre de programmes/outils permettant de construire de
  tels modèles de manière relativement simple et efficace.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Enfin, un GLM est composé de : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -3725,6 +4048,10 @@ La fonction de variance :
 \end_inset
 
  est le paramètre de dispersion (constant).
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3815,7 +4142,11 @@ En considérant deux polices dans la même plage de tarifs et ayant la même
 \begin_inset Formula $X_{i}$
 \end_inset
 
- correspondant à la réponse pour la police i.
+ correspondant à la réponse pour la police 
+\begin_inset Formula $i$
+\end_inset
+
+.
  Alors 
 \begin_inset Formula $X_{1}$
 \end_inset
@@ -3838,6 +4169,10 @@ Cette hypothèse n'est dans les fait pas complètement respectée.
 \begin_inset Newline newline
 \end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
 Les hypothèses 1 et 2 ont pour conséquence que les coûts des sinistres sont
  indépendants : Ils concernent soit une police différente soit un intervalle
  de temps différent.
@@ -3854,7 +4189,7 @@ Les modèles à dispersion exponentielle font partie des GLMs, et généralisent
  EDM peut être déterminée 
 \begin_inset CommandInset citation
 LatexCommand citep
-key "Ohlsson2010"
+key "Ohlsson2010,StatActu2"
 literal "false"
 
 \end_inset
@@ -3918,6 +4253,10 @@ f_{Y_{i}}(y;\theta_{i};\phi)=exp\left\{ \frac{y\theta_{i}-a(\theta_{i})}{\phi/\u
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -3973,6 +4312,10 @@ f_{X_{i}}(x_{i};\mu_{i})=e^{-\upsilon_{i}\mu_{i}}\frac{(\upsilon_{i}\mu_{i})^{x_
 
 \end_inset
 
+
+\begin_inset Newline newline
+\end_inset
+
  La distribution du ratio 
 \begin_inset Formula $Y_{i}=X_{i}/\upsilon_{i}$
 \end_inset
@@ -4005,6 +4348,10 @@ relative
 \end_inset
 
 :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4027,11 +4374,19 @@ f_{Y_{i}}(y_{i};\mu_{i})=P(Y_{i}=y_{i})=P(X_{i}=\upsilon_{i}y_{i})
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Il s'agit là une forme de la distribution de probabilité des EDM vue plus
  haut, avec :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -4694,6 +5049,10 @@ La fonction de lien sert à généraliser le modèle linéaire basique (OLS),
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4732,6 +5091,10 @@ Il faut maintenant choisir une cellule comme la cellule de base, qui servira
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4746,11 +5109,7 @@ Et donc :
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
-Le modèle est réécrit sous forme de liste et les égalités suivantes sont
+Le modèle est réécrit sous forme de liste et les équations suivantes sont
  définies :
 \end_layout
 
@@ -4777,6 +5136,10 @@ Le modèle est réécrit sous forme de liste et les égalités suivantes sont
 
 \begin_layout Itemize
 \begin_inset Formula $\beta_{4}:=\gamma_{23}$
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -4807,11 +5170,19 @@ En forme de liste,
 \begin_layout Standard
 Cette équation représente la structure linéaire et peut être écrite sous
  la forme matricielle :
+\begin_inset Newline newline
+\end_inset
+
+
 \begin_inset Formula 
 \[
 \mu=X\beta
 \]
 
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -4828,6 +5199,10 @@ Il est maintenant possible de généraliser l'exemple ci-dessus, avec l'équatio
 \mu_{i}=\sum_{j=1}^{r}x_{ij}\beta_{j}\qquad i=1,...,n.
 \]
 
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -4983,6 +5358,10 @@ En réécrivant l'équation en fonction de
 \end_inset
 
 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -4990,6 +5369,10 @@ En réécrivant l'équation en fonction de
 \end_inset
 
  : fonction de variance
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -4997,7 +5380,7 @@ Il suffit maintenant de prendre ces
 \begin_inset Formula $r$
 \end_inset
 
- dérivées partielles et de les égaliser à 
+ dérivées partielles, de les égaliser à 
 \begin_inset Formula $0$
 \end_inset
 
@@ -5117,13 +5500,6 @@ Et la fonction de lien utilisée dans ce cas-ci sera le logarithme (qui permet
 g(\mu_{i})=log(\mu_{i})
 \]
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset Newpage pagebreak
 \end_inset
 
 
@@ -5373,6 +5749,10 @@ La manière dont un perceptron calcule la réponse
 \end_inset
 
  peut être décomposée en deux étapes :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -5388,6 +5768,10 @@ Les poids sont multipliés par les valeurs des entrées à laquelle on ajoute
 La valeur ainsi obtenue est prise comme argument dans la fonction d'activation
  : 
 \begin_inset Formula $Y=\varphi(\omega)$
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -5420,9 +5804,9 @@ Lorsqu'il est question d'apprentissage automatique, cela signifie en fait
  Si cette prédiction est correcte alors les poids ne sont pas modifiés,
  cependant, dans le cas ou la prédiction est incorrecte une règle de mise
  à jour des poids sera appliquée.
- Ce procédé sera expliqué plus en détail dans la section suivante, mais
- nous pouvons d'ores et déjà observer l'équation de mise à jour des poids
- d'un perceptron simple 
+ Ce procédé sera expliqué plus en détail dans la sous-section suivante,
+ mais nous pouvons d'ores et déjà observer l'équation de mise à jour des
+ poids d'un perceptron simple 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Geron2017"
@@ -5439,6 +5823,10 @@ literal "false"
 w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \]
 
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -5480,6 +5868,10 @@ w_{i}^{next}=w_{i}+\eta(\hat{y_{j}}-y_{j})x_{i}
 \end_inset
 
  : la valeur cible
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -5532,7 +5924,7 @@ literal "false"
 Perceptron multicouche
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Paragraph*
 Fonctionnement
 \end_layout
 
@@ -5681,6 +6073,10 @@ Paramètres choisis à la création du modèle par l'utilisateur, ceux-ci ne
 Le fonctionnement de ce réseau est similaire à celui du perceptron, cependant,
  son architecture est plus complexe et nécessite certains changements dans
  les notations utilisées, aussi :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -5766,13 +6162,17 @@ Le fonctionnement de ce réseau est similaire à celui du perceptron, cependant,
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 Chaque neurone de ce réseau fonctionne en fait comme un perceptron, relié
  à d'autres perceptrons organisés en forme de couches, et qui transfère
  le résultat de sa sortie à la couche suivante.
- En partant de ce principe et en adaptant les notations, le conclusion suivante
+ En partant de ce principe et en adaptant les notations, la conclusion suivante
  est trouvée :
 \end_layout
 
@@ -5804,16 +6204,16 @@ représentant la sortie du neurone
  alors il représente la sortie du réseau, ou sa réponse.
  La couche de sortie peut être composée d'un seul neurone mais cela n'est
  pas obligatoire.
- Si nous cherchons par exemple à estimer à quelle classe une instance appartient
- il est possible de représenter chaque classe par un neurone dans cette
- couche.
+ Si le but recherché est par exemple d'estimer à quelle classe un échantillon
+ appartient il est possible de représenter chaque classe par un neurone
+ dans cette couche.
 \end_layout
 
 \begin_layout Standard
-Le fonctionement d'un réseau de neurones étant expliqué, il est maintenant
+Le fonctionnement d'un réseau de neurones étant expliqué, il est maintenant
  nécessaire de comprendre comment un tel réseau est calibré, car sans cette
- phase de calibration le réseau de neurone serait inefficace.
- Il existe diverses méthodes permettant d'optimiser un réseau de neurone
+ phase de calibration le réseau de neurones serait inefficace.
+ Il existe diverses méthodes permettant d'optimiser un réseau de neurones
  mais nous ne détaillerons que la 
 \begin_inset Quotes eld
 \end_inset
@@ -5834,7 +6234,7 @@ literal "false"
 .
 \end_layout
 
-\begin_layout Paragraph
+\begin_layout Paragraph*
 Rétropropagation
 \end_layout
 
@@ -5848,7 +6248,7 @@ Avant l'apparition de la rétropropagation, les réseaux de neurones étaient
 
 ).
  Cette méthode présente cependant un inconvenient de taille : l'inversion
- numérique de la matrice Hessienne est très long voir impossible lorsque
+ numérique de la matrice Hessienne est très longue voir impossible lorsque
  celle-ci est mal conditionnée.
  Ces problèmes peuvent être contournés en utilisant un autre algorithme
  paru en 1986 : la rétropropagation.
@@ -6160,7 +6560,7 @@ Bagging
 \begin_layout Standard
 Si le bagging n'est pas au centre de ce travail, il est tout de même intéressant
  de présenter cet algorithme car il est souvent comparé au boosting qui
- sera introduit dans la section suivante.
+ sera introduit dans la sous-section suivante.
  En effet, le bagging (Bootstrap Aggregating) est une méthode assez populaire
  dans le domaine de l'apprentissage automatique, connue pour fonctionner
  particulièrement bien lorsque la variance est élevée.
@@ -6172,6 +6572,10 @@ LatexCommand citep
 key "BaggingBreiman"
 literal "false"
 
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -6201,10 +6605,14 @@ literal "false"
 
  : La valeur à prédire.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
-Sur base de ceci 
+Sur base de ceci, 
 \begin_inset Formula $\varphi(x,\mathcal{L})$
 \end_inset
 
@@ -6221,7 +6629,7 @@ Sur base de ceci
 \end_inset
 
 .
- En supposant que de plusieurs sets d'apprentissages dénotés 
+ En supposant que plusieurs sets d'apprentissages dénotés 
 \begin_inset Formula $\{\mathcal{L}_{k}\}$
 \end_inset
 
@@ -6233,7 +6641,7 @@ Sur base de ceci
 \begin_inset Formula $\varphi(x_{k},\mathcal{L}_{k})$
 \end_inset
 
- et de les combiner afin de d'obtenir un résulat pour la prédiction.
+ et de les combiner afin d'obtenir un résulat pour la prédiction.
  Dans le cas de la régression, ce résultat peut être obtenu en prenant simplemen
 t la moyenne des résultats des différents prédicteurs : 
 \end_layout
@@ -6250,7 +6658,7 @@ t la moyenne des résultats des différents prédicteurs :
 \end_layout
 
 \begin_layout Standard
-Un raisonement similaire peut être tenu pour le cas de la classification
+Un raisonnement similaire peut être tenu pour le cas de la classification
  mais celui-ci ne sera pas expliqué ici car il ne rentre pas dans le cadre
  de ce travail.
  Le problème principal du bagging est qu'il nécessite 
@@ -6264,7 +6672,7 @@ Un raisonement similaire peut être tenu pour le cas de la classification
 \end_layout
 
 \begin_layout Standard
-Celui-ci consiste en un échantillonage aléatoire (équiprobable) avec remise.
+Celui-ci consiste en un échantillonnage aléatoire (équiprobable) avec remise.
  Les sets d'entraînements générés sont donc composés de 
 \begin_inset Formula $n$
 \end_inset
@@ -6299,11 +6707,11 @@ méta-algorithme
 \begin_inset Quotes erd
 \end_inset
 
- que d'algorithme à proprement parler, c'est à dire qu'il s'agit d'une famille
+ que d'algorithme à proprement parler, c'est-à-dire qu'il s'agit d'une famille
  d'algorithmes utilisant d'autres algorithmes (apprenants faibles) dans
  certaines de ses étapes afin d'améliorer les performances que l'apprenant
- faible choisi aurait eu sans l'utilisation du méta-algortithme.
- Ces méthodes se basent sur l'entrainement d'apprenants faibles
+ faible choisi aurait eu sans l'utilisation du méta-algorithme.
+ Ces méthodes fonctionnent par l'entrainement d'apprenants faibles
 \begin_inset Foot
 status open
 
@@ -6333,15 +6741,16 @@ fort
 \end_inset
 
 .
- Ils se basent souvent sur une règle de décision elle même basée sur les
+ Ils reposent souvent sur une règle de décision elle-même basée sur les
  réponses des différents prédicteurs, dans le cas d'une classification binaire
- cela peut par exemple être représenté par un vote majoritaire de ceux-ci.
+ cela peut, par exemple, être représenté par un vote majoritaire de ces
+ derniers.
  Avec le boosting, les prédicteurs sont entrainés l'un après l'autre sur
  un sous-ensemble des données du jeu d'entraînement.
  Une fois le prédicteur entraîné, toutes les données du jeu d'entraînement
  sont passées dans celui-ci et l'erreur du prédicteur sur les prédictions
  est enregistrée.
- Concrètement c'est la distance entre l'observation et sa prédiction qui
+ Concrètement, c'est la distance entre l'observation et sa prédiction qui
  est observée, puisque nous tentons avec le boosting de donner l'accent
  aux données mal prédites pour l'entraînement des prochains prédicteurs.
  Les probabilités des données les plus incorrectes sont ensuite modifiées
@@ -6367,7 +6776,8 @@ Boosting adaptatif.
 \end_inset
 
 , il en existe plusieurs versions à la fois pour la classification et la
- régression et c'est ce méta-algorithme qui sera utilisé.
+ régression et c'est ce méta-algorithme qui sera l'objet principal de ce
+ mémoire.
 \end_layout
 
 \begin_layout Subsection
@@ -6405,7 +6815,7 @@ bagging
 \end_inset
 
 , un autre méta-algorithme populaire.
- Il faut cependant noter que puisque dans AdaBoost, les résultats de chaque
+ Il faut cependant noter que puisque dans AdaBoost les résultats de chaque
  modèle influent la création du suivant, il est impossible d'entraîner les
  modèles de manière parallèle sur les différents coeurs d'un processeur
  ou d'un GPU (contrairement au bagging)
@@ -6436,8 +6846,8 @@ AdaBoost suppose qu'un apprenant de base (apprenant faible) peut être utilisé
  Cette hypothèse faible ne doit pas être particulièrement complexe ou efficace
  sur le jeu de données, la seule supposition faite est qu'elle doit être
  légèrement plus efficace qu'une sélection aléatoire de la classe finale.
- Cette sélection aléatoire, puisque nous somme dans le cadre d'une classificatio
-n binaire, aura une précision 
+ Cette sélection aléatoire, dans le cadre d'une classification binaire,
+ aura une précision 
 \begin_inset Formula $\epsilon_{t}=1/2$
 \end_inset
 
@@ -6487,8 +6897,8 @@ Afin d'améliorer la précision d'AdaBoost, des apprenants faibles sont construi
 \end_inset
 
  modifiée a chaque itération de l'algorithme, cela permet aux apprenants
- de bases de produires des hypothèses de bases différentes et variées, ce
- qui au final permet d'obtenir de biens meilleur résultats.
+ de bases de produire des hypothèses de base différentes et variées, ce
+ qui au final permet d'obtenir de bien meilleurs résultats.
  C'est d'ailleurs l'idée principale du boosting, choisir les jeux d'entraînement
  de telle manière que l'on force l'apprenant faible à déduire une nouvelle
  hypothèse faible.
@@ -6715,6 +7125,10 @@ literal "false"
 
 \begin_layout Standard
 Cette équation indique deux choses intéressantes : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -6741,6 +7155,10 @@ Puisque
 
  des éléments mal classés.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -6780,11 +7198,11 @@ Pour la prochaine étape, il est nécessaire de mettre à jour la distribution
 \begin_inset Formula $D_{t+1}$
 \end_inset
 
- qui permets une hypothèse 
+ qui permet une hypothèse 
 \begin_inset Formula $h_{t+1}$
 \end_inset
 
- efficace sur les examples mal classés par l'hypothèse précédente.
+ efficace sur les exemples mal classés par l'hypothèse précédente.
  L'idée principale ici est de donner plus d'importance aux éléments mal
  classés par 
 \begin_inset Formula $h_{t}$
@@ -6814,11 +7232,11 @@ D_{t+1}(i)=\frac{D_{t}(i)exp(-\alpha_{t}y_{i}h_{t}(x_{i}))}{Z_{t}}
 \end_layout
 
 \begin_layout Standard
-Qui peut être scindée en deux cas (si l'exemple 
+Celle-ci peut être scindée en deux cas (si l'exemple 
 \begin_inset Formula $i$
 \end_inset
 
- est correctement classé ou non) comme indiqué dans l'algorithme 3 
+ est correctement classé ou non) comme indiqué dans l'algorithme 3.3 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "schapire2013boosting"
@@ -6831,7 +7249,7 @@ literal "false"
 \begin_inset Formula $Z_{t}$
 \end_inset
 
- est le facteur de normalisation, c'est à dire que c'est un facteur qui
+ est le facteur de normalisation, c'est-à-dire que c'est un facteur qui
  sert à maintenir l'équation 
 \begin_inset Formula $D_{t+1}=1$
 \end_inset
@@ -6910,6 +7328,10 @@ H(x)=sign\left(\sum_{t=1}^{T}\alpha_{t}h_{t}(x)\right)
 
 \begin_layout Standard
 Pour résumer, AdaBoost se repose sur trois idées principales : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -6917,12 +7339,12 @@ AdaBoost combine un grand nombre d'apprenants faibles afin d'obtenir une
  classification la plus précise possible.
  Les apprenants faibles sont des modèles avec une prise de décision simple.
  Dans le cas de la classification, il s'agit souvent d'une série d'arbres
- de décision prenant leur décision en se basant sur une seule variable,
+ de décision effectuant leur choix en se basant sur une seule variable,
  les apprenants faibles sont généralement rapides et simples à entraîner
  puisque c'est potentiellement un très grand nombre d'entre eux qui seront
  utilisés.
  Ceci dit, le boosting est aussi possible avec des algorithmes plus puissants,
- le seul réél problème dans ce cas étant le temps de calcul et que les apprenant
+ le seul réel problème dans ce cas étant le temps de calcul et que les apprenant
 s de base soient plus efficaces qu'une sélection aléatoire (équiprobable)
  de la réponse.
  
@@ -6930,7 +7352,7 @@ s de base soient plus efficaces qu'une sélection aléatoire (équiprobable)
 
 \begin_layout Itemize
 Tous les algorithmes entrainés n'ont pas le même poids lors de la prise
- de décision, en effet ceux qui sont le plus confiants quant à leur décisions
+ de décision, en effet ceux qui sont les plus confiants quant à leur décision
  seront plus impactants lors de la décision finale.
  
 \end_layout
@@ -6943,15 +7365,19 @@ Chaque apprenant faible est entraîné en prenant en compte les erreurs commises
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
 L'algorithme a été dévié dans plusieurs formes portant toutes des noms différent
-s, et parmis ces formes, certaines permettent de travailler avec des problèmes
+s, et parmi ces formes, certaines permettent de travailler avec des problèmes
  de régression.
  C'est notamment le cas de Adaboost.R2, présenté par Drucker, qui sera l'algorith
 me utilisé dans ce travail.
- Celui-ci est présenté ci-dessous dans la section 3.4.5.
+ Celui-ci est présenté ci-dessous dans la sous-section 3.4.4.
 \end_layout
 
 \begin_layout Subsection
@@ -7000,6 +7426,10 @@ Init :
 \begin_layout Plain Layout
 While 
 \begin_inset Formula $\bar{L}<0.5$
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -7139,6 +7569,10 @@ Hypothèse finale
 \end_inset
 
 :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Plain Layout
@@ -7180,6 +7614,10 @@ literal "false"
 \begin_layout Standard
 Comme mentionné précédemment, il est clair que les deux algorithmes sont
  très similaires, et fonctionnent tout deux comme ceci : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -7204,18 +7642,22 @@ Calcul de l'importance de l'apprenant faible.
 \end_layout
 
 \begin_layout Itemize
-Mise à jour des poids : C'est cette étape qui différencie réellement le
- boosting du bagging, en effet le fait de modifier les probabilités de sélection
- des éléments de manière individuelle permet aux apprenants faibles suivant
- de se concentrer sur les exemple mal prédits.
+Mise à jour des poids : c'est cette étape qui différencie réellement le
+ boosting du bagging, en effet, le fait de modifier les probabilités de
+ sélection des éléments de manière individuelle permet aux apprenants faibles
+ suivants de se concentrer sur les exemple mal prédits.
  
 \end_layout
 
 \begin_layout Itemize
-Aggrégation des hypothèses faibles en une hypothèse forte pour la décision
- finale : Dans AdaBoost, cela correspond à un vote majoritaire (pondéré
+Agrégation des hypothèses faibles en une hypothèse forte pour la décision
+ finale : dans AdaBoost, cela correspond à un vote majoritaire (pondéré
  par l'importance de l'hypothèse) et dans AdaBoost.R2 la formule suivante
  est utilisée : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7224,6 +7666,10 @@ Aggrégation des hypothèses faibles en une hypothèse forte pour la décision
 h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}\sum_{t}log\left(\frac{1}{\beta_{t}}\right)\right\} 
 \]
 
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -7249,7 +7695,7 @@ Afin de déterminer la réponse finale, toutes les hypothèses faibles sont
 
  (importance de l'hypothèse de base) est ensuite associée à la prédiction
  de son hypothèse faible.
- Les examples sont ensuites triés de la manière suivante : 
+ Les exemples sont ensuite triés de la manière suivante : 
 \end_layout
 
 \begin_layout Standard
@@ -7265,7 +7711,7 @@ y_{1}^{(t)}\leq y_{2}^{(t)}\leq...\leq y_{i}^{(t)}
 
 \begin_layout Standard
 Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
- d'additioner (en suivant l'odre ci-dessus) les 
+ d'additionner (en suivant l'ordre ci-dessus) les 
 \begin_inset Formula $log(\frac{1}{\beta_{t}})$
 \end_inset
 
@@ -7292,7 +7738,7 @@ Ensuite, afin d'obtenir la réponse finale de l'hypothèse forte, il suffit
  étaient égaux (chaque hypothèse disposant de la même importance) alors
  la réponse finale correspondrait à la médiane simple des prédictions.
  Une grande différence entre AdaBoost et AdaBoost.R2 peut cependant être
- mentionnée : Dans AdaBoost, 
+ mentionnée : dans AdaBoost, 
 \begin_inset Formula $T$
 \end_inset
 
@@ -7318,9 +7764,9 @@ Lorsqu'un modèle est entrainé, il est important que celui-ci soit assez
  général pour avoir de bonnes performances sur le jeu d'entraînement, mais
  aussi et surtout sur le jeu de test qui sert à évaluer les performances
  réelles de l'algorithme.
- Le principe de rasoir d'Ockham est un principe qui vient de la philosophie,
- mais dont le raisonement a été largement adopté dans la communauté de recherche
- sur l'apprentissage automatique.
+ Le principe du rasoir d'Ockham est un principe qui vient de la philosophie,
+ mais dont le raisonnement a été largement adopté dans la communauté de
+ recherche sur l'apprentissage automatique.
  Il soutient que 
 \begin_inset Quotes eld
 \end_inset
@@ -7334,7 +7780,7 @@ les hypothèses suffisantes les plus simples doivent être choisies
  pour être efficace mais assez simple pour pouvoir être généralisable.
  Ce principe a été largement vérifié dans la plupart des cas, mais il est
  intéressant de noter que le boosting peut constituer une exception à cette
- règle, comme il le sera expliqué dans cette section 
+ règle, comme cela sera expliqué dans cette sous-section 
 \begin_inset CommandInset citation
 LatexCommand citep
 key "BoostingMarginSchapire"
@@ -7349,11 +7795,11 @@ literal "false"
 \begin_layout Standard
 Dans une étude menée par Schapire, Freund, Bartlett et Lee, les performances
  d'AdaBoost ont été comparées aux performances du bagging, et plus particulièrem
-ent c'est un fait intéressant concernant AdaBoost qui a été à l'origine
+ent, c'est un fait intéressant concernant AdaBoost qui a été à l'origine
  de cette recherche.
  En observant les graphiques de performances d'AdaBoost et du bagging entrainés
- avec le même type d'apprenant faible et sur le même jeu de données, il
- est possible de voir que dans certains cas, l'erreur sur le jeu de test
+ avec le même type d'apprenant faible et sur le même jeu de données.
+ Il est possible de voir que dans certains cas, l'erreur sur le jeu de test
  d'Adaboost continuait de descendre en tendant vers une asymptote après
  que l'erreur sur le jeu d'entrainement était déjà nulle, ce qui n'a pas
  été observé pour le bagging et constitue un comportement à la fois particulier
@@ -7366,12 +7812,12 @@ literal "false"
 \end_inset
 
 .
- Il était jusque là supposé que les méthodes de vote d'ensemble
+ Il était jusque-là supposé que les méthodes de vote d'ensemble
 \begin_inset Foot
 status open
 
 \begin_layout Plain Layout
-Décision basée sur l'aggrégation du vote de plusieurs modèles, comme dans
+Décision basée sur l'agrégation du vote de plusieurs modèles, comme dans
  le boosting.
 \end_layout
 
@@ -7391,8 +7837,8 @@ literal "false"
  Cette explication, qui peut être utilisée comme argument en parlant du
  bagging (qui est connu pour fonctionner particulièrement bien lorsque la
  variance est grande), n'est cependant pas applicable dans le cas du boosting.
- En effet celui-ci ne recquiert pas que la variance soit élevée afin de
- délivrer de bonnes performances.
+ En effet celui-ci ne requiert pas que la variance soit élevée afin de délivrer
+ de bonnes performances.
  
 \end_layout
 
@@ -7401,13 +7847,13 @@ Dans son rapport de recherche, et pour prouver son hypothèse, Breiman applique
  le boosting à un algorithme connu pour sa variance faible (Analyse discriminant
 e linéaire) et les résultats obtenus semblent pencher en sa faveur puisque
  les performances de l'algorithme combiné au boosting sont plutôt mauvaises.
- Cependant, l'autre étude évoquée dans cette section met en évidence le
- fait que la variance faible de l'algorithme ne serait pas en cause.
+ Cependant, l'autre étude évoquée dans cette sous-section met en évidence
+ le fait que la variance faible de l'algorithme ne serait pas en cause.
  Le boosting permettrait dans certains cas de faire diminuer l'erreur de
  test après que l'erreur d'entraînement soit déjà nulle, comme mentionné
  plus haut.
- En plus du fait que AdaBoost a été testé avec succès sur des problèmes
- à faible variance, les chercheurs évoquent deux hypothèses qui expliqueraient
+ En plus du fait qu'AdaBoost a été testé avec succès sur des problèmes à
+ faible variance, les chercheurs évoquent deux hypothèses qui expliqueraient
  pourquoi le boosting peut ne pas être performant dans certains cas 
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -7427,7 +7873,7 @@ e.
 
 \begin_layout Enumerate
 Les erreurs d'entrainement des apprenants faibles deviennent trop élevées
- rapidement (Suite aux rééchantillonages).
+ rapidement (suite aux rééchantillonnages).
 \end_layout
 
 \begin_layout Subsection
@@ -7452,6 +7898,10 @@ literal "false"
 \end_inset
 
  :
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -7499,6 +7949,10 @@ literal "false"
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7630,7 +8084,8 @@ Maintenant que les notions qui seront utilisée au cours de cette analyse
  et les résultats seront analysés.
  Certaines modifications à l'algorithme original AdaBoost.R2 seront également
  expliquées et mises en pratique.
- 
+ Des notes concernant le code utilisé pour l'analyse sont disponibles dans
+ l'annexe 7.
 \end_layout
 
 \begin_layout Section
@@ -7658,6 +8113,10 @@ Lorsqu'un modèle est entraîné sur un jeu de données, celui-ci est ensuite
 C'est pour cette raison que dans la vaste majorité des cas, les bases de
  données sont divisées en un jeu d'entraînement et un jeu de test.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -7671,6 +8130,10 @@ Jeu de test : Utilisé uniquement pour le calcul de la perte du modèle.
  Le fait que ces données n'influent pas la prise de décision sur les paramètres
  choisi garanti que le calcul de la perte du modèle est correct.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7721,6 +8184,10 @@ Pour la bonne compréhension de la suite de cette analyse, un point doit
  élevée que le jeu de test.
  Pour palier à ce problème, deux solutions sont possibles.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -7741,6 +8208,10 @@ Normaliser la déviance par rapport au nombre total de clients :
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -7821,7 +8292,7 @@ Les déviances sont calculées sur le jeu de test séparé.
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.1169581
+0.10680
 \end_layout
 
 \end_inset
@@ -7830,7 +8301,7 @@ Les déviances sont calculées sur le jeu de test séparé.
 \begin_inset Text
 
 \begin_layout Plain Layout
-7543.92
+6889.15
 \end_layout
 
 \end_inset
@@ -8082,7 +8553,7 @@ Déviance calculée sur le jeu de test séparé.
 \begin_inset Text
 
 \begin_layout Plain Layout
-0.113632
+0.09904
 \end_layout
 
 \end_inset
@@ -8091,7 +8562,7 @@ Déviance calculée sur le jeu de test séparé.
 \begin_inset Text
 
 \begin_layout Plain Layout
-7329.38
+6388.51
 \end_layout
 
 \end_inset
@@ -8448,6 +8919,10 @@ ique.
 \begin_layout Standard
 Les hyperparamètres qui seront optimisés pour les réseaux de neurones de
  ce travail sont décris ci-dessous : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -8517,6 +8992,10 @@ ent paramétré.
 
 \begin_layout Standard
 Un graphique de courbe d'apprentissage est composé de deux axes : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -8529,6 +9008,10 @@ Sur l'axe des abscisses, le paramètre pour lequel il est intéressant de
 \begin_layout Itemize
 Sur l'axe des ordonnées, la déviance moyenne.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -9508,6 +9991,10 @@ Taux d'apprentissage : La courbe semble indiquer que 0.1 est une bonne valeur
  pour le paramètre.
  Au delà, l'erreur de test commence à augmenter (légèrement).
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -10624,6 +11111,10 @@ Le but de ce paramètre est de pouvoir influer sur le nombre de modèles créés
 
 .
  Pour ce faire, deux étapes vont être modifiées : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -10650,6 +11141,10 @@ La modification des poids se fera avec la formule :
 \end_inset
 
 .
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -10665,7 +11160,7 @@ Pour comprendre comment ce nouveau paramètre influe sur l'apprentissage,
  des illustrations sont présentées ci-dessous.
  Les modèles illustrés ici ont été construits pour la démonstration et ne
  représentent pas les courbes des algorithmes entraînés plus loin dans cette
- sous-section.
+ section.
  Les paramètres utilisés sont cependant très similaires à ceux qui seront
  construits plus tard, mis à part le taux d'apprentissage qui est étudié
  ici.
@@ -10764,7 +11259,7 @@ La méthodologie restera très similaire à celle des réseaux de neurones (hors
  La plupart des hyperparamètres proviennent du réseau de neurones, à l'exception
  du taux d'apprentissage d'AdaBoost, présenté ci-dessus.
  La fonction de perte utilisée pour AdaBoost est la fonction exponentielle
- présentée dans la sous section 3.4.4.
+ présentée dans la sous-section 3.4.4.
  Voici le premier domaine des hyperparamètres : 
 \end_layout
 
@@ -12442,6 +12937,10 @@ N.
  Passé ce cap l'addition de neurones va progressivement dégrader les performance
 s du modèle.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -13718,6 +14217,10 @@ Fréquence des sinistres par âge et par sexe.
 
 \begin_layout Standard
 Les graphiques ci-dessus nous apprennent des choses intéressantes : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -13736,6 +14239,10 @@ Le constat est clair, tout les modèles basés sur les réseaux de neurones,
 \begin_layout Itemize
 La différence entre homme et femme (en termes de proportion) également être
  mieux représentée par le GLM.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -13770,6 +14277,10 @@ Réseaux de neurones artificiels.
 \begin_layout Itemize
 Le GLM surrestime légèrement la moyenne du groupe 16-24 et sous-estime ceux
  des groupes 45-54 et 55-64.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -13849,14 +14360,15 @@ typiques
 \begin_layout Standard
 La fonction de décision utilisée dans AdaBoost.R2, pour rappel, s'écrit comme
  ceci : 
-\end_layout
-
-\begin_layout Standard
 \begin_inset Formula 
 \[
 h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\geq\frac{1}{2}\sum_{t}log\left(\frac{1}{\beta_{t}}\right)\right\} 
 \]
 
+\end_inset
+
+
+\begin_inset Newline newline
 \end_inset
 
 
@@ -13921,6 +14433,10 @@ Sur ces graphiques, il est possible d'observer l'influence du taux d'apprentissa
 ge introduit plus tôt sur la déviance prédite des clients types en fonction
  de l'âge.
  Plusieurs fait peuvent être notés : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -13947,6 +14463,10 @@ La courbe représentant le taux d'apprentissage de 0.01 semble par contre
  être beaucoup moins nette, ce qui est clairement du au nombre bien plus
  grand d'apprenants faibles entraînés, et peut permettre d'atteindre des
  fonctions de réponses plus complexes.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \end_deeper
@@ -14026,6 +14546,10 @@ En regardant ces graphiques, il est facile de remarquer que les modèles
 \begin_layout Itemize
 La fréquence de sinistre prédite semble également être plus faible pour
  les femmes, et ce particulièrement lorsque les clients sont jeunes.
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14084,6 +14608,10 @@ La fréquence des sinistres est bien moins grande pour le client type de
 Des conclusions similaires aux graphiques de la figure 4.14 peuvent être
  prises par rapport à la forme des courbes.
  
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14113,6 +14641,10 @@ Dans cette sous-section seront présentées les prédictions des différents
  une fréquence positive).
  Les 4 clients qui seront utilisés dans cette analyse sont présentés ici
  : 
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Itemize
@@ -14133,6 +14665,10 @@ Femme, 43 ans, habitant les campagnes du nord.
 \begin_layout Itemize
 Homme, 27 ans, habitant une ville de taille moyenne.
  (fréquence nulle)
+\begin_inset Newline newline
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
@@ -14141,6 +14677,7 @@ Les résultats sont présentés dans ce graphique :
 
 \begin_layout Standard
 \begin_inset Float figure
+placement H
 wide false
 sideways false
 status open
@@ -14176,7 +14713,11 @@ Fréquences des sinistres prédite par les différents modèles comparées au
 \end_layout
 
 \begin_layout Standard
-Plusieurs constats intéressants peuvent être évoqués : 
+Plusieurs constats intéressants peuvent être évoqués :
+\begin_inset Newline newline
+\end_inset
+
+ 
 \end_layout
 
 \begin_layout Itemize
@@ -14256,9 +14797,9 @@ Par la suite, les prédictions des différents algorithmes ont été analysées
 \end_layout
 
 \begin_layout Standard
-En terme de fréquence des sinistres moyenne (par groupe de clients), le
- GLM apparait clairement comme un meilleur estimateur, même si celui-ci
- tends à parfois surestimer les valeurs prédites.
+Tout d'abord, en terme de fréquence des sinistres moyenne (par groupe de
+ clients), le GLM apparait clairement comme un meilleur estimateur, même
+ si celui-ci tends à parfois surestimer les valeurs prédites.
  Les modèles basés sur les réseaux de neurones ont quant à eux une grande
  tendance à sous-estimer ces fréquences moyennes par groupe.
 \end_layout
@@ -14643,13 +15184,6 @@ status open
 \end_inset
 
 
-\begin_inset Graphics
-	filename Images/clients type/cf-models/femme-20-ville.png
-	scale 50
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -14657,7 +15191,7 @@ status open
 
 \begin_layout Plain Layout
 Fréquence des sinistres prédites en fonction de l'âge du véhicule pour une
- femme de 20 ans habitant dans un village et en ville.
+ femme de 20 ans habitant dans un village.
 \end_layout
 
 \end_inset
@@ -14686,13 +15220,6 @@ status open
 \end_inset
 
 
-\begin_inset Graphics
-	filename Images/clients type/cf-models/femme-50-ville.png
-	scale 50
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -14700,7 +15227,7 @@ status open
 
 \begin_layout Plain Layout
 Fréquence des sinistres prédites en fonction de l'âge du véhicule pour une
- femme de 50 ans habitant dans un village et en ville.
+ femme de 50 ans habitant dans un village.
 \end_layout
 
 \end_inset
@@ -14729,13 +15256,6 @@ status open
 \end_inset
 
 
-\begin_inset Graphics
-	filename Images/clients type/cf-models/homme-20-ville.png
-	scale 50
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Plain Layout
@@ -14743,7 +15263,7 @@ status open
 
 \begin_layout Plain Layout
 Fréquence des sinistres prédites en fonction de l'âge du véhicule pour un
- homme de 20 ans habitant dans un village et en ville.
+ homme de 20 ans habitant dans un village.
 \end_layout
 
 \end_inset
@@ -14754,6 +15274,95 @@ Fréquence des sinistres prédites en fonction de l'âge du véhicule pour un
 \end_inset
 
 
+\end_layout
+
+\begin_layout Standard
+\begin_inset Newpage newpage
+\end_inset
+
+
+\end_layout
+
+\begin_layout Section*
+Annexe 7 
+\end_layout
+
+\begin_layout Subsection*
+Notes concernant le code
+\end_layout
+
+\begin_layout Standard
+La grande majorité du code est écrit en Python, sauf une partie de la préparatio
+n des données qui a été écrite est R.
+ Les différents fichiers sont : 
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+AdaBoostR2Class : Implémentation des deux versions d'AdaBoost (Originale,
+ et avec taux d'apprentissage), recherche des hyperparamètres et courbes
+ d'apprentissage.
+\end_layout
+
+\begin_layout Itemize
+NN : Recherche des hyperparamètres pour le réseau de neurones simple et
+ courbes d'apprentissage.
+\end_layout
+
+\begin_layout Itemize
+DNN : Recherche des hyperparamètres pour le réseau de neurones profond et
+ courbes d'apprentissage.
+ 
+\end_layout
+
+\begin_layout Itemize
+GLM : Construction du GLM en python.
+\end_layout
+
+\begin_layout Itemize
+Corrmat : Matrice des corrélations.
+\end_layout
+
+\begin_layout Itemize
+Pairdata : Pair-plots.
+ 
+\end_layout
+
+\begin_layout Itemize
+PreprocTrainTest : Division du jeu de données en jeu de test et jeu d'entraîneme
+nt.
+ 
+\end_layout
+
+\begin_layout Itemize
+LRComparisons : Comparaison des taux d'apprentissage AdaBoost.R2.
+\end_layout
+
+\begin_layout Itemize
+ModelsComparisons : Comparaison des résultats des différents modèles (graphiques
+).
+ 
+\end_layout
+
+\begin_layout Itemize
+Les résultats des différentes recherches des hyperparamètres sont disponibles
+ dans des fichiers .csv (/Python/Param_search_results).
+\begin_inset Newline newline
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Le code est disponible sur github : 
+\begin_inset Newline newline
+\end_inset
+
+https://github.com/Lledune/Poisson-neural-network-insurance-pricing/tree/master/P
+ython
 \end_layout
 
 \end_body

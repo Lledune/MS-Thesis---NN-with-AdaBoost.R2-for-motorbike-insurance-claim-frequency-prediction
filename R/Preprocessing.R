@@ -1,4 +1,4 @@
-path = "c:/users/lucien/desktop/Poisson-neural-network-insurance-pricing/mcc.csv"
+path = "c:/users/kryst/desktop/Poisson/Poisson-neural-network-insurance-pricing/mcc.csv"
 
 data = read.csv(path, sep = ",")
 
