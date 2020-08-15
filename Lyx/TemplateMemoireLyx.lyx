@@ -8073,7 +8073,7 @@ literal "false"
 \end_layout
 
 \begin_layout Standard
-Maintenant que les notions qui seront utilisée au cours de cette analyse
+Maintenant que les notions qui seront utilisées au cours de cette analyse
  ont toutes été présentées, l'étude de cas peut être réalisée.
  Pour rappel, les données utilisées sont issues d'une assurance moto et
  la variable prédite est la fréquence des sinistres, qui correspond au nombre
@@ -8082,7 +8082,7 @@ Maintenant que les notions qui seront utilisée au cours de cette analyse
  relatifs à celle-ci seront introduits.
  Par la suite, des modèles seront construits pour chaque algorithme présenté,
  et les résultats seront analysés.
- Certaines modifications à l'algorithme original AdaBoost.R2 seront également
+ Certaines modifications de l'algorithme original AdaBoost.R2 seront également
  expliquées et mises en pratique.
  Des notes concernant le code utilisé pour l'analyse sont disponibles dans
  l'annexe 7.
@@ -8101,7 +8101,7 @@ Lorsqu'un modèle est entraîné sur un jeu de données, celui-ci est ensuite
  de surentraînement ce qui se traduirait par de bonnes prédictions sur le
  jeu d'entraînement mais une mauvaise généralisation aux nouveaux cas.
  Dans le cadre de l'assurance, les bases de données sont composées d'événements
- rares, ce qui rends les modèles entraînés sur celles-ci très sensible au
+ rares, ce qui rend les modèles entraînés sur celles-ci très sensibles au
  sûrentraînement.
  Ce problème peut être en partie résolu grâce à la validation croisée qui
  a été présentée plus tôt, cependant si celle-ci est réalisée sur le jeu
@@ -8128,7 +8128,7 @@ Jeu d'entraînement : Utilisé pour entraîner le modèle, et affiner les param�
 \begin_layout Itemize
 Jeu de test : Utilisé uniquement pour le calcul de la perte du modèle.
  Le fait que ces données n'influent pas la prise de décision sur les paramètres
- choisi garanti que le calcul de la perte du modèle est correct.
+ choisis garanti que le calcul de la perte du modèle est correct.
  
 \begin_inset Newline newline
 \end_inset
@@ -8148,7 +8148,7 @@ De manière générale, les bases de données sont donc divisées suivant des
 \begin_layout Standard
 C'est donc une proportion 87.5% (entraînement) et 12.5% (test) qui sera utilisée.
  Un autre problème spécifique à nos données peu équilibrée apparait cependant
- lors de l'échantillonnage : Les événements étant rares, la proportion de
+ lors de l'échantillonnage : les événements étant rares, la proportion de
  clients ayant eu un sinistre par rapport à la proportion de clients n'ayant
  déclaré aucun sinistre risque de ne pas être respectée.
  
@@ -8160,10 +8160,10 @@ Afin de contourner ce problème, une variable temporaire prenant pour valeur
  est égale à 0.
  Cette variable est donc très similaire à la fréquence des sinistres avec
  l'exception qu'elle ne tient pas compte du nombre de sinistres.
- L'échantillonnage est ensuite réalisé en suivant échantillonnage stratifié
+ L'échantillonnage est ensuite réalisé en suivant un échantillonnage stratifié
  sur cette variable (un échantillonnage respectant les proportions de cette
  variable, si 1% des clients déclarent un sinistres dans la base de donnée,
- alors 1% des clients de la base test exactement aura déclaré un accident).
+ alors 1% des clients de la base test exactement auront déclaré un accident).
  De cette manière, nous sommes assurés que les deux parties de la base de
  donnée contiennent la même proportion de clients ayant déclaré un accident.
  
@@ -8483,7 +8483,6 @@ VehiculeAge
 
 \begin_layout Plain Layout
 Variables sélectionnées pour le GLM final.
- (La plupart de ces variables sont des variables binaires)
 \end_layout
 
 \end_inset
@@ -8537,7 +8536,7 @@ Déviance tot.
 status open
 
 \begin_layout Plain Layout
-Déviance calculée sur le jeu de test séparé.
+Les déviances sont calculées sur le jeu de test séparé.
 \end_layout
 
 \end_inset
@@ -8606,9 +8605,16 @@ Les réseaux de neurones représentent un des aspects principaux de ce travail
  Afin d'avoir différents points de comparaison pour la performance des méthodes
  de boosting sur les données utilisées, deux modèles consistant de réseaux
  de neurones seront entraînés.
- Un réseau de neurone 'classique', constitué d'une seule couche cachée,
- et un réseau dit d'apprentissage profond, qui est constitué de plusieurs
- couches cachées.
+ Un réseau de neurone 
+\begin_inset Quotes eld
+\end_inset
+
+simple
+\begin_inset Quotes erd
+\end_inset
+
+, constitué d'une seule couche cachée, et un réseau dit d'apprentissage
+ profond, qui est constitué de plusieurs couches cachées.
  
 \end_layout
 
@@ -8621,7 +8627,7 @@ ns de la base de données.
 
 \begin_layout Standard
 Afin de limiter un peu plus le temps d'entraînement, la majorité des calculs
- seront executés sur un processeur graphique
+ seront exécutés sur un processeur graphique
 \begin_inset Foot
 status open
 
@@ -8685,7 +8691,7 @@ Dépendant du cas étudié, le domaine de cette fonction
 \end_inset
 
  peut différer.
- En effet, si dans le plupart des cas il est intéressant d'avoir une fonction
+ En effet, si dans la plupart des cas il est intéressant d'avoir une fonction
  avec 
 \begin_inset Formula $\mathbb{R}$
 \end_inset
@@ -8938,11 +8944,11 @@ Taille des lots (Batch size) : Un lot est un ensemble de
 
  entrées, qui sera passé dans le réseau de neurone en une seule fois lors
  de l'optimisation.
- La taille du lot défini combien de de lots au total seront passés dans
- le réseau de neurones au cours d'une époque.
- Par exemple, si la base de donnée est composée de 10.000 entrées, et que
+ La taille du lot défini combien de lots au total seront passés dans le
+ réseau de neurones au cours d'une époque.
+ Par exemple, si la base de données est composée de 10.000 entrées, et que
  la taille des lots est de 500, alors 20 lots seront passés à travers le
- réseau de neurone à chaque époque.
+ réseau de neurones à chaque époque.
  En pratique, cela influence l'optimisation des poids car un gradient sera
  calculé par lot, et les poids seront modifiés à chaque calcul de gradient.
  
@@ -9023,7 +9029,8 @@ Des courbes représentant la déviance moyenne pour différentes valeurs du
 ment, ou si l'erreur de test est trop supérieure à celle d'entraînement,
  respectivement).
  Ce type de graphique peut aussi être utilisé pour explorer le domaine de
- certains hyperparamètres et choisir le meilleur d'entre eux.
+ certains hyperparamètres et choisir la meilleure valeur possible pour l'un
+ d'entre eux.
  
 \end_layout
 
@@ -9998,7 +10005,7 @@ Taux d'apprentissage : La courbe semble indiquer que 0.1 est une bonne valeur
 \end_layout
 
 \begin_layout Standard
-Les conclusions quand au nombre d'époques et au nombre de neurones semblent
+Les conclusions quant au nombre d'époques et au nombre de neurones semblent
  indiquer que les paramètres peuvent potentiellement bénéficier d'un dernier
  affinage.
  Un nouveau modèle est donc entraîné, avec 300 époques et 30 neurones.
@@ -10014,7 +10021,7 @@ Réseau de neurones profond
 Comme évoqué précédemment, un réseau de neurones profond est simplement
  un réseau disposant de plusieurs couches cachées.
  Ce type de réseau est capable de résoudre des problèmes extrêmement complexes
- mais sont aussi très sensibles au surentraînement.
+ mais est aussi très sensible au surentraînement.
  En suivant la même méthodologie que pour le réseau de neurones simple,
  un réseau de neurones profond sera construit dans cette sous-section.
  Pour la création de celui-ci, le nombre de couches cachées sera limitée
@@ -11057,8 +11064,8 @@ Une seule couche cachée.
 \begin_layout Standard
 Si diminuer le temps de calcul des réseaux de neurones était important dans
  la sous-section précédente, avec AdaBoost.R2 cela devient une nécessité.
- Construire un prédicteur avec AdaBoost.R2 requiert non-seulement d'échantiller
- 
+ Construire un prédicteur avec AdaBoost.R2 requiert non-seulement d'échantillonne
+r 
 \begin_inset Formula $N$
 \end_inset
 
@@ -11068,7 +11075,7 @@ Si diminuer le temps de calcul des réseaux de neurones était important dans
 \end_inset
 
  réseaux de neurones.
- Ici encore, si leur entraînement prends un certains temps, c'est loin d'être
+ De plus, si leur entraînement prends un certains temps, c'est loin d'être
  le seul problème.
  En effet afin de réaliser une prédiction avec AdaBoost.R2, il est nécessaire
  de stocker tous les apprenants faibles entrainés pour créer l'hypothèse
@@ -11098,7 +11105,11 @@ Si la version d'AdaBoost.R2 originale ne dispose d'aucun hyperparamètre (hormis
 \end_inset
 
  (souvent un nombre maximal d'apprenants faibles est tout de même spécifié).
- Dans ce paragraphe sera introduit le taux d'apprentissage d'AdaBoost.R2,
+ 
+\end_layout
+
+\begin_layout Standard
+Dans ce paragraphe sera introduit le taux d'apprentissage d'AdaBoost.R2,
  qui est souvent rajouté en pratique dans les implémentations du méta-algorithme.
 \end_layout
 
@@ -11149,8 +11160,11 @@ La modification des poids se fera avec la formule :
 
 \begin_layout Standard
 Ces modifications ont pour effet de diminuer l'importance des modèles et
- la vitesse à laquelle les poids sont modifiés, et d'apporter un certain
- contrôle sur le phénomène.
+ la vitesse à laquelle les poids sont modifiés (pour 
+\begin_inset Formula $\eta<1$
+\end_inset
+
+), et d'apporter un certain contrôle sur le phénomène.
  De ce fait, l'erreur moyenne aura tendance à augmenter moins vite, et plus
  de modèles seront créés avant d'arriver à une erreur moyenne de 0.5.
 \end_layout
@@ -11255,7 +11269,7 @@ Domaine des hyperparamètres et résultats
 
 \begin_layout Standard
 La méthodologie restera très similaire à celle des réseaux de neurones (hors
- validation croisée qui n'a pas lieu ici).
+ validation croisée qui n'aura pas lieu ici).
  La plupart des hyperparamètres proviennent du réseau de neurones, à l'exception
  du taux d'apprentissage d'AdaBoost, présenté ci-dessus.
  La fonction de perte utilisée pour AdaBoost est la fonction exponentielle
@@ -12027,12 +12041,12 @@ Résultat de la première recherche des hyperparamètres.
 \end_layout
 
 \begin_layout Standard
-Ces résultats sont plutôt encourageants mais un autre résultat intéressant
+Ces résultats sont plutôt encourageants mais un autre constat intéressant
  peut être observé.
  En effet, le modèle le plus efficace est un modèle ayant un taux d'apprentissag
 e (NN) plus élevé, et une taille de lot relativement grande également.
  Si ce résultat est si intéressant, c'est parce que le transit des données
- vers le GPU se fait à chaque époque, et ceci à pour effet de ralentir l'éxécuti
+ vers le GPU se fait à chaque époque, et ceci a pour effet de ralentir l'éxécuti
 on.
  Non pas parce que les calculs sont plus compliqués mais bien parce que
  les données mettent plus de temps à être acheminées vers le processeur
@@ -12945,8 +12959,8 @@ s du modèle.
 
 \begin_layout Standard
 Au vu des courbes d'apprentissage du taux d'apprentissage, du nombre de
- neurones et du nombre d'époque, il parait intéressant de relancer une recherche
- avec un domaine différent légèrement différent.
+ neurones et du nombre d'époques, il parait intéressant de relancer une
+ recherche avec un domaine légèrement différent.
  Les résultats sont présentés ci-dessous : 
 \end_layout
 
@@ -14352,7 +14366,7 @@ typiques
 \begin_inset Quotes erd
 \end_inset
 
- et d'observer la manière dont les prédictions varie selon certains critères.
+ et d'observer la manière dont les prédictions varient selon certains critères.
  Ceci est particulièrement intéressant pour les valeurs continues.
  
 \end_layout
@@ -14377,11 +14391,11 @@ h_{f}=inf\left\{ y\in Y:\sum_{t:h_{t}\leq y}log\left(\frac{1}{\beta_{t}}\right)\
 \begin_layout Standard
 Comme décrit dans l'équation, si des dizaines voir des centaines de prédicteurs
  peuvent être entraînés, c'est au final la prédiction d'un seul des apprenants
- faibles qui sera choisi et renvoyée comme réponse finale.
- Cette propriété, couplée au contrôle accordé par le taux d'apprentissage
- sur le nombre d'estimateurs qui seront construit dans un modèle, implique
- que la fonction finale peut être vue comme une combinaisons des différentes
- fonctions des apprenants faibles.
+ faibles qui sera choisie et renvoyée comme réponse finale.
+ Cette propriété implique que la fonction finale peut être vue comme une
+ combinaisons des différentes fonctions des apprenants faibles et qu'un
+ contrôle sur le nombre d'estimateurs utilisés dans cette combinaison est
+ possible par la ocnfiguration du taux d'apprentissage d'AdaBoost.
  
 \end_layout
 
@@ -14441,7 +14455,7 @@ ge introduit plus tôt sur la déviance prédite des clients types en fonction
 
 \begin_layout Itemize
 Plus le taux d'apprentissage est élevé, plus la valeur vers laquelle la
- valeur prédite converte est élevée.
+ valeur prédite converge est élevée.
  
 \end_layout
 
@@ -14460,7 +14474,7 @@ La courbe représentant le taux d'apprentissage de 1 semble donc naturellement
 
 \begin_layout Itemize
 La courbe représentant le taux d'apprentissage de 0.01 semble par contre
- être beaucoup moins nette, ce qui est clairement du au nombre bien plus
+ être beaucoup moins nette, ce qui est clairement dû au nombre bien plus
  grand d'apprenants faibles entraînés, et peut permettre d'atteindre des
  fonctions de réponses plus complexes.
 \begin_inset Newline newline
@@ -14627,7 +14641,8 @@ Comparaison des prédictions et des valeurs réelles
 Dans le cadre du calcul de la prime d'un assuré, deux modèles sont généralement
  construits.
  Tout d'abord, un modèle estimant la fréquence des sinistres (objet de ce
- travail), et deuxièmement un modèle estimant la gravité des sinistres (montant).
+ travail), et deuxièmement un modèle estimant la gravité des sinistres (montant
+ que le sinistre va coûter à l'assureur).
  Une analyse de ces primes pourrait être intéressante, mais comme aucun
  modèle ayant pour but de prédire la gravité des sinistres n'a été construit,
  ce sont directement les fréquences des sinistres qui seront comparées.
@@ -14722,7 +14737,7 @@ Plusieurs constats intéressants peuvent être évoqués :
 
 \begin_layout Itemize
 La tendance du GLM à prédire des valeurs plus élevées que les autres modèles
- se retrouve bien ici, à part contre le réseau de neurones profonds pour
+ se retrouve bien ici, à part contre le réseau de neurones profond pour
  le troisième client.
  
 \end_layout
@@ -14768,18 +14783,18 @@ Premièrement, un réseau de neurones simple a été entrainé, produisant de
  Par la suite, un réseau de neurones profond a également été construit.
  Celui-ci dispose également de meilleures performances que le modèle linéaire
  généralisé, cependant le nombre important de paramètres induit par les
- nombreux neurones des différentes couches le rendent sensible au surentraînemen
-t, et celui-ci ne parvient pas à battre le premier réseau de neurones construit.
+ nombreux neurones des différentes couches le rend sensible au surentraînement,
+ et celui-ci ne parvient pas à battre le premier réseau de neurones construit.
  
 \end_layout
 
 \begin_layout Standard
 Enfin, AdaBoost.R2, variation d'AdaBoost modifiée pour fonctionner dans le
- cas de la régression a été utilisé en combinaison avec des réseaux de neurones
- afin de tenter de produire de meilleurs résultats que tout les modèles
- précédents.
- Les résultats de cette combinaison sont réellement encourageant, les modèles
- entraîné avec le boosting associé aux réseaux de neurones produisent de
+ cas de la régression, a été utilisé en combinaison avec des réseaux de
+ neurones afin de tenter de produire de meilleurs résultats que tout les
+ modèles précédents.
+ Les résultats de cette combinaison sont réellement encourageants, les modèles
+ entraînés avec le boosting associé aux réseaux de neurones produisent de
  loin les meilleurs résultats de ce travail en terme de déviance.
  
 \end_layout
@@ -14787,7 +14802,7 @@ Enfin, AdaBoost.R2, variation d'AdaBoost modifiée pour fonctionner dans le
 \begin_layout Standard
 Une normalisation de la déviance, fonction de perte utilisée pour l'optimisation
  des paramètres des perceptrons multicouches, a ensuite été incorporée dans
- l'algorithme d'AdaBoost en temps que fonction de perte.
+ l'algorithme d'AdaBoost.R2 en tant que fonction de perte.
  Les résultats obtenus sont cependant décevants.
 \end_layout
 
@@ -14805,15 +14820,8 @@ Tout d'abord, en terme de fréquence des sinistres moyenne (par groupe de
 \end_layout
 
 \begin_layout Standard
-Au vu de ces résultats, il est clair que l'application de nouveaux algorithmes
- à ce type de problème peut être bénéfique, mais nécessiterait encore des
- améliorations.
- 
-\end_layout
-
-\begin_layout Standard
 Dans le cadre de l'assurance, il est difficile de prédire la fréquence de
- sinistre de manière individuelle, y arriver voudrait dire réussire à faire
+ sinistre de manière individuelle, y arriver voudrait dire réussire à obtenir
  une discrimination parfaite des clients et une connaissance exacte de tout
  les profils.
  Ceci étant en pratique impossible, c'est souvent par groupes d'individus
@@ -14852,6 +14860,12 @@ Groupe 54-65 ans de la figure 4.11 par exemple.
 \end_layout
 
 \begin_layout Standard
+Au vu de ces résultats, il est clair que l'application de nouveaux algorithmes
+ à ce type de problème peut être bénéfique, mais nécessiterait encore des
+ améliorations.
+\end_layout
+
+\begin_layout Standard
 Cependant, AdaBoost n'est pas la seule méthode de boosting existante (les
  GBM
 \begin_inset Foot
@@ -14866,9 +14880,9 @@ Gradient Boosting Machine.
  peuvent être cités comme exemple), et l'application de ces autres techniques
  à la problématique de ce mémoire pourrait également produire de bons résultats,
  voir de meilleurs résultats.
- Si ce travail était surtout articulé autout de l'algorithme d'AdaBoost,
- il serait donc tout de même pertinent de continuer la recherche sur les
- autres algorithmes de boosting existants
+ Si ce travail était surtout articulé autout de l'algorithme AdaBoost, il
+ serait donc tout de même pertinent de continuer la recherche sur les autres
+ algorithmes de boosting existants
 \begin_inset Foot
 status open
 
@@ -15294,6 +15308,33 @@ Notes concernant le code
 \begin_layout Standard
 La grande majorité du code est écrit en Python, sauf une partie de la préparatio
 n des données qui a été écrite est R.
+ Il est important de préciser que le code des différents réseaux de neurones
+ utilise Keras
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Outil Python permettant de travailler avec les réseaux de neurones artificiels.
+ Interface pour TensorFlow, la librairie d'apprentissage profond de Google.
+\end_layout
+
+\end_inset
+
+ ainsi que Cuda
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Programme permettant l'utilisation du GPU pour le calcul des gradients des
+ RNA.
+\end_layout
+
+\end_inset
+
+.
+ Il est donc possible que pour lancer les codes relatifs aux RNA ou à AdaBoost,
+ les deux soient installés (et configurés pour fonctionner ensemble) sur
+ la machine qui lancera le script.
  Les différents fichiers sont : 
 \begin_inset Newline newline
 \end_inset
@@ -15302,48 +15343,48 @@ n des données qui a été écrite est R.
 \end_layout
 
 \begin_layout Itemize
-AdaBoostR2Class : Implémentation des deux versions d'AdaBoost (Originale,
+AdaBoostR2Class.py : Implémentation des deux versions d'AdaBoost (Originale,
  et avec taux d'apprentissage), recherche des hyperparamètres et courbes
  d'apprentissage.
 \end_layout
 
 \begin_layout Itemize
-NN : Recherche des hyperparamètres pour le réseau de neurones simple et
+NN.py : Recherche des hyperparamètres pour le réseau de neurones simple et
  courbes d'apprentissage.
 \end_layout
 
 \begin_layout Itemize
-DNN : Recherche des hyperparamètres pour le réseau de neurones profond et
- courbes d'apprentissage.
+DNN.py : Recherche des hyperparamètres pour le réseau de neurones profond
+ et courbes d'apprentissage.
  
 \end_layout
 
 \begin_layout Itemize
-GLM : Construction du GLM en python.
+GLM .py: Construction du GLM en python.
 \end_layout
 
 \begin_layout Itemize
-Corrmat : Matrice des corrélations.
+Corrmat.py : Matrice des corrélations.
 \end_layout
 
 \begin_layout Itemize
-Pairdata : Pair-plots.
+Pairdata.py : Pair-plots.
  
 \end_layout
 
 \begin_layout Itemize
-PreprocTrainTest : Division du jeu de données en jeu de test et jeu d'entraîneme
-nt.
+PreprocTrainTest.py : Division du jeu de données en jeu de test et jeu d'entraîne
+ment.
  
 \end_layout
 
 \begin_layout Itemize
-LRComparisons : Comparaison des taux d'apprentissage AdaBoost.R2.
+LRComparisons.py : Comparaison des taux d'apprentissage AdaBoost.R2.
 \end_layout
 
 \begin_layout Itemize
-ModelsComparisons : Comparaison des résultats des différents modèles (graphiques
-).
+ModelsComparisons.py : Comparaison des résultats des différents modèles (graphiqu
+es).
  
 \end_layout
 

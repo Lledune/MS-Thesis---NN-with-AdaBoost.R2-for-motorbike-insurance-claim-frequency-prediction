@@ -1446,37 +1446,6 @@ if __name__ == "__main__":
     plt.show()
     plt.close()
     
-import statsmodels.api as sm
-
-X = dataTrain
-Xt = dataTest
-y = y1
-yt = y1test
-
-X = sm.add_constant(X)
-Xt = sm.add_constant(Xt)
-
-Xbis = X[["Gender.F", "Zone.1", "Zone.2", "Zone.3", "Class.3", "Class.4", "BonusClass.4", "OwnersAge", "VehiculeAge"]]
-Xtbis = Xt[["Gender.F", "Zone.1", "Zone.2", "Zone.3", "Class.3", "Class.4", "BonusClass.4", "OwnersAge", "VehiculeAge"]]
-
-Xbis = sm.add_constant(Xbis)
-Xtbis = sm.add_constant(Xtbis)
-
-glm = sm.GLM(y, X, family = sm.families.Poisson(link = sm.families.links.log), duration = d1)    
-glm = glm.fit()    
-glm.summary()    
-
-preds = glm.predict(Xt)
-adb = AdaBoost()
-devtot = adb.devFull(yt, preds, d1test)
-devtot = devtot / 12901
-devtot = devtot * 64501
-
-glm2 = sm.GLM(y, Xbis, family = sm.families.Poisson(link=sm.families.links.log), duration = d1)
-glm2 = glm2.fit()
-
-preds2 = glm2.predict(Xtbis)
-devtot2 = adb.devFull(yt, preds2, d1test)/12901*64501
 
 
 
