@@ -8764,7 +8764,7 @@ t grâce à la formule suivante :
 
 \begin_layout Standard
 Dans ce travail, une approche différente mais qui devrait produire des résultats
- similaire sera utilisée.
+ similaires sera utilisée.
  L'approche précédente utilisait une fonction de lien similaire à celle
  du GLM afin de restreindre le modèle, mais celle utilisée dans ce travail
  se base sur la fonction d'activation de la couche de sortie.
@@ -8901,8 +8901,8 @@ recherche
 Dans un monde parfait, toutes les combinaisons possibles des hyperparamètres
  dans le domaine défini devraient être testées, ceci est cependant impossible
  à cause du temps de calcul nécessaire à l'entraînement du modèle, ce qui
- rends la tâche difficile (et encore plus lorsque la validation croisée
- est utilisée, puisque celle-ci implique la création de 
+ rend la tâche difficile (et encore plus lorsque la validation croisée est
+ utilisée, puisque celle-ci implique la création de 
 \begin_inset Formula $K$
 \end_inset
 
@@ -14395,7 +14395,7 @@ Comme décrit dans l'équation, si des dizaines voir des centaines de prédicteu
  Cette propriété implique que la fonction finale peut être vue comme une
  combinaisons des différentes fonctions des apprenants faibles et qu'un
  contrôle sur le nombre d'estimateurs utilisés dans cette combinaison est
- possible par la ocnfiguration du taux d'apprentissage d'AdaBoost.
+ possible par la configuration du taux d'apprentissage d'AdaBoost.
  
 \end_layout
 
@@ -14497,8 +14497,8 @@ Prédictions des modèles entraînés pour les clients types
 Dans cette sous-section seront présentés les résultats des prédictions des
  modèles entraînés pour les différents clients types.
  Ces représentations peuvent être intéressantes pour comprendre comment
- les modèles réagissent par rapport à une variable, tout choses égales par
- ailleurs.
+ les modèles réagissent par rapport à une variable, toutes choses égales
+ par ailleurs.
  Premièrement, les graphiques en fonction de l'âge du conducteur sont présentés
  : 
 \end_layout
