@@ -515,7 +515,7 @@ Ce mémoire de fin d'étude peut être vu comme la conclusion de mon parcours
  des modèles utilisés dans la prédiction des fréquences de sinistres d'une
  assurance non-vie.
  Dans cette optique, la rédaction de ce mémoire m'a aussi permi d'en apprendre
- plus sur ce domaine, que je ne connaissait que de nom auparavant.
+ plus sur ce domaine, que je ne connaissais que de nom auparavant.
  La recherche associée a ce travail fut laborieuse et le nombre de travaux
  scientifiques sur le sujet étaient assez limités, mais cette investigation
  a finalement été fructueuse.
@@ -757,9 +757,9 @@ Apprentissage automatique : Méthodes statistique permettant à un ordinateur
 
 L'utilisation de prédicteurs n'est pas nouvelle dans ce secteur, mais les
  algorithmes utilisés changent avec l'essort actuel de la technologie.
- Ainsi il est maintenant possible facilement utiliser des réseaux de neurones
- afin de répondre aux problèmes pour lesquels des algorithmes moins complexes
- étaient utilisés auparavant.
+ Ainsi il est maintenant possible de facilement utiliser des réseaux de
+ neurones afin de répondre aux problèmes pour lesquels des algorithmes moins
+ complexes étaient utilisés auparavant.
  
 \end_layout
 
@@ -789,7 +789,7 @@ AdaBoost
 
 \begin_layout Standard
 Dans la première partie de cet ouvrage seront traités les questions relatives
- à l'anlyse et la préparation de la base de données utilisée.
+ à l'analyse et la préparation de la base de données utilisée.
  Dans la deuxième partie, les algorithmes utilisés ainsi que les concepts
  importants à leur compréhension seront abordés et expliqués.
  Enfin, la troisième partie de ce travail aura pour but d'appliquer les
@@ -805,7 +805,7 @@ Présentation des données
 \end_layout
 
 \begin_layout Standard
-Afin de réaliser ce travail, une base de donnée adéquate est nécessaire,
+Afin de réaliser ce travail, une base de données adéquate est nécessaire,
  celle-ci est présentée et analysée dans ce chapitre.
  La base de données est constituée d'informations sur les clients d'une
  compagnie d'assurance nommée Wasa, dans une période de temps située entre
@@ -5429,7 +5429,7 @@ Cette sous-section traite du cas où
 \end_inset
 
  suit une loi de Poisson, ce qui est le cas pour notre base de données.
- Travailler avec une loi de poisson permet En supposant : 
+ En supposant : 
 \end_layout
 
 \begin_layout Standard
@@ -14790,8 +14790,8 @@ Premièrement, un réseau de neurones simple a été entrainé, produisant de
 
 \begin_layout Standard
 Enfin, AdaBoost.R2, variation d'AdaBoost modifiée pour fonctionner dans le
- cas de la régression, a été utilisé en combinaison avec des réseaux de
- neurones afin de tenter de produire de meilleurs résultats que tout les
+ cas de la régression, a été utilisée en combinaison avec des réseaux de
+ neurones afin de tenter de produire de meilleurs résultats que tous les
  modèles précédents.
  Les résultats de cette combinaison sont réellement encourageants, les modèles
  entraînés avec le boosting associé aux réseaux de neurones produisent de
@@ -14814,14 +14814,14 @@ Par la suite, les prédictions des différents algorithmes ont été analysées
 \begin_layout Standard
 Tout d'abord, en terme de fréquence des sinistres moyenne (par groupe de
  clients), le GLM apparait clairement comme un meilleur estimateur, même
- si celui-ci tends à parfois surestimer les valeurs prédites.
+ si celui-ci tend à parfois surestimer les valeurs prédites.
  Les modèles basés sur les réseaux de neurones ont quant à eux une grande
  tendance à sous-estimer ces fréquences moyennes par groupe.
 \end_layout
 
 \begin_layout Standard
 Dans le cadre de l'assurance, il est difficile de prédire la fréquence de
- sinistre de manière individuelle, y arriver voudrait dire réussire à obtenir
+ sinistre de manière individuelle, y arriver voudrait dire réussir à obtenir
  une discrimination parfaite des clients et une connaissance exacte de tout
  les profils.
  Ceci étant en pratique impossible, c'est souvent par groupes d'individus
@@ -14880,7 +14880,7 @@ Gradient Boosting Machine.
  peuvent être cités comme exemple), et l'application de ces autres techniques
  à la problématique de ce mémoire pourrait également produire de bons résultats,
  voir de meilleurs résultats.
- Si ce travail était surtout articulé autout de l'algorithme AdaBoost, il
+ Si ce travail était surtout articulé autour de l'algorithme AdaBoost, il
  serait donc tout de même pertinent de continuer la recherche sur les autres
  algorithmes de boosting existants
 \begin_inset Foot

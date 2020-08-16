@@ -515,7 +515,7 @@ Ce mémoire de fin d'étude peut être vu comme la conclusion de mon parcours
  des modèles utilisés dans la prédiction des fréquences de sinistres d'une
  assurance non-vie.
  Dans cette optique, la rédaction de ce mémoire m'a aussi permi d'en apprendre
- plus sur ce domaine, que je ne connaissait que de nom auparavant.
+ plus sur ce domaine, que je ne connaissais que de nom auparavant.
  La recherche associée a ce travail fut laborieuse et le nombre de travaux
  scientifiques sur le sujet étaient assez limités, mais cette investigation
  a finalement été fructueuse.
@@ -757,9 +757,9 @@ Apprentissage automatique : Méthodes statistique permettant à un ordinateur
 
 L'utilisation de prédicteurs n'est pas nouvelle dans ce secteur, mais les
  algorithmes utilisés changent avec l'essort actuel de la technologie.
- Ainsi il est maintenant possible facilement utiliser des réseaux de neurones
- afin de répondre aux problèmes pour lesquels des algorithmes moins complexes
- étaient utilisés auparavant.
+ Ainsi il est maintenant possible de facilement utiliser des réseaux de
+ neurones afin de répondre aux problèmes pour lesquels des algorithmes moins
+ complexes étaient utilisés auparavant.
  
 \end_layout
 
@@ -789,7 +789,7 @@ AdaBoost
 
 \begin_layout Standard
 Dans la première partie de cet ouvrage seront traités les questions relatives
- à l'anlyse et la préparation de la base de données utilisée.
+ à l'analyse et la préparation de la base de données utilisée.
  Dans la deuxième partie, les algorithmes utilisés ainsi que les concepts
  importants à leur compréhension seront abordés et expliqués.
  Enfin, la troisième partie de ce travail aura pour but d'appliquer les
@@ -805,7 +805,7 @@ Présentation des données
 \end_layout
 
 \begin_layout Standard
-Afin de réaliser ce travail, une base de donnée adéquate est nécessaire,
+Afin de réaliser ce travail, une base de données adéquate est nécessaire,
  celle-ci est présentée et analysée dans ce chapitre.
  La base de données est constituée d'informations sur les clients d'une
  compagnie d'assurance nommée Wasa, dans une période de temps située entre
@@ -839,20 +839,48 @@ http://staff.math.su.se/esbj/GLMbook/case.html
 \end_layout
 
 \begin_layout Itemize
-OwnersAge : L'âge du conducteur.
+\begin_inset Quotes eld
+\end_inset
+
+OwnersAge
+\begin_inset Quotes erd
+\end_inset
+
+ : L'âge du conducteur.
 \end_layout
 
 \begin_layout Itemize
-Gender : Le sexe du conducteur.
+\begin_inset Quotes eld
+\end_inset
+
+Gender
+\begin_inset Quotes erd
+\end_inset
+
+ : Le sexe du conducteur.
 \end_layout
 
 \begin_layout Itemize
-Zone : Variable catégorielle représentant la zone dans laquelle le véhicule
- est conduit..
+\begin_inset Quotes eld
+\end_inset
+
+Zone
+\begin_inset Quotes erd
+\end_inset
+
+ : Variable catégorielle représentant la zone dans laquelle le véhicule
+ est conduit.
 \end_layout
 
 \begin_layout Itemize
-Class : Variable catégorielle représentant la classe du véhicule.
+\begin_inset Quotes eld
+\end_inset
+
+Class
+\begin_inset Quotes erd
+\end_inset
+
+ : Variable catégorielle représentant la classe du véhicule.
  Les classes sont assignées dans une des 7 catégories selon le ratio : 
 \begin_inset Formula $EV=\frac{kW\times100}{kg+75}$
 \end_inset
@@ -861,25 +889,60 @@ Class : Variable catégorielle représentant la classe du véhicule.
 \end_layout
 
 \begin_layout Itemize
-VehiculeAge : L'âge du véhicule en années.
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge
+\begin_inset Quotes erd
+\end_inset
+
+ : L'âge du véhicule en années.
 \end_layout
 
 \begin_layout Itemize
-BonusClass : Le bonus du conducteur, un nouveau conducteur commence à 1
- et sera incrémenté à chaque année complète passée dans la compagnie sans
- sinistre déclaré, jusqu'à un maximum de 7.
+\begin_inset Quotes eld
+\end_inset
+
+BonusClass
+\begin_inset Quotes erd
+\end_inset
+
+ : Le bonus du conducteur, un nouveau conducteur commence à 1 et sera incrémenté
+ à chaque année complète passée dans la compagnie sans sinistre déclaré,
+ jusqu'à un maximum de 7.
 \end_layout
 
 \begin_layout Itemize
-Duration : Le nombre d'année passées dans la compagnie.
+\begin_inset Quotes eld
+\end_inset
+
+Duration
+\begin_inset Quotes erd
+\end_inset
+
+ : Le nombre d'année passées dans la compagnie.
 \end_layout
 
 \begin_layout Itemize
-NumberClaims : Le nombre de sinistres.
+\begin_inset Quotes eld
+\end_inset
+
+NumberClaims
+\begin_inset Quotes erd
+\end_inset
+
+ : Le nombre de sinistres.
 \end_layout
 
 \begin_layout Itemize
-ClaimCost : Le coût des sinistres.
+\begin_inset Quotes eld
+\end_inset
+
+ClaimCost
+\begin_inset Quotes erd
+\end_inset
+
+ : Le coût des sinistres.
 \end_layout
 
 \begin_layout Standard
@@ -1218,7 +1281,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distribution Gender
+Distribution de 
+\begin_inset Quotes eld
+\end_inset
+
+Gender
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1263,7 +1334,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distribution OwnersAge
+Distribution de 
+\begin_inset Quotes eld
+\end_inset
+
+OwnersAge
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1380,7 +1459,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distribution VehiculeAge
+Distribution de 
+\begin_inset Quotes eld
+\end_inset
+
+VehiculeAge
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1425,7 +1512,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distribution Zone
+Distribution de 
+\begin_inset Quotes eld
+\end_inset
+
+Zone
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1523,7 +1618,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distribution BonusClass
+Distribution de 
+\begin_inset Quotes eld
+\end_inset
+
+BonusClass
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1568,7 +1671,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distribution Class
+Distribution de 
+\begin_inset Quotes eld
+\end_inset
+
+Class
+\begin_inset Quotes erd
+\end_inset
+
+
 \end_layout
 
 \end_inset
@@ -1588,14 +1699,22 @@ Distribution Class
 
 \begin_layout Standard
 Les classes de bonus les plus fréquentes sont les classes 1 et 7, respectivement
- le minimum ( c'est à dire l'année d'entrée dans la compagnie d'assurance)
+ le minimum (c'est à dire l'année d'entrée dans la compagnie d'assurance)
  et le maximum (représentant un client fidèle depuis sept années au minimum).
  
 \begin_inset Newline newline
 \end_inset
 
-Pour la variable Class nous observons qu'assez peu de véhicules appartiennent
- à la catégorie la plus puissante.
+Pour la variable 
+\begin_inset Quotes eld
+\end_inset
+
+Class
+\begin_inset Quotes erd
+\end_inset
+
+ nous observons qu'assez peu de véhicules appartiennent à la catégorie la
+ plus puissante.
  En fait, la plupart des véhicules se situent dans les classes 3, 4 et 5,
  ce qui montre que les vehicules les moins puissants et les plus puissants
  sont minoritaires.
@@ -1641,7 +1760,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Bonus Claims
+Sinistres déclarés pour la variable 
+\begin_inset Quotes eld
+\end_inset
+
+BonusClass
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1686,7 +1813,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Class Claims
+Sinistres déclarés pour la variable 
+\begin_inset Quotes eld
+\end_inset
+
+Class
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1708,7 +1843,7 @@ Class Claims
 Il parait logique de supposer que plus un client a un bonus élevé, moins
  celui-ci causera d'accidents, puisque le bonus monte uniquement si le client
  parvient à compléter une année sans causer d'accident.
- Cependant en observant la figure 2.7, il apparait que la majorité des cas
+ Cependant en observant la figure 2.2.7, il apparait que la majorité des cas
  d'accidents sont déclarés par des clients appartenant aux classes 3 à 6
  de bonus.
  Ce qui est d'autant plus étonnant lorsque l'on associe ce résultat avec
@@ -1720,18 +1855,18 @@ BonusClass
 \begin_inset Quotes erd
 \end_inset
 
- (figure 2.5) : les classes 3 à 6 sont celles contenant le moins d'utilisateurs.
+ (figure 2.2.5) : les classes 3 à 6 sont celles contenant le moins d'utilisateurs.
  Les clients appartenant à la classe de bonus 7 semblent cependant causer
  très peu d'accidents malgré le fait qu'ils soient la classe de bonus majoritair
 e.
 \begin_inset Newline newline
 \end_inset
 
-Les résultats de la figure 2.8 sont moins surprenant : plus un véhicule est
- puissant, plus le risque d'accident sera important.
+Les résultats de la figure 2.2.8 sont moins surprenant : plus un véhicule
+ est puissant, plus le risque d'accident sera important.
  Les déviations de cette règle par les classes 3 et 7 sont expliquées par
  la distribution de la population à travers les différentes classes (figure
- 2.6), ainsi il y a peu d'accidents pour les véhicules de classe 7 simplement
+ 2.2.6), ainsi il y a peu d'accidents pour les véhicules de classe 7 simplement
  car ceux-ci sont peu nombreux, une conclusion similaire peut être énoncée
  concernant la classe 3.
 \end_layout
@@ -1774,7 +1909,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Gender claims
+Sinistres déclarés par sexe.
 \end_layout
 
 \end_inset
@@ -1819,7 +1954,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Zone claims
+Sinistres déclarés pour la variable 
+\begin_inset Quotes eld
+\end_inset
+
+Zone
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1844,9 +1987,9 @@ les de causer des accidents que les femmes.
  femmes dans nos données, cependant la conclusion ne change pas puisque
  la proportion de femmes est de 18%, alors que celles-ci ne causent que
  8.7% des sinistres.
- Sur la figure 2.10, les classes 1 et 3 sont celles qui déclarent le plus
+ Sur la figure 2.2.10, les classes 1 et 3 sont celles qui déclarent le plus
  de sinistres.
- La première classe étant plutôt minoritaire (figure 2.4), les personnes
+ La première classe étant plutôt minoritaire (figure 2.2.4), les personnes
  habitant dans les parties centrales et semi-centrales de Norvège semblent
  causer bien plus d'accidents que les autres catégories.
  La même conclusion peut être faite pour la deuxième classe (Banlieues et
@@ -1893,7 +2036,7 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Gender claims by Age
+Sinistres déclarés par âge et par sexe.
 \end_layout
 
 \end_inset
@@ -1938,7 +2081,15 @@ status open
 \begin_inset Caption Standard
 
 \begin_layout Plain Layout
-Distribution ClaimCost
+Distribution 
+\begin_inset Quotes eld
+\end_inset
+
+ClaimCost
+\begin_inset Quotes erd
+\end_inset
+
+.
 \end_layout
 
 \end_inset
@@ -1957,12 +2108,12 @@ Distribution ClaimCost
 \end_layout
 
 \begin_layout Standard
-La figure 2.11 a pour but de mieux comprendre cette disparité entre les hommes
- et les femmes dans la déclaration des sinistres.
+La figure 2.2.11 a pour but de mieux comprendre cette disparité entre les
+ hommes et les femmes dans la déclaration des sinistres.
  Une comparaison par âge permet de mettre en évidence une information importante.
  En effet, si les hommes semblent bien causer plus d'accidents que les femmes
  jusqu'à la treintaine, mais passé ce cap, cette tendance s'égalise.
- Enfin, la figure 2.12 nous informe de la distribution de la variable ClaimCost,
+ Enfin, la figure 2.2.12 nous informe de la distribution de la variable ClaimCost,
  représentant le coût total des sinistres d'un client.
  Il est important de noter qu'il s'agit bien de la somme de tous les sinistres
  déclarés du client.
@@ -2141,11 +2292,19 @@ ClaimCost
 \end_inset
 
  est la somme des coûts des différents sinistres survenus.
- Ceci implique que si aucun sinistre n'a été déclaré (ClaimFrequency 
+ Ceci implique que si aucun sinistre n'a été déclaré (
+\begin_inset Quotes eld
+\end_inset
+
+ClaimFrequency
+\begin_inset Quotes erd
+\end_inset
+
+ 
 \begin_inset Formula $=$
 \end_inset
 
-0 ) alors 
+ 0) alors 
 \begin_inset Quotes eld
 \end_inset
 
@@ -2346,7 +2505,7 @@ Claim
 \end_layout
 
 \begin_layout Standard
-La figure 2.14 montre plusieurs choses : 
+La figure 2.2.14 montre plusieurs choses : 
 \begin_inset Newline newline
 \end_inset
 
@@ -2763,7 +2922,7 @@ binaires
 \begin_inset Quotes erd
 \end_inset
 
- et qui prendront pour valeur 
+ qui prendront pour valeur 
 \begin_inset Formula $1$
 \end_inset
 
@@ -3081,8 +3240,16 @@ Pour le bon fonctionnement du modèle, certaines autres données ont du être
 
 \begin_layout Standard
 Certaines de ces observations n'ont cependant pas une valeur nulle pour
- la variable NbClaims, ce qui signifie que des sinistres auraient été déclarés
- dans des contrats dont la durée est nulle.
+ la variable 
+\begin_inset Quotes eld
+\end_inset
+
+NumberClaims
+\begin_inset Quotes erd
+\end_inset
+
+, ce qui signifie que des sinistres auraient été déclarés dans des contrats
+ dont la durée est nulle.
  Ce cas de figure n'étant pas possible, elles seront supprimées car il s'agit
  probablement d'erreur d'encodage.
  De plus, changer la valeur de la durée du contrat par 0.00274 dans ce cas
@@ -3137,7 +3304,7 @@ Dans ce chapitre, les différents algorithmes utilisés lors des analyses
 
 \begin_layout Standard
 Les deux algorithmes de base que sont les modèles linéaires généralisés
- et les réseaux de neurones artificiels seront introduits et leur fonctionement
+ et les réseaux de neurones artificiels seront introduits et leur fonctionnement
  expliqué.
  Enfin, le boosting sera également étudié et plus particulièrement le 
 \begin_inset Quotes eld
@@ -3868,7 +4035,7 @@ STATE
 \end_inset
 
 
-\begin_inset Formula $E(Q)=K^{-1}\sum_{i=1}^{i=k}E_{k}$
+\begin_inset Formula $E(Q)=K^{-1}\sum_{i=1}^{K}E_{k}$
 \end_inset
 
 //Moyenne des erreurs
@@ -4064,7 +4231,7 @@ Hypothèses
 
 \begin_layout Standard
 Afin que les raisonnements à suivre restent corrects, il est nécessaire
- de faire 3 hypothèses pour que nos modèles statistiques restent valides
+ de faire 3 hypothèses pour que les modèles statistiques restent valides
  
 \begin_inset CommandInset citation
 LatexCommand citep
@@ -5628,8 +5795,7 @@ status open
 \align center
 \begin_inset Graphics
 	filename Images/400px-HardLimitFunction.png
-	width 10cm
-	height 4cm
+	scale 200
 
 \end_inset
 
@@ -5705,10 +5871,11 @@ Pour en revenir au perceptron, les données d'un individu sont considérées
 
 .
  Il est important de noter que le nombre de poids correspond à 
-\begin_inset Formula $J$
+\begin_inset Formula $J+1$
 \end_inset
 
-, soit le nombre de variables explicatives utilisées.
+, soit le nombre de variables explicatives utilisées auquel s'ajoute le
+ biais.
  Un perceptron peut être représenté comme ceci :
 \end_layout
 
@@ -6133,7 +6300,7 @@ Le fonctionnement de ce réseau est similaire à celui du perceptron, cependant,
 \end_layout
 
 \begin_layout Itemize
-\begin_inset Formula $z_{j}^{i}=\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i}$
+\begin_inset Formula $z_{j}^{i}=\sum_{k}(w_{jk}^{i}a_{k}^{i-1})+b_{j}^{i}$
 \end_inset
 
  : La valeur d'activation avant de passer par la fonction d'activation.
@@ -6179,7 +6346,7 @@ Chaque neurone de ce réseau fonctionne en fait comme un perceptron, relié
 \begin_layout Standard
 \begin_inset Formula 
 \[
-a_{j}^{i}=\varphi(\sum_{k}(w_{jk}^{i}\centerdot a_{k}^{i-1})+b_{j}^{i})
+a_{j}^{i}=\varphi(\sum_{k}(w_{jk}^{i}a_{k}^{i-1})+b_{j}^{i})
 \]
 
 \end_inset
@@ -6549,7 +6716,7 @@ Boosting
 
 \begin_layout Standard
 Dans cette section, le boosting sera introduit et expliqué, et plus particulière
-ment AdaBoost et ses variations.
+ment AdaBoost ainsi que ses variations.
  
 \end_layout
 
@@ -6641,7 +6808,7 @@ Sur base de ceci,
 \begin_inset Formula $\varphi(x_{k},\mathcal{L}_{k})$
 \end_inset
 
- et de les combiner afin d'obtenir un résulat pour la prédiction.
+ et de les combiner afin d'obtenir un résultat pour la prédiction.
  Dans le cas de la régression, ce résultat peut être obtenu en prenant simplemen
 t la moyenne des résultats des différents prédicteurs : 
 \end_layout
@@ -6751,8 +6918,8 @@ fort
  sont passées dans celui-ci et l'erreur du prédicteur sur les prédictions
  est enregistrée.
  Concrètement, c'est la distance entre l'observation et sa prédiction qui
- est observée, puisque nous tentons avec le boosting de donner l'accent
- aux données mal prédites pour l'entraînement des prochains prédicteurs.
+ est observée, puisque le but avec le boosting est de mettre l'accent sur
+ les données mal prédites pour l'entraînement des prochains prédicteurs.
  Les probabilités des données les plus incorrectes sont ensuite modifiées
  afin d'augmenter leur chances d'apparaître dans le sous-ensemble utilisé
  pour l'entraînement du prochain prédicteur.
@@ -8140,14 +8307,13 @@ Jeu de test : Utilisé uniquement pour le calcul de la perte du modèle.
 De manière générale, les bases de données sont donc divisées suivant des
  proportions proches de 80% pour le jeu d'entraînement et 20% pour le jeu
  de test.
- Dans notre cas, les événements sont plus rares et il est donc important
- d'en inclure un maximum dans l'entraînement pour maximiser l'efficacité
- du modèle.
+ Dans notre cas, les événements sont rares et il est donc important d'en
+ inclure un maximum dans l'entraînement pour maximiser l'efficacité du modèle.
 \end_layout
 
 \begin_layout Standard
 C'est donc une proportion 87.5% (entraînement) et 12.5% (test) qui sera utilisée.
- Un autre problème spécifique à nos données peu équilibrée apparait cependant
+ Un autre problème spécifique à nos données peu équilibrées apparait cependant
  lors de l'échantillonnage : les événements étant rares, la proportion de
  clients ayant eu un sinistre par rapport à la proportion de clients n'ayant
  déclaré aucun sinistre risque de ne pas être respectée.
@@ -8924,7 +9090,7 @@ ique.
 
 \begin_layout Standard
 Les hyperparamètres qui seront optimisés pour les réseaux de neurones de
- ce travail sont décris ci-dessous : 
+ ce travail sont décrits ci-dessous : 
 \begin_inset Newline newline
 \end_inset
 
@@ -11067,6 +11233,16 @@ Si diminuer le temps de calcul des réseaux de neurones était important dans
  Construire un prédicteur avec AdaBoost.R2 requiert non-seulement d'échantillonne
 r 
 \begin_inset Formula $N$
+\end_inset
+
+
+\begin_inset Foot
+status open
+
+\begin_layout Plain Layout
+Nombre d'apprenants faibles.
+\end_layout
+
 \end_inset
 
  sous-ensembles du jeu de données pour l'entraînement, mais aussi la création
@@ -14261,7 +14437,7 @@ La différence entre homme et femme (en termes de proportion) également être
 
 \end_deeper
 \begin_layout Itemize
-Age : 
+Âge : 
 \end_layout
 
 \begin_deeper
@@ -14393,9 +14569,7 @@ Comme décrit dans l'équation, si des dizaines voir des centaines de prédicteu
  peuvent être entraînés, c'est au final la prédiction d'un seul des apprenants
  faibles qui sera choisie et renvoyée comme réponse finale.
  Cette propriété implique que la fonction finale peut être vue comme une
- combinaisons des différentes fonctions des apprenants faibles et qu'un
- contrôle sur le nombre d'estimateurs utilisés dans cette combinaison est
- possible par la configuration du taux d'apprentissage d'AdaBoost.
+ combinaison des différentes fonctions des apprenants faibles.
  
 \end_layout
 
@@ -14619,7 +14793,7 @@ La fréquence des sinistres est bien moins grande pour le client type de
 \end_layout
 
 \begin_layout Itemize
-Des conclusions similaires aux graphiques de la figure 4.14 peuvent être
+Des conclusions similaires aux graphiques de la figure 4.6.4 peuvent être
  prises par rapport à la forme des courbes.
  
 \begin_inset Newline newline
@@ -14790,8 +14964,8 @@ Premièrement, un réseau de neurones simple a été entrainé, produisant de
 
 \begin_layout Standard
 Enfin, AdaBoost.R2, variation d'AdaBoost modifiée pour fonctionner dans le
- cas de la régression, a été utilisé en combinaison avec des réseaux de
- neurones afin de tenter de produire de meilleurs résultats que tout les
+ cas de la régression, a été utilisée en combinaison avec des réseaux de
+ neurones afin de tenter de produire de meilleurs résultats que tous les
  modèles précédents.
  Les résultats de cette combinaison sont réellement encourageants, les modèles
  entraînés avec le boosting associé aux réseaux de neurones produisent de
@@ -14814,14 +14988,14 @@ Par la suite, les prédictions des différents algorithmes ont été analysées
 \begin_layout Standard
 Tout d'abord, en terme de fréquence des sinistres moyenne (par groupe de
  clients), le GLM apparait clairement comme un meilleur estimateur, même
- si celui-ci tends à parfois surestimer les valeurs prédites.
+ si celui-ci tend à parfois surestimer les valeurs prédites.
  Les modèles basés sur les réseaux de neurones ont quant à eux une grande
  tendance à sous-estimer ces fréquences moyennes par groupe.
 \end_layout
 
 \begin_layout Standard
 Dans le cadre de l'assurance, il est difficile de prédire la fréquence de
- sinistre de manière individuelle, y arriver voudrait dire réussire à obtenir
+ sinistre de manière individuelle, y arriver voudrait dire réussir à obtenir
  une discrimination parfaite des clients et une connaissance exacte de tout
  les profils.
  Ceci étant en pratique impossible, c'est souvent par groupes d'individus
@@ -14837,7 +15011,7 @@ Il faut cependant noter que si le GLM semble produire de très bonnes estimation
 status open
 
 \begin_layout Plain Layout
-Comparaison entre hommes et femmes de la figure 4.11 par exemple.
+Comparaison entre hommes et femmes de la figure 4.6.1 par exemple.
 \end_layout
 
 \end_inset
@@ -14847,7 +15021,7 @@ Comparaison entre hommes et femmes de la figure 4.11 par exemple.
 status open
 
 \begin_layout Plain Layout
-Groupe 54-65 ans de la figure 4.11 par exemple.
+Groupe 54-65 ans de la figure 4.6.1 par exemple.
 \end_layout
 
 \end_inset
@@ -14880,7 +15054,7 @@ Gradient Boosting Machine.
  peuvent être cités comme exemple), et l'application de ces autres techniques
  à la problématique de ce mémoire pourrait également produire de bons résultats,
  voir de meilleurs résultats.
- Si ce travail était surtout articulé autout de l'algorithme AdaBoost, il
+ Si ce travail était surtout articulé autour de l'algorithme AdaBoost, il
  serait donc tout de même pertinent de continuer la recherche sur les autres
  algorithmes de boosting existants
 \begin_inset Foot
